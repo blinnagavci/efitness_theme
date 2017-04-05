@@ -104,17 +104,17 @@
                             </a>
                             <ul>
                                 <li>
-                                    <a href="">
+                                    <a href="add_item.php">
                                         <span class="title">Add Item</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="">
+                                    <a href="search_inventory.php">
                                         <span class="title">Search Inventory</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="">
+                                    <a href="sales.php">
                                         <span class="title">Sales</span>
                                     </a>
                                 </li>
