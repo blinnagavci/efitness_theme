@@ -329,18 +329,33 @@
 									<div class="col-sm-5">
 										<div class="input-group">
 											<span class="input-group-addon"><i class="entypo-mail"></i></span>
-											<input type="text" class="form-control" name="member_email" data-validate="required" id="member_email" placeholder="">
+											<input type="text" class="form-control" name="member_email" data-validate="required, email" id="member_email" placeholder="">
 										</div>
 									</div>
 								</div>
 								
 								<div class="form-group">
-									<label for="member-photo" class="col-sm-3 control-label">Select Photo</label>
+								<label class="col-sm-3 control-label">Upload Photo</label>
+								
+								<div class="col-sm-5">
 									
-									<div class="col-sm-5">
-										<input type="file" class="form-control" id="member-photo" placeholder="">
+									<div class="fileinput fileinput-new" data-provides="fileinput">
+										<div class="fileinput-new thumbnail" style="width: 200px; height: 150px;" data-trigger="fileinput">
+											<img src="http://placehold.it/200x150" alt="...">
+										</div>
+										<div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px; max-height: 150px"></div>
+										<div>
+											<span class="btn btn-white btn-file">
+												<span class="fileinput-new">Select image</span>
+												<span class="fileinput-exists">Change</span>
+												<input type="file" name="..." accept="image/*"   >
+											</span>
+											<a href="#" class="btn btn-orange fileinput-exists" data-dismiss="fileinput" >Remove</a>
+										</div>
 									</div>
+									
 								</div>
+							</div>
 								
 								<div class="form-group">
 									<label class="col-sm-3 control-label">Membership Type</label>
@@ -468,6 +483,9 @@
 <!-- Imported scripts on this page -->
 <script src="assets/js/bootstrap-switch.min.js"></script>
 <script src="assets/js/neon-chat.js"></script>
+
+<script src="assets/js/fileinput.js"></script>
+	<script src="assets/js/dropzone/dropzone.js"></script>
 
 
 <!-- JavaScripts initializations and stuff -->
