@@ -72,65 +72,65 @@
 				<!-- add class "multiple-expanded" to allow multiple submenus to open -->
 				<!-- class "auto-inherit-active-class" will automatically add "active" class for parent elements who are marked already with class "active" -->
 				<li class="active opened active">
-					<a href="test.php">
+					<a href="index.php">
 						<i class="entypo-gauge"></i>
 						<span class="title">Dashboard</span>
 					</a>
 				</li>
 				<li class="has-sub">
-					<a href="add_members.php">
+					<a href="#">
 						<i class="entypo-users"></i>
 						<span class="title">Members</span>
 					</a>
 					<ul>
 						<li>
-							<a href="add_members.php">
-								<span class="title">Add Members</span>
+							<a href="add_member.php">
+								<span class="title">Add Member</span>
 							</a>
 						</li>
 						<li>
-							<a href="">
+							<a href="search_members.php">
 								<span class="title">Search Members</span>
 							</a>
 						</li>
 					</ul>
 				</li>
 				<li class="has-sub">
-					<a href="">
+					<a href="#">
 						<i class="entypo-briefcase"></i>
 						<span class="title">Employees</span>
 					</a>
 					<ul>
 						<li>
-							<a href="">
-								<span class="title">Add Employees</span>
+							<a href="add_employee.php">
+								<span class="title">Add Employee</span>
 							</a>
 						</li>
 						<li>
-							<a href="">
+							<a href="search_employees.php">
 								<span class="title">Search Employees</span>
 							</a>
 						</li>
 					</ul>
 				</li>
 				<li class="has-sub">
-					<a href="">
+					<a href="#">
 						<i class="entypo-database"></i>
 						<span class="title">Inventory</span>
 					</a>
 					<ul>
 						<li>
-							<a href="">
+							<a href="add_item.php">
 								<span class="title">Add Item</span>
 							</a>
 						</li>
 						<li>
-							<a href="">
+							<a href="search_inventory.php">
 								<span class="title">Search Inventory</span>
 							</a>
 						</li>
 						<li>
-							<a href="">
+							<a href="sales.php">
 								<span class="title">Sales</span>
 							</a>
 						</li>
