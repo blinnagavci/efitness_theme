@@ -11,7 +11,7 @@
 
 	<link rel="icon" href="assets/images/favicon.ico">
 
-	<title>E-Fitness | Dashboard</title>
+	<title>E-Fitness | Members</title>
 
 	<link rel="stylesheet" href="assets/js/jquery-ui/css/no-theme/jquery-ui-1.10.3.custom.min.css">
 	<link rel="stylesheet" href="assets/css/font-icons/entypo/css/entypo.css">
@@ -65,59 +65,59 @@
 						</a>
 					</li>
 					<li class="has-sub active opened active">
-						<a href="add_members">
+						<a href="#">
 							<i class="entypo-users"></i>
 							<span class="title">Members</span>
 						</a>
 						<ul>
 							<li class="active">
-								<a href="add_members">
-									<span class="title">Add Members</span>
+								<a href="add_member.php">
+									<span class="title">Add Member</span>
 								</a>
 							</li>
 							<li>
-								<a href="">
+								<a href="search_members.php">
 									<span class="title">Search Members</span>
 								</a>
 							</li>
 						</ul>
 					</li>
 					<li class="has-sub">
-						<a href="">
+						<a href="#">
 							<i class="entypo-briefcase"></i>
 							<span class="title">Employees</span>
 						</a>
 						<ul>
 							<li>
-								<a href="">
-									<span class="title">Add Employees</span>
+								<a href="add_employee.php">
+									<span class="title">Add Employee</span>
 								</a>
 							</li>
 							<li>
-								<a href="">
+								<a href="search_employees.php">
 									<span class="title">Search Employees</span>
 								</a>
 							</li>
 						</ul>
 					</li>
 					<li class="has-sub">
-						<a href="">
+						<a href="#">
 							<i class="entypo-database"></i>
 							<span class="title">Inventory</span>
 						</a>
 						<ul>
 							<li>
-								<a href="">
+								<a href="add_item.php">
 									<span class="title">Add Item</span>
 								</a>
 							</li>
 							<li>
-								<a href="">
+								<a href="search_item.php">
 									<span class="title">Search Inventory</span>
 								</a>
 							</li>
 							<li>
-								<a href="">
+								<a href="sales.php">
 									<span class="title">Sales</span>
 								</a>
 							</li>

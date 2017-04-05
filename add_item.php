@@ -33,7 +33,7 @@
 
 
     </head>
-    <body class="page-body  page-fade" data-url="http://neon.dev">
+    <body class="page-body  page-fade" data-url="">
 
         <div class="page-container"><!-- add class "sidebar-collapsed" to close sidebar by default, "chat-visible" to make chat appear always -->
 
@@ -78,32 +78,32 @@
                             </a>
                         </li>
                         <li class="has-sub">
-                            <a href="add_members.php">
+                            <a href="#">
                                 <i class="entypo-users"></i>
                                 <span class="title">Members</span>
                             </a>
                             <ul>
                                 <li>
-                                    <a href="add_members.php">
-                                        <span class="title">Add Members</span>
+                                    <a href="add_member.php">
+                                        <span class="title">Add Member</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="">
+                                    <a href="search_members.php">
                                         <span class="title">Search Members</span>
                                     </a>
                                 </li>
                             </ul>
                         </li>
                         <li class="has-sub">
-                            <a href="">
+                            <a href="#">
                                 <i class="entypo-briefcase"></i>
                                 <span class="title">Employees</span>
                             </a>
                             <ul>
                                 <li>
                                     <a href="">
-                                        <span class="title">Add Employees</span>
+                                        <span class="title">Add Employee</span>
                                     </a>
                                 </li>
                                 <li>
@@ -114,7 +114,7 @@
                             </ul>
                         </li>
                         <li class="has-sub opened active">
-                            <a href="">
+                            <a href="#">
                                 <i class="entypo-database"></i>
                                 <span class="title">Inventory</span>
                             </a>
