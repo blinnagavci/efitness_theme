@@ -172,7 +172,7 @@
                                     <!-- Profile sub-links -->
                                     <li>
                                         <a href="extra-timeline.html">
-                                            <i class="entypo-user"></i>
+                                            <i class="entypo-user"></i> 
                                             Edit Profile
                                         </a>
                                     </li>

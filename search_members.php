@@ -255,10 +255,10 @@
                                 null,
                                 null,
                                 null,
+                                null,
                                 {"bSortable": false}
                             ],
                             buttons: [
-                                'copyHtml5',
                                 'excelHtml5',
                                 'pdfHtml5'
                             ],
@@ -271,6 +271,7 @@
                 <table class="table table-bordered table-striped datatable" id="table-2">
                     <thead>
                         <tr>
+                            <th>ID</th>
                             <th>First Name</th>
                             <th>Last Name</th>
                             <th>Gender</th>
@@ -283,6 +284,7 @@
                     <tbody>
                         <?php while ($row = $result->fetch_assoc()): ?>
                             <tr>
+                                <td><?php echo $row['id'] ?></td>
                                 <td><?php echo $row['first_name'] ?></td>
                                 <td><?php echo $row['last_name'] ?></td>
                                 <td><?php echo $row['gender'] ?></td>
