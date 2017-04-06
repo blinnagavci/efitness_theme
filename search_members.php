@@ -11,7 +11,7 @@
 
         <link rel="icon" href="assets/images/favicon.ico">
 
-        <title>E-Fitness | Add Item</title>
+        <title>E-Fitness | Search Members</title>
 
         <link rel="stylesheet" href="assets/js/jquery-ui/css/no-theme/jquery-ui-1.10.3.custom.min.css">
         <link rel="stylesheet" href="assets/css/font-icons/entypo/css/entypo.css">
@@ -240,63 +240,37 @@
                 ?>
                 <h2>Search Members</h2>
                 <br />
-
                 <script type="text/javascript">
                     jQuery(window).load(function () {
                         var $table2 = jQuery("#table-2");
 
                         // Initialize DataTable
                         $table2.DataTable({
-                            "sDom": "tip",
+                            "sDom": "Bfrtip",
                             "bStateSave": false,
-                            "iDisplayLength": 8,
+                            "iDisplayLength": 10,
                             "aoColumns": [
-                                {"bSortable": false},
                                 null,
                                 null,
                                 null,
-                                null
+                                null,
+                                null,
+                                {"bSortable": false}
+                            ],
+                            buttons: [
+                                'copyHtml5',
+                                'excelHtml5',
+                                'pdfHtml5'
                             ],
                             "bStateSave": true
                         });
-
-                        // Highlighted rows
-                        $table2.find("tbody input[type=checkbox]").each(function (i, el) {
-                            var $this = $(el),
-                                    $p = $this.closest('tr');
-
-                            $(el).on('change', function () {
-                                var is_checked = $this.is(':checked');
-
-                                $p[is_checked ? 'addClass' : 'removeClass']('highlight');
-                            });
-                        });
-
-                        // Replace Checboxes
-                        $table2.find(".pagination a").click(function (ev) {
-                            replaceCheckboxes();
-                        });
                     });
 
-                    // Sample Function to add new row
-                    var giCount = 1;
-
-                    function fnClickAddRow() {
-                        jQuery('#table-2').dataTable().fnAddData(['<div class="checkbox checkbox-replace"><input type="checkbox" /></div>', giCount + ".1", giCount + ".2", giCount + ".3", giCount + ".4"]);
-                        replaceCheckboxes(); // because there is checkbox, replace it
-                        giCount++;
-                    }
                 </script>
 
                 <table class="table table-bordered table-striped datatable" id="table-2">
                     <thead>
                         <tr>
-                            <th>
-                                <div class="checkbox checkbox-replace">
-                                    <input type="checkbox" id="chk-1">
-                                </div>
-                            </th>
-                            <th>ID</th>
                             <th>First Name</th>
                             <th>Last Name</th>
                             <th>Gender</th>
@@ -308,14 +282,7 @@
 
                     <tbody>
                         <?php while ($row = $result->fetch_assoc()): ?>
-
                             <tr>
-                                <td>
-                                    <div class="checkbox checkbox-replace">
-                                        <input type="checkbox" id="chk-1">
-                                    </div>
-                                </td>
-                                <td><?php echo $row['id'] ?></td>
                                 <td><?php echo $row['first_name'] ?></td>
                                 <td><?php echo $row['last_name'] ?></td>
                                 <td><?php echo $row['gender'] ?></td>
@@ -341,6 +308,7 @@
                         <?php endwhile; ?>
                     </tbody>
                 </table>
+                <br />
                 <footer class="main">
 
                     <strong>E-Fitness 2017 </strong>&copy; All Rights Reserved
@@ -349,9 +317,10 @@
             </div>
         </div>
 
-
-        <link rel="stylesheet" href="assets/js/jvectormap/jquery-jvectormap-1.2.2.css">
-        <link rel="stylesheet" href="assets/js/rickshaw/rickshaw.min.css">
+        <!-- Imported styles on this page -->
+        <link rel="stylesheet" href="assets/js/datatables/datatables.css">
+        <link rel="stylesheet" href="assets/js/select2/select2-bootstrap.css">
+        <link rel="stylesheet" href="assets/js/select2/select2.css">
 
         <!-- Bottom scripts (common) -->
         <script src="assets/js/gsap/TweenMax.min.js"></script>
@@ -360,25 +329,19 @@
         <script src="assets/js/joinable.js"></script>
         <script src="assets/js/resizeable.js"></script>
         <script src="assets/js/neon-api.js"></script>
-        <script src="assets/js/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
 
 
         <!-- Imported scripts on this page -->
-        <script src="assets/js/jvectormap/jquery-jvectormap-europe-merc-en.js"></script>
-        <script src="assets/js/jquery.sparkline.min.js"></script>
-        <script src="assets/js/rickshaw/vendor/d3.v3.js"></script>
-        <script src="assets/js/rickshaw/rickshaw.min.js"></script>
-        <script src="assets/js/raphael-min.js"></script>
-        <!-- <script src="assets/js/morris.min.js"></script> -->
-        <script src="assets/js/toastr.js"></script>
+        <script src="assets/js/datatables/datatables.js"></script>
+        <script src="assets/js/select2/select2.min.js"></script>
         <script src="assets/js/neon-chat.js"></script>
-        <script src="assets/js/jquery.validate.min.js"></script>
 
 
         <!-- JavaScripts initializations and stuff -->
         <script src="assets/js/neon-custom.js"></script>
 
 
-
+        <!-- Demo Settings -->
+        <script src="assets/js/neon-demo.js"></script> 
     </body>
 </html>
