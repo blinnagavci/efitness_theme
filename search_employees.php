@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+        <?php require('database/db_connect.php'); ?>
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
         <meta charset="utf-8">
@@ -10,7 +11,7 @@
 
         <link rel="icon" href="assets/images/favicon.ico">
 
-        <title>E-Fitness | Add item</title>
+        <title>E-Fitness | Search Employees</title>
 
         <link rel="stylesheet" href="assets/js/jquery-ui/css/no-theme/jquery-ui-1.10.3.custom.min.css">
         <link rel="stylesheet" href="assets/css/font-icons/entypo/css/entypo.css">
@@ -95,7 +96,7 @@
                                 </li>
                             </ul>
                         </li>
-                        <li class="has-sub">
+                        <li class="has-sub opened active">
                             <a href="#">
                                 <i class="entypo-briefcase"></i>
                                 <span class="title">Employees</span>
@@ -106,20 +107,20 @@
                                         <span class="title">Add employee</span>
                                     </a>
                                 </li>
-                                <li>
+                                <li class="active">
                                     <a href="">
                                         <span class="title">Search employees</span>
                                     </a>
                                 </li>
                             </ul>
                         </li>
-                        <li class="has-sub opened active">
+                        <li class="has-sub">
                             <a href="#">
                                 <i class="entypo-database"></i>
                                 <span class="title">Inventory</span>
                             </a>
                             <ul>
-                                <li class="active">
+                                <li>
                                     <a href="add_item.php">
                                         <span class="title">Add item</span>
                                     </a>
@@ -224,110 +225,95 @@
 
                 <ol class="breadcrumb bc-3" >
                     <li>
-                        Inventory
+                        Employees
                     </li>
                     <li class="active">
-                        <strong>Add item</strong>
+                        <strong>Search employees</strong>
                     </li>
                 </ol>
-                <h2>Add item</h2>
+                <?php
+                $sql = "SELECT id, first_name, last_name, gender, city, birth_date, telephone_no FROM employee";
+                $result = $conn->query($sql);
+
+
+                // output data of each row
+                ?>
+                <h2>Search employees</h2>
                 <br />
+                <script type="text/javascript">
+                    jQuery(window).load(function () {
+                        var $table_employees = jQuery("#tableEmployees");
 
+                        // Initialize DataTable
+                        $table_employees.DataTable({
+                            "sDom": "Bfrtip",
+                            "bStateSave": false,
+                            "iDisplayLength": 10,
+                            "aoColumns": [
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                {"bSortable": false}
+                            ],
+                            buttons: [
+                                'excelHtml5',
+                                'pdfHtml5'
+                            ],
+                            "bStateSave": true
+                        });
+                    });
 
-                <div class="row">
-                    <div class="col-md-12">
+                </script>
 
-                        <div class="panel panel-primary" data-collapsed="0">
+                <table class="table table-bordered table-striped datatable" id="tableEmployees">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Gender</th>
+                            <th>City</th>
+                            <th>Date of Birth</th>
+                            <th>Phone no.</th>
+                            <th>Options</th>
+                        </tr>
+                    </thead>
 
-                            <div class="panel-heading">
-                                <div class="panel-title">
+                    <tbody>
+                        <?php while ($row = $result->fetch_assoc()): ?>
+                            <tr>
+                                <td><?php echo $row['id'] ?></td>
+                                <td><?php echo $row['first_name'] ?></td>
+                                <td><?php echo $row['last_name'] ?></td>
+                                <td><?php echo $row['gender'] ?></td>
+                                <td><?php echo $row['city'] ?></td>
+                                <td><?php echo $row['birth_date'] ?></td>
+                                <td><?php echo $row['telephone_no'] ?></td>
+                                <td>
+                                    <a href="#" class="btn btn-default btn-sm btn-icon icon-left">
+                                        <i class="entypo-pencil"></i>
+                                        Edit
+                                    </a>
 
-                                </div>
+                                    <a href="#" class="btn btn-danger btn-sm btn-icon icon-left">
+                                        <i class="entypo-cancel"></i>
+                                        Delete
+                                    </a>
 
-                                <div class="panel-options">
-                                    <a href="#" data-rel="collapse"><i class="entypo-down-open"></i></a>
-                                </div>
-                            </div>
-
-                            <div class="panel-body">
-
-                                <form role="form" id="add_item_form" name="add_item_form" method="post" class="form-horizontal form-groups-bordered validate">
-
-                                    <div class="form-group">
-                                        <label for="field-1" class="col-sm-3 control-label">Item Name</label>
-
-                                        <div class="col-sm-5">
-                                            <input type="text" class="form-control" name="item_name" id="item_name" data-validate="required">
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label class="col-sm-3 control-label">Category</label>
-
-                                        <div class="col-sm-5">
-                                            <select name="item_category" id="item_category" class="form-control" data-validate="required">
-                                                <option selected disabled>Select</option>
-                                                <option value="equipment">Equipment</option>
-                                                <option value="supplement">Supplement</option>
-                                                <option value="food">Food</option>
-                                                <option value="drink">Drink</option>
-                                            </select>
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="field-1" class="col-sm-3 control-label">Barcode</label>
-
-                                        <div class="col-sm-5">
-                                            <input type="text" class="form-control" name="item_barcode" id="item_barcode" data-validate="required">
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="field-1" class="col-sm-3 control-label">Register Date</label>
-
-                                        <div class="col-sm-5">
-                                            <input type="text" value="<?php echo date('d/m/Y') ?>"class="form-control" name="item_date" id="item_date" readonly>
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="field-1" class="col-sm-3 control-label">Cost Price</label>
-
-                                        <div class="col-sm-5">
-                                            <input type="text" class="form-control" name="item_price" id="item_price" data-validate="required">
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label class="col-sm-3 control-label">Quantity</label>
-
-                                        <div class="col-sm-5">
-
-                                            <!-- Spinner Markup -->
-                                            <div class="input-spinner">
-                                                <button type="button" class="btn btn-default">-</button>
-                                                <input type="text" class="form-control size-1" value="1" name="item_quantity" id="item_quantity" data-validate="number" />
-                                                <button type="button" class="btn btn-default">+</button>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="col-sm-offset-3 col-sm-5">
-                                            <button type="submit" name="add_item" class="btn btn-block btn-primary">Add Item</button>
-                                        </div>
-                                    </div>
-
-                                </form>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-                </div>
-
+                                    <a href="#" class="btn btn-info btn-sm btn-icon icon-left">
+                                        <i class="entypo-info"></i>
+                                        Details
+                                    </a>
+                                </td>
+                            </tr>
+                        <?php endwhile; ?>
+                    </tbody>
+                </table>
+                <br />
                 <footer class="main">
 
                     <strong>E-Fitness 2017 </strong>&copy; All Rights Reserved
@@ -336,9 +322,10 @@
             </div>
         </div>
 
-
-        <link rel="stylesheet" href="assets/js/jvectormap/jquery-jvectormap-1.2.2.css">
-        <link rel="stylesheet" href="assets/js/rickshaw/rickshaw.min.css">
+        <!-- Imported styles on this page -->
+        <link rel="stylesheet" href="assets/js/datatables/datatables.css">
+        <link rel="stylesheet" href="assets/js/select2/select2-bootstrap.css">
+        <link rel="stylesheet" href="assets/js/select2/select2.css">
 
         <!-- Bottom scripts (common) -->
         <script src="assets/js/gsap/TweenMax.min.js"></script>
@@ -347,25 +334,19 @@
         <script src="assets/js/joinable.js"></script>
         <script src="assets/js/resizeable.js"></script>
         <script src="assets/js/neon-api.js"></script>
-        <script src="assets/js/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
 
 
         <!-- Imported scripts on this page -->
-        <script src="assets/js/jvectormap/jquery-jvectormap-europe-merc-en.js"></script>
-        <script src="assets/js/jquery.sparkline.min.js"></script>
-        <script src="assets/js/rickshaw/vendor/d3.v3.js"></script>
-        <script src="assets/js/rickshaw/rickshaw.min.js"></script>
-        <script src="assets/js/raphael-min.js"></script>
-        <!-- <script src="assets/js/morris.min.js"></script> -->
-        <script src="assets/js/toastr.js"></script>
+        <script src="assets/js/datatables/datatables.js"></script>
+        <script src="assets/js/select2/select2.min.js"></script>
         <script src="assets/js/neon-chat.js"></script>
-        <script src="assets/js/jquery.validate.min.js"></script>
 
 
         <!-- JavaScripts initializations and stuff -->
         <script src="assets/js/neon-custom.js"></script>
 
 
-
+        <!-- Demo Settings -->
+        <script src="assets/js/neon-demo.js"></script> 
     </body>
 </html>
