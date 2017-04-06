@@ -245,7 +245,7 @@
 
                             <div class="panel-body">
 
-                                <form action='database/add_member.php' method="POST" role="form" class="form-horizontal form-groups-bordered validate" novalidate="novalidate">
+                                <form action='database/add_member.php' method="POST" enctype="multipart/form-data" role="form" class="form-horizontal form-groups-bordered validate" novalidate="novalidate">
 
                                     <div class="form-group">
                                         <label for="member_firstname" class="col-sm-3 control-label" >First Name</label>
@@ -348,7 +348,7 @@
                                                     <span class="btn btn-white btn-file">
                                                         <span class="fileinput-new">Select image</span>
                                                         <span class="fileinput-exists">Change</span>
-                                                        <input type="file" name="..." accept="image/*"   >
+                                                        <input type="file" name="member_upload" id="member_upload" accept="image/*"   >
                                                     </span>
                                                     <a href="#" class="btn btn-orange fileinput-exists" data-dismiss="fileinput" >Remove</a>
                                                 </div>
