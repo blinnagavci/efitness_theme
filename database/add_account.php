@@ -22,6 +22,6 @@ if (isset($_POST['submit'])) {
     }
 
     mysqli_close($conn);
-    header("refresh: 0; url = ../../manage_accounts");
+    header("refresh: 0; url = ../accounts.php");
 }
 
