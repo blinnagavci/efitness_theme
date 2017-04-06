@@ -28,4 +28,3 @@ if (isset($_GET['id'])) {
     mysqli_close($conn);
     header("refresh: 0; url = ../accounts.php");
 }
-

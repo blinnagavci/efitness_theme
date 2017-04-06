@@ -3,7 +3,7 @@
 require('db_connect.php');
 
 if (isset($_POST['remove_employee_type_submit'])) {
-    $employeetype = $_POST['remove_employee_type_select'];
+    $employeetype = filter_input(INPUT_POST, 'remove_employee_type_select');
 
     $sql = "UPDATE employee_type SET status='1' WHERE employee_type = '$employeetype'";
 
@@ -15,6 +15,5 @@ if (isset($_POST['remove_employee_type_submit'])) {
     }
 
     mysqli_close($conn);
-    header("refresh: 0; url = ../../other_settings");
+    header("refresh: 0; url = ../other_settings.php");
 }
-
