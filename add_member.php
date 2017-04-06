@@ -11,7 +11,7 @@
 
         <link rel="icon" href="assets/images/favicon.ico">
 
-        <title>E-Fitness | Members</title>
+        <title>E-Fitness | Add members</title>
 
         <link rel="stylesheet" href="assets/js/jquery-ui/css/no-theme/jquery-ui-1.10.3.custom.min.css">
         <link rel="stylesheet" href="assets/css/font-icons/entypo/css/entypo.css">
@@ -72,12 +72,12 @@
                             <ul>
                                 <li class="active">
                                     <a href="add_member.php">
-                                        <span class="title">Add Member</span>
+                                        <span class="title">Add member</span>
                                     </a>
                                 </li>
                                 <li>
                                     <a href="search_members.php">
-                                        <span class="title">Search Members</span>
+                                        <span class="title">Search members</span>
                                     </a>
                                 </li>
                             </ul>
@@ -90,12 +90,12 @@
                             <ul>
                                 <li>
                                     <a href="add_employee.php">
-                                        <span class="title">Add Employee</span>
+                                        <span class="title">Add employee</span>
                                     </a>
                                 </li>
                                 <li>
                                     <a href="search_employees.php">
-                                        <span class="title">Search Employees</span>
+                                        <span class="title">Search employees</span>
                                     </a>
                                 </li>
                             </ul>
@@ -108,12 +108,12 @@
                             <ul>
                                 <li>
                                     <a href="add_item.php">
-                                        <span class="title">Add Item</span>
+                                        <span class="title">Add item</span>
                                     </a>
                                 </li>
                                 <li>
                                     <a href="search_item.php">
-                                        <span class="title">Search Inventory</span>
+                                        <span class="title">Search inventory</span>
                                     </a>
                                 </li>
                                 <li>
@@ -136,7 +136,7 @@
                             </a>
                         </li>
                         <li class="">
-                            <a href="">
+                            <a href="other_settings.php">
                                 <i class="entypo-tools"></i>
                                 <span class="title">Settings</span>
                             </a>
@@ -173,7 +173,7 @@
                                     <li>
                                         <a href="extra-timeline.html">
                                             <i class="entypo-user"></i> 
-                                            Edit Profile
+                                            Edit profile
                                         </a>
                                     </li>
 
@@ -204,7 +204,7 @@
 
                             <li>
                                 <a href="extra-login.html">
-                                    Log Out <i class="entypo-logout right"></i>
+                                    Log out <i class="entypo-logout right"></i>
                                 </a>
                             </li>
                         </ul>
@@ -221,11 +221,11 @@
                     </li>
                     <li class="active">
 
-                        <strong>Add Member</strong>
+                        <strong>Add member</strong>
                     </li>
                 </ol>
 
-                <h2>Add Member</h2>
+                <h2>Add member</h2>
                 <br />
 
 
@@ -248,7 +248,7 @@
                                 <form action='database/add_member.php' method="POST" enctype="multipart/form-data" role="form" class="form-horizontal form-groups-bordered validate" novalidate="novalidate">
 
                                     <div class="form-group">
-                                        <label for="member_firstname" class="col-sm-3 control-label" >First Name</label>
+                                        <label for="member_firstname" class="col-sm-3 control-label" >First name</label>
 
                                         <div class="col-sm-5">
                                             <input type="text" name="member_firstname" class="form-control" data-validate="required" id="member_firstname">
@@ -256,7 +256,7 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="member_surname" class="col-sm-3 control-label">Last Name</label>
+                                        <label for="member_surname" class="col-sm-3 control-label">Last name</label>
 
                                         <div class="col-sm-5">
                                             <input type="text" name="member_surname" class="form-control" data-validate="required" id="member_surname" placeholder="">
@@ -277,7 +277,7 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label class="col-sm-3 control-label">Birth Date</label>
+                                        <label class="col-sm-3 control-label">Birth date</label>
 
                                         <div class="col-sm-3">
                                             <div class="input-group">
@@ -291,7 +291,7 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="member_address" class="col-sm-3 control-label">Residental Address</label>
+                                        <label for="member_address" class="col-sm-3 control-label">Residential address</label>
 
                                         <div class="col-sm-5">
                                             <input type="text" name="member_address"  data-validate="required" class="form-control" id="member_address" placeholder="">
@@ -308,7 +308,7 @@
 
 
                                     <div class="form-group">
-                                        <label for="member_telephone" class="col-sm-3 control-label">Phone No.</label>
+                                        <label for="member_telephone" class="col-sm-3 control-label">Phone no.</label>
 
                                         <div class="col-sm-5">
                                             <input type="text" name="member_telephone" class="form-control" data-validate="required" id="member_telephone" placeholder="">
@@ -316,7 +316,7 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="member_alternative" class="col-sm-3 control-label">Alternative No.</label>
+                                        <label for="member_alternative" class="col-sm-3 control-label">Alternative no.</label>
 
                                         <div class="col-sm-5">
                                             <input type="text" name="member_alternative" class="form-control"  data-validate="required" id="member_alternative" placeholder="">
@@ -328,14 +328,14 @@
 
                                         <div class="col-sm-5">
                                             <div class="input-group">
-                                                <span class="input-group-addon"><i class="entypo-mail"></i></span>
                                                 <input type="text" class="form-control" name="member_email" data-validate="required, email" id="member_email" placeholder="">
+                                                <span class="input-group-addon"><i class="entypo-mail"></i></span>
                                             </div>
                                         </div>
                                     </div>
 
                                     <div class="form-group">
-                                        <label class="col-sm-3 control-label">Upload Photo</label>
+                                        <label class="col-sm-3 control-label">Upload photo</label>
 
                                         <div class="col-sm-5">
 
@@ -358,7 +358,7 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label class="col-sm-3 control-label">Membership Type</label>
+                                        <label class="col-sm-3 control-label">Membership type</label>
 
                                         <div class="col-sm-5">
                                             <select name="member_subscription" class="form-control"  data-validate="required" id="member_subscription">
@@ -391,7 +391,7 @@
 
 
                                     <div class="form-group">
-                                        <label class="col-sm-3 control-label">Start Date</label>
+                                        <label class="col-sm-3 control-label">Start date</label>
 
                                         <div class="col-sm-3">
                                             <div class="input-group">
@@ -404,7 +404,7 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-sm-3 control-label">End Date</label>
+                                        <label class="col-sm-3 control-label">End date</label>
 
                                         <div class="col-sm-3">
                                             <div class="input-group">
