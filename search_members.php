@@ -299,7 +299,7 @@
                                         Edit
                                     </a>
 
-                                    <a href="#" class="btn btn-danger btn-sm btn-icon icon-left">
+                                    <a onclick="return confirm('Are you sure you want to delete this member?');" href='database/remove_member.php?id=<?php echo $row['id'] ?>' class="btn btn-danger btn-sm btn-icon icon-left">
                                         <i class="entypo-cancel"></i>
                                         Delete
                                     </a>

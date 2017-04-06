@@ -2,7 +2,7 @@
 
 require('db_connect.php');
 
-if (isset($_POST['add_employe_type_submit'])) {
+if (isset($_POST['add_employee_type_submit'])) {
     $employeetype = $_POST['employeetype_settings'];
 
     $sql = "INSERT INTO employee_type (employee_type, status)
@@ -18,6 +18,6 @@ if (isset($_POST['add_employe_type_submit'])) {
     }
 
     mysqli_close($conn);
-    header("refresh: 0; url = ../../other_settings");
+    header("refresh: 0; url = ../other_settings.php");
 }
 
