@@ -11,7 +11,7 @@
 
         <link rel="icon" href="assets/images/favicon.ico">
 
-        <title>E-Fitness | Search Employees</title>
+        <title>E-Fitness | Search employees</title>
 
         <link rel="stylesheet" href="assets/js/jquery-ui/css/no-theme/jquery-ui-1.10.3.custom.min.css">
         <link rel="stylesheet" href="assets/css/font-icons/entypo/css/entypo.css">
@@ -315,9 +315,7 @@
                 </table>
                 <br />
                 <footer class="main">
-
                     <strong>E-Fitness 2017 </strong>&copy; All Rights Reserved
-
                 </footer>
             </div>
         </div>
@@ -335,7 +333,6 @@
         <script src="assets/js/resizeable.js"></script>
         <script src="assets/js/neon-api.js"></script>
 
-
         <!-- Imported scripts on this page -->
         <script src="assets/js/datatables/datatables.js"></script>
         <script src="assets/js/select2/select2.min.js"></script>
@@ -344,7 +341,6 @@
 
         <!-- JavaScripts initializations and stuff -->
         <script src="assets/js/neon-custom.js"></script>
-
 
         <!-- Demo Settings -->
         <script src="assets/js/neon-demo.js"></script> 
