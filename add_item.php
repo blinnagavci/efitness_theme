@@ -2,14 +2,11 @@
 <html lang="en">
     <head>
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="description" content="Neon Admin Panel" />
+        <meta name="description" content="E-Fitness Admin Panel" />
         <meta name="Blin Nagavci, Labian Gashi, Besarber Tasholli" content="" />
-
         <link rel="icon" href="assets/images/favicon.ico">
-
         <title>E-Fitness | Add item</title>
 
         <link rel="stylesheet" href="assets/js/jquery-ui/css/no-theme/jquery-ui-1.10.3.custom.min.css">
@@ -251,10 +248,10 @@
 
                             <div class="panel-body">
 
-                                <form role="form" id="add_item_form" name="add_item_form" method="post" class="form-horizontal form-groups-bordered validate">
+                                <form role="form" id="add_item_form" action="database/add_item.php" name="add_item_form" method="post" class="form-horizontal form-groups-bordered validate">
 
                                     <div class="form-group">
-                                        <label for="field-1" class="col-sm-3 control-label">Item Name</label>
+                                        <label for="item_name" class="col-sm-3 control-label">Item Name</label>
 
                                         <div class="col-sm-5">
                                             <input type="text" class="form-control" name="item_name" id="item_name" data-validate="required">
@@ -262,21 +259,44 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label class="col-sm-3 control-label">Category</label>
+                                        <label for="item_category" class="col-sm-3 control-label">Category</label>
 
                                         <div class="col-sm-5">
                                             <select name="item_category" id="item_category" class="form-control" data-validate="required">
-                                                <option selected disabled>Select</option>
-                                                <option value="equipment">Equipment</option>
-                                                <option value="supplement">Supplement</option>
-                                                <option value="food">Food</option>
-                                                <option value="drink">Drink</option>
+                                                <option value="disabled" disabled selected>Select</option>
+                                                <?php
+                                                include('database/db_connect.php');
+
+                                                $sql = 'SELECT category FROM item_category';
+                                                $select_category = mysqli_query($conn, $sql);
+                                                if (!$select_category) {
+                                                    echo ("Could not retrieve data" . mysql_error());
+                                                }
+                                                while ($row = $select_category->fetch_assoc()) {
+                                                    $item_category = $row['category'];
+                                                    echo "<option value='$item_category'>$item_category</option>";
+                                                }
+                                                mysqli_close($conn);
+                                                ?>
                                             </select>
                                         </div>
+                                        <script type="text/javascript">
+                                            $("#item_category").change(function () {
+                                                var val = $("#item_category").val();
+                                                if (val === "Equipment") {
+                                                    if ($(".form-group").hasClass("selling-price")) {
+                                                        $(".selling-price").addClass("hide");
+                                                        $(".selling-price input").attr("data-validate: ''");
+                                                    }
+                                                } else if (val !== "Equipment") {
+                                                    $(".selling-price").removeClass("hide");
+                                                }
+                                            });
+                                        </script>
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="field-1" class="col-sm-3 control-label">Barcode</label>
+                                        <label for="item_barcode" class="col-sm-3 control-label">Barcode</label>
 
                                         <div class="col-sm-5">
                                             <input type="text" class="form-control" name="item_barcode" id="item_barcode" data-validate="required">
@@ -292,10 +312,17 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="field-1" class="col-sm-3 control-label">Cost Price</label>
+                                        <label for="item_price" class="col-sm-3 control-label">Cost Price</label>
 
                                         <div class="col-sm-5">
-                                            <input type="text" class="form-control" name="item_price" id="item_price" data-validate="required">
+                                            <input type="number" class="form-control" name="item_price" id="item_price" data-validate="required">
+                                        </div>
+                                    </div>
+                                    <div class="form-group selling-price">
+                                        <label for="item_selling_price" class="col-sm-3 control-label">Selling Price</label>
+
+                                        <div class="col-sm-5">
+                                            <input type="number" class="form-control" name="item_selling_price" id="item_selling_price" data-validate="required">
                                         </div>
                                     </div>
 
@@ -307,7 +334,7 @@
                                             <!-- Spinner Markup -->
                                             <div class="input-spinner">
                                                 <button type="button" class="btn btn-default">-</button>
-                                                <input type="text" class="form-control size-1" value="1" name="item_quantity" id="item_quantity" data-validate="number" />
+                                                <input type="text" class="form-control size-1" value="1" name="item_quantity" id="item_quantity" data-validate="number,minlength[1]" />
                                                 <button type="button" class="btn btn-default">+</button>
                                             </div>
 
