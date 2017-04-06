@@ -11,7 +11,7 @@
 
         <link rel="icon" href="assets/images/favicon.ico">
 
-        <title>E-Fitness | More settings</title>
+        <title>E-Fitness | Search Employees</title>
 
         <link rel="stylesheet" href="assets/js/jquery-ui/css/no-theme/jquery-ui-1.10.3.custom.min.css">
         <link rel="stylesheet" href="assets/css/font-icons/entypo/css/entypo.css">
@@ -24,13 +24,26 @@
 
         <script src="assets/js/jquery-1.11.3.min.js"></script>
 
+        <!--[if lt IE 9]><script src="assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+
+        <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+                <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+                <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
 
     </head>
     <body class="page-body  page-fade" data-url="">
+
         <div class="page-container"><!-- add class "sidebar-collapsed" to close sidebar by default, "chat-visible" to make chat appear always -->
+
             <div class="sidebar-menu">
-                <div class="sidebar-menu-inner">			
+
+                <div class="sidebar-menu-inner">
+
                     <header class="logo-env">
+
                         <!-- logo -->
                         <div class="logo">
                             <a href="index.php">
@@ -45,6 +58,7 @@
                             </a>
                         </div>
 
+
                         <!-- open/close menu icon (do not remove if you want to enable menu on mobile devices) -->
                         <div class="sidebar-mobile-menu visible-xs">
                             <a href="#" class="with-animation"><!-- add class "with-animation" to support animation -->
@@ -58,7 +72,7 @@
                     <ul id="main-menu" class="main-menu">
                         <!-- add class "multiple-expanded" to allow multiple submenus to open -->
                         <!-- class "auto-inherit-active-class" will automatically add "active" class for parent elements who are marked already with class "active" -->
-                        <li class="">
+                        <li>
                             <a href="index.php">
                                 <i class="entypo-gauge"></i>
                                 <span class="title">Dashboard</span>
@@ -70,7 +84,7 @@
                                 <span class="title">Members</span>
                             </a>
                             <ul>
-                                <li class="">
+                                <li>
                                     <a href="add_member.php">
                                         <span class="title">Add member</span>
                                     </a>
@@ -82,19 +96,19 @@
                                 </li>
                             </ul>
                         </li>
-                        <li class="has-sub">
+                        <li class="has-sub opened active">
                             <a href="#">
                                 <i class="entypo-briefcase"></i>
                                 <span class="title">Employees</span>
                             </a>
                             <ul>
                                 <li>
-                                    <a href="add_employee.php">
+                                    <a href="">
                                         <span class="title">Add employee</span>
                                     </a>
                                 </li>
-                                <li>
-                                    <a href="search_employees.php">
+                                <li class="active">
+                                    <a href="">
                                         <span class="title">Search employees</span>
                                     </a>
                                 </li>
@@ -135,23 +149,17 @@
                                 <span class="title">Accounts</span>
                             </a>
                         </li>
-
-                        <li class="active">
-                            <a href="other_settings.php">
-                                <i class="entypo-tools opened active"></i>
+                        <li class="">
+                            <a href="">
+                                <i class="entypo-tools"></i>
                                 <span class="title">Settings</span>
                             </a>
                         </li>
                     </ul>
-
                 </div>
-
             </div>
-
             <div class="main-content">
-
                 <div class="row">
-
                     <!-- Profile Info and Notifications -->
                     <div class="col-md-6 col-sm-8 clearfix">
 
@@ -161,8 +169,8 @@
                             <li class="profile-info dropdown"><!-- add class "pull-right" if you want to place this from right -->
 
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                    <img src="assets/images/thumb-1@2x.png" alt="" class="img-circle" width="44" />
-                                    Blin Nagavci
+                                    <img src="assets/images/labiangashi.png" alt="" class="img-circle" width="44" />
+                                    Labian Gashi
                                 </a>
 
                                 <ul class="dropdown-menu">
@@ -213,144 +221,112 @@
                     </div>
 
                 </div>
-
                 <hr />
 
                 <ol class="breadcrumb bc-3" >
+                    <li>
+                        Employees
+                    </li>
                     <li class="active">
-                        Settings
+                        <strong>Search employees</strong>
                     </li>
                 </ol>
+                <?php
+                $sql = "SELECT id, first_name, last_name, gender, city, birth_date, telephone_no FROM employee";
+                $result = $conn->query($sql);
 
-                <h2>Settings</h2>
+
+                // output data of each row
+                ?>
+                <h2>Search employees</h2>
                 <br />
+                <script type="text/javascript">
+                    jQuery(window).load(function () {
+                        var $table_employees = jQuery("#tableEmployees");
 
+                        // Initialize DataTable
+                        $table_employees.DataTable({
+                            "sDom": "Bfrtip",
+                            "bStateSave": false,
+                            "iDisplayLength": 10,
+                            "aoColumns": [
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                {"bSortable": false}
+                            ],
+                            buttons: [
+                                'excelHtml5',
+                                'pdfHtml5'
+                            ],
+                            "bStateSave": true
+                        });
+                    });
 
-                <div class="row">
-                    <div class="col-md-12">
+                </script>
 
-                        <div class="panel panel-primary" data-collapsed="0">
+                <table class="table table-bordered table-striped datatable" id="tableEmployees">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Gender</th>
+                            <th>City</th>
+                            <th>Date of Birth</th>
+                            <th>Phone no.</th>
+                            <th>Options</th>
+                        </tr>
+                    </thead>
 
-                            <div class="panel-heading">
-                                <div class="panel-title">Membership settings</div>
+                    <tbody>
+                        <?php while ($row = $result->fetch_assoc()): ?>
+                            <tr>
+                                <td><?php echo $row['id'] ?></td>
+                                <td><?php echo $row['first_name'] ?></td>
+                                <td><?php echo $row['last_name'] ?></td>
+                                <td><?php echo $row['gender'] ?></td>
+                                <td><?php echo $row['city'] ?></td>
+                                <td><?php echo $row['birth_date'] ?></td>
+                                <td><?php echo $row['telephone_no'] ?></td>
+                                <td>
+                                    <a href="#" class="btn btn-default btn-sm btn-icon icon-left">
+                                        <i class="entypo-pencil"></i>
+                                        Edit
+                                    </a>
 
-                                <div class="panel-options">
-                                    <a href="#" data-rel="collapse"><i class="entypo-down-open"></i></a>
-                                </div>
-                            </div>
+                                    <a href="#" class="btn btn-danger btn-sm btn-icon icon-left">
+                                        <i class="entypo-cancel"></i>
+                                        Delete
+                                    </a>
 
-                            <div class="panel-body">
-
-                                <form action='database/add_membership.php' method="POST" role="form" class="form-horizontal form-groups-bordered validate">
-                                    <div class="form-group">
-                                        <label for="membershiptype_settings" class="col-sm-3 control-label" >New membership</label>
-                                        <div class="col-sm-5">
-                                            <div class="input-group">
-                                                <input type="text"  name="membershiptype_settings" id="membershiptype_settings" class="form-control" data-validate="required">
-                                                <span class="input-group-btn">
-                                                    <button type="submit" class="width-72 btn btn-primary">Add</button>
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                    </div>
-
-                                </form>
-
-                                <form action='database/remove_membership.php' method="POST" role="form" class="form-horizontal form-groups-bordered validate">
-
-                                    <div class="form-group">
-                                        <label for="gender_select" class="col-sm-3 control-label">Membership types</label>
-
-                                        <div class="col-sm-5">
-                                            <div class="input-group">
-                                                <select name="remove_membership_select" class="form-control" data-validate="required" id="remove_membership_select">
-                                                    <option value="disabled" disabled selected>Select</option>
-
-                                                    <?php
-                                                    include('inc/database/db_connect.php');
-                                                    $sql = 'SELECT membership_type FROM membership WHERE status= "0"';
-                                                    $retval = mysqli_query($conn, $sql);
-                                                    if (!$retval) {
-                                                        echo ("Could not retrieve data" . mysql_error());
-                                                    }
-                                                    while ($row = $retval->fetch_assoc()) {
-                                                        $membership = $row['membership_type'];
-                                                        echo "<option value='$membership'>$membership</option>";
-                                                    }
-                                                    mysqli_close($conn);
-                                                    ?>
-                                                </select>
-                                                <span class="input-group-btn">
-                                                    <button type="submit" class="btn btn-primary">Remove</button>
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group"></div>
-                                </form>
-
-                            </div>
-
-                        </div>
-
-
-                        <div class="panel panel-primary" data-collapsed="0">
-
-                            <div class="panel-heading">
-                                <div class="panel-title">Employee type settings</div>
-
-                                <div class="panel-options">
-                                    <a href="#" data-rel="collapse"><i class="entypo-down-open"></i></a>
-                                </div>
-                            </div>
-
-                            <div class="panel-body">
-
-                                <form action='database/add_employee_type.php' method="POST" role="form" class="form-horizontal form-groups-bordered validate">
-
-                                    <div class="form-group">
-                                        <label for="employee_firstname" class="col-sm-3 control-label" >New employee type</label>
-
-                                        <div class="col-sm-5">
-                                            <div class="input-group">
-                                                <input type="text"  name="membershiptype_settings" id="membershiptype_settings" class="form-control" data-validate="required">
-                                                <span class="input-group-btn">
-                                                    <button type="submit" name="submit" class="width-72 btn btn-primary">Add</button>
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                    </div>
-                                </form>
-                                <form action='database/remove_employee_type.php' method="POST" role="form" class="form-horizontal form-groups-bordered validate" novalidate="novalidate">
-                                    <div class="form-group">
-                                        <label for="gender_select" class="col-sm-3 control-label">Employee types</label>
-
-                                        <div class="col-sm-5">
-                                            <div class="input-group">
-                                                <select name="remove_membership_select" class="form-control" data-validate="required" id="remove_membership_select">
-                                                    <option value="disabled" disabled selected>Select</option>
-                                                </select>
-
-                                                <span class="input-group-btn">
-                                                    <button type="submit" name="submit" class="btn btn-primary">Remove</button>
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                                    <a href="#" class="btn btn-info btn-sm btn-icon icon-left">
+                                        <i class="entypo-info"></i>
+                                        Details
+                                    </a>
+                                </td>
+                            </tr>
+                        <?php endwhile; ?>
+                    </tbody>
+                </table>
+                <br />
                 <footer class="main">
+
                     <strong>E-Fitness 2017 </strong>&copy; All Rights Reserved
+
                 </footer>
             </div>
         </div>
+
+        <!-- Imported styles on this page -->
+        <link rel="stylesheet" href="assets/js/datatables/datatables.css">
+        <link rel="stylesheet" href="assets/js/select2/select2-bootstrap.css">
+        <link rel="stylesheet" href="assets/js/select2/select2.css">
+
         <!-- Bottom scripts (common) -->
         <script src="assets/js/gsap/TweenMax.min.js"></script>
         <script src="assets/js/jquery-ui/js/jquery-ui-1.10.3.minimal.min.js"></script>
@@ -358,25 +334,12 @@
         <script src="assets/js/joinable.js"></script>
         <script src="assets/js/resizeable.js"></script>
         <script src="assets/js/neon-api.js"></script>
-        <script src="assets/js/select2/select2.min.js"></script>
-        <script src="assets/js/bootstrap-tagsinput.min.js"></script>
-        <script src="assets/js/typeahead.min.js"></script>
-        <script src="assets/js/selectboxit/jquery.selectBoxIt.min.js"></script>
-        <script src="assets/js/bootstrap-datepicker.js"></script>
-        <script src="assets/js/bootstrap-timepicker.min.js"></script>
-        <script src="assets/js/bootstrap-colorpicker.min.js"></script>
-        <script src="assets/js/moment.min.js"></script>
-        <script src="assets/js/daterangepicker/daterangepicker.js"></script>
-        <script src="assets/js/jquery.multi-select.js"></script>
-        <script src="assets/js/icheck/icheck.min.js"></script>
-        <script src="assets/js/neon-chat.js"></script>
-        <script src="assets/js/jquery.validate.min.js"></script>
-        <!-- Imported scripts on this page -->
-        <script src="assets/js/bootstrap-switch.min.js"></script>
-        <script src="assets/js/neon-chat.js"></script>
 
-        <script src="assets/js/fileinput.js"></script>
-        <script src="assets/js/dropzone/dropzone.js"></script>
+
+        <!-- Imported scripts on this page -->
+        <script src="assets/js/datatables/datatables.js"></script>
+        <script src="assets/js/select2/select2.min.js"></script>
+        <script src="assets/js/neon-chat.js"></script>
 
 
         <!-- JavaScripts initializations and stuff -->
@@ -384,7 +347,6 @@
 
 
         <!-- Demo Settings -->
-        <script src="assets/js/neon-demo.js"></script>
-
+        <script src="assets/js/neon-demo.js"></script> 
     </body>
 </html>

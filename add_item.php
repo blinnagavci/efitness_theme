@@ -10,7 +10,7 @@
 
         <link rel="icon" href="assets/images/favicon.ico">
 
-        <title>E-Fitness | Add Item</title>
+        <title>E-Fitness | Add item</title>
 
         <link rel="stylesheet" href="assets/js/jquery-ui/css/no-theme/jquery-ui-1.10.3.custom.min.css">
         <link rel="stylesheet" href="assets/css/font-icons/entypo/css/entypo.css">
@@ -85,12 +85,12 @@
                             <ul>
                                 <li>
                                     <a href="add_member.php">
-                                        <span class="title">Add Member</span>
+                                        <span class="title">Add member</span>
                                     </a>
                                 </li>
                                 <li>
                                     <a href="search_members.php">
-                                        <span class="title">Search Members</span>
+                                        <span class="title">Search members</span>
                                     </a>
                                 </li>
                             </ul>
@@ -103,12 +103,12 @@
                             <ul>
                                 <li>
                                     <a href="">
-                                        <span class="title">Add Employee</span>
+                                        <span class="title">Add employee</span>
                                     </a>
                                 </li>
                                 <li>
                                     <a href="">
-                                        <span class="title">Search Employees</span>
+                                        <span class="title">Search employees</span>
                                     </a>
                                 </li>
                             </ul>
@@ -121,12 +121,12 @@
                             <ul>
                                 <li class="active">
                                     <a href="add_item.php">
-                                        <span class="title">Add Item</span>
+                                        <span class="title">Add item</span>
                                     </a>
                                 </li>
                                 <li>
                                     <a href="search_inventory.php">
-                                        <span class="title">Search Inventory</span>
+                                        <span class="title">Search inventory</span>
                                     </a>
                                 </li>
                                 <li>
@@ -227,10 +227,10 @@
                         Inventory
                     </li>
                     <li class="active">
-                        <strong>Add Item</strong>
+                        <strong>Add item</strong>
                     </li>
                 </ol>
-                <h2>Add Item</h2>
+                <h2>Add item</h2>
                 <br />
 
 

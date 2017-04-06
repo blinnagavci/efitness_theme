@@ -17,15 +17,30 @@ if (isset($_POST['submit'])) {
     $membershipstart = $_POST['membership_start'];
     $membershipend = $_POST['membership_end'];
 }
-
-$sql_member = "INSERT INTO member (first_name, last_name, gender, residential_address, city, telephone_no,
-alternative_no, email, birth_date)
-VALUES ('$firstname', '$lastname', '$gender', '$address', '$city', '$telephoneno', '$alternativeno' , '$email', '$birthdate')";
+$uploadedFileName = $_FILES['member_upload']['name'];
+$temp_name = $_FILES['member_upload']['tmp_name'];
+$temp = explode(".", $_FILES["member_upload"]["name"]);
+$getID = mysqli_query($conn, "SELECT id FROM member ORDER BY id DESC");
+$idRow = mysqli_fetch_row($getID);
+$newfilename = $idRow[0] + 1 . "_" . $firstname . "_" . $lastname . '.' . end($temp);
+if (!($_FILES['member_upload']['name'] == "")) {
+    $sql_member = "INSERT INTO member (first_name, last_name, gender, residential_address, city, telephone_no,
+alternative_no, email, birth_date, photo)
+VALUES ('$firstname', '$lastname', '$gender', '$address', '$city', '$telephoneno', '$alternativeno' , '$email', '$birthdate', '$newfilename')";
+} else {
+    $sql_member = "INSERT INTO member (first_name, last_name, gender, residential_address, city, telephone_no,
+    alternative_no, email, birth_date)
+    VALUES ('$firstname', '$lastname', '$gender', '$address', '$city', '$telephoneno', '$alternativeno' , '$email', '$birthdate')";
+}
 $retval1 = mysqli_query($conn, $sql_member);
-
+if ($uploadedFileName != '') {
+    $upload_directory = "../repository/member_photos/";
+    move_uploaded_file($temp_name, $upload_directory . $newfilename);
+}
 if (!$retval1) {
     die('Could not enter data to member table' . mysqli_connect_error());
 }
+
 
 $memberid = mysqli_query($conn, "SELECT id from member ORDER BY id DESC");
 $membershipid = mysqli_query($conn, "SELECT id from membership WHERE membership_type = '$membershiptype'");

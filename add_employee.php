@@ -72,12 +72,12 @@
                             <ul>
                                 <li class="">
                                     <a href="add_member.php">
-                                        <span class="title">Add Member</span>
+                                        <span class="title">Add member</span>
                                     </a>
                                 </li>
                                 <li>
                                     <a href="search_members.php">
-                                        <span class="title">Search Members</span>
+                                        <span class="title">Search members</span>
                                     </a>
                                 </li>
                             </ul>
@@ -108,12 +108,12 @@
                             <ul>
                                 <li>
                                     <a href="add_item.php">
-                                        <span class="title">Add Item</span>
+                                        <span class="title">Add item</span>
                                     </a>
                                 </li>
                                 <li>
                                     <a href="search_item.php">
-                                        <span class="title">Search Inventory</span>
+                                        <span class="title">Search inventory</span>
                                     </a>
                                 </li>
                                 <li>
@@ -136,7 +136,7 @@
                             </a>
                         </li>
                         <li class="">
-                            <a href="">
+                            <a href="other_settings.php">
                                 <i class="entypo-tools"></i>
                                 <span class="title">Settings</span>
                             </a>
@@ -173,7 +173,7 @@
                                     <li>
                                         <a href="extra-timeline.html">
                                             <i class="entypo-user"></i>
-                                            Edit Profile
+                                            Edit profile
                                         </a>
                                     </li>
 
@@ -248,7 +248,7 @@
                                 <form action='database/add_employee.php' method="POST" role="form" class="form-horizontal form-groups-bordered validate" novalidate="novalidate">
 
                                     <div class="form-group">
-                                        <label for="employee_firstname" class="col-sm-3 control-label" >First Name</label>
+                                        <label for="employee_firstname" class="col-sm-3 control-label" >First name</label>
 
                                         <div class="col-sm-5">
                                             <input type="text" name="employee_firstname" class="form-control" data-validate="required" id="employee_firstname">
@@ -256,7 +256,7 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="employee_surname" class="col-sm-3 control-label">Last Name</label>
+                                        <label for="employee_surname" class="col-sm-3 control-label">Last name</label>
 
                                         <div class="col-sm-5">
                                             <input type="text" name="employee_surname" class="form-control" data-validate="required" id="employee_surname" placeholder="">
@@ -277,7 +277,7 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="employee_date" class="col-sm-3 control-label">Birth Date</label>
+                                        <label for="employee_date" class="col-sm-3 control-label">Birth date</label>
 
                                         <div class="col-sm-3">
                                             <div class="input-group">
@@ -291,7 +291,7 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="employee_address" class="col-sm-3 control-label">Residential Address</label>
+                                        <label for="employee_address" class="col-sm-3 control-label">Residential address</label>
 
                                         <div class="col-sm-5">
                                             <input type="text" name="employee_address"  data-validate="required" class="form-control" id="employee_address" placeholder="">
@@ -308,7 +308,7 @@
 
 
                                     <div class="form-group">
-                                        <label for="employee_telephone" class="col-sm-3 control-label">Phone No.</label>
+                                        <label for="employee_telephone" class="col-sm-3 control-label">Phone no.</label>
 
                                         <div class="col-sm-5">
                                             <input type="text" name="employee_telephone" class="form-control" data-validate="required" id="employee_telephone" placeholder="">
@@ -316,7 +316,7 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="employee_alternative" class="col-sm-3 control-label">Alternative No.</label>
+                                        <label for="employee_alternative" class="col-sm-3 control-label">Alternative no.</label>
 
                                         <div class="col-sm-5">
                                             <input type="text" name="employee_alternative" class="form-control"  data-validate="required" id="employee_alternative" placeholder="">
@@ -335,7 +335,7 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label class="col-sm-3 control-label">Upload Photo</label>
+                                        <label class="col-sm-3 control-label">Upload photo</label>
 
                                         <div class="col-sm-5">
 
@@ -391,7 +391,7 @@
 
 
                                     <div class="form-group">
-                                        <label for="employee_start" class="col-sm-3 control-label">Start Date</label>
+                                        <label for="employee_start" class="col-sm-3 control-label">Start date</label>
 
                                         <div class="col-sm-3">
                                             <div class="input-group">
@@ -404,7 +404,7 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="employee_end" class="col-sm-3 control-label">End Date</label>
+                                        <label for="employee_end" class="col-sm-3 control-label">End date</label>
 
                                         <div class="col-sm-3">
                                             <div class="input-group">
@@ -431,35 +431,11 @@
                     </div>
                 </div>
 
-
-
-
-                <div class="row">
-                    <div class="col-md-12">
-
-
-                    </div>
-                </div>
-
-
-
-
-
-
-
-
                 <footer class="main">
-
                     <strong>E-Fitness 2017 </strong>&copy; All Rights Reserved
-
                 </footer>
             </div>
         </div>
-
-
-
-
-
 
         <!-- Bottom scripts (common) -->
         <script src="assets/js/gsap/TweenMax.min.js"></script>
@@ -487,7 +463,6 @@
 
         <script src="assets/js/fileinput.js"></script>
         <script src="assets/js/dropzone/dropzone.js"></script>
-
 
         <!-- JavaScripts initializations and stuff -->
         <script src="assets/js/neon-custom.js"></script>
