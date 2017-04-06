@@ -9,6 +9,9 @@
   color: #999999;
   opacity: 1;
 }
+.width-72{
+    width: 72px;
+}
 .form-control:-ms-input-placeholder {
   color: #999999;
 }
