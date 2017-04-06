@@ -257,14 +257,14 @@
 
                             <div class="panel-body">
 
-                                <form action='database/add_membership.php' method="POST" role="form" class="form-horizontal form-groups-bordered validate" novalidate="novalidate">
+                                <form action='database/add_membership.php' method="POST" role="form" class="form-horizontal form-groups-bordered validate">
                                     <div class="form-group">
                                         <label for="membershiptype_settings" class="col-sm-3 control-label" >New membership</label>
                                         <div class="col-sm-5">
                                             <div class="input-group">
                                                 <input type="text"  name="membershiptype_settings" id="membershiptype_settings" class="form-control" data-validate="required">
                                                 <span class="input-group-btn">
-                                                    <button type="button" class="btn btn-primary">Add</button>
+                                                    <button type="submit" class="width-72 btn btn-primary">Add</button>
                                                 </span>
                                             </div>
                                         </div>
@@ -274,7 +274,7 @@
 
                                 </form>
 
-                                <form action='database/remove_membership.php' method="POST" role="form" class="form-horizontal form-groups-bordered validate" novalidate="novalidate">
+                                <form action='database/remove_membership.php' method="POST" role="form" class="form-horizontal form-groups-bordered validate">
 
                                     <div class="form-group">
                                         <label for="gender_select" class="col-sm-3 control-label">Membership types</label>
@@ -299,7 +299,7 @@
                                                     ?>
                                                 </select>
                                                 <span class="input-group-btn">
-                                                    <button type="button" class="btn btn-primary">Remove</button>
+                                                    <button type="submit" class="btn btn-primary">Remove</button>
                                                 </span>
                                             </div>
                                         </div>
@@ -324,7 +324,7 @@
 
                             <div class="panel-body">
 
-                                <form action='database/add_employee_type.php' method="POST" role="form" class="form-horizontal form-groups-bordered validate" novalidate="novalidate">
+                                <form action='database/add_employee_type.php' method="POST" role="form" class="form-horizontal form-groups-bordered validate">
 
                                     <div class="form-group">
                                         <label for="employee_firstname" class="col-sm-3 control-label" >New employee type</label>
@@ -332,9 +332,8 @@
                                         <div class="col-sm-5">
                                             <div class="input-group">
                                                 <input type="text"  name="membershiptype_settings" id="membershiptype_settings" class="form-control" data-validate="required">
-
                                                 <span class="input-group-btn">
-                                                    <button type="submit" name="submit" class="btn btn-primary">Add</button>
+                                                    <button type="submit" name="submit" class="width-72 btn btn-primary">Add</button>
                                                 </span>
                                             </div>
                                         </div>
@@ -358,37 +357,20 @@
                                             </div>
                                         </div>
                                     </div>
-
                                 </form>
-
                             </div>
-
                         </div>
-
                     </div>
                 </div>
-
-
                 <div class="row">
                     <div class="col-md-12">
-
-
                     </div>
                 </div>
-
                 <footer class="main">
-
                     <strong>E-Fitness 2017 </strong>&copy; All Rights Reserved
-
                 </footer>
             </div>
         </div>
-
-
-
-
-
-
         <!-- Bottom scripts (common) -->
         <script src="assets/js/gsap/TweenMax.min.js"></script>
         <script src="assets/js/jquery-ui/js/jquery-ui-1.10.3.minimal.min.js"></script>
