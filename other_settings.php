@@ -136,23 +136,11 @@
                             </a>
                         </li>
 
-                        <li class="has-sub">
-                            <a href="#">
+                        <li class="active">
+                            <a href="other_settings.php">
                                 <i class="entypo-tools opened active"></i>
                                 <span class="title">Settings</span>
                             </a>
-                            <ul>
-                                <li class="active">
-                                    <a href="#">
-                                        <span class="title">Manage accounts</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="other_settings.php">
-                                        <span class="title">Other settings</span>
-                                    </a>
-                                </li>
-                            </ul>
                         </li>
                     </ul>
 
@@ -229,16 +217,12 @@
                 <hr />
 
                 <ol class="breadcrumb bc-3" >
-                    <li>
-                        Employees
-                    </li>
                     <li class="active">
-
-                        <strong>Add employee</strong>
+                        Settings
                     </li>
                 </ol>
 
-                <h2>Add employee</h2>
+                <h2>Settings</h2>
                 <br />
 
 
