@@ -21,6 +21,5 @@ if (isset($_GET['id'])) {
         die("Could not remove member: " . mysqli_error($conn));
     }
     mysqli_close($conn);
-    header("refresh: 0; url = ../../search_employees");
+    header("refresh: 0; url = ../search_employees.php");
 }
-
