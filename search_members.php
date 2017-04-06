@@ -11,7 +11,7 @@
 
         <link rel="icon" href="assets/images/favicon.ico">
 
-        <title>E-Fitness | Search Members</title>
+        <title>E-Fitness | Search members</title>
 
         <link rel="stylesheet" href="assets/js/jquery-ui/css/no-theme/jquery-ui-1.10.3.custom.min.css">
         <link rel="stylesheet" href="assets/css/font-icons/entypo/css/entypo.css">
@@ -150,7 +150,7 @@
                             </a>
                         </li>
                         <li class="">
-                            <a href="">
+                            <a href="other_settings.php">
                                 <i class="entypo-tools"></i>
                                 <span class="title">Settings</span>
                             </a>
@@ -228,7 +228,7 @@
                         Members
                     </li>
                     <li class="active">
-                        <strong>Search Members</strong>
+                        <strong>Search members</strong>
                     </li>
                 </ol>
                 <?php
@@ -238,7 +238,7 @@
 
                 // output data of each row
                 ?>
-                <h2>Search Members</h2>
+                <h2>Search members</h2>
                 <br />
                 <script type="text/javascript">
                     jQuery(window).load(function () {
@@ -250,6 +250,7 @@
                             "bStateSave": false,
                             "iDisplayLength": 10,
                             "aoColumns": [
+                                null,
                                 null,
                                 null,
                                 null,
@@ -277,6 +278,7 @@
                             <th>Gender</th>
                             <th>City</th>
                             <th>Date of Birth</th>
+                            <th>Phone no.</th>
                             <th>Options</th>
                         </tr>
                     </thead>
@@ -290,6 +292,7 @@
                                 <td><?php echo $row['gender'] ?></td>
                                 <td><?php echo $row['city'] ?></td>
                                 <td><?php echo $row['birth_date'] ?></td>
+                                <td><?php echo $row['telephone_no'] ?></td>
                                 <td>
                                     <a href="#" class="btn btn-default btn-sm btn-icon icon-left">
                                         <i class="entypo-pencil"></i>
