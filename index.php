@@ -85,12 +85,12 @@
 					<ul>
 						<li>
 							<a href="add_member.php">
-								<span class="title">Add Member</span>
+								<span class="title">Add member</span>
 							</a>
 						</li>
 						<li>
 							<a href="search_members.php">
-								<span class="title">Search Members</span>
+								<span class="title">Search members</span>
 							</a>
 						</li>
 					</ul>
@@ -103,12 +103,12 @@
 					<ul>
 						<li>
 							<a href="add_employee.php">
-								<span class="title">Add Employee</span>
+								<span class="title">Add employee</span>
 							</a>
 						</li>
 						<li>
 							<a href="search_employees.php">
-								<span class="title">Search Employees</span>
+								<span class="title">Search employees</span>
 							</a>
 						</li>
 					</ul>
@@ -121,12 +121,12 @@
 					<ul>
 						<li>
 							<a href="add_item.php">
-								<span class="title">Add Item</span>
+								<span class="title">Add item</span>
 							</a>
 						</li>
 						<li>
 							<a href="search_inventory.php">
-								<span class="title">Search Inventory</span>
+								<span class="title">Search inventory</span>
 							</a>
 						</li>
 						<li>
