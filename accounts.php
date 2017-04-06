@@ -362,7 +362,7 @@
                                         <div class="col-sm-5">
                                             <div class="input-group">
                                                 <span class="input-group-addon"><i class="entypo-mail"></i></span>
-                                                <input type="text" class="form-control" name="account_email" data-validate="required, email" id="account_email" placeholder="">
+                                                <input type="text" class="form-control" name="account_email" data-validate="required,email" id="account_email" placeholder="">
                                             </div>
                                         </div>
                                     </div>
