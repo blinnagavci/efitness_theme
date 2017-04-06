@@ -258,14 +258,20 @@
                             <div class="panel-body">
 
                                 <form action='database/add_membership.php' method="POST" role="form" class="form-horizontal form-groups-bordered validate" novalidate="novalidate">
-
                                     <div class="form-group">
                                         <label for="membershiptype_settings" class="col-sm-3 control-label" >New membership</label>
                                         <div class="col-sm-5">
-                                            <input type="text"  name="membershiptype_settings" id="membershiptype_settings" class="form-control" data-validate="required">
-                                            <button type="button" class="btn btn-primary col-sm-3">Add</button>
+                                            <div class="input-group">
+                                                <input type="text"  name="membershiptype_settings" id="membershiptype_settings" class="form-control" data-validate="required">
+                                                <span class="input-group-btn">
+                                                    <button type="button" class="btn btn-primary">Add</button>
+                                                </span>
+                                            </div>
                                         </div>
                                     </div>
+                                    <div class="form-group">
+                                    </div>
+
                                 </form>
 
                                 <form action='database/remove_membership.php' method="POST" role="form" class="form-horizontal form-groups-bordered validate" novalidate="novalidate">
@@ -274,29 +280,31 @@
                                         <label for="gender_select" class="col-sm-3 control-label">Membership types</label>
 
                                         <div class="col-sm-5">
-                                            <select name="remove_membership_select" class="form-control" data-validate="required" id="remove_membership_select">
-                                                <option value="disabled" disabled selected>Select</option>
+                                            <div class="input-group">
+                                                <select name="remove_membership_select" class="form-control" data-validate="required" id="remove_membership_select">
+                                                    <option value="disabled" disabled selected>Select</option>
 
-                                                <?php
-                                                include('inc/database/db_connect.php');
-                                                $sql = 'SELECT membership_type FROM membership WHERE status= "0"';
-                                                $retval = mysqli_query($conn, $sql);
-                                                if (!$retval) {
-                                                    echo ("Could not retrieve data" . mysql_error());
-                                                }
-                                                while ($row = $retval->fetch_assoc()) {
-                                                    $membership = $row['membership_type'];
-                                                    echo "<option value='$membership'>$membership</option>";
-                                                }
-                                                mysqli_close($conn);
-                                                ?>
-                                            </select>
-
-                                            <button type="button" class="btn btn-primary col-sm-3">Remove</button>
-
+                                                    <?php
+                                                    include('inc/database/db_connect.php');
+                                                    $sql = 'SELECT membership_type FROM membership WHERE status= "0"';
+                                                    $retval = mysqli_query($conn, $sql);
+                                                    if (!$retval) {
+                                                        echo ("Could not retrieve data" . mysql_error());
+                                                    }
+                                                    while ($row = $retval->fetch_assoc()) {
+                                                        $membership = $row['membership_type'];
+                                                        echo "<option value='$membership'>$membership</option>";
+                                                    }
+                                                    mysqli_close($conn);
+                                                    ?>
+                                                </select>
+                                                <span class="input-group-btn">
+                                                    <button type="button" class="btn btn-primary">Remove</button>
+                                                </span>
+                                            </div>
                                         </div>
                                     </div>
-
+                                    <div class="form-group"></div>
                                 </form>
 
                             </div>
@@ -321,28 +329,33 @@
                                     <div class="form-group">
                                         <label for="employee_firstname" class="col-sm-3 control-label" >New employee type</label>
 
-                                        <div class="col-sm-4">
-                                            <input type="text"  name="membershiptype_settings" id="membershiptype_settings" class="form-control" data-validate="required">
-                                            <button type="submit" name="submit" class="btn btn-primary col-sm-3">Add</button>
+                                        <div class="col-sm-5">
+                                            <div class="input-group">
+                                                <input type="text"  name="membershiptype_settings" id="membershiptype_settings" class="form-control" data-validate="required">
+
+                                                <span class="input-group-btn">
+                                                    <button type="submit" name="submit" class="btn btn-primary">Add</button>
+                                                </span>
+                                            </div>
                                         </div>
                                     </div>
-
+                                    <div class="form-group">
+                                    </div>
                                 </form>
-
-
                                 <form action='database/remove_employee_type.php' method="POST" role="form" class="form-horizontal form-groups-bordered validate" novalidate="novalidate">
-
                                     <div class="form-group">
                                         <label for="gender_select" class="col-sm-3 control-label">Employee types</label>
 
                                         <div class="col-sm-5">
-                                            <select name="remove_membership_select" class="form-control" data-validate="required" id="remove_membership_select">
-                                                <option value="disabled" disabled selected>Select</option>
+                                            <div class="input-group">
+                                                <select name="remove_membership_select" class="form-control" data-validate="required" id="remove_membership_select">
+                                                    <option value="disabled" disabled selected>Select</option>
+                                                </select>
 
-                                            </select>
-
-                                            <button type="submit" name="submit" class="btn btn-primary col-sm-3">Remove</button>
-
+                                                <span class="input-group-btn">
+                                                    <button type="submit" name="submit" class="btn btn-primary">Remove</button>
+                                                </span>
+                                            </div>
                                         </div>
                                     </div>
 
