@@ -303,6 +303,7 @@
                                         <i class="entypo-cancel"></i>
                                         Delete
                                     </a>
+                                    
                                 </td>
                             </tr>
                         <?php endwhile; ?>
@@ -361,7 +362,7 @@
                                         <div class="col-sm-5">
                                             <div class="input-group">
                                                 <span class="input-group-addon"><i class="entypo-mail"></i></span>
-                                                <input type="text" class="form-control" name="account_email" data-validate="required, email" id="account_email" placeholder="">
+                                                <input type="text" class="form-control" name="account_email" data-validate="required,email" id="account_email" placeholder="">
                                             </div>
                                         </div>
                                     </div>
@@ -432,7 +433,7 @@
                                         $('.editButton').click(function () {
                                             var id = $(this).attr('data-id');
                                             $.ajax({
-                                                url: "edit_account.php?id=" + id, cache: false, success: function (result) {
+                                                url: "edit_account.php?id="+id, cache: false, success: function (result) {
                                                     $('#modal_edit_content').html(result);
                                                 }
                                             });

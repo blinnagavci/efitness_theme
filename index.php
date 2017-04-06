@@ -143,7 +143,7 @@
                             </a>
                         </li>
                         <li class="">
-                            <a href="">
+                            <a href="accounts.php">
                                 <i class="entypo-user"></i>
                                 <span class="title">Accounts</span>
                             </a>
