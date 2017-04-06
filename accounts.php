@@ -338,7 +338,7 @@
                                 <h4 class="modal-title">Add Account</h4>
                             </div>
                             <div class="modal-body">
-                                <form action='database/add_account.php' method="POST" role="form" class="form-horizontal form-groups-bordered validate" novalidate="novalidate">
+                                <form action='database/add_account.php' method="POST" enctype="multipart/form-data" role="form" class="form-horizontal form-groups-bordered validate" novalidate="novalidate">
 
                                     <div class="form-group">
                                         <label for="account_username" class="col-sm-3 control-label" >Username</label>
@@ -364,6 +364,28 @@
                                                 <span class="input-group-addon"><i class="entypo-mail"></i></span>
                                                 <input type="text" class="form-control" name="account_email" data-validate="required,email" id="account_email" placeholder="">
                                             </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">Upload photo</label>
+
+                                        <div class="col-sm-5">
+
+                                            <div class="fileinput fileinput-new" data-provides="fileinput">
+                                                <div class="fileinput-new thumbnail" style="width: 200px; height: 150px;" data-trigger="fileinput">
+                                                    <img src="http://placehold.it/200x150" alt="...">
+                                                </div>
+                                                <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px; max-height: 150px"></div>
+                                                <div>
+                                                    <span class="btn btn-white btn-file">
+                                                        <span class="fileinput-new">Select image</span>
+                                                        <span class="fileinput-exists">Change</span>
+                                                        <input type="file" name="account_upload" id="account_upload" accept="image/*"   >
+                                                    </span>
+                                                    <a href="#" class="btn btn-orange fileinput-exists" data-dismiss="fileinput" >Remove</a>
+                                                </div>
+                                            </div>
+
                                         </div>
                                     </div>
 
@@ -412,6 +434,7 @@
         <script src="assets/js/joinable.js"></script>
         <script src="assets/js/resizeable.js"></script>
         <script src="assets/js/neon-api.js"></script>
+        <script src="assets/js/fileinput.js"></script>
 
 
         <!-- Imported scripts on this page -->
