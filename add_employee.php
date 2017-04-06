@@ -11,7 +11,7 @@
 
         <link rel="icon" href="assets/images/favicon.ico">
 
-        <title>E-Fitness | Members</title>
+        <title>E-Fitness | Add employee</title>
 
         <link rel="stylesheet" href="assets/js/jquery-ui/css/no-theme/jquery-ui-1.10.3.custom.min.css">
         <link rel="stylesheet" href="assets/css/font-icons/entypo/css/entypo.css">
@@ -64,13 +64,13 @@
                                 <span class="title">Dashboard</span>
                             </a>
                         </li>
-                        <li class="has-sub active opened active">
+                        <li class="has-sub">
                             <a href="#">
                                 <i class="entypo-users"></i>
                                 <span class="title">Members</span>
                             </a>
                             <ul>
-                                <li class="active">
+                                <li class="">
                                     <a href="add_member.php">
                                         <span class="title">Add Member</span>
                                     </a>
@@ -82,20 +82,20 @@
                                 </li>
                             </ul>
                         </li>
-                        <li class="has-sub">
+                        <li class="has-sub opened active">
                             <a href="#">
                                 <i class="entypo-briefcase"></i>
                                 <span class="title">Employees</span>
                             </a>
                             <ul>
-                                <li>
+                                <li class="active">
                                     <a href="add_employee.php">
-                                        <span class="title">Add Employee</span>
+                                        <span class="title">Add employee</span>
                                     </a>
                                 </li>
                                 <li>
                                     <a href="search_employees.php">
-                                        <span class="title">Search Employees</span>
+                                        <span class="title">Search employees</span>
                                     </a>
                                 </li>
                             </ul>
@@ -217,15 +217,15 @@
 
                 <ol class="breadcrumb bc-3" >
                     <li>
-                        Members
+                        Employees
                     </li>
                     <li class="active">
 
-                        <strong>Add Member</strong>
+                        <strong>Add employee</strong>
                     </li>
                 </ol>
 
-                <h2>Add Member</h2>
+                <h2>Add employee</h2>
                 <br />
 
 
@@ -245,29 +245,29 @@
 
                             <div class="panel-body">
 
-                                <form action='database/add_member.php' method="POST" role="form" class="form-horizontal form-groups-bordered validate" novalidate="novalidate">
+                                <form action='database/add_employee.php' method="POST" role="form" class="form-horizontal form-groups-bordered validate" novalidate="novalidate">
 
                                     <div class="form-group">
-                                        <label for="member_firstname" class="col-sm-3 control-label" >First Name</label>
+                                        <label for="employee_firstname" class="col-sm-3 control-label" >First Name</label>
 
                                         <div class="col-sm-5">
-                                            <input type="text" name="member_firstname" class="form-control" data-validate="required" id="member_firstname">
+                                            <input type="text" name="employee_firstname" class="form-control" data-validate="required" id="employee_firstname">
                                         </div>
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="member_surname" class="col-sm-3 control-label">Last Name</label>
+                                        <label for="employee_surname" class="col-sm-3 control-label">Last Name</label>
 
                                         <div class="col-sm-5">
-                                            <input type="text" name="member_surname" class="form-control" data-validate="required" id="member_surname" placeholder="">
+                                            <input type="text" name="employee_surname" class="form-control" data-validate="required" id="employee_surname" placeholder="">
                                         </div>
                                     </div>
 
                                     <div class="form-group">
-                                        <label class="col-sm-3 control-label">Gender</label>
+                                        <label for="gender_select" class="col-sm-3 control-label">Gender</label>
 
                                         <div class="col-sm-5">
-                                            <select name="member_gender" class="form-control" data-validate="required" id="gender_select">
+                                            <select name="employee_gender" class="form-control" data-validate="required" id="gender_select">
                                                 <option value="disabled" disabled selected>Select</option>
                                                 <option value="Male">Male</option>
                                                 <option value="Female">Female</option>
@@ -277,11 +277,11 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label class="col-sm-3 control-label">Birth Date</label>
+                                        <label for="employee_date" class="col-sm-3 control-label">Birth Date</label>
 
                                         <div class="col-sm-3">
                                             <div class="input-group">
-                                                <input type="text" name="member_date" data-validate="required" class="form-control datepicker" data-format="dd/mm/yyyy">
+                                                <input type="text" name="employee_date" data-validate="required" class="form-control datepicker" data-format="dd/mm/yyyy">
 
                                                 <div class="input-group-addon">
                                                     <a href="#"><i class="entypo-calendar"></i></a>
@@ -291,45 +291,45 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="member_address" class="col-sm-3 control-label">Residental Address</label>
+                                        <label for="employee_address" class="col-sm-3 control-label">Residential Address</label>
 
                                         <div class="col-sm-5">
-                                            <input type="text" name="member_address"  data-validate="required" class="form-control" id="member_address" placeholder="">
+                                            <input type="text" name="employee_address"  data-validate="required" class="form-control" id="employee_address" placeholder="">
                                         </div>
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="member_city" class="col-sm-3 control-label">City</label>
+                                        <label for="employee_city" class="col-sm-3 control-label">City</label>
 
                                         <div class="col-sm-5">
-                                            <input type="text" name="member_city" class="form-control"  data-validate="required" id="member_city" placeholder="">
+                                            <input type="text" name="employee_city" class="form-control"  data-validate="required" id="employee_city" placeholder="">
                                         </div>
                                     </div>
 
 
                                     <div class="form-group">
-                                        <label for="member_telephone" class="col-sm-3 control-label">Phone No.</label>
+                                        <label for="employee_telephone" class="col-sm-3 control-label">Phone No.</label>
 
                                         <div class="col-sm-5">
-                                            <input type="text" name="member_telephone" class="form-control" data-validate="required" id="member_telephone" placeholder="">
+                                            <input type="text" name="employee_telephone" class="form-control" data-validate="required" id="employee_telephone" placeholder="">
                                         </div>
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="member_alternative" class="col-sm-3 control-label">Alternative No.</label>
+                                        <label for="employee_alternative" class="col-sm-3 control-label">Alternative No.</label>
 
                                         <div class="col-sm-5">
-                                            <input type="text" name="member_alternative" class="form-control"  data-validate="required" id="member_alternative" placeholder="">
+                                            <input type="text" name="employee_alternative" class="form-control"  data-validate="required" id="employee_alternative" placeholder="">
                                         </div>
                                     </div>
 
                                     <div class="form-group">
-                                        <label class="col-sm-3 control-label">Email</label>
+                                        <label for="employee_email" class="col-sm-3 control-label">Email</label>
 
                                         <div class="col-sm-5">
                                             <div class="input-group">
+                                                <input type="text" class="form-control" name="employee_email" data-validate="required, email" id="employee_email" placeholder="">
                                                 <span class="input-group-addon"><i class="entypo-mail"></i></span>
-                                                <input type="text" class="form-control" name="member_email" data-validate="required, email" id="member_email" placeholder="">
                                             </div>
                                         </div>
                                     </div>
@@ -348,7 +348,7 @@
                                                     <span class="btn btn-white btn-file">
                                                         <span class="fileinput-new">Select image</span>
                                                         <span class="fileinput-exists">Change</span>
-                                                        <input type="file" name="..." accept="image/*"   >
+                                                        <input type="file" name="employee_upload" id="employee-upload" accept="image/*"   >
                                                     </span>
                                                     <a href="#" class="btn btn-orange fileinput-exists" data-dismiss="fileinput" >Remove</a>
                                                 </div>
@@ -358,22 +358,22 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label class="col-sm-3 control-label">Membership Type</label>
+                                        <label for="employee_subscription" class="col-sm-3 control-label">Employee type</label>
 
                                         <div class="col-sm-5">
-                                            <select name="member_subscription" class="form-control"  data-validate="required" id="member_subscription">
+                                            <select name="employee_subscription" class="form-control"  data-validate="required" id="employee_subscription">
                                                 <option value="disabled" disabled selected>Select</option>
                                                 <?php
                                                 include('inc/database/db_connect.php');
 
-                                                $sql = 'SELECT membership_type FROM membership WHERE status= "0"';
+                                                $sql = 'SELECT employee_type FROM employee_type WHERE status= "0"';
                                                 $retval = mysqli_query($conn, $sql);
                                                 if (!$retval) {
                                                     echo ("Could not retrieve data" . mysql_error());
                                                 }
                                                 while ($row = $retval->fetch_assoc()) {
-                                                    $membership = $row['membership_type'];
-                                                    echo "<option value='$membership'>$membership</option>";
+                                                    $employee_type = $row['employee_type'];
+                                                    echo "<option value='$employee_type'>$employee_type</option>";
                                                 }
                                                 mysqli_close($conn);
                                                 ?>
@@ -382,20 +382,20 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="membership_amount" class="col-sm-3 control-label">Amount</label>
+                                        <label for="salary_amount" class="col-sm-3 control-label">Salary amount</label>
 
                                         <div class="col-sm-5">
-                                            <input type="text" name="membership_amount" class="form-control" data-validate="required" id="membership_amount" placeholder="">
+                                            <input type="text" name="salary_amount" class="form-control" data-validate="required" id="salary_amount" placeholder="">
                                         </div>
                                     </div>
 
 
                                     <div class="form-group">
-                                        <label class="col-sm-3 control-label">Start Date</label>
+                                        <label for="employee_start" class="col-sm-3 control-label">Start Date</label>
 
                                         <div class="col-sm-3">
                                             <div class="input-group">
-                                                <input type="text" class="form-control datepicker" data-validate="required" name="membership_start" data-format="dd/mm/yyyy">
+                                                <input type="text" class="form-control datepicker" data-validate="required" name="employee_start" id="employee_start" data-format="dd/mm/yyyy">
 
                                                 <div class="input-group-addon">
                                                     <a href="#"><i class="entypo-calendar"></i></a>
@@ -404,11 +404,11 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-sm-3 control-label">End Date</label>
+                                        <label for="employee_end" class="col-sm-3 control-label">End Date</label>
 
                                         <div class="col-sm-3">
                                             <div class="input-group">
-                                                <input type="text" class="form-control datepicker" data-validate="required" name="membership_end" data-format="dd/mm/yyyy">
+                                                <input type="text" class="form-control datepicker" data-validate="required" name="employee_end" id="employee_end" data-format="dd/mm/yyyy">
 
                                                 <div class="input-group-addon">
                                                     <a href="#"><i class="entypo-calendar"></i></a>
@@ -431,15 +431,33 @@
                     </div>
                 </div>
 
+
+
+
+                <div class="row">
+                    <div class="col-md-12">
+
+
+                    </div>
+                </div>
+
+
+
+
+
+
+
+
                 <footer class="main">
 
                     <strong>E-Fitness 2017 </strong>&copy; All Rights Reserved
 
                 </footer>
             </div>
-
-
         </div>
+
+
+
 
 
 

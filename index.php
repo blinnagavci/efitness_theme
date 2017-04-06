@@ -148,11 +148,24 @@
 						<span class="title">Accounts</span>
 					</a>
 				</li>
-				<li class="">
-					<a href="">
+
+				<li class="has-sub">
+					<a href="#">
 						<i class="entypo-tools"></i>
 						<span class="title">Settings</span>
 					</a>
+					<ul>
+						<li>
+							<a href="#">
+								<span class="title">Manage accounts</span>
+							</a>
+						</li>
+						<li>
+							<a href="other_settings.php">
+								<span class="title">Other settings</span>
+							</a>
+						</li>
+					</ul>
 				</li>
 			<!-- 	<li class="has-sub">
 					<a href="layout-api.html">

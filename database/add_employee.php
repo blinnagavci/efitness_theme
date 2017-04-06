@@ -23,14 +23,14 @@ if (isset($_POST['submit'])) {
     $getID = mysqli_query($conn, "SELECT id FROM employee ORDER BY id DESC");
     $idRow = mysqli_fetch_row($getID);
     $newfilename = $idRow[0] + 1 . "_" . $firstname . "_" . $lastname . '.' . end($temp);
+    $sql_employee = "INSERT INTO employee (first_name, last_name, gender, residential_address, city, telephone_no,
+    alternative_no, email, birth_date, photo)
+    VALUES ('$firstname', '$lastname', '$gender', '$address', '$city', '$telephoneno', '$alternativeno' , '$email', '$birthdate', '$newfilename')";
+    $retval1 = mysqli_query($conn, $sql_employee);
     if ($uploadedFileName != '') {
-        $upload_directory = "../../repository/employee_photos/";
+        $upload_directory = "../repository/employee_photos/";
         move_uploaded_file($temp_name, $upload_directory . $newfilename);
     }
-    $sql_employee = "INSERT INTO employee (first_name, last_name, gender, residential_address, city, telephone_no,
-alternative_no, email, birth_date, photo)
-VALUES ('$firstname', '$lastname', '$gender', '$address', '$city', '$telephoneno', '$alternativeno' , '$email', '$birthdate', '$newfilename')";
-    $retval1 = mysqli_query($conn, $sql_employee);
 //    $imageId = strstr($newfilename, '_', true);
 //    if ($imageId) {
 //        var_dump($imageId);
@@ -55,6 +55,6 @@ VALUES ('$firstname', '$lastname', '$gender', '$address', '$city', '$telephoneno
     }
 
     mysqli_close($conn);
-    header("refresh: 0; url = ../../employees");
+    // header("refresh: 0; url = ../add_employee.php");
 }
 
