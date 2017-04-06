@@ -303,6 +303,7 @@
                                         <i class="entypo-cancel"></i>
                                         Delete
                                     </a>
+                                    
                                 </td>
                             </tr>
                         <?php endwhile; ?>
@@ -432,7 +433,7 @@
                                         $('.editButton').click(function () {
                                             var id = $(this).attr('data-id');
                                             $.ajax({
-                                                url: "edit_account.php?id=" + id, cache: false, success: function (result) {
+                                                url: "edit_account.php?id="+id, cache: false, success: function (result) {
                                                     $('#modal_edit_content').html(result);
                                                 }
                                             });
