@@ -1,10 +1,6 @@
 <?php
 require('database/db_connect.php');
 require('database/login.php');
-
-if (!isset($_SESSION['logged_in'])) {
-    header('refresh: 0; url=extra-login.php');
-}
 ?>
 <!DOCTYPE html>
 <html lang="en">

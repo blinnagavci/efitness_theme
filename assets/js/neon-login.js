@@ -1,11 +1,6 @@
-/**
- *	Neon Login Script
- *
- *	Developed by Arlind Nushi - www.laborator.co
- */
-
 var neonLogin = neonLogin || {};
 
+;
 (function ($, window, undefined)
 {
     "use strict";
@@ -14,62 +9,126 @@ var neonLogin = neonLogin || {};
     {
         neonLogin.$container = $("#form_login");
 
-
         // Login Form & Validation
         neonLogin.$container.validate({
             rules: {
                 username: {
                     required: true
                 },
-
                 password: {
                     required: true
                 },
-
             },
-
             highlight: function (element) {
                 $(element).closest('.input-group').addClass('validate-has-error');
             },
-
             unhighlight: function (element)
             {
                 $(element).closest('.input-group').removeClass('validate-has-error');
             },
-
             submitHandler: function (ev)
             {
-                neonLogin.setPercentage(10);// this is just how you want to show users login process, it can be any value from 0-100
+                /* 
+                 Updated on v1.1.4
+                 Login form now processes the login data, here is the file: data/sample-login-form.php
+                 */
 
-// Now send the login data to the server
-                var submitted_username = $("#username").val(),
-                        submitted_password = $("#password").val();
+                $(".login-page").addClass('logging-in'); // This will hide the login form and init the progress bar
 
-// Do login via ajax
-                $.ajax({
-                    url: "", // Your php script to wait for login connections and set login sessions
-                    type: "POST",
-                    // You can access the user and pass with $_POST['username'] and $_POST['password']
-                    data: {
-                        username: submitted_username,
-                        password: submitted_password
-                    },
 
-                    success: function (response_text) // response_text - is what you output based on user login information, lets suggest you output numbers i.e. 1 means logged in, 2 password incorred, 3 any other reason...
-                    {
-                        if (response_text)
+                // Hide Errors
+                $(".form-login-error").slideUp('fast');
+
+                // We will wait till the transition ends				
+                setTimeout(function ()
+                {
+                    var random_pct = 25 + Math.round(Math.random() * 30);
+
+                    // The form data are subbmitted, we can forward the progress to 70%
+                    neonLogin.setPercentage(40 + random_pct);
+
+                    // Send data to the server
+                    $.ajax({
+                        url: baseurl + 'data/sample-login-form.php',
+                        method: 'POST',
+                        dataType: 'json',
+                        data: {
+                            username: $("input#username").val(),
+                            password: $("input#password").val(),
+                        },
+                        error: function ()
                         {
-                            neonLogin.setPercentage(100); // update the percentage to 100%
+                            alert("An error occoured!");
+                        },
+                        success: function (response)
+                        {
+                            // Login status [success|invalid]
+                            var login_status = response.login_status;
 
-                            // We will wait (not necessary) till the animation is finished and then redirect to dashboard
+                            // Form is fully completed, we update the percentage
+                            neonLogin.setPercentage(100);
+
+
+                            // We will give some time for the animation to finish, then execute the following procedures	
                             setTimeout(function ()
                             {
-                                window.location.href = 'index.php'; // after this, its done!
+                                // If login is invalid, we store the 
+                                if (login_status == 'invalid')
+                                {
+                                    $(".login-page").removeClass('logging-in');
+                                    neonLogin.resetProgressBar(true);
+                                } else
+                                if (login_status == 'success')
+                                {
+                                    // Redirect to login page
+                                    setTimeout(function ()
+                                    {
+                                        var redirect_url = baseurl;
+
+                                        if (response.redirect_url && response.redirect_url.length)
+                                        {
+                                            redirect_url = response.redirect_url;
+                                        }
+
+                                        window.location.href = redirect_url;
+                                    }, 400);
+                                }
+
                             }, 1000);
                         }
-                    }
-                });
+                    });
+
+
+                }, 650);
             }
+//                neonLogin.setPercentage(10); // this is just how you want to show users login process, it can be any value from 0-100
+//
+//// Now send the login data to the server
+//                var submitted_username = $("#username").val(),
+//                        submitted_password = $("#password").val();
+//// Do login via ajax
+//                $.ajax({
+//                    url: "database/login.php", // Your php script to wait for login connections and set login sessions
+//                    type: "POST",
+//                    // You can access the user and pass with $_POST['username'] and $_POST['password']
+//                    data: {
+//                        username: submitted_username,
+//                        password: submitted_password
+//                    },
+//                    success: function (response_text) // response_text - is what you output based on user login information, lets suggest you output numbers i.e. 1 means logged in, 2 password incorred, 3 any other reason...
+//                    {
+//                        if (response_text == "1")
+//                        {
+//                            neonLogin.setPercentage(100); // update the percentage to 100%
+//
+//                            // We will wait (not necessary) till the animation is finished and then redirect to dashboard
+//                            setTimeout(function ()
+//                            {
+//                                window.location.href = 'index.php'; // after this, its done!
+//                            }, 1000);
+//                        }
+//                    }
+//                });
         });
 
 
@@ -103,15 +162,15 @@ var neonLogin = neonLogin || {};
 
                 submitHandler: function (ev)
                 {
-                    /* 
-                     Demo Purpose Only 
+                    /*
+                     Demo Purpose Only
                      
                      Here you can handle the page login, currently it does not process anything, just fills the loader.
                      */
 
                     $(".login-page").addClass('logging-in-lockscreen'); // This will hide the login form and init the progress bar
 
-                    // We will wait till the transition ends				
+                    // We will wait till the transition ends                               
                     setTimeout(function ()
                     {
                         var random_pct = 25 + Math.round(Math.random() * 30);
@@ -247,43 +306,6 @@ var neonLogin = neonLogin || {};
                     },
                     onComplete: callback
                 });
-            },
-
-            resetProgressBar: function (display_errors)
-            {
-                TweenMax.set(neonLogin.$container, {css: {opacity: 0}});
-
-                setTimeout(function ()
-                {
-                    TweenMax.to(neonLogin.$container, .6, {css: {opacity: 1}, onComplete: function ()
-                        {
-                            neonLogin.$container.attr('style', '');
-                        }});
-
-                    neonLogin.$login_progressbar_indicator.html('0%');
-                    neonLogin.$login_progressbar.width(0);
-
-                    if (display_errors)
-                    {
-                        var $errors_container = $(".form-login-error");
-
-                        $errors_container.show();
-                        var height = $errors_container.outerHeight();
-
-                        $errors_container.css({
-                            height: 0
-                        });
-
-                        TweenMax.to($errors_container, .45, {css: {height: height}, onComplete: function ()
-                            {
-                                $errors_container.css({height: 'auto'});
-                            }});
-
-                        // Reset password fields
-                        neonLogin.$container.find('input[type="password"]').val('');
-                    }
-
-                }, 800);
             }
         });
 
@@ -296,15 +318,11 @@ var neonLogin = neonLogin || {};
 
             neonLogin.$lockscreen_progress_canvas.appendTo(neonLogin.$ls_thumb);
 
-            var line_width = 3,
-                    thumb_size = neonLogin.$ls_thumb.width() + line_width;
+            var thumb_size = neonLogin.$ls_thumb.width();
 
             neonLogin.$lockscreen_progress_canvas.attr({
                 width: thumb_size,
                 height: thumb_size
-            }).css({
-                top: -line_width / 2,
-                left: -line_width / 2
             });
 
 
@@ -323,7 +341,7 @@ var neonLogin = neonLogin || {};
             ctx.lineCap = 'square';
             ctx.closePath();
             ctx.fill();
-            ctx.lineWidth = line_width;
+            ctx.lineWidth = 3.0;
 
             imd = ctx.getImageData(0, 0, thumb_size, thumb_size);
 

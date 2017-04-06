@@ -1,20 +1,3 @@
-<?php
-include('database/db_connect.php');
-include('database/login.php');
-
-if (isset($_SESSION['logged_in'])) {
-    header('refresh: 0; url=index.php');
-}
-
-if (isset($_REQUEST['submit_login'])) {
-    extract($_REQUEST);
-    if ($obj->Login("account", $username, $password)) {
-        header('location: index.php');
-    } else {
-        $msg = "<font color='#FF0000'>Invalid username or password</font>";
-    }
-}
-?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -53,12 +36,6 @@ if (isset($_REQUEST['submit_login'])) {
     </head>
     <body class="page-body login-page login-form-fall" data-url="http://neon.dev">
 
-
-        <!-- This is needed when you send requests via Ajax -->
-        <script type="text/javascript">
-            var baseurl = '';
-        </script>
-
         <div class="login-container">
 
             <div class="login-header login-caret">
@@ -91,12 +68,7 @@ if (isset($_REQUEST['submit_login'])) {
                         <p>Your account username or password is invalid</p>
                     </div>
 
-                    <form method="post" role="form" id="form_login" action="">
-                        <?php
-                        if (isset($_REQUEST['submit_login'])) {
-                            echo $msg;
-                        }
-                        ?>
+                    <form name="submit_login" method="post" role="form" id="form_login" action="">
                         <div class="form-group">
 
                             <div class="input-group">
