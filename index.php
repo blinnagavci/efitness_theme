@@ -1,3 +1,11 @@
+<?php
+require('database/db_connect.php');
+require('database/login.php');
+
+if (!isset($_SESSION['logged_in'])) {
+    header('refresh: 0; url=extra-login.php');
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -148,7 +156,7 @@
                                 <span class="title">Accounts</span>
                             </a>
                         </li>
-                        
+
                         <li class="">
                             <a href="other_settings.php">
                                 <i class="entypo-user"></i>
@@ -156,7 +164,7 @@
                             </a>
                         </li>
 
-                            
+
                     </ul>
 
                 </div>
@@ -219,7 +227,7 @@
                         <ul class="list-inline links-list pull-right">	
 
                             <li>
-                                <a href="extra-login.html">
+                                <a href="database/logout.php">
                                     Log Out <i class="entypo-logout right"></i>
                                 </a>
                             </li>
@@ -669,7 +677,7 @@
         <script src="assets/js/resizeable.js"></script>
         <script src="assets/js/neon-api.js"></script>
         <script src="assets/js/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
-        
+
         <!-- Imported scripts on this page -->
         <script src="assets/js/jvectormap/jquery-jvectormap-europe-merc-en.js"></script>
         <script src="assets/js/jquery.sparkline.min.js"></script>

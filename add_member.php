@@ -203,7 +203,7 @@
                         <ul class="list-inline links-list pull-right">	
 
                             <li>
-                                <a href="extra-login.html">
+                                <a href="extra-login.php.html">
                                     Log out <i class="entypo-logout right"></i>
                                 </a>
                             </li>
