@@ -5,7 +5,6 @@ session_start();
 if (!isset($_SESSION['logged_in'])) {
     header('location: extra-login.php');
 }
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -185,7 +184,7 @@ if (!isset($_SESSION['logged_in'])) {
                             <li class="profile-info dropdown"><!-- add class "pull-right" if you want to place this from right -->
 
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                    <img src="repository/account_photos/<?php echo $_SESSION['profile_photo'];?>" alt="" class="img-circle" width="44" />
+                                    <img src="repository/account_photos/<?php echo $_SESSION['profile_photo']; ?>" alt="" class="img-circle" width="44" />
                                     <?php echo $_SESSION['username']; ?>
                                 </a>
 

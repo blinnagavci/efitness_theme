@@ -22,7 +22,7 @@ VALUES ('$username', '$password', '$email', '$accounttype', '0', '$newfilename')
         $sql_account = "INSERT INTO account (username, password, email, admin_status, status)
 VALUES ('$username', '$password', '$email', '$accounttype', '0')";
     }
-if ($uploadedFileName != '') {
+    if ($uploadedFileName != '') {
         $upload_directory = "../repository/account_photos/";
         move_uploaded_file($temp_name, $upload_directory . $newfilename);
     }

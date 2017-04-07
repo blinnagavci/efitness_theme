@@ -1,3 +1,10 @@
+<?php
+session_start();
+if (!isset($_SESSION['logged_in'])) {
+    header('location: extra-login.php');
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -161,8 +168,8 @@
                             <li class="profile-info dropdown"><!-- add class "pull-right" if you want to place this from right -->
 
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                    <img src="assets/images/labiangashi.png" alt="" class="img-circle" width="44" />
-                                    Labian Gashi
+                                    <img src="repository/account_photos/<?php echo $_SESSION['profile_photo']; ?>" alt="" class="img-circle" width="44" />
+                                    <?php echo $_SESSION['username']; ?>
                                 </a>
 
                                 <ul class="dropdown-menu">
@@ -278,7 +285,8 @@
                     </thead>
 
                     <tbody>
-                        <?php while ($row = $result->fetch_assoc()): ?>
+                        <?php while ($row = $result->fetch_assoc()):
+                            ?>
                             <tr>
                                 <td><?php echo $row["id"] ?></td>
                                 <td><?php echo $row['username'] ?></td>
@@ -441,7 +449,7 @@
         <script src="assets/js/datatables/datatables.js"></script>
         <script src="assets/js/select2/select2.min.js"></script>
         <script src="assets/js/neon-chat.js"></script>
-
+        <script src="assets/js/toastr.js"></script>
         <script src="assets/js/jquery.validate.min.js"></script>
 
 
@@ -449,22 +457,19 @@
         <!-- JavaScripts initializations and stuff -->
         <script src="assets/js/neon-custom.js"></script>
 
-
         <!-- Demo Settings -->
         <script src="assets/js/neon-demo.js"></script> 
         <script>
-                                    $(document).ready(function () {
-                                        $('.editButton').click(function () {
-                                            var id = $(this).attr('data-id');
-                                            $.ajax({
-                                                url: "edit_account.php?id=" + id, cache: false, success: function (result) {
-                                                    $('#modal_edit_content').html(result);
-                                                }
+                                        $(document).ready(function () {
+                                            $('.editButton').click(function () {
+                                                var id = $(this).attr('data-id');
+                                                $.ajax({
+                                                    url: "edit_account.php?id=" + id, cache: false, success: function (result) {
+                                                        $('#modal_edit_content').html(result);
+                                                    }
+                                                });
                                             });
                                         });
-                                    });
-
-
         </script>
     </body>
 </html>
