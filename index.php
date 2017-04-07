@@ -1,6 +1,11 @@
 <?php
-require('database/db_connect.php');
-require('database/login.php');
+//require('database/db_connect.php');
+//require('data/sample-login-form.php');
+session_start();
+if (!isset($_SESSION['logged_in'])) {
+    header('location: extra-login.php');
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -9,7 +14,7 @@ require('database/login.php');
 
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="description" content="Neon Admin Panel" />
+        <meta name="description" content="EFitness Admin Panel" />
         <meta name="Blin Nagavci, Labian Gashi, Besarber Tasholli" content="" />
 
         <link rel="icon" href="assets/images/favicon.ico">
@@ -180,8 +185,8 @@ require('database/login.php');
                             <li class="profile-info dropdown"><!-- add class "pull-right" if you want to place this from right -->
 
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                    <img src="assets/images/thumb-1@2x.png" alt="" class="img-circle" width="44" />
-                                    Blin Nagavci
+                                    <img src="repository/account_photos/<?php echo $_SESSION['profile_photo'];?>" alt="" class="img-circle" width="44" />
+                                    <?php echo $_SESSION['username']; ?>
                                 </a>
 
                                 <ul class="dropdown-menu">

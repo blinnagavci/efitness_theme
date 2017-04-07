@@ -303,7 +303,7 @@
                                         <i class="entypo-cancel"></i>
                                         Delete
                                     </a>
-                                    
+
                                 </td>
                             </tr>
                         <?php endwhile; ?>
@@ -453,14 +453,17 @@
         <!-- Demo Settings -->
         <script src="assets/js/neon-demo.js"></script> 
         <script>
+                                    $(document).ready(function () {
                                         $('.editButton').click(function () {
                                             var id = $(this).attr('data-id');
                                             $.ajax({
-                                                url: "edit_account.php?id="+id, cache: false, success: function (result) {
+                                                url: "edit_account.php?id=" + id, cache: false, success: function (result) {
                                                     $('#modal_edit_content').html(result);
                                                 }
                                             });
                                         });
+                                    });
+
 
         </script>
     </body>

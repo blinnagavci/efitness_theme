@@ -1,3 +1,4 @@
+
 <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal">&times;</button>
     <h4 class="modal-title">Edit Account</h4>
@@ -18,7 +19,7 @@
             <label for="account_username" class="col-sm-3 control-label" >Username</label>
 
             <div class="col-sm-5">
-                <input type="text" name="account_username" class="form-control" data-validate="required" id="account_username" value='<?php echo $row['username']; ?>'>
+                <input type="text" name="account_username" class="form-control" data-validate="required" id="account_username" value='<?php echo $row['username']; ?>' required>
 
             </div>
         </div>
@@ -85,13 +86,9 @@
 <div class="modal-footer">
     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 </div>
- 
 
-        <script src="assets/js/jquery.validate.min.js"></script>
+<script src="assets/js/jquery.validate.min.js"></script>
+<script src="assets/js/neon-custom.js"></script>
 
-
-
-        <!-- JavaScripts initializations and stuff -->
-        <script src="assets/js/neon-custom.js"></script>
 
 

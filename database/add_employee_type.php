@@ -14,7 +14,7 @@ if (isset($_POST['add_employee_type_submit'])) {
     if (!$retval1) {
         die('Could not enter data to employee type table' . mysqli_connect_error());
     } else {
-        echo "<script type='text/javascript'>window.alert('Employee type successfully added')</script>";
+//        echo "<script type='text/javascript'>window.alert('Employee type successfully added')</script>";
     }
 
     mysqli_close($conn);

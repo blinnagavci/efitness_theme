@@ -54,7 +54,7 @@ if (isset($_POST['submit'])) {
     if (!$retval3) {
         die('Could not enter data to employee contract table' . mysqli_connect_error());
     } else {
-        echo "<script type='text/javascript'>window.alert('Employee successfully added')</script>";
+//        echo "<script type='text/javascript'>window.alert('Employee successfully added')</script>";
     }
 
     mysqli_close($conn);

@@ -16,7 +16,7 @@ if (isset($_GET['id'])) {
         die("Could not remove member: " . mysqli_error($conn));
     }
     if (mysqli_query($conn, $removesql2)) {
-        echo "<script type=text/javascript>window.alert('Member removed successfully.')</script>";
+//        echo "<script type=text/javascript>window.alert('Member removed successfully.')</script>";
     } else {
         die("Could not remove member: " . mysqli_error($conn));
     }

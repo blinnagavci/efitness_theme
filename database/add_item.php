@@ -20,7 +20,7 @@ VALUES ('$itemname', '$itemcategory', '$item_barcode', '$register_date', '$item_
         die('Could not enter data to item table' . mysqli_connect_error());
     }
     else {
-        echo "<script type='text/javascript'>window.alert('Item successfully added')</script>";
+//        echo "<script type='text/javascript'>window.alert('Item successfully added')</script>";
     }
 
     mysqli_close($conn);

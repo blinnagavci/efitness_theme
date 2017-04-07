@@ -11,7 +11,7 @@ if (isset($_POST['remove_employee_type_submit'])) {
     if (!$retval1) {
         die('Could not remove data from employee type table' . mysqli_connect_error());
     } else {
-        echo "<script type='text/javascript'>window.alert('Employee type successfully removed')</script>";
+//        echo "<script type='text/javascript'>window.alert('Employee type successfully removed')</script>";
     }
 
     mysqli_close($conn);

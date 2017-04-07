@@ -22,16 +22,19 @@ VALUES ('$username', '$password', '$email', '$accounttype', '0', '$newfilename')
         $sql_account = "INSERT INTO account (username, password, email, admin_status, status)
 VALUES ('$username', '$password', '$email', '$accounttype', '0')";
     }
-
+if ($uploadedFileName != '') {
+        $upload_directory = "../repository/account_photos/";
+        move_uploaded_file($temp_name, $upload_directory . $newfilename);
+    }
     $retval1 = mysqli_query($conn, $sql_account);
 
     if (!$retval1) {
         die('Could not enter data to account table' . mysqli_connect_error());
     } else {
-        echo "<script type='text/javascript'>window.alert('Account successfully added')</script>";
+//        echo "<script type='text/javascript'>window.alert('Account successfully added')</script>";
     }
 
     mysqli_close($conn);
-//    header("refresh: 0; url = ../accounts.php");
+    header("refresh: 0; url = ../accounts.php");
 }
 

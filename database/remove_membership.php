@@ -11,7 +11,7 @@ if (isset($_POST['remove_membership_submit'])) {
     if (!$retval1) {
         die('Could not remove data to membership table' . mysqli_connect_error());
     } else {
-        echo "<script type='text/javascript'>window.alert('Membership successfully removed')</script>";
+//        echo "<script type='text/javascript'>window.alert('Membership successfully removed')</script>";
     }
 
     mysqli_close($conn);

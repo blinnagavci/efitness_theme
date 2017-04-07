@@ -1,5 +1,4 @@
 <?php
-
 require('db_connect.php');
 
 if (isset($_POST['submit'])) {
@@ -54,8 +53,10 @@ $retval3 = mysqli_query($conn, $sql_membershippayment);
 if (!$retval3) {
     die('Could not enter data to membership payment table' . mysqli_connect_error());
 } else {
-    echo "<script type='text/javascript'>window.alert('Member successfully added')</script>";
+//    echo "<script type='text/javascript'>window.alert('Member successfully added')</script>";
 }
 
 mysqli_close($conn);
 header("refresh: 0; url = ../add_member.php");
+?>
+

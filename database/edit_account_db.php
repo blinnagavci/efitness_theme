@@ -42,7 +42,7 @@ if (isset($_POST['account_edit_submit'])) {
     if (!$retval1) {
         die(mysqli_error($conn));
     } else {
-        echo "<script type='text/javascript'>window.alert('Account successfully edited')</script>";
+//        echo "<script type='text/javascript'>window.alert('Account successfully edited')</script>";
     }
 
     mysqli_close($conn);

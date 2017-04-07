@@ -1,7 +1,14 @@
 <!DOCTYPE html>
+<?php 
+session_start();
+//require('data/sample-login-form.php');
+if (isset($_SESSION['logged_in'])) {
+    header('location: index.php');
+}
+?>
 <html lang="en">
     <head>
-
+      
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
         <meta charset="utf-8">
@@ -24,6 +31,7 @@
 
         <script src="assets/js/jquery-1.11.3.min.js"></script>
 
+
         <!--[if lt IE 9]><script src="assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
 
         <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -36,15 +44,23 @@
     </head>
     <body class="page-body login-page login-form-fall" data-url="http://neon.dev">
 
+
+        <!-- This is needed when you send requests via Ajax -->
+        <script type="text/javascript">
+            var baseurl = '';
+        </script>
+
         <div class="login-container">
 
             <div class="login-header login-caret">
 
                 <div class="login-content">
 
-                    <a href="index.php" class="logo">
+                    <a href="index.html" class="logo">
                         <img src="assets/images/logo@2x.png" width="120" alt="" />
                     </a>
+
+                    <p class="description">Dear user, log in to access the admin area!</p>
 
                     <!-- progress bar indicator -->
                     <div class="login-progressbar-indicator">
@@ -65,10 +81,11 @@
 
                     <div class="form-login-error">
                         <h3>Invalid login</h3>
-                        <p>Your account username or password is invalid</p>
+                        <p>Please enter valid username and password</p>
                     </div>
 
-                    <form name="submit_login" method="post" role="form" id="form_login" action="">
+                    <form method="post" role="form" id="form_login">
+
                         <div class="form-group">
 
                             <div class="input-group">
@@ -94,11 +111,13 @@
                         </div>
 
                         <div class="form-group">
-                            <button type="submit" name="submit_login" class="btn btn-primary btn-block btn-login">
+                            <button type="submit" class="btn btn-primary btn-block btn-login">
                                 <i class="entypo-login"></i>
                                 Log In
                             </button>
                         </div>
+
+                        <!-- Implemented in v1.1.4 -->
 
 
                         <!-- 
@@ -128,6 +147,10 @@
                     <div class="login-bottom-links">
 
                         <a href="extra-forgot-password.html" class="link">Forgot your password?</a>
+
+                        <br />
+
+                        <!--<a href="#">ToS</a>  - <a href="#">Privacy Policy</a>-->
 
                     </div>
 

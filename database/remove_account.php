@@ -21,7 +21,7 @@ if (isset($_GET['id'])) {
     $removesql = "UPDATE account SET status='1' WHERE id = '$id'";
 
     if (mysqli_query($conn, $removesql)) {
-        echo "<script type=text/javascript>window.alert('Account removed successfully.')</script>";
+//        echo "<script type=text/javascript>window.alert('Account removed successfully.')</script>";
     } else {
         die("Could not remove account: " . mysqli_error($conn));
     }
