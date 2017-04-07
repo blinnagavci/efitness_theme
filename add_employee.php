@@ -245,7 +245,7 @@
 
                             <div class="panel-body">
 
-                                <form action='database/add_employee.php' method="POST" role="form" class="form-horizontal form-groups-bordered validate" novalidate="novalidate">
+                                <form action='database/add_employee.php' method="POST" role="form" class="form-horizontal form-groups-bordered validate" enctype="multipart/form-data" novalidate="novalidate">
 
                                     <div class="form-group">
                                         <label for="employee_firstname" class="col-sm-3 control-label" >First name</label>
@@ -281,7 +281,7 @@
 
                                         <div class="col-sm-3">
                                             <div class="input-group">
-                                                <input type="text" name="employee_date" data-validate="required" class="form-control datepicker" data-format="dd/mm/yyyy">
+                                                <input type="text" name="employee_date" id="employee_date" data-validate="required" class="form-control datepicker" data-format="dd/mm/yyyy">
 
                                                 <div class="input-group-addon">
                                                     <a href="#"><i class="entypo-calendar"></i></a>
@@ -348,7 +348,7 @@
                                                     <span class="btn btn-white btn-file">
                                                         <span class="fileinput-new">Select image</span>
                                                         <span class="fileinput-exists">Change</span>
-                                                        <input type="file" name="employee_upload" id="employee-upload" accept="image/*"   >
+                                                        <input type="file" name="employee_upload" id="employee_upload" accept="image/*"   >
                                                     </span>
                                                     <a href="#" class="btn btn-orange fileinput-exists" data-dismiss="fileinput" >Remove</a>
                                                 </div>
@@ -364,7 +364,7 @@
                                             <select name="employee_subscription" class="form-control"  data-validate="required" id="employee_subscription">
                                                 <option value="disabled" disabled selected>Select</option>
                                                 <?php
-                                                include('inc/database/db_connect.php');
+                                                include('database/db_connect.php');
 
                                                 $sql = 'SELECT employee_type FROM employee_type WHERE status= "0"';
                                                 $retval = mysqli_query($conn, $sql);

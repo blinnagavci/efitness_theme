@@ -58,6 +58,6 @@ if (isset($_POST['submit'])) {
     }
 
     mysqli_close($conn);
-    header("refresh: 0; url = ../add_employee.php");
+    //header("refresh: 0; url = ../add_employee.php");
 }
 
