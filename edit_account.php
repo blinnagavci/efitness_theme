@@ -4,13 +4,13 @@
     <h4 class="modal-title">Edit Account</h4>
 </div>
 <div class="modal-body">
-    <form action='database/edit_account_db.php' method="POST" role="form" class="form-horizontal form-groups-bordered validate">
+    <form action='database/edit_account_db.php' method="POST" role="form" enctype="multipart/form-data" class="form-horizontal form-groups-bordered validate">
         <?php
         require('database/db_connect.php');
         if (isset($_GET['id'])) {
             $id = $_GET['id'];
         }
-        $sql = "SELECT id, username, password, email, admin_status FROM account WHERE id = '$id'";
+        $sql = "SELECT id, username, password, email, admin_status, photo FROM account WHERE id = '$id'";
         $result = $conn->query($sql);
         $row = $result->fetch_assoc();
         ?>
@@ -43,7 +43,36 @@
                 </div>
             </div>
         </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">Upload photo</label>
 
+            <div class="col-sm-5">
+
+                <div class="fileinput fileinput-new" data-provides="fileinput">
+                    <div class="fileinput-new thumbnail" style="width: 200px; height: 150px;" data-trigger="fileinput">
+                        <?php
+                        if ($row['photo'] === '') {
+                            echo '<img src="http://placehold.it/200x150" alt="Empty Photo"/>';
+                        } else {
+                            ?>
+                            <img src="repository/account_photos/<?php echo $row["photo"]; ?>" alt="Photo">
+                            <?php
+                        }
+                        ?>
+                    </div>
+                    <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px; max-height: 150px"></div>
+                    <div>
+                        <span class="btn btn-white btn-file">
+                            <span class="fileinput-new">Select image</span>
+                            <span class="fileinput-exists">Change</span>
+                            <input type="file" name="account_upload" id="account_upload" accept="image/*"   >
+                        </span>
+                        <a href="#" class="btn btn-orange fileinput-exists" data-dismiss="fileinput" >Remove</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
         <div class="form-group">
             <label class="col-sm-3 control-label">Account Type</label>
 

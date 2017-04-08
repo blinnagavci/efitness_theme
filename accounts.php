@@ -232,7 +232,6 @@
                 <script type="text/javascript">
                     jQuery(window).load(function () {
                         var $table3 = jQuery("#table-accounts");
-
                         // Initialize DataTable
                         $table3.DataTable({
                             "sDom": "Bfrtip",
@@ -299,14 +298,36 @@
                                         Edit
                                     </a>
 
-                                    <a onclick="return confirm('Are you sure you want to delete this account?');" href='database/remove_account.php?id=<?php echo $row['id'] ?>' name="remove-account" class="btn btn-danger btn-sm btn-icon icon-left">
+                                    <a href="javascript:;" onclick="jQuery('#modal-delete').modal('show', {backdrop: 'static'});" name="remove-account" class="btn btn-danger btn-sm btn-icon icon-left" data-id="<?php echo $row['id']; ?>">
                                         <i class="entypo-cancel"></i>
                                         Delete
                                     </a>
 
                                 </td>
                             </tr>
-                        <?php endwhile; ?>
+                        <div class="modal fade" id="modal-delete" data-backdrop="static">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+
+                                    <div class="modal-header">
+                                        <h4 class="modal-title">Delete Account</h4>
+                                    </div>
+
+                                    <div class="modal-body">
+
+                                        Are you sure you want to delete this account?
+
+                                    </div>
+
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                        <a type="button" class="btn btn-danger" href="database/remove_account.php?id=<?php echo $row['id']; ?>">Delete</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <?php endwhile; ?>
+
                     </tbody>
                 </table>
                 <br />
@@ -430,7 +451,7 @@
         <!-- Bottom scripts (common) -->
         <script src="assets/js/gsap/TweenMax.min.js"></script>
         <script src="assets/js/jquery-ui/js/jquery-ui-1.10.3.minimal.min.js"></script>
-        <script src="assets/js/bootstrap.js"></script>
+
         <script src="assets/js/joinable.js"></script>
         <script src="assets/js/resizeable.js"></script>
         <script src="assets/js/neon-api.js"></script>
@@ -453,18 +474,19 @@
         <!-- Demo Settings -->
         <script src="assets/js/neon-demo.js"></script> 
         <script>
-                                    $(document).ready(function () {
-                                        $('.editButton').click(function () {
-                                            var id = $(this).attr('data-id');
-                                            $.ajax({
-                                                url: "edit_account.php?id=" + id, cache: false, success: function (result) {
-                                                    $('#modal_edit_content').html(result);
-                                                }
+                                        $(document).ready(function () {
+                                            $('.editButton').click(function () {
+                                                var id = $(this).attr('data-id');
+                                                $.ajax({
+                                                    url: "edit_account.php?id=" + id, cache: false, success: function (result) {
+                                                        $('#modal_edit_content').html(result);
+                                                    }
+                                                });
                                             });
                                         });
-                                    });
 
 
         </script>
+        <script src="assets/js/bootstrap.js"></script>
     </body>
 </html>
