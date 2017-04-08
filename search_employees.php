@@ -212,7 +212,7 @@
                         <ul class="list-inline links-list pull-right">	
 
                             <li>
-                                <a href="extra-login.php.html">
+                                <a href="extra-login.php">
                                     Log Out <i class="entypo-logout right"></i>
                                 </a>
                             </li>
@@ -232,7 +232,7 @@
                     </li>
                 </ol>
                 <?php
-                $sql = "SELECT id, first_name, last_name, gender, city, birth_date, telephone_no FROM employee";
+                $sql = "SELECT id, first_name, last_name, gender, city, birth_date, telephone_no FROM employee where status='0'";
                 $result = $conn->query($sql);
 
 
@@ -299,14 +299,14 @@
                                         Edit
                                     </a>
 
-                                    <a href="#" class="btn btn-danger btn-sm btn-icon icon-left">
+                                    <a onclick="return confirm('Are you sure you want to delete this employee?');" href='database/remove_employee.php?id=<?php echo $row['id'] ?>' class="btn btn-danger btn-sm btn-icon icon-left">
                                         <i class="entypo-cancel"></i>
                                         Delete
                                     </a>
 
                                     <a href="#" class="btn btn-info btn-sm btn-icon icon-left">
                                         <i class="entypo-info"></i>
-                                        Details
+                                        Contracts
                                     </a>
                                 </td>
                             </tr>

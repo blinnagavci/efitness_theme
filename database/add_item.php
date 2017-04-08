@@ -24,6 +24,6 @@ VALUES ('$itemname', '$itemcategory', '$item_barcode', '$register_date', '$item_
     }
 
     mysqli_close($conn);
-    header("refresh: 0; url = ../add_item.php");
+    header("location: ../add_item.php");
 }
 
