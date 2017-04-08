@@ -232,7 +232,7 @@
                     </li>
                 </ol>
                 <?php
-                $sql = "SELECT id, first_name, last_name, gender, city, birth_date, telephone_no FROM member";
+                $sql = "SELECT id, first_name, last_name, gender, city, birth_date, telephone_no FROM member where status='0'";
                 $result = $conn->query($sql);
 
 
@@ -306,7 +306,7 @@
 
                                     <a href="#" class="btn btn-info btn-sm btn-icon icon-left">
                                         <i class="entypo-info"></i>
-                                        Details
+                                        Contracts
                                     </a>
                                 </td>
                             </tr>
