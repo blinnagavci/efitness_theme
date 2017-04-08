@@ -1,8 +1,8 @@
 <?php
 
 require ('db_connect.php');
-if (isset($_POST['id'])) {
-    $id = $_POST['id'];
+if (isset($_GET['id'])) {
+    $id = $_GET['id'];
 
     $getAccount = mysqli_query($conn, "SELECT admin_status FROM account WHERE id = '$id'");
     $accountType = mysqli_fetch_row($getAccount);
@@ -12,8 +12,8 @@ if (isset($_POST['id'])) {
         $result = $conn->query($getAll);
 
         if ($result->num_rows <= 1) {
-            echo "oneadmin";
-            //header("refresh: 0; url = ../accounts.php");
+            echo "<script type=text/javascript>window.alert('You must have at least one Admin account')</script>";
+            header("refresh: 0; url = ../accounts.php");
             exit();
         }
     }
@@ -21,10 +21,10 @@ if (isset($_POST['id'])) {
     $removesql = "UPDATE account SET status='1' WHERE id = '$id'";
 
     if (mysqli_query($conn, $removesql)) {
-        echo 'success';
+//        echo "<script type=text/javascript>window.alert('Account removed successfully.')</script>";
     } else {
         die("Could not remove account: " . mysqli_error($conn));
     }
     mysqli_close($conn);
-    //header("refresh: 0; url = ../accounts.php");
+    header("refresh: 0; url = ../accounts.php");
 }
