@@ -47,7 +47,7 @@ $resp['login_status'] = $login_status;
 // Login Success URL
 if ($login_status == 'success') {
     $row = mysqli_fetch_assoc($result);
-    
+
     // If you validate the user you may set the user cookies/sessions here
     #setcookie("logged_in", "user_id");
     #$_SESSION["logged_user"] = "user_id";

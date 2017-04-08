@@ -184,14 +184,8 @@ if (!isset($_SESSION['logged_in'])) {
                             <li class="profile-info dropdown"><!-- add class "pull-right" if you want to place this from right -->
 
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                    <img src="repository/account_photos/<?php
-                                    if ($_SESSION['profile_photo'] == '') {
-                                        echo 'empty-profile-icon.png';
-                                    } else {
-                                        echo $_SESSION['profile_photo'];
-                                    }
-                                    ?>" alt="Profile" class="img-circle" width="44" />
-                                         <?php echo $_SESSION['username']; ?>
+                                    <img src="repository/account_photos/<?php echo $_SESSION['profile_photo']; ?>" alt="" class="img-circle" width="44" />
+                                    <?php echo $_SESSION['username']; ?>
                                 </a>
 
                                 <ul class="dropdown-menu">
