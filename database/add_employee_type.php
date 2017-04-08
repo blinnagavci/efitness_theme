@@ -10,7 +10,6 @@ if (isset($_POST['add_employee_type_submit'])) {
 
     $retval1 = mysqli_query($conn, $sql);
 
-
     if (!$retval1) {
         die('Could not enter data to employee type table' . mysqli_connect_error());
     } else {
@@ -18,6 +17,5 @@ if (isset($_POST['add_employee_type_submit'])) {
     }
 
     mysqli_close($conn);
-    header("refresh: 0; url = ../other_settings.php");
+    header("location: ../other_settings.php");
 }
-

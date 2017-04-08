@@ -57,6 +57,5 @@ if (!$retval3) {
 }
 
 mysqli_close($conn);
-header("refresh: 0; url = ../add_member.php");
+header("location: ../add_member.php");
 ?>
-

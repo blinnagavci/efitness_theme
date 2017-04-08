@@ -9,4 +9,3 @@ if (isset($_GET['id'])) {
     }
     header("location: ../search_members.php");
 }
-
