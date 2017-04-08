@@ -328,7 +328,7 @@
 
                                         <div class="col-sm-5">
                                             <div class="input-group">
-                                                <input type="text" class="form-control" name="member_email" data-validate="required, email" id="member_email" placeholder="">
+                                                <input type="text" class="form-control" name="member_email" data-validate="required,email" id="member_email" placeholder="">
                                                 <span class="input-group-addon"><i class="entypo-mail"></i></span>
                                             </div>
                                         </div>

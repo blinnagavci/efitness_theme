@@ -294,7 +294,7 @@
                                 <td><?php echo $row['birth_date'] ?></td>
                                 <td><?php echo $row['telephone_no'] ?></td>
                                 <td>
-                                    <a href="#" class="btn btn-default btn-sm btn-icon icon-left">
+                                    <a href="#" class="btn btn-default btn-sm btn-icon icon-left editButton" data-toggle='modal' data-target='#modal_edit'  data-id='<?php echo $row["id"]; ?>'>
                                         <i class="entypo-pencil"></i>
                                         Edit
                                     </a>
@@ -320,7 +320,30 @@
 
                 </footer>
             </div>
+            <div id="modal_edit" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content" id="modal_edit_content">
+
+                    </div>
+
+                </div>
+            </div>
         </div>
+        <script>
+            $(document).ready(function () {
+                $('.editButton').click(function () {
+                    var id = $(this).attr('data-id');
+                    $.ajax({
+                        url: "edit_member.php?id=" + id, cache: false, success: function (result) {
+                            $('#modal_edit_content').html(result);
+                        }
+                    });
+                });
+
+            });
+        </script>
 
         <!-- Imported styles on this page -->
         <link rel="stylesheet" href="assets/js/datatables/datatables.css">
