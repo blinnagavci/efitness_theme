@@ -113,43 +113,46 @@
                     $("#editaccount_form").submit(function (event) {
                         // Initiate Variables With Form Content
                         event.preventDefault();
-                        var id = $("#test-id").val();
-                        var username = $("#account_username").val();
-                        var temporarypassword = $("#account_password").val();
-                        var email = $("#account_email").val();
-                        var account_type = $("#account_type").val();
-                        var form_data = new FormData();
-                        var file_data;
-                        var test = '';
-                        if (!($("#account_upload").val().length === 0)) {
-                            file_data = $("#account_upload").prop('files')[0];
-                            form_data.append('file', file_data);
-                            var test = 'pic';
-                        }
-                        form_data.append('username', username);
-                        form_data.append('temporarypassword', temporarypassword);
-                        form_data.append('email', email);
-                        form_data.append('id', id);
-                        form_data.append('account_type', account_type);
-                        form_data.append('test', test);
-                        $.ajax({
-                            type: "POST",
-                            dataType: 'text',
-                            cache: false,
-                            contentType: false,
-                            processData: false,
-                            url: "database/edit_account_db.php",
-                            data: form_data,
-                            success: function (text) {
-                                if (text === "success") {
-                                    formSuccess();
-                                } else if (text === "2") {
-                                    oneAdmin();
-                                } else {
-                                    formFail();
-                                }
+                        if ($(this).valid()) {
+                            var id = $("#test-id").val();
+                            var username = $("#account_username").val();
+                            var temporarypassword = $("#account_password").val();
+                            var email = $("#account_email").val();
+                            var account_type = $("#account_type").val();
+                            var form_data = new FormData();
+                            var file_data;
+                            var test = '';
+                            if (!($("#account_upload").val().length === 0)) {
+                                file_data = $("#account_upload").prop('files')[0];
+                                form_data.append('file', file_data);
+                                var test = 'pic';
                             }
-                        });
+                            form_data.append('username', username);
+                            form_data.append('temporarypassword', temporarypassword);
+                            form_data.append('email', email);
+                            form_data.append('id', id);
+                            form_data.append('account_type', account_type);
+                            form_data.append('test', test);
+                            $.ajax({
+                                type: "POST",
+                                dataType: 'text',
+                                cache: false,
+                                contentType: false,
+                                processData: false,
+                                url: "database/edit_account_db.php",
+                                data: form_data,
+                                success: function (text) {
+                                    if (text === "success") {
+                                        formSuccess();
+                                    } else if (text === "2") {
+                                        oneAdmin();
+                                    } else {
+                                        formFail();
+                                    }
+                                }
+                            });
+                        }
+
                     });
                     function oneAdmin() {
                         var opts = {

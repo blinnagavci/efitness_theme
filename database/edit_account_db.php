@@ -9,7 +9,6 @@ $id = ($_POST['id']);
 $accounttypeselect = $_POST['account_type'];
 $test = ($_POST['test']);
 if ($test === 'pic') {
-    $temp = explode(".", $_FILES["file"]["tmp_name"]);
     //we can use temp but we are converting every pic to PNG for less space
     $newfilename = $id . "_" . $username . "." . "png";
     move_uploaded_file($_FILES['file']['tmp_name'], '../repository/account_photos/' . $newfilename);
