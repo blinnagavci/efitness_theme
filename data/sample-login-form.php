@@ -28,8 +28,8 @@ $login_status = 'invalid';
 //	$login_status = 'success';
 //}
 
-$password = sha1($password);
-$sql = "SELECT * FROM account WHERE username='$username' AND password = '$password' AND status='0'";
+$passwordd = sha1($password);
+$sql = "SELECT * FROM account WHERE username='$username' AND password = '$passwordd' AND status='0'";
 
 $result = $conn->query($sql);
 
