@@ -307,7 +307,7 @@ if (!isset($_SESSION['logged_in'])) {
                         <div class="panel panel-primary" data-collapsed="0">
 
                             <div class="panel-heading">
-                                <div class="panel-title">Employee type settings</div>
+                                <div class="panel-title">Employee settings</div>
 
                                 <div class="panel-options">
                                     <a href="#" data-rel="collapse"><i class="entypo-down-open"></i></a>
