@@ -114,6 +114,8 @@
     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 </div>
 
+<script src="assets/js/jquery.validate.min.js"></script>
+<script src="assets/js/main.js" type="text/javascript"></script>
 <script>
 
                     $("#editaccount_form").submit(function (event) {
