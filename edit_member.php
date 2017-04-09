@@ -64,7 +64,6 @@
 
             <div class="col-sm-5">
                 <input type="text" name="member_date" class="form-control datepicker" data-format="dd/mm/yyyy" value="<?php echo $row['birth_date']; ?>" required>
-
             </div>
         </div>
 
@@ -157,7 +156,6 @@
 
 <script src="assets/js/bootstrap-datepicker.js"></script>
 <script src="assets/js/fileinput.js"></script>
-<!--<script src="assets/js/neon-custom.js"></script>-->
 <script src="assets/js/jquery.validate.min.js"></script>
 <script src="assets/js/main.js" type="text/javascript"></script>
 
