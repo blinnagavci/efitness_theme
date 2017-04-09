@@ -6,7 +6,7 @@
 
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="description" content="Neon Admin Panel" />
+        <meta name="description" content="E-Fitness Admin Panel" />
         <meta name="Blin Nagavci, Labian Gashi, Besarber Tasholli" content="" />
 
         <link rel="icon" href="assets/images/favicon.ico">
@@ -28,7 +28,7 @@
     <body class="page-body  page-fade" data-url="">
 
         <div class="page-container">
-            
+
             <div class="sidebar-menu">
 
                 <div class="sidebar-menu-inner">
@@ -55,7 +55,7 @@
                                 <i class="entypo-menu"></i>
                             </a>
                         </div>
-                        
+
                     </header>
 
 
@@ -196,7 +196,7 @@
                         <ul class="list-inline links-list pull-right">	
 
                             <li>
-                                <a href="extra-login.php.html">
+                                <a href="extra-login.php">
                                     Log Out <i class="entypo-logout right"></i>
                                 </a>
                             </li>
@@ -216,7 +216,7 @@
                     </li>
                 </ol>
                 <?php
-                $sql = "SELECT * FROM item";
+                $sql = "SELECT * FROM item where status='0'";
                 $result = $conn->query($sql);
 
                 // output data of each row
@@ -279,7 +279,7 @@
                                         Edit
                                     </a>
 
-                                    <a onclick="return confirm('Are you sure you want to delete this item?');" href='database/remove_item.php?id=<?php echo $row['id'] ?>' class="btn btn-danger btn-sm btn-icon icon-left">
+                                    <a href="javascript:;" onclick="jQuery('#modal-delete').modal('show', {backdrop: 'static'});" name="remove_item" class="btn btn-danger btn-sm btn-icon icon-left" data-id="<?php echo $row['id']; ?>">
                                         <i class="entypo-cancel"></i>
                                         Delete
                                     </a>
@@ -290,7 +290,29 @@
                                     </a>
                                 </td>
                             </tr>
-                        <?php endwhile; ?>
+
+                        <div class="modal fade" id="modal-delete" data-backdrop="static">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+
+                                    <div class="modal-header">
+                                        <h4 class="modal-title">Delete item</h4>
+                                    </div>
+
+                                    <div class="modal-body">
+
+                                        Are you sure you want to delete this item?<?php echo $row['id']; ?>
+
+                                    </div>
+
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                        <a type="button" class="btn btn-danger" href="database/remove_item.php?id=<?php echo $row['id']; ?>">Delete</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <?php endwhile; ?>
                     </tbody>
                 </table>
                 <br />
@@ -308,7 +330,6 @@
         <!-- Bottom scripts (common) -->
         <script src="assets/js/gsap/TweenMax.min.js"></script>
         <script src="assets/js/jquery-ui/js/jquery-ui-1.10.3.minimal.min.js"></script>
-        <script src="assets/js/bootstrap.js"></script>
         <script src="assets/js/joinable.js"></script>
         <script src="assets/js/resizeable.js"></script>
         <script src="assets/js/neon-api.js"></script>
@@ -323,5 +344,6 @@
 
         <!-- Demo Settings -->
         <script src="assets/js/neon-demo.js"></script> 
+        <script src="assets/js/bootstrap.js"></script>
     </body>
 </html>
