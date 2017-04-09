@@ -63,11 +63,8 @@
             <label class="col-sm-3 control-label">Birth date</label>
 
             <div class="col-sm-5">
-                <div class="input-group">
-                    <input type="text" name="member_date" required class="form-control datepicker" data-format="dd/mm/yyyy" value="<?php echo $row['birth_date']; ?>" required>
+                <input type="text" name="member_date" class="form-control datepicker" data-format="dd/mm/yyyy" value="<?php echo $row['birth_date']; ?>" required>
 
-
-                </div>
             </div>
         </div>
 
