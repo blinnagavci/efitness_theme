@@ -1,4 +1,10 @@
 <!DOCTYPE html>
+<?php
+session_start();
+if (!isset($_SESSION['logged_in'])) {
+    header('location: extra-login.php');
+}
+?>
 <html lang="en">
     <head>
         <?php require('database/db_connect.php'); ?>
@@ -11,7 +17,7 @@
 
         <link rel="icon" href="assets/images/favicon.ico">
 
-        <title>E-Fitness | Add members</title>
+        <title>E-Fitness | Add member</title>
 
         <link rel="stylesheet" href="assets/js/jquery-ui/css/no-theme/jquery-ui-1.10.3.custom.min.css">
         <link rel="stylesheet" href="assets/css/font-icons/entypo/css/entypo.css">
@@ -26,11 +32,16 @@
 
 
     </head>
-    <body class="page-body  page-fade" data-url="">
+    <body class="page-body  page-fade" data-url="http://neon.dev">
+
         <div class="page-container"><!-- add class "sidebar-collapsed" to close sidebar by default, "chat-visible" to make chat appear always -->
+
             <div class="sidebar-menu">
-                <div class="sidebar-menu-inner">			
+
+                <div class="sidebar-menu-inner">
+
                     <header class="logo-env">
+
                         <!-- logo -->
                         <div class="logo">
                             <a href="index.php">
@@ -44,6 +55,7 @@
                                 <i class="entypo-menu"></i>
                             </a>
                         </div>
+
 
                         <!-- open/close menu icon (do not remove if you want to enable menu on mobile devices) -->
                         <div class="sidebar-mobile-menu visible-xs">
@@ -112,7 +124,7 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="search_item.php">
+                                    <a href="search_inventory.php">
                                         <span class="title">Search inventory</span>
                                     </a>
                                 </li>
@@ -123,24 +135,27 @@
                                 </li>
                             </ul>
                         </li>
-                        <li class="">
+<!--                        <li class="">
                             <a href="">
                                 <i class="entypo-folder"></i>
                                 <span class="title">Reports</span>
                             </a>
-                        </li>
+                        </li>-->
                         <li class="">
-                            <a href="">
+                            <a href="accounts.php">
                                 <i class="entypo-user"></i>
                                 <span class="title">Accounts</span>
                             </a>
                         </li>
+
                         <li class="">
                             <a href="other_settings.php">
-                                <i class="entypo-tools"></i>
+                                <i class="entypo-cog"></i>
                                 <span class="title">Settings</span>
                             </a>
                         </li>
+
+
                     </ul>
 
                 </div>
@@ -160,8 +175,14 @@
                             <li class="profile-info dropdown"><!-- add class "pull-right" if you want to place this from right -->
 
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                    <img src="assets/images/thumb-1@2x.png" alt="" class="img-circle" width="44" />
-                                    Blin Nagavci
+                                    <img src="repository/account_photos/<?php
+                                    if ($_SESSION['profile_photo'] == '') {
+                                        echo 'empty-profile-icon.png';
+                                    } else {
+                                        echo $_SESSION['profile_photo'];
+                                    }
+                                    ?>" alt="Profile" class="img-circle" width="44" />
+                                         <?php echo $_SESSION['username']; ?>
                                 </a>
 
                                 <ul class="dropdown-menu">
@@ -172,8 +193,8 @@
                                     <!-- Profile sub-links -->
                                     <li>
                                         <a href="extra-timeline.html">
-                                            <i class="entypo-user"></i> 
-                                            Edit profile
+                                            <i class="entypo-user"></i>
+                                            Edit Profile
                                         </a>
                                     </li>
 
@@ -203,8 +224,8 @@
                         <ul class="list-inline links-list pull-right">	
 
                             <li>
-                                <a href="extra-login.php.html">
-                                    Log out <i class="entypo-logout right"></i>
+                                <a href="database/logout.php">
+                                    Log Out <i class="entypo-logout right"></i>
                                 </a>
                             </li>
                         </ul>

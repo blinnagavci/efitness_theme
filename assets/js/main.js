@@ -6,7 +6,7 @@
 $(document).ready(function () {
     $('#modal_form_edit_member').validate();
     $('#editaccount_form').validate();
-
+    $('#modal_form_subscription_member').validate();
 });
 
 // Datepicker

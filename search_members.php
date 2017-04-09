@@ -1,4 +1,10 @@
 <!DOCTYPE html>
+<?php
+session_start();
+if (!isset($_SESSION['logged_in'])) {
+    header('location: extra-login.php');
+}
+?>
 <html lang="en">
     <head>
         <?php require('database/db_connect.php'); ?>
@@ -34,7 +40,7 @@
 
 
     </head>
-    <body class="page-body  page-fade" data-url="">
+    <body class="page-body  page-fade" data-url="http://neon.dev">
 
         <div class="page-container"><!-- add class "sidebar-collapsed" to close sidebar by default, "chat-visible" to make chat appear always -->
 
@@ -72,13 +78,13 @@
                     <ul id="main-menu" class="main-menu">
                         <!-- add class "multiple-expanded" to allow multiple submenus to open -->
                         <!-- class "auto-inherit-active-class" will automatically add "active" class for parent elements who are marked already with class "active" -->
-                        <li>
+                        <li class="">
                             <a href="index.php">
                                 <i class="entypo-gauge"></i>
                                 <span class="title">Dashboard</span>
                             </a>
                         </li>
-                        <li class="has-sub opened active">
+                        <li class="has-sub active opened active">
                             <a href="#">
                                 <i class="entypo-users"></i>
                                 <span class="title">Members</span>
@@ -103,12 +109,12 @@
                             </a>
                             <ul>
                                 <li>
-                                    <a href="">
+                                    <a href="add_employee.php">
                                         <span class="title">Add employee</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="">
+                                    <a href="search_employees.php">
                                         <span class="title">Search employees</span>
                                     </a>
                                 </li>
@@ -137,29 +143,37 @@
                                 </li>
                             </ul>
                         </li>
-                        <li class="">
+<!--                        <li class="">
                             <a href="">
                                 <i class="entypo-folder"></i>
                                 <span class="title">Reports</span>
                             </a>
-                        </li>
+                        </li>-->
                         <li class="">
-                            <a href="">
+                            <a href="accounts.php">
                                 <i class="entypo-user"></i>
                                 <span class="title">Accounts</span>
                             </a>
                         </li>
+
                         <li class="">
                             <a href="other_settings.php">
-                                <i class="entypo-tools"></i>
+                                <i class="entypo-cog"></i>
                                 <span class="title">Settings</span>
                             </a>
                         </li>
+
+
                     </ul>
+
                 </div>
+
             </div>
+
             <div class="main-content">
+
                 <div class="row">
+
                     <!-- Profile Info and Notifications -->
                     <div class="col-md-6 col-sm-8 clearfix">
 
@@ -169,8 +183,14 @@
                             <li class="profile-info dropdown"><!-- add class "pull-right" if you want to place this from right -->
 
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                    <img src="assets/images/labiangashi.png" alt="" class="img-circle" width="44" />
-                                    Labian Gashi
+                                    <img src="repository/account_photos/<?php
+                                    if ($_SESSION['profile_photo'] == '') {
+                                        echo 'empty-profile-icon.png';
+                                    } else {
+                                        echo $_SESSION['profile_photo'];
+                                    }
+                                    ?>" alt="Profile" class="img-circle" width="44" />
+                                         <?php echo $_SESSION['username']; ?>
                                 </a>
 
                                 <ul class="dropdown-menu">
@@ -212,7 +232,7 @@
                         <ul class="list-inline links-list pull-right">	
 
                             <li>
-                                <a href="extra-login.php.html">
+                                <a href="database/logout.php">
                                     Log Out <i class="entypo-logout right"></i>
                                 </a>
                             </li>
@@ -221,6 +241,7 @@
                     </div>
 
                 </div>
+
                 <hr />
 
                 <ol class="breadcrumb bc-3" >
@@ -304,9 +325,9 @@
                                         Delete
                                     </a>
 
-                                    <a href="#" class="btn btn-info btn-sm btn-icon icon-left">
+                                    <a href="#" class="btn btn-info btn-sm btn-icon icon-left subscriptionButton" data-toggle='modal' data-target='#modal_add_subscription'  data-id='<?php echo $row["id"]; ?>'>
                                         <i class="entypo-info"></i>
-                                        Contracts
+                                        Subscriptions
                                     </a>
                                 </td>
                             </tr>
@@ -330,6 +351,17 @@
 
                 </div>
             </div>
+
+            <div id="modal_add_subscription" class="modal fade" role="dialog">
+                <div class="modal-dialog" style="width: 80%">
+
+                    <!-- Modal content-->
+                    <div class="modal-content" id="modal_add_subscription_content">
+
+                    </div>
+
+                </div>
+            </div>
         </div>
         <script>
             $(document).ready(function () {
@@ -338,6 +370,15 @@
                     $.ajax({
                         url: "edit_member.php?id=" + id, cache: false, success: function (result) {
                             $('#modal_edit_content').html(result);
+                        }
+                    });
+                });
+
+                $('.subscriptionButton').click(function () {
+                    var id = $(this).attr('data-id');
+                    $.ajax({
+                        url: "add_subscription_member.php?id=" + id, cache: false, success: function (result) {
+                            $('#modal_add_subscription_content').html(result);
                         }
                     });
                 });

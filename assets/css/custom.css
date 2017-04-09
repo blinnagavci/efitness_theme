@@ -19,3 +19,7 @@ label.error{
 .datepicker.datepicker-dropdown {
   z-index: 10001 !important;
 }
+
+.add_subscription_submit{
+    margin-bottom: 10px;
+}
