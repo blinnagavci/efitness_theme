@@ -1,10 +1,11 @@
 
+
 <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal">&times;</button>
     <h4 class="modal-title">Edit Member</h4>
 </div>
 <div class="modal-body">
-    <form action='database/edit_member_db.php' method="POST" role="form" enctype="multipart/form-data" class="form-horizontal form-groups-bordered validate">
+    <form action='database/edit_member_db.php' id="modal_form_edit_member" method="POST" role="form" enctype="multipart/form-data" class="form-horizontal form-groups-bordered">
         <?php
         require('database/db_connect.php');
         if (isset($_GET['id'])) {
@@ -19,7 +20,7 @@
             <label for="member_firstname" class="col-sm-3 control-label" >First name</label>
 
             <div class="col-sm-5">
-                <input type="text" name="member_firstname" class="form-control" data-validate="required" id="member_firstname" value="<?php echo $row['first_name']; ?>">
+                <input type="text" name="member_firstname" class="form-control" id="member_firstname" value="<?php echo $row['first_name']; ?>" required>
             </div>
         </div>
 
@@ -27,7 +28,7 @@
             <label for="member_surname" class="col-sm-3 control-label">Last name</label>
 
             <div class="col-sm-5">
-                <input type="text" name="member_surname" class="form-control" data-validate="required" id="member_surname" placeholder="" value="<?php echo $row['last_name']; ?>">
+                <input type="text" name="member_surname" class="form-control" id="member_surname" placeholder="" value="<?php echo $row['last_name']; ?>" required>
             </div>
         </div>
 
@@ -35,7 +36,7 @@
             <label class="col-sm-3 control-label">Gender</label>
 
             <div class="col-sm-5">
-                <select name="member_gender" class="form-control" data-validate="required" id="gender_select">
+                <select name="member_gender" class="form-control"  id="gender_select" required>
                     <option value="<?php echo $row['gender']; ?>" selected><?php echo $row['gender']; ?></option>
                     <?php
                     switch ($row['gender']) {
@@ -61,13 +62,11 @@
         <div class="form-group">
             <label class="col-sm-3 control-label">Birth date</label>
 
-            <div class="col-sm-3">
+            <div class="col-sm-5">
                 <div class="input-group">
-                    <input type="text" name="member_date" data-validate="required" class="form-control datepicker" data-format="dd/mm/yyyy" value="<?php echo $row['birth_date']; ?>">
+                    <input type="text" name="member_date" required class="form-control datepicker" data-format="dd/mm/yyyy" value="<?php echo $row['birth_date']; ?>" required>
 
-                    <div class="input-group-addon">
-                        <a href="#"><i class="entypo-calendar"></i></a>
-                    </div>
+
                 </div>
             </div>
         </div>
@@ -76,7 +75,7 @@
             <label for="member_address" class="col-sm-3 control-label">Residential address</label>
 
             <div class="col-sm-5">
-                <input type="text" name="member_address"  data-validate="required" class="form-control" id="member_address" placeholder="" value="<?php echo $row['residential_address']; ?>">
+                <input type="text" name="member_address"  required class="form-control" id="member_address" placeholder="" value="<?php echo $row['residential_address']; ?>">
             </div>
         </div>
 
@@ -84,7 +83,7 @@
             <label for="member_city" class="col-sm-3 control-label">City</label>
 
             <div class="col-sm-5">
-                <input type="text" name="member_city" class="form-control"  data-validate="required" id="member_city" placeholder="" value="<?php echo $row['city']; ?>">
+                <input type="text" name="member_city" class="form-control"  required id="member_city" placeholder="" value="<?php echo $row['city']; ?>">
             </div>
         </div>
 
@@ -93,7 +92,7 @@
             <label for="member_telephone" class="col-sm-3 control-label">Phone no.</label>
 
             <div class="col-sm-5">
-                <input type="text" name="member_telephone" class="form-control" data-validate="required" id="member_telephone" placeholder="" value="<?php echo $row['telephone_no']; ?>">
+                <input type="text" name="member_telephone" class="form-control" required id="member_telephone" placeholder="" value="<?php echo $row['telephone_no']; ?>">
             </div>
         </div>
 
@@ -101,7 +100,7 @@
             <label for="member_alternative" class="col-sm-3 control-label">Alternative no.</label>
 
             <div class="col-sm-5">
-                <input type="text" name="member_alternative" class="form-control"  data-validate="required" id="member_alternative" placeholder="" value="<?php echo $row['alternative_no']; ?>">
+                <input type="text" name="member_alternative" class="form-control"  required id="member_alternative" placeholder="" value="<?php echo $row['alternative_no']; ?>">
             </div>
         </div>
 
@@ -109,10 +108,8 @@
             <label class="col-sm-3 control-label">Email</label>
 
             <div class="col-sm-5">
-                <div class="input-group">
-                    <input type="text" class="form-control" name="member_email" data-validate="required,email" id="member_email" placeholder="" value="<?php echo $row['email']; ?>">
-                    <span class="input-group-addon"><i class="entypo-mail"></i></span>
-                </div>
+                <input type="email" class="form-control" name="member_email" required id="member_email" placeholder="" value="<?php echo $row['email']; ?>">
+
             </div>
         </div>
         <div class="form-group">
@@ -162,9 +159,9 @@
 
 
 <script src="assets/js/bootstrap-datepicker.js"></script>
-<script src="assets/js/jquery.validate.min.js"></script>
 <script src="assets/js/fileinput.js"></script>
-<script src="assets/js/neon-custom.js"></script>
-
+<!--<script src="assets/js/neon-custom.js"></script>-->
+<script src="assets/js/jquery.validate.min.js"></script>
+<script src="assets/js/main.js" type="text/javascript"></script>
 
 
