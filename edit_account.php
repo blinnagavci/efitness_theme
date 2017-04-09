@@ -121,7 +121,7 @@
                     $("#editaccount_form").submit(function (event) {
                         $editForm = $(this);
                         event.preventDefault();
-                        if (!$editForm.checkValidity || $editForm.checkValidity()) {
+                        if ($editForm.valid()) {
                             var id = $("#test-id").val();
                             var username = $("#account_username").val();
                             var temporarypassword = $("#account_password").val();
