@@ -4,7 +4,7 @@
     <h4 class="modal-title">Edit Account</h4>
 </div>
 <div class="modal-body">
-    <form action='database/edit_account_db.php' id="modal_form_edit_account" method="POST" role="form" enctype="multipart/form-data" class="form-horizontal form-groups-bordered validate">
+    <form id="editaccount_form" name="editaccount_form" role="form" enctype="multipart/form-data" class="form-horizontal form-groups-bordered validate">
         <?php
         require('database/db_connect.php');
         if (isset($_GET['id'])) {
@@ -14,7 +14,7 @@
         $result = $conn->query($sql);
         $row = $result->fetch_assoc();
         ?>
-        <input type="hidden" name="test-id" value="<?php echo $row['id']; ?>"/>
+        <input type="hidden" id="test-id" name="test-id" value="<?php echo $row['id']; ?>"/>
         <div class="form-group">
             <label for="account_username" class="col-sm-3 control-label" >Username</label>
 
@@ -75,7 +75,7 @@
             <label class="col-sm-3 control-label">Account Type</label>
 
             <div class="col-sm-5">
-                <select name="account_type" class="form-control" required>
+                <select id="account_type" name="account_type" class="form-control" required>
                     <?php
                     $status = $row['admin_status'];
                     if ($status == 0) {
@@ -116,6 +116,91 @@
 
 <script src="assets/js/jquery.validate.min.js"></script>
 <script src="assets/js/main.js" type="text/javascript"></script>
+<script>
+
+                    $("#editaccount_form").submit(function (event) {
+                        $editForm = $(this);
+                        event.preventDefault();
+                        if (!$editForm.checkValidity || $editForm.checkValidity()) {
+                            var id = $("#test-id").val();
+                            var username = $("#account_username").val();
+                            var temporarypassword = $("#account_password").val();
+                            var email = $("#account_email").val();
+                            var account_type = $("#account_type").val();
+                            var form_data = new FormData();
+                            var file_data;
+                            var test = '';
+                            if (!($("#account_upload").val().length === 0)) {
+                                file_data = $("#account_upload").prop('files')[0];
+                                form_data.append('file', file_data);
+                                var test = 'pic';
+                            }
+                            form_data.append('username', username);
+                            form_data.append('temporarypassword', temporarypassword);
+                            form_data.append('email', email);
+                            form_data.append('id', id);
+                            form_data.append('account_type', account_type);
+                            form_data.append('test', test);
+                            $.ajax({
+                                type: "POST",
+                                dataType: 'text',
+                                cache: false,
+                                contentType: false,
+                                processData: false,
+                                url: "database/edit_account_db.php",
+                                data: form_data,
+                                success: function (text) {
+                                    if (text === "success") {
+                                        window.location = window.location + "#editsuccess";
+                                        location.reload();
+                                    } else if (text === "2") {
+                                        oneAdmin();
+                                    } else {
+                                        editAccountFail();
+                                    }
+                                }
+                            });
+                        }
+
+                    });
+                    function oneAdmin() {
+                        var opts = {
+                            "closeButton": true,
+                            "debug": false,
+                            "positionClass": "toast-top-full-width",
+                            "onclick": null,
+                            "showDuration": "300",
+                            "hideDuration": "1000",
+                            "timeOut": "5000",
+                            "extendedTimeOut": "1000",
+                            "showEasing": "swing",
+                            "hideEasing": "linear",
+                            "showMethod": "fadeIn",
+                            "hideMethod": "fadeOut"
+                        };
+                        toastr.error("You must have at least one admin account", opts);
+                    }
+                    function editAccountFail() {
+                        var opts = {
+                            "closeButton": true,
+                            "debug": false,
+                            "positionClass": "toast-top-full-width",
+                            "onclick": null,
+                            "showDuration": "300",
+                            "hideDuration": "1000",
+                            "timeOut": "5000",
+                            "extendedTimeOut": "1000",
+                            "showEasing": "swing",
+                            "hideEasing": "linear",
+                            "showMethod": "fadeIn",
+                            "hideMethod": "fadeOut"
+                        };
+                        toastr.error("Unfortunately, we ran into problems trying to edit the account.", opts);
+                    }
+
+</script>
+
+
 
 
 

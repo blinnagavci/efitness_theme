@@ -36,9 +36,9 @@ if (!($accountPassword[0] == $temporarypassword)) {
     $password = $temporarypassword;
 }
 if ($test === 'pic') {
-    $sql = "UPDATE account SET username='$username', password='$password', email='$email', admin_status='$accounttypeselect', photo='$newfilename' WHERE id = $id";
+    $sql = "UPDATE account SET username='$username', password='$password', email='$email', admin_status='$accounttypeselect', photo='$newfilename' WHERE id = '$id'";
 } else {
-    $sql = "UPDATE account SET username='$username', password='$password', email='$email', admin_status='$accounttypeselect' WHERE id = $id";
+    $sql = "UPDATE account SET username='$username', password='$password', email='$email', admin_status='$accounttypeselect' WHERE id = '$id'";
 }
 
 
