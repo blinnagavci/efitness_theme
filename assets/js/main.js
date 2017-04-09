@@ -5,7 +5,7 @@
  */
 $(document).ready(function () {
     $('#modal_form_edit_member').validate();
-    $('#modal_form_edit_account').validate();
+    $('#editaccount_form').validate();
 
 });
 

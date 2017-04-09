@@ -4,7 +4,7 @@
     <h4 class="modal-title">Edit Account</h4>
 </div>
 <div class="modal-body">
-    <form id="editaccount_form" name="editaccount_form" role="form" enctype="multipart/form-data" class="form-horizontal form-groups-bordered validate">
+    <form id="editaccount_form" name="editaccount_form" role="form" enctype="multipart/form-data" class="form-horizontal form-groups-bordered">
         <?php
         require('database/db_connect.php');
         if (isset($_GET['id'])) {
@@ -114,8 +114,6 @@
     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 </div>
 
-<script src="assets/js/jquery.validate.min.js"></script>
-<script src="assets/js/main.js" type="text/javascript"></script>
 <script>
 
                     $("#editaccount_form").submit(function (event) {
