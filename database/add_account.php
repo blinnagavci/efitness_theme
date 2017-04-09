@@ -11,10 +11,9 @@ if (isset($_POST['submit'])) {
     $password = sha1($temporary_password);
     $uploadedFileName = $_FILES['account_upload']['name'];
     $temp_name = $_FILES['account_upload']['tmp_name'];
-    $temp = explode(".", $_FILES["account_upload"]["name"]);
     $getID = mysqli_query($conn, "SELECT id FROM account ORDER BY id DESC");
     $idRow = mysqli_fetch_row($getID);
-    $newfilename = $idRow[0] + 1 . "_" . $username . '.' . end($temp);
+    $newfilename = $idRow[0] + 1 . "_" . $username . '.png';
     if (!($_FILES['account_upload']['name'] == "")) {
         $sql_account = "INSERT INTO account (username, password, email, admin_status, status, photo)
 VALUES ('$username', '$password', '$email', '$accounttype', '0', '$newfilename')";

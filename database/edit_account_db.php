@@ -45,9 +45,9 @@ if (isset($_POST['account_edit_submit'])) {
             $upload_directory = "../repository/account_photos/";
             move_uploaded_file($temp_name, $upload_directory . $newfilename);
         }
-        $sql = "UPDATE account SET username='$username', password='$password', email='$email', admin_status='$accounttypeselect', photo='$newfilename' WHERE id = $id";
+        $sql = "UPDATE account SET username='$username', password='$passwosrd', email='$email', admin_status='$accounttypeselect', photo='$newfilename' WHERE id = $id";
     } else {
-        $sql = "UPDATE account SET username='$username', password='$password', email='$email', admin_status='$accounttypeselect' WHERE id = $id";
+        
     }
     $retval1 = mysqli_query($conn, $sql);
 
