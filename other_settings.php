@@ -1,3 +1,10 @@
+<?php
+session_start();
+if (!isset($_SESSION['logged_in'])) {
+    header('location: extra-login.php');
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -119,12 +126,12 @@
                                 </li>
                             </ul>
                         </li>
-                        <li class="">
+<!--                        <li class="">
                             <a href="">
                                 <i class="entypo-folder"></i>
                                 <span class="title">Reports</span>
                             </a>
-                        </li>
+                        </li>-->
                         <li class="">
                             <a href="">
                                 <i class="entypo-user"></i>
@@ -134,7 +141,7 @@
 
                         <li class="active">
                             <a href="other_settings.php">
-                                <i class="entypo-tools opened active"></i>
+                                <i class="entypo-cog active"></i>
                                 <span class="title">Settings</span>
                             </a>
                         </li>
@@ -157,8 +164,14 @@
                             <li class="profile-info dropdown"><!-- add class "pull-right" if you want to place this from right -->
 
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                    <img src="assets/images/thumb-1@2x.png" alt="" class="img-circle" width="44" />
-                                    Blin Nagavci
+                                    <img src="repository/account_photos/<?php
+                                    if ($_SESSION['profile_photo'] == '') {
+                                        echo 'empty-profile-icon.png';
+                                    } else {
+                                        echo $_SESSION['profile_photo'];
+                                    }
+                                    ?>" alt="Profile" class="img-circle" width="44" />
+                                         <?php echo $_SESSION['username']; ?>
                                 </a>
 
                                 <ul class="dropdown-menu">
@@ -200,7 +213,7 @@
                         <ul class="list-inline links-list pull-right">	
 
                             <li>
-                                <a href="extra-login.php.html">
+                                <a href="database/logout.php">
                                     Log Out <i class="entypo-logout right"></i>
                                 </a>
                             </li>

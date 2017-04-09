@@ -144,12 +144,12 @@ if (!isset($_SESSION['logged_in'])) {
                                 </li>
                             </ul>
                         </li>
-                        <li class="">
+<!--                        <li class="">
                             <a href="">
                                 <i class="entypo-folder"></i>
                                 <span class="title">Reports</span>
                             </a>
-                        </li>
+                        </li>-->
                         <li class="">
                             <a href="accounts.php">
                                 <i class="entypo-user"></i>
@@ -159,7 +159,7 @@ if (!isset($_SESSION['logged_in'])) {
 
                         <li class="">
                             <a href="other_settings.php">
-                                <i class="entypo-user"></i>
+                                <i class="entypo-cog"></i>
                                 <span class="title">Settings</span>
                             </a>
                         </li>
