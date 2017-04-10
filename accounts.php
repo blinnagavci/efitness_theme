@@ -1,3 +1,10 @@
+<?php
+session_start();
+if (!isset($_SESSION['logged_in'])) {
+    header('location: extra-login.php');
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -21,9 +28,7 @@
         <link rel="stylesheet" href="assets/css/neon-theme.css">
         <link rel="stylesheet" href="assets/css/neon-forms.css">
         <link rel="stylesheet" href="assets/css/custom.css">
-
         <script src="assets/js/jquery-1.11.3.min.js"></script>
-
 
     </head>
     <body class="page-body  page-fade" data-url="">
@@ -161,8 +166,14 @@
                             <li class="profile-info dropdown"><!-- add class "pull-right" if you want to place this from right -->
 
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                    <img src="assets/images/labiangashi.png" alt="" class="img-circle" width="44" />
-                                    Labian Gashi
+                                    <img src="repository/account_photos/<?php
+                                    if ($_SESSION['profile_photo'] == '') {
+                                        echo 'empty-profile-icon.png';
+                                    } else {
+                                        echo $_SESSION['profile_photo'];
+                                    }
+                                    ?>" alt="Profile" class="img-circle" width="44" />
+                                         <?php echo $_SESSION['username']; ?>
                                 </a>
 
                                 <ul class="dropdown-menu">
@@ -278,7 +289,8 @@
                     </thead>
 
                     <tbody>
-                        <?php while ($row = $result->fetch_assoc()): ?>
+                        <?php while ($row = $result->fetch_assoc()):
+                            ?>
                             <tr>
                                 <td><?php echo $row["id"] ?></td>
                                 <td><?php echo $row['username'] ?></td>
@@ -299,7 +311,7 @@
                                         Edit
                                     </a>
 
-                                    <a onclick="return confirm('Are you sure you want to delete this account?');" href='database/remove_account.php?id=<?php echo $row['id'] ?>' name="remove-account" class="btn btn-danger btn-sm btn-icon icon-left">
+                                    <a href="javascript:;" name="remove-account" class="delete-account btn btn-danger btn-sm btn-icon icon-left" data-target="#modal_delete" data-id="<?php echo $row['id']; ?>">
                                         <i class="entypo-cancel"></i>
                                         Delete
                                     </a>
@@ -326,6 +338,27 @@
 
                     </div>
                 </div>
+                <div class="modal fade" id="modal-4" data-backdrop="static">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+
+                            <div class="modal-header">
+                                <h4 class="modal-title">Delete Account?</h4>
+                            </div>
+
+                            <div class="modal-body">
+
+                                Are you sure you want to delete this account?
+
+                            </div>
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal" id='close-account'>Close</button>
+                                <button type="button" class="btn btn-danger delete-account-submit">Delete</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
 
                 <div id="add_account" class="modal fade" role="dialog">
@@ -338,7 +371,7 @@
                                 <h4 class="modal-title">Add Account</h4>
                             </div>
                             <div class="modal-body">
-                                <form action='database/add_account.php' method="POST" enctype="multipart/form-data" role="form" class="form-horizontal form-groups-bordered validate" novalidate="novalidate">
+                                <form enctype="multipart/form-data" role="form" class="add-account-form form-horizontal form-groups-bordered validate" novalidate="novalidate">
 
                                     <div class="form-group">
                                         <label for="account_username" class="col-sm-3 control-label" >Username</label>
@@ -430,7 +463,7 @@
         <!-- Bottom scripts (common) -->
         <script src="assets/js/gsap/TweenMax.min.js"></script>
         <script src="assets/js/jquery-ui/js/jquery-ui-1.10.3.minimal.min.js"></script>
-        <script src="assets/js/bootstrap.js"></script>
+
         <script src="assets/js/joinable.js"></script>
         <script src="assets/js/resizeable.js"></script>
         <script src="assets/js/neon-api.js"></script>
@@ -441,30 +474,182 @@
         <script src="assets/js/datatables/datatables.js"></script>
         <script src="assets/js/select2/select2.min.js"></script>
         <script src="assets/js/neon-chat.js"></script>
-
+        <script src="assets/js/toastr.js"></script>
         <script src="assets/js/jquery.validate.min.js"></script>
-
-
 
         <!-- JavaScripts initializations and stuff -->
         <script src="assets/js/neon-custom.js"></script>
 
-
         <!-- Demo Settings -->
         <script src="assets/js/neon-demo.js"></script> 
         <script>
-                                    $(document).ready(function () {
-                                        $('.editButton').click(function () {
-                                            var id = $(this).attr('data-id');
-                                            $.ajax({
-                                                url: "edit_account.php?id=" + id, cache: false, success: function (result) {
-                                                    $('#modal_edit_content').html(result);
-                                                }
-                                            });
-                                        });
-                                    });
+                    $(document).ready(function () {
+                        $('.editButton').click(function () {
+                            var id = $(this).attr('data-id');
+                            $.ajax({
+                                url: "edit_account.php?id=" + id, cache: false, success: function (result) {
+                                    $('#modal_edit_content').html(result);
+                                }
+                            });
+                        });
+                        $('.delete-account').click(function () {
+                            $('#modal-4').modal('show', {backdrop: 'static'});
+                        });
+                    });
+                    $(".add-account-form").submit(function () {
+                        event.preventDefault();
+                        if ($(this).valid()) {
+                            var id = $('.editButton').attr('data-id');
+                            var username = $("#account_username").val();
+                            var temporarypassword = $("#account_password").val();
+                            var email = $("#account_email").val();
+                            var account_type = $("#account_type").val();
+                            var form_data = new FormData();
+                            var file_data;
+                            var test = '';
+                            if (!($("#account_upload").val().length === 0)) {
+                                file_data = $("#account_upload").prop('files')[0];
+                                form_data.append('file', file_data);
+                                var test = 'pic';
+                            }
+                            form_data.append('id', id);
+                            form_data.append('username', username);
+                            form_data.append('temporarypassword', temporarypassword);
+                            form_data.append('email', email);
+                            form_data.append('account_type', account_type);
+                            form_data.append('test', test);
+                            $.ajax({
+                                type: "POST",
+                                dataType: 'text',
+                                cache: false,
+                                contentType: false,
+                                processData: false,
+                                url: "database/add_account.php",
+                                data: form_data,
+                                success: function (text) {
+                                    if (text === "success") {
+                                        addAccountSuccess();
+                                        $("button.close").trigger("click");
+                                    } else {
+                                        addAccountFail();
+                                    }
+                                }
+                            });
+                        }
+                    });
+                    $(".delete-account-submit").click(function () {
+                        var id = $(".delete-account").attr('data-id');
+                        var form_data = new FormData();
+                        form_data.append('id', id);
+                        $.ajax({
+                            type: "POST",
+                            dataType: 'text',
+                            cache: false,
+                            contentType: false,
+                            processData: false,
+                            url: "database/remove_account.php",
+                            data: form_data,
+                            success: function (text) {
+                                if (text === "success") {
+                                    deleteSuccess();
+                                    $("#close-account").trigger("click");
+                                } else if (text === "oneadmin") {
+                                    oneAdmin();
+                                } else {
+                                    deleteFail();
+                                }
+                            }
+                        });
+                    });
 
+                    function oneAdmin() {
+                        var opts = {
+                            "closeButton": true,
+                            "debug": false,
+                            "positionClass": "toast-top-full-width",
+                            "onclick": null,
+                            "showDuration": "300",
+                            "hideDuration": "1000",
+                            "timeOut": "5000",
+                            "extendedTimeOut": "1000",
+                            "showEasing": "swing",
+                            "hideEasing": "linear",
+                            "showMethod": "fadeIn",
+                            "hideMethod": "fadeOut"
+                        };
+                        toastr.error("You must have at least one admin account", opts);
+                    }
+                    function deleteSuccess() {
+                        var opts = {
+                            "closeButton": true,
+                            "debug": false,
+                            "positionClass": "toast-top-full-width",
+                            "onclick": null,
+                            "showDuration": "300",
+                            "hideDuration": "1000",
+                            "timeOut": "5000",
+                            "extendedTimeOut": "1000",
+                            "showEasing": "swing",
+                            "hideEasing": "linear",
+                            "showMethod": "fadeIn",
+                            "hideMethod": "fadeOut"
+                        };
+                        toastr.success("Account successfully deleted", opts);
+                    }
+                    function deleteFail() {
 
+                        var opts = {
+                            "closeButton": true,
+                            "debug": false,
+                            "positionClass": "toast-top-full-width",
+                            "onclick": null,
+                            "showDuration": "300",
+                            "hideDuration": "1000",
+                            "timeOut": "5000",
+                            "extendedTimeOut": "1000",
+                            "showEasing": "swing",
+                            "hideEasing": "linear",
+                            "showMethod": "fadeIn",
+                            "hideMethod": "fadeOut"
+                        };
+                        toastr.error("Unfortunately, we ran into problems trying to delete the account.", opts);
+                    }
+                    function addAccountSuccess() {
+                        var opts = {
+                            "closeButton": true,
+                            "debug": false,
+                            "positionClass": "toast-top-full-width",
+                            "onclick": null,
+                            "showDuration": "300",
+                            "hideDuration": "1000",
+                            "timeOut": "5000",
+                            "extendedTimeOut": "1000",
+                            "showEasing": "swing",
+                            "hideEasing": "linear",
+                            "showMethod": "fadeIn",
+                            "hideMethod": "fadeOut"
+                        };
+                        toastr.success("Account successfully added", opts);
+                    }
+                    function addAccountFail() {
+
+                        var opts = {
+                            "closeButton": true,
+                            "debug": false,
+                            "positionClass": "toast-top-full-width",
+                            "onclick": null,
+                            "showDuration": "300",
+                            "hideDuration": "1000",
+                            "timeOut": "5000",
+                            "extendedTimeOut": "1000",
+                            "showEasing": "swing",
+                            "hideEasing": "linear",
+                            "showMethod": "fadeIn",
+                            "hideMethod": "fadeOut"
+                        };
+                        toastr.error("Unfortunately, we ran into problems trying to add the account.", opts);
+                    }
         </script>
+        <script src="assets/js/bootstrap.js"></script>
     </body>
 </html>
