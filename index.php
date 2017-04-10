@@ -201,7 +201,7 @@ if (!isset($_SESSION['logged_in'])) {
 
                                     <!-- Profile sub-links -->
                                     <li>
-                                        <a href="extra-timeline.html">
+                                        <a href="edit_profile.php" >
                                             <i class="entypo-user"></i>
                                             Edit Profile
                                         </a>

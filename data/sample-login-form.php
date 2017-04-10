@@ -52,6 +52,7 @@ if ($login_status == 'success') {
     #setcookie("logged_in", "user_id");
     #$_SESSION["logged_user"] = "user_id";
     // Set the redirect url after successful login$rows = mysqli_fetch_assoc($query);
+    $_SESSION['id'] = $row['id'];
     $_SESSION['username'] = $row['username'];
     $_SESSION['logged_in'] = TRUE;
     $_SESSION['admin_status'] = $row['admin_status'];
