@@ -63,7 +63,7 @@
             <label class="col-sm-3 control-label">Birth date</label>
 
             <div class="col-sm-5">
-                <input type="text" name="member_date" class="form-control datepicker" id="member_date" data-format="dd/mm/yyyy" value="<?php echo $row['birth_date']; ?>" required>
+                <input type="text" name="member_date" class="form-control datepicker" data-end-date="+0d" id="member_date" data-format="dd/mm/yyyy" value="<?php echo $row['birth_date']; ?>" required>
             </div>
         </div>
 
@@ -159,6 +159,7 @@
 <script src="assets/js/jquery.validate.min.js"></script>
 <script src="assets/js/main.js" type="text/javascript"></script>
 <script type="text/javascript">
+
     $("#modal_form_edit_member").submit(function (e) {
         e.preventDefault();
         if ($(this).valid()) {
@@ -180,8 +181,6 @@
                 form_data.append('file', file_data);
                 var test = 'pic';
             }
-            console.log(id);
-            console.log(firstname);
             form_data.append('id', id);
             form_data.append('firstname', firstname);
             form_data.append('surname', surname);
@@ -228,6 +227,9 @@
                 toastr.error("Unfortunately, we ran into some problems trying to edit the member", opts);
             }
         }
+    });
+    $('input.datepicker').on('changeDate', function (e) {
+        $(this).datepicker('hide');
     });
 </script>
 

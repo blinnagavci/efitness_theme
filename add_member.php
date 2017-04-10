@@ -302,7 +302,7 @@ if (!isset($_SESSION['logged_in'])) {
 
                                         <div class="col-sm-3">
                                             <div class="input-group">
-                                                <input type="text" name="member_date" id="member_date" data-validate="required" class="form-control datepicker" data-format="dd/mm/yyyy">
+                                                <input type="text" name="member_date" id="member_date" data-validate="required" class="form-control datepicker" data-end-date="+0d" data-format="dd/mm/yyyy">
 
                                                 <div class="input-group-addon">
                                                     <a href="#"><i class="entypo-calendar"></i></a>
@@ -511,9 +511,12 @@ if (!isset($_SESSION['logged_in'])) {
                             + window.location.search);
                 }
             });
+            $('input.datepicker').on('changeDate', function (e) {
+                $(this).datepicker('hide');
+            });
             $("#add-member-form").submit(function (e) {
                 e.preventDefault();
-                if ($(this).valid()){
+                if ($(this).valid()) {
                     var firstname = $("#member_firstname").val();
                     var surname = $("#member_surname").val();
                     var gender = $("#member_gender").val();

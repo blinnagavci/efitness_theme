@@ -428,9 +428,11 @@ if (!isset($_SESSION['logged_in'])) {
                                                 case "search_members.php#editmembersuccess":
                                                     editMemberSuccess();
                                                     removeHash();
+                                                    break;
                                                 case "search_members.php#addsubscriptionsuccess":
                                                     addSubscriptionSuccess();
                                                     removeHash();
+                                                    break;
                                                 default:
                                                     break;
                                             }

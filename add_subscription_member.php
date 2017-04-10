@@ -53,7 +53,7 @@
                     <label class="col-sm-3 control-label">Start Date</label>
 
                     <div class="col-sm-5">
-                        <input type="text" id="membership-start" name="membership_start" class="form-control datepicker" data-format="dd/mm/yyyy" required>
+                        <input type="text" id="membership-start" name="membership_start" class="form-control datepicker" data-start-date="+0d" data-format="dd/mm/yyyy" required>
                     </div>
                 </div>
 
@@ -129,6 +129,9 @@
             history.pushState("", document.title, window.location.pathname
                     + window.location.search);
         }
+    });
+    $('input.datepicker').on('changeDate', function(e){
+        $(this).datepicker('hide');
     });
     $("#modal_form_subscription_member").submit(function (e) {
         e.preventDefault();
