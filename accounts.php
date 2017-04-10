@@ -276,11 +276,11 @@ if (!isset($_SESSION['logged_in'])) {
 
                     <tbody>
                         <?php while ($row = $result->fetch_assoc()): ?>
-                        <?php
-                                if ($row["id"] === $_SESSION['id']):
-                                    continue;
-                                endif;
-                                ?>
+                            <?php
+                            if ($row["id"] === $_SESSION['id']):
+                                continue;
+                            endif;
+                            ?>
                             <tr>                 
                                 <td><?php echo $row["id"] ?></td>
                                 <td><?php echo $row['username'] ?></td>
@@ -329,7 +329,7 @@ if (!isset($_SESSION['logged_in'])) {
                                 </div>
                             </div>
                         </div>
-<?php endwhile; ?>
+                    <?php endwhile; ?>
 
                     </tbody>
                 </table>

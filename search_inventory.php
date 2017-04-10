@@ -279,7 +279,7 @@
                                         Edit
                                     </a>
 
-                                    <a href="javascript:;" onclick="jQuery('#modal-delete').modal('show', {backdrop: 'static'});" name="remove_item" class="btn btn-danger btn-sm btn-icon icon-left" data-id="<?php echo $row['id']; ?>">
+                                    <a href="javascript:;" onclick="jQuery('#modal-delete').modal('show', {backdrop: 'static'});" name="remove_item" class="btn btn-danger btn-sm btn-icon icon-left">
                                         <i class="entypo-cancel"></i>
                                         Delete
                                     </a>
@@ -290,7 +290,6 @@
                                     </a>
                                 </td>
                             </tr>
-
                         <div class="modal fade" id="modal-delete" data-backdrop="static">
                             <div class="modal-dialog">
                                 <div class="modal-content">
@@ -304,7 +303,6 @@
                                         Are you sure you want to delete this item?<?php echo $row['id']; ?>
 
                                     </div>
-
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                                         <a type="button" class="btn btn-danger" href="database/remove_item.php?id=<?php echo $row['id']; ?>">Delete</a>
