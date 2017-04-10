@@ -7,6 +7,8 @@ $(document).ready(function () {
     $('#modal_form_edit_member').validate();
     $('#editaccount_form').validate();
     $('#modal_form_subscription_member').validate();
+    $('#modal_form_edit_employee').validate();
+    $('#modal_form_contract_employee').validate();
 });
 
 // Datepicker

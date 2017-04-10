@@ -1,4 +1,10 @@
 <!DOCTYPE html>
+<?php
+session_start();
+if (!isset($_SESSION['logged_in'])) {
+    header('location: extra-login.php');
+}
+?>
 <html lang="en">
     <head>
         <?php require('database/db_connect.php'); ?>
@@ -26,11 +32,16 @@
 
 
     </head>
-    <body class="page-body  page-fade" data-url="">
+    <body class="page-body  page-fade">
+
         <div class="page-container"><!-- add class "sidebar-collapsed" to close sidebar by default, "chat-visible" to make chat appear always -->
+
             <div class="sidebar-menu">
-                <div class="sidebar-menu-inner">			
+
+                <div class="sidebar-menu-inner">
+
                     <header class="logo-env">
+
                         <!-- logo -->
                         <div class="logo">
                             <a href="index.php">
@@ -44,6 +55,7 @@
                                 <i class="entypo-menu"></i>
                             </a>
                         </div>
+
 
                         <!-- open/close menu icon (do not remove if you want to enable menu on mobile devices) -->
                         <div class="sidebar-mobile-menu visible-xs">
@@ -82,7 +94,7 @@
                                 </li>
                             </ul>
                         </li>
-                        <li class="has-sub opened active">
+                        <li class="has-sub  active opened active">
                             <a href="#">
                                 <i class="entypo-briefcase"></i>
                                 <span class="title">Employees</span>
@@ -112,7 +124,7 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="search_item.php">
+                                    <a href="search_inventory.php">
                                         <span class="title">Search inventory</span>
                                     </a>
                                 </li>
@@ -123,24 +135,27 @@
                                 </li>
                             </ul>
                         </li>
+                        <!--                        <li class="">
+                                                    <a href="">
+                                                        <i class="entypo-folder"></i>
+                                                        <span class="title">Reports</span>
+                                                    </a>
+                                                </li>-->
                         <li class="">
-                            <a href="">
-                                <i class="entypo-folder"></i>
-                                <span class="title">Reports</span>
-                            </a>
-                        </li>
-                        <li class="">
-                            <a href="">
+                            <a href="accounts.php">
                                 <i class="entypo-user"></i>
                                 <span class="title">Accounts</span>
                             </a>
                         </li>
+
                         <li class="">
                             <a href="other_settings.php">
-                                <i class="entypo-tools"></i>
+                                <i class="entypo-cog"></i>
                                 <span class="title">Settings</span>
                             </a>
                         </li>
+
+
                     </ul>
 
                 </div>
@@ -160,8 +175,14 @@
                             <li class="profile-info dropdown"><!-- add class "pull-right" if you want to place this from right -->
 
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                    <img src="assets/images/thumb-1@2x.png" alt="" class="img-circle" width="44" />
-                                    Blin Nagavci
+                                    <img src="repository/account_photos/<?php
+                                    if ($_SESSION['profile_photo'] == '') {
+                                        echo 'empty-profile-icon.png';
+                                    } else {
+                                        echo $_SESSION['profile_photo'];
+                                    }
+                                    ?>" alt="Profile" class="img-circle" width="44" />
+                                         <?php echo $_SESSION['username']; ?>
                                 </a>
 
                                 <ul class="dropdown-menu">
@@ -173,15 +194,7 @@
                                     <li>
                                         <a href="extra-timeline.html">
                                             <i class="entypo-user"></i>
-                                            Edit profile
-                                        </a>
-                                    </li>
-
-
-                                    <li>
-                                        <a href="extra-calendar.html">
-                                            <i class="entypo-calendar"></i>
-                                            Calendar
+                                            Edit Profile
                                         </a>
                                     </li>
                                 </ul>
@@ -203,7 +216,7 @@
                         <ul class="list-inline links-list pull-right">	
 
                             <li>
-                                <a href="extra-login.php.html">
+                                <a href="database/logout.php">
                                     Log Out <i class="entypo-logout right"></i>
                                 </a>
                             </li>
@@ -328,7 +341,7 @@
 
                                         <div class="col-sm-5">
                                             <div class="input-group">
-                                                <input type="text" class="form-control" name="employee_email" data-validate="required, email" id="employee_email" placeholder="">
+                                                <input type="text" class="form-control" name="employee_email" data-validate="required,email" id="employee_email" placeholder="">
                                                 <span class="input-group-addon"><i class="entypo-mail"></i></span>
                                             </div>
                                         </div>
