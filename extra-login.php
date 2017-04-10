@@ -81,7 +81,7 @@ if (isset($_SESSION['logged_in'])) {
 
                     <div class="form-login-error">
                         <h3>Invalid login</h3>
-                        <p>Please enter valid username and password</p>
+                        <p>Please enter a valid username and password</p>
                     </div>
 
                     <form method="post" role="form" id="form_login">

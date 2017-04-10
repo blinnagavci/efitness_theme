@@ -1,4 +1,10 @@
 <!DOCTYPE html>
+<?php
+session_start();
+if (!isset($_SESSION['logged_in'])) {
+    header('location: extra-login.php');
+}
+?>
 <html lang="en">
     <head>
         <?php require('database/db_connect.php'); ?>
@@ -11,7 +17,7 @@
 
         <link rel="icon" href="assets/images/favicon.ico">
 
-        <title>E-Fitness | Add members</title>
+        <title>E-Fitness | Add member</title>
 
         <link rel="stylesheet" href="assets/js/jquery-ui/css/no-theme/jquery-ui-1.10.3.custom.min.css">
         <link rel="stylesheet" href="assets/css/font-icons/entypo/css/entypo.css">
@@ -26,11 +32,16 @@
 
 
     </head>
-    <body class="page-body  page-fade" data-url="">
+    <body class="page-body  page-fade">
+
         <div class="page-container"><!-- add class "sidebar-collapsed" to close sidebar by default, "chat-visible" to make chat appear always -->
+
             <div class="sidebar-menu">
-                <div class="sidebar-menu-inner">			
+
+                <div class="sidebar-menu-inner">
+
                     <header class="logo-env">
+
                         <!-- logo -->
                         <div class="logo">
                             <a href="index.php">
@@ -44,6 +55,7 @@
                                 <i class="entypo-menu"></i>
                             </a>
                         </div>
+
 
                         <!-- open/close menu icon (do not remove if you want to enable menu on mobile devices) -->
                         <div class="sidebar-mobile-menu visible-xs">
@@ -112,7 +124,7 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="search_item.php">
+                                    <a href="search_inventory.php">
                                         <span class="title">Search inventory</span>
                                     </a>
                                 </li>
@@ -123,24 +135,27 @@
                                 </li>
                             </ul>
                         </li>
+                        <!--                        <li class="">
+                                                    <a href="">
+                                                        <i class="entypo-folder"></i>
+                                                        <span class="title">Reports</span>
+                                                    </a>
+                                                </li>-->
                         <li class="">
-                            <a href="">
-                                <i class="entypo-folder"></i>
-                                <span class="title">Reports</span>
-                            </a>
-                        </li>
-                        <li class="">
-                            <a href="">
+                            <a href="accounts.php">
                                 <i class="entypo-user"></i>
                                 <span class="title">Accounts</span>
                             </a>
                         </li>
+
                         <li class="">
                             <a href="other_settings.php">
-                                <i class="entypo-tools"></i>
+                                <i class="entypo-cog"></i>
                                 <span class="title">Settings</span>
                             </a>
                         </li>
+
+
                     </ul>
 
                 </div>
@@ -160,8 +175,14 @@
                             <li class="profile-info dropdown"><!-- add class "pull-right" if you want to place this from right -->
 
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                    <img src="assets/images/thumb-1@2x.png" alt="" class="img-circle" width="44" />
-                                    Blin Nagavci
+                                    <img src="repository/account_photos/<?php
+                                    if ($_SESSION['profile_photo'] == '') {
+                                        echo 'empty-profile-icon.png';
+                                    } else {
+                                        echo $_SESSION['profile_photo'];
+                                    }
+                                    ?>" alt="Profile" class="img-circle" width="44" />
+                                         <?php echo $_SESSION['username']; ?>
                                 </a>
 
                                 <ul class="dropdown-menu">
@@ -172,8 +193,8 @@
                                     <!-- Profile sub-links -->
                                     <li>
                                         <a href="extra-timeline.html">
-                                            <i class="entypo-user"></i> 
-                                            Edit profile
+                                            <i class="entypo-user"></i>
+                                            Edit Profile
                                         </a>
                                     </li>
 
@@ -203,8 +224,8 @@
                         <ul class="list-inline links-list pull-right">	
 
                             <li>
-                                <a href="extra-login.php.html">
-                                    Log out <i class="entypo-logout right"></i>
+                                <a href="database/logout.php">
+                                    Log Out <i class="entypo-logout right"></i>
                                 </a>
                             </li>
                         </ul>
@@ -245,7 +266,7 @@
 
                             <div class="panel-body">
 
-                                <form action='database/add_member.php' method="POST" enctype="multipart/form-data" role="form" class="form-horizontal form-groups-bordered validate" novalidate="novalidate">
+                                <form id="add-member-form" name="add-member-form" enctype="multipart/form-data" role="form" class="form-horizontal form-groups-bordered validate" novalidate="novalidate">
 
                                     <div class="form-group">
                                         <label for="member_firstname" class="col-sm-3 control-label" >First name</label>
@@ -267,7 +288,7 @@
                                         <label class="col-sm-3 control-label">Gender</label>
 
                                         <div class="col-sm-5">
-                                            <select name="member_gender" class="form-control" data-validate="required" id="gender_select">
+                                            <select name="member_gender" id="member_gender" class="form-control" data-validate="required" id="gender_select">
                                                 <option value="disabled" disabled selected>Select</option>
                                                 <option value="Male">Male</option>
                                                 <option value="Female">Female</option>
@@ -281,7 +302,7 @@
 
                                         <div class="col-sm-3">
                                             <div class="input-group">
-                                                <input type="text" name="member_date" data-validate="required" class="form-control datepicker" data-format="dd/mm/yyyy">
+                                                <input type="text" name="member_date" id="member_date" data-validate="required" class="form-control datepicker" data-format="dd/mm/yyyy">
 
                                                 <div class="input-group-addon">
                                                     <a href="#"><i class="entypo-calendar"></i></a>
@@ -328,7 +349,7 @@
 
                                         <div class="col-sm-5">
                                             <div class="input-group">
-                                                <input type="text" class="form-control" name="member_email" data-validate="required, email" id="member_email" placeholder="">
+                                                <input type="text" class="form-control" name="member_email" data-validate="required,email" id="member_email" placeholder="">
                                                 <span class="input-group-addon"><i class="entypo-mail"></i></span>
                                             </div>
                                         </div>
@@ -385,7 +406,7 @@
                                         <label for="membership_amount" class="col-sm-3 control-label">Amount</label>
 
                                         <div class="col-sm-5">
-                                            <input type="text" name="membership_amount" class="form-control" data-validate="required" id="membership_amount" placeholder="">
+                                            <input type="text" name="membership_amount" class="form-control" data-validate="required" id="membership-amount" placeholder="">
                                         </div>
                                     </div>
 
@@ -395,7 +416,7 @@
 
                                         <div class="col-sm-3">
                                             <div class="input-group">
-                                                <input type="text" class="form-control datepicker" data-validate="required" name="membership_start" data-format="dd/mm/yyyy">
+                                                <input type="text" class="form-control datepicker" data-validate="required" id="membership-start" name="membership_start" data-format="dd/mm/yyyy">
 
                                                 <div class="input-group-addon">
                                                     <a href="#"><i class="entypo-calendar"></i></a>
@@ -408,7 +429,7 @@
 
                                         <div class="col-sm-3">
                                             <div class="input-group">
-                                                <input type="text" class="form-control datepicker" data-validate="required" name="membership_end" data-format="dd/mm/yyyy">
+                                                <input type="text" class="form-control datepicker" data-validate="required" id="membership-end" name="membership_end" data-format="dd/mm/yyyy">
 
                                                 <div class="input-group-addon">
                                                     <a href="#"><i class="entypo-calendar"></i></a>
@@ -420,7 +441,7 @@
 
                                     <div class="form-group">
                                         <div class="col-sm-offset-3 col-sm-5">
-                                            <button type="submit" name="submit" class="btn btn-primary btn-block">Submit</button>
+                                            <button type="submit" id="add-member-submit" name="add-member-submit" class="btn btn-primary btn-block">Submit</button>
                                         </div>
                                     </div>
                                 </form>
@@ -478,6 +499,110 @@
 
         <!-- Demo Settings -->
         <script src="assets/js/neon-demo.js"></script>
+        <script src="assets/js/toastr.js" type="text/javascript"></script>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                var url = window.location.href;
+                var array = url.split('/');
+                var lastsegment = array[array.length - 1];
+                if (lastsegment === "add_member.php#addmembersuccess") {
+                    addSuccess();
+                    history.pushState("", document.title, window.location.pathname
+                            + window.location.search);
+                }
+            });
+            $("#add-member-form").submit(function (e) {
+                e.preventDefault();
+                if ($(this).valid()){
+                    var firstname = $("#member_firstname").val();
+                    var surname = $("#member_surname").val();
+                    var gender = $("#member_gender").val();
+                    var birthdate = $("#member_date").val();
+                    var address = $("#member_address").val();
+                    var city = $("#member_city").val();
+                    var phoneno = $("#member_telephone").val();
+                    var alternativeno = $("#member_alternative").val();
+                    var email = $("#member_email").val();
+                    var membershiptype = $("#member_subscription").val();
+                    var membershipamount = $("#membership-amount").val();
+                    var startdate = $("#membership-start").val();
+                    var enddate = $("#membership-end").val();
+                    var form_data = new FormData();
+                    var file_data;
+                    var test = '';
+                    if (!($("#member_upload").val().length === 0)) {
+                        file_data = $("#member_upload").prop('files')[0];
+                        form_data.append('file', file_data);
+                        var test = 'pic';
+                    }
+                    form_data.append('firstname', firstname);
+                    form_data.append('surname', surname);
+                    form_data.append('gender', gender);
+                    form_data.append('birthdate', birthdate);
+                    form_data.append('address', address);
+                    form_data.append('city', city);
+                    form_data.append('phoneno', phoneno);
+                    form_data.append('alternativeno', alternativeno);
+                    form_data.append('email', email);
+                    form_data.append('membershiptype', membershiptype);
+                    form_data.append('membershipamount', membershipamount);
+                    form_data.append('startdate', startdate);
+                    form_data.append('enddate', enddate);
+                    form_data.append('test', test);
+                    $.ajax({
+                        type: "POST",
+                        dataType: 'text',
+                        cache: false,
+                        contentType: false,
+                        processData: false,
+                        url: "database/add_member.php",
+                        data: form_data,
+                        success: function (text) {
+                            if (text === "success") {
+                                window.location = window.location + "#addmembersuccess";
+                                location.reload();
+                            } else {
+                                addFail();
+                            }
+                        }
+                    });
+                }
+            });
+            function addSuccess() {
+                opts = {
+                    "closeButton": true,
+                    "debug": false,
+                    "positionClass": "toast-top-full-width",
+                    "onclick": null,
+                    "showDuration": "300",
+                    "hideDuration": "1000",
+                    "timeOut": "5000",
+                    "extendedTimeOut": "1000",
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut"
+                };
+                toastr.success("Member successfully added", opts);
+            }
+            function addFail() {
+                opts = {
+                    "closeButton": true,
+                    "debug": false,
+                    "positionClass": "toast-top-full-width",
+                    "onclick": null,
+                    "showDuration": "300",
+                    "hideDuration": "1000",
+                    "timeOut": "5000",
+                    "extendedTimeOut": "1000",
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut"
+                };
+                toastr.error("Unfortunately, we ran into some problems trying to add the member", opts);
+            }
+        </script>
 
     </body>
 </html>

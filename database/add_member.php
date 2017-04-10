@@ -1,41 +1,41 @@
 <?php
+
 require('db_connect.php');
 
-if (isset($_POST['submit'])) {
-    $firstname = $_POST['member_firstname'];
-    $lastname = ($_POST['member_surname']);
-    $address = $_POST['member_address'];
-    $gender = $_POST['member_gender'];
-    $city = ($_POST['member_city']);
-    $email = ($_POST['member_email']);
-    $telephoneno = ($_POST['member_telephone']);
-    $alternativeno = ($_POST['member_alternative']);
-    $birthdate = ($_POST['member_date']);
-    $membershiptype = $_POST['member_subscription'];
-    $membershipamount = $_POST['membership_amount'];
-    $membershipstart = $_POST['membership_start'];
-    $membershipend = $_POST['membership_end'];
-}
-$uploadedFileName = $_FILES['member_upload']['name'];
-$temp_name = $_FILES['member_upload']['tmp_name'];
-$temp = explode(".", $_FILES["member_upload"]["name"]);
+
+$firstname = $_POST['firstname'];
+$surname = ($_POST['surname']);
+$gender = $_POST['gender'];
+$birthdate = $_POST['birthdate'];
+$address = $_POST['address'];
+$city = ($_POST['city']);
+$email = ($_POST['email']);
+$telephoneno = ($_POST['phoneno']);
+$alternativeno = ($_POST['alternativeno']);
+$birthdate = ($_POST['birthdate']);
+$membershiptype = $_POST['membershiptype'];
+$membershipamount = $_POST['membershipamount'];
+$membershipstart = $_POST['startdate'];
+$membershipend = $_POST['enddate'];
+$test = ($_POST['test']);
+
 $getID = mysqli_query($conn, "SELECT id FROM member ORDER BY id DESC");
 $idRow = mysqli_fetch_row($getID);
-$newfilename = $idRow[0] + 1 . "_" . $firstname . "_" . $lastname . '.' . end($temp);
-if (!($_FILES['member_upload']['name'] == "")) {
+
+if ($test === 'pic') {
+    $newfilename = $idRow[0] + 1 . "_" . $firstname . "_" . $surname . ".png";
+    $upload_directory = "../repository/member_photos/";
+    move_uploaded_file($_FILES['file']['tmp_name'], $upload_directory . $newfilename);
     $sql_member = "INSERT INTO member (first_name, last_name, gender, residential_address, city, telephone_no,
 alternative_no, email, birth_date, photo)
-VALUES ('$firstname', '$lastname', '$gender', '$address', '$city', '$telephoneno', '$alternativeno' , '$email', '$birthdate', '$newfilename')";
+VALUES ('$firstname', '$surname', '$gender', '$address', '$city', '$telephoneno', '$alternativeno' , '$email', '$birthdate', '$newfilename')";
 } else {
     $sql_member = "INSERT INTO member (first_name, last_name, gender, residential_address, city, telephone_no,
     alternative_no, email, birth_date)
-    VALUES ('$firstname', '$lastname', '$gender', '$address', '$city', '$telephoneno', '$alternativeno' , '$email', '$birthdate')";
+    VALUES ('$firstname', '$surname', '$gender', '$address', '$city', '$telephoneno', '$alternativeno' , '$email', '$birthdate')";
 }
+
 $retval1 = mysqli_query($conn, $sql_member);
-if ($uploadedFileName != '') {
-    $upload_directory = "../repository/member_photos/";
-    move_uploaded_file($temp_name, $upload_directory . $newfilename);
-}
 if (!$retval1) {
     die('Could not enter data to member table' . mysqli_connect_error());
 }
@@ -49,13 +49,12 @@ $membershiprow = mysqli_fetch_row($membershipid);
 $sql_membershippayment = "INSERT INTO membership_payment(amount_of_payment, start_date, end_date, id_member, id_membership)
 VALUES ('$membershipamount','$membershipstart','$membershipend', '$memberrow[0]', '$membershiprow[0]')";
 
-$retval3 = mysqli_query($conn, $sql_membershippayment);
-if (!$retval3) {
+$retval2 = mysqli_query($conn, $sql_membershippayment);
+if (!$retval2) {
     die('Could not enter data to membership payment table' . mysqli_connect_error());
 } else {
-//    echo "<script type='text/javascript'>window.alert('Member successfully added')</script>";
+    echo 'success';
 }
 
 mysqli_close($conn);
-header("location: ../add_member.php");
 ?>

@@ -1,17 +1,22 @@
+<?php
+session_start();
+if (!isset($_SESSION['logged_in'])) {
+    header('location: extra-login.php');
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
         <?php require('database/db_connect.php'); ?>
+        <title>E-Fitness | Settings</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="description" content="Neon Admin Panel" />
-        <meta name="Blin Nagavci, Labian Gashi, Besarber Tasholli" content="" />
+        <meta name="Blin Nagavci, Labian Gashi, Besarber Tasholli" content="" />      
 
         <link rel="icon" href="assets/images/favicon.ico">
-
-        <title>E-Fitness | More settings</title>
 
         <link rel="stylesheet" href="assets/js/jquery-ui/css/no-theme/jquery-ui-1.10.3.custom.min.css">
         <link rel="stylesheet" href="assets/css/font-icons/entypo/css/entypo.css">
@@ -23,10 +28,8 @@
         <link rel="stylesheet" href="assets/css/custom.css">
 
         <script src="assets/js/jquery-1.11.3.min.js"></script>
-
-
     </head>
-    <body class="page-body  page-fade" data-url="">
+    <body class="page-body page-fade">
         <div class="page-container"><!-- add class "sidebar-collapsed" to close sidebar by default, "chat-visible" to make chat appear always -->
             <div class="sidebar-menu">
                 <div class="sidebar-menu-inner">			
@@ -123,12 +126,12 @@
                                 </li>
                             </ul>
                         </li>
-                        <li class="">
+<!--                        <li class="">
                             <a href="">
                                 <i class="entypo-folder"></i>
                                 <span class="title">Reports</span>
                             </a>
-                        </li>
+                        </li>-->
                         <li class="">
                             <a href="">
                                 <i class="entypo-user"></i>
@@ -138,7 +141,7 @@
 
                         <li class="active">
                             <a href="other_settings.php">
-                                <i class="entypo-tools opened active"></i>
+                                <i class="entypo-cog active"></i>
                                 <span class="title">Settings</span>
                             </a>
                         </li>
@@ -161,8 +164,14 @@
                             <li class="profile-info dropdown"><!-- add class "pull-right" if you want to place this from right -->
 
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                    <img src="assets/images/thumb-1@2x.png" alt="" class="img-circle" width="44" />
-                                    Blin Nagavci
+                                    <img src="repository/account_photos/<?php
+                                    if ($_SESSION['profile_photo'] == '') {
+                                        echo 'empty-profile-icon.png';
+                                    } else {
+                                        echo $_SESSION['profile_photo'];
+                                    }
+                                    ?>" alt="Profile" class="img-circle" width="44" />
+                                         <?php echo $_SESSION['username']; ?>
                                 </a>
 
                                 <ul class="dropdown-menu">
@@ -204,7 +213,7 @@
                         <ul class="list-inline links-list pull-right">	
 
                             <li>
-                                <a href="extra-login.php.html">
+                                <a href="database/logout.php">
                                     Log Out <i class="entypo-logout right"></i>
                                 </a>
                             </li>
@@ -288,7 +297,6 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="form-group"></div>
                                 </form>
 
                             </div>
@@ -299,7 +307,7 @@
                         <div class="panel panel-primary" data-collapsed="0">
 
                             <div class="panel-heading">
-                                <div class="panel-title">Employee type settings</div>
+                                <div class="panel-title">Employee settings</div>
 
                                 <div class="panel-options">
                                     <a href="#" data-rel="collapse"><i class="entypo-down-open"></i></a>
@@ -355,7 +363,68 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="form-group"></div>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="panel panel-primary" data-collapsed="0">
+
+                            <div class="panel-heading">
+                                <div class="panel-title">Inventory Settings</div>
+
+                                <div class="panel-options">
+                                    <a href="#" data-rel="collapse"><i class="entypo-down-open"></i></a>
+                                </div>
+                            </div>
+
+                            <div class="panel-body">
+
+                                <form action='database/add_item_category.php' method="POST" role="form" class="form-horizontal form-groups-bordered validate">
+
+                                    <div class="form-group">
+                                        <label for="employeetype_settings" class="col-sm-3 control-label" >New item category</label>
+
+                                        <div class="col-sm-5">
+                                            <div class="input-group">
+                                                <input type="text"  name="item_category_settings" id="item_category_settings" class="form-control" data-validate="required">
+                                                <span class="input-group-btn">
+                                                    <button type="submit" name="add_item_category_submit" id="add_item_category_submit" class="width-72 btn btn-primary">Add</button>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                    </div>
+                                </form>
+                                <form action='database/remove_item_category.php' method="POST" role="form" class="form-horizontal form-groups-bordered validate">
+
+                                    <div class="form-group">
+                                        <label for="remove_item_category_select" class="col-sm-3 control-label">Item categories</label>
+
+                                        <div class="col-sm-5">
+                                            <div class="input-group">
+                                                <select name="remove_item_category_select" class="form-control" data-validate="required" id="remove_item_category_select">
+                                                    <option value="disabled" disabled selected>Select</option>
+                                                    <?php
+                                                    include('database/db_connect.php');
+                                                    $sql = 'SELECT category FROM item_category WHERE status= "0"';
+                                                    $retval = mysqli_query($conn, $sql);
+                                                    if (!$retval) {
+                                                        echo ("Could not retrieve data" . mysql_error());
+                                                    }
+                                                    while ($row = $retval->fetch_assoc()) {
+                                                        $itemcategory = $row['category'];
+                                                        echo "<option value='$itemcategory'>$itemcategory</option>";
+                                                    }
+                                                    mysqli_close($conn);
+                                                    ?>
+
+                                                </select>
+                                                <span class="input-group-btn">
+                                                    <button type="submit" name="remove_item_category_submit" id="remove_item_category_submit" class="btn btn-primary">Remove</button>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </form>
                             </div>
                         </div>

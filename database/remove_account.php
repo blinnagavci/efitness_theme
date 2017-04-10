@@ -13,7 +13,6 @@ if (isset($_POST['id'])) {
 
         if ($result->num_rows <= 1) {
             echo "oneadmin";
-            //header("refresh: 0; url = ../accounts.php");
             exit();
         }
     }
@@ -26,5 +25,4 @@ if (isset($_POST['id'])) {
         die("Could not remove account: " . mysqli_error($conn));
     }
     mysqli_close($conn);
-    //header("refresh: 0; url = ../accounts.php");
 }
