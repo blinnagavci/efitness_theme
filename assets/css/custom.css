@@ -12,10 +12,7 @@ body {
     color: #cc2424;
     display: inline-block !important;
     margin-top: 5px;
-}
-label.error{
-    display: none !important;
-}
+} 
 .datepicker.datepicker-dropdown {
   z-index: 10001 !important;
 }

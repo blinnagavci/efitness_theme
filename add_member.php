@@ -197,14 +197,6 @@ if (!isset($_SESSION['logged_in'])) {
                                             Edit Profile
                                         </a>
                                     </li>
-
-
-                                    <li>
-                                        <a href="extra-calendar.html">
-                                            <i class="entypo-calendar"></i>
-                                            Calendar
-                                        </a>
-                                    </li>
                                 </ul>
                             </li>
 

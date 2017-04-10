@@ -325,7 +325,7 @@ if (!isset($_SESSION['logged_in'])) {
                                     </a>
 
                                     <a href="#" class="btn btn-info btn-sm btn-icon icon-left subscriptionButton" data-toggle='modal' data-target='#modal_add_subscription' name="delete-member" id="delete-member" data-id='<?php echo $row["id"]; ?>'>
-                                        <i class="entypo-info"></i>
+                                        <i class="entypo-check"></i>
                                         Subscriptions
                                     </a>
                                 </td>
