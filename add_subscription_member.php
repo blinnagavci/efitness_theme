@@ -45,7 +45,7 @@
                     <label for="membership_amount" class="col-sm-3 control-label">Amount</label>
 
                     <div class="col-sm-5">
-                        <input type="text" name="membership_amount" class="form-control" id="membership-amount" placeholder="" required>
+                        <input type="number" name="membership_amount" class="form-control" id="membership-amount" placeholder="" required>
                     </div>
                 </div>
 
@@ -61,7 +61,7 @@
                     <label class="col-sm-3 control-label">End Date</label>
 
                     <div class="col-sm-5">
-                        <input type="text" id="membership-end" name="membership_end" class="form-control datepicker" data-format="dd/mm/yyyy" required>
+                        <input type="text" id="membership-end" name="membership_end" class="form-control datepicker" data-start-date="+0d" data-format="dd/mm/yyyy" required>
                     </div>
                 </div>
 
@@ -120,16 +120,6 @@
 <script src="assets/js/jquery.validate.min.js"></script>
 <script src="assets/js/main.js" type="text/javascript"></script>
 <script type="text/javascript">
-    $(document).ready(function () {
-        var url = window.location.href;
-        var array = url.split('/');
-        var lastsegment = array[array.length - 1];
-        if (lastsegment === "add_member.php#addsuccess") {
-            addSuccess();
-            history.pushState("", document.title, window.location.pathname
-                    + window.location.search);
-        }
-    });
     $('input.datepicker').on('changeDate', function(e){
         $(this).datepicker('hide');
     });

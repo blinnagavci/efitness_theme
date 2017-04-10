@@ -348,6 +348,16 @@ if (!isset($_SESSION['logged_in'])) {
 
                     </div>
                 </div>
+                <div id="modal-delete" class="modal fade" role="dialog">
+                    <div class="modal-dialog">
+
+                        <!-- Modal content-->
+                        <div class="modal-content" id="modal_delete_employee_content">
+
+                        </div>
+
+                    </div>
+                </div>
 
                 <footer class="main">
                     <strong>E-Fitness 2017 </strong>&copy; All Rights Reserved
@@ -391,7 +401,7 @@ if (!isset($_SESSION['logged_in'])) {
                     var id = $(this).attr('data-id');
                     $.ajax({
                         url: "remove_employee.php?id=" + id, cache: false, success: function (result) {
-                            $('#modal_edit_content').html(result);
+                            $('#modal_delete_employee_content').html(result);
                         }
                     });
                 });
@@ -430,7 +440,7 @@ if (!isset($_SESSION['logged_in'])) {
             }
             function deleteEmployeeSuccess() {
                 toastrAlert();
-                toastr.success("Member successfully deleted", opts);
+                toastr.success("Employee successfully deleted.", opts);
             }
             function addEmployeeFail() {
                 toastrAlert();
