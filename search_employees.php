@@ -327,6 +327,10 @@ if (!isset($_SESSION['logged_in'])) {
                     </tbody>
                 </table>
                 <br />
+                <a href="add_employee.php" class="btn btn-primary" >
+                    <i class="entypo-plus"></i>
+                    Add Employee
+                </a>
                 <div id="modal_edit" class="modal fade" role="dialog">
                     <div class="modal-dialog">
 
