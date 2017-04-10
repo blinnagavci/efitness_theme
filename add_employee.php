@@ -398,7 +398,7 @@ if (!isset($_SESSION['logged_in'])) {
                                         <label for="salary_amount" class="col-sm-3 control-label">Salary amount</label>
 
                                         <div class="col-sm-5">
-                                            <input type="text" name="salary_amount" class="form-control" data-validate="required" id="salary_amount" placeholder="">
+                                            <input type="number" name="salary_amount" class="form-control" data-validate="required" id="salary_amount" placeholder="">
                                         </div>
                                     </div>
 
