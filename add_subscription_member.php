@@ -1,4 +1,3 @@
-
 <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal">&times;</button>
     <h4 class="modal-title">Manage Subscriptions</h4>
@@ -6,7 +5,7 @@
 <div class="modal-body">
     <div class="row">
         <div class="col-md-6">
-            <form action='database/addsubscriptions_member_db.php' id="modal_form_subscription_member" method="POST" role="form" enctype="multipart/form-data" class="form-horizontal form-groups-bordered">
+            <form id="modal_form_subscription_member" name="modal_form_subscription_member" role="form" enctype="multipart/form-data" class="form-horizontal form-groups-bordered">
                 <?php
                 require('database/db_connect.php');
                 if (isset($_GET['id'])) {
@@ -16,13 +15,13 @@
                 $result = $conn->query($sql);
                 $row = $result->fetch_assoc();
                 ?>
-                <input type="hidden" name="test-id" value="<?php echo $row['id']; ?>"/>
+                <input type="hidden" name="test-id" id="test-id" value="<?php echo $row['id']; ?>"/>
 
                 <div class="form-group">
                     <label class="col-sm-3 control-label">Membership Type</label>
 
                     <div class="col-sm-5">
-                        <select name = "member_subscription" class="form-control"  id="member_subscription" required>
+                        <select name = "member_subscription" class="form-control"  id="member-subscription" required>
                             <option value = "select" disabled selected>Select</option>
                             <?php
                             //include('inc/database/db_connect.php');
@@ -46,7 +45,7 @@
                     <label for="membership_amount" class="col-sm-3 control-label">Amount</label>
 
                     <div class="col-sm-5">
-                        <input type="text" name="membership_amount" class="form-control" id="membership_amount" placeholder="" required>
+                        <input type="text" name="membership_amount" class="form-control" id="membership-amount" placeholder="" required>
                     </div>
                 </div>
 
@@ -54,7 +53,7 @@
                     <label class="col-sm-3 control-label">Start Date</label>
 
                     <div class="col-sm-5">
-                        <input type="text" id="membership_start" name="membership_start" class="form-control datepicker" data-format="dd/mm/yyyy" required>
+                        <input type="text" id="membership-start" name="membership_start" class="form-control datepicker" data-format="dd/mm/yyyy" required>
                     </div>
                 </div>
 
@@ -62,7 +61,7 @@
                     <label class="col-sm-3 control-label">End Date</label>
 
                     <div class="col-sm-5">
-                        <input type="text" id="membership_end" name="membership_end" class="form-control datepicker" data-format="dd/mm/yyyy" required>
+                        <input type="text" id="membership-end" name="membership_end" class="form-control datepicker" data-format="dd/mm/yyyy" required>
                     </div>
                 </div>
 
@@ -120,3 +119,65 @@
 <script src="assets/js/bootstrap-datepicker.js"></script>
 <script src="assets/js/jquery.validate.min.js"></script>
 <script src="assets/js/main.js" type="text/javascript"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var url = window.location.href;
+        var array = url.split('/');
+        var lastsegment = array[array.length - 1];
+        if (lastsegment === "add_member.php#addsuccess") {
+            addSuccess();
+            history.pushState("", document.title, window.location.pathname
+                    + window.location.search);
+        }
+    });
+    $("#modal_form_subscription_member").submit(function (e) {
+        e.preventDefault();
+        if ($(this).valid()) {
+            var id = $("#test-id").val();
+            var membershiptype = $("#member-subscription").val();
+            var membershipamount = $("#membership-amount").val();
+            var membershipstart = $("#membership-start").val();
+            var membershipend = $("#membership-end").val();
+            var form_data = new FormData();
+            form_data.append('id', id);
+            form_data.append('membershiptype', membershiptype);
+            form_data.append('membershipamount', membershipamount);
+            form_data.append('membershipstart', membershipstart);
+            form_data.append('membershipend', membershipend);
+            $.ajax({
+                type: "POST",
+                dataType: 'text',
+                cache: false,
+                contentType: false,
+                processData: false,
+                url: "database/add_subscriptions_member_db.php",
+                data: form_data,
+                success: function (text) {
+                    if (text === "success") {
+                        window.location = window.location + "#addsubscriptionsuccess";
+                        location.reload();
+                    } else {
+                        addSubscriptionFail();
+                    }
+                }
+            });
+        }
+    });
+    function addSubscriptionFail() {
+        opts = {
+            "closeButton": true,
+            "debug": false,
+            "positionClass": "toast-top-full-width",
+            "onclick": null,
+            "showDuration": "300",
+            "hideDuration": "1000",
+            "timeOut": "5000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+        };
+        toastr.error("Unfortunately, we ran into some problems trying to add the subscription", opts);
+    }
+</script>

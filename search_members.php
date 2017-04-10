@@ -143,12 +143,12 @@ if (!isset($_SESSION['logged_in'])) {
                                 </li>
                             </ul>
                         </li>
-<!--                        <li class="">
-                            <a href="">
-                                <i class="entypo-folder"></i>
-                                <span class="title">Reports</span>
-                            </a>
-                        </li>-->
+                        <!--                        <li class="">
+                                                    <a href="">
+                                                        <i class="entypo-folder"></i>
+                                                        <span class="title">Reports</span>
+                                                    </a>
+                                                </li>-->
                         <li class="">
                             <a href="accounts.php">
                                 <i class="entypo-user"></i>
@@ -319,22 +319,46 @@ if (!isset($_SESSION['logged_in'])) {
                                         <i class="entypo-pencil"></i>
                                         Edit
                                     </a>
-
-                                    <a onclick="return confirm('Are you sure you want to delete this member?');" href='database/remove_member.php?id=<?php echo $row['id'] ?>' class="btn btn-danger btn-sm btn-icon icon-left">
+                                    <a href="javascript:;" onclick="jQuery('#modal-delete').modal('show', {backdrop: 'static'});" class="btn btn-danger btn-sm btn-icon icon-left">
                                         <i class="entypo-cancel"></i>
                                         Delete
                                     </a>
 
-                                    <a href="#" class="btn btn-info btn-sm btn-icon icon-left subscriptionButton" data-toggle='modal' data-target='#modal_add_subscription'  data-id='<?php echo $row["id"]; ?>'>
+                                    <a href="#" class="btn btn-info btn-sm btn-icon icon-left subscriptionButton" data-toggle='modal' data-target='#modal_add_subscription' name="delete-member" id="delete-member" data-id='<?php echo $row["id"]; ?>'>
                                         <i class="entypo-info"></i>
                                         Subscriptions
                                     </a>
                                 </td>
                             </tr>
-                        <?php endwhile; ?>
+                        <div class="modal fade" id="modal-delete" data-backdrop="static">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+
+                                    <div class="modal-header">
+                                        <h4 class="modal-title">Delete Member</h4>
+                                    </div>
+
+                                    <div class="modal-body">
+
+                                        Are you sure you want to delete this member?
+
+                                    </div>
+
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                        <a type="button" class="btn btn-danger" name="delete-member-submit" id="delete-member-submit">Delete</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <?php endwhile; ?>
                     </tbody>
                 </table>
                 <br />
+                <a href="add_member.php" class="btn btn-primary" >
+                    <i class="entypo-plus"></i>
+                    Add Member
+                </a>
                 <footer class="main">
 
                     <strong>E-Fitness 2017 </strong>&copy; All Rights Reserved
@@ -363,28 +387,8 @@ if (!isset($_SESSION['logged_in'])) {
                 </div>
             </div>
         </div>
-        <script>
-            $(document).ready(function () {
-                $('.editButton').click(function () {
-                    var id = $(this).attr('data-id');
-                    $.ajax({
-                        url: "edit_member.php?id=" + id, cache: false, success: function (result) {
-                            $('#modal_edit_content').html(result);
-                        }
-                    });
-                });
+        <script src="assets/js/toastr.js" type="text/javascript"></script>
 
-                $('.subscriptionButton').click(function () {
-                    var id = $(this).attr('data-id');
-                    $.ajax({
-                        url: "add_subscription_member.php?id=" + id, cache: false, success: function (result) {
-                            $('#modal_add_subscription_content').html(result);
-                        }
-                    });
-                });
-
-            });
-        </script>
 
         <!-- Imported styles on this page -->
         <link rel="stylesheet" href="assets/js/datatables/datatables.css">
@@ -394,7 +398,6 @@ if (!isset($_SESSION['logged_in'])) {
         <!-- Bottom scripts (common) -->
         <script src="assets/js/gsap/TweenMax.min.js"></script>
         <script src="assets/js/jquery-ui/js/jquery-ui-1.10.3.minimal.min.js"></script>
-        <script src="assets/js/bootstrap.js"></script>
         <script src="assets/js/joinable.js"></script>
         <script src="assets/js/resizeable.js"></script>
         <script src="assets/js/neon-api.js"></script>
@@ -412,5 +415,115 @@ if (!isset($_SESSION['logged_in'])) {
 
         <!-- Demo Settings -->
         <script src="assets/js/neon-demo.js"></script> 
+        <script>
+                                        $(document).ready(function () {
+                                            var url = window.location.href;
+                                            var array = url.split('/');
+                                            var lastsegment = array[array.length - 1];
+                                            switch (lastsegment) {
+                                                case "search_members.php#deletemembersuccess":
+                                                    deleteMemberSuccess();
+                                                    removeHash();
+                                                    break;
+                                                case "search_members.php#editmembersuccess":
+                                                    editMemberSuccess();
+                                                    removeHash();
+                                                case "search_members.php#addsubscriptionsuccess":
+                                                    addSubscriptionSuccess();
+                                                    removeHash();
+                                                default:
+                                                    break;
+                                            }
+                                            function removeHash() {
+                                                history.pushState("", document.title, window.location.pathname
+                                                        + window.location.search);
+                                            }
+                                            $('.editButton').click(function () {
+                                                var id = $(this).attr('data-id');
+                                                $.ajax({
+                                                    url: "edit_member.php?id=" + id, cache: false, success: function (result) {
+                                                        $('#modal_edit_content').html(result);
+                                                    }
+                                                });
+                                            });
+
+                                            $('.subscriptionButton').click(function () {
+                                                var id = $(this).attr('data-id');
+                                                $.ajax({
+                                                    url: "add_subscription_member.php?id=" + id, cache: false, success: function (result) {
+                                                        $('#modal_add_subscription_content').html(result);
+                                                    }
+                                                });
+                                            });
+                                            $("#delete-member-submit").click(function () {
+                                                var id = $("#delete-member").attr('data-id');
+                                                var form_data = new FormData();
+                                                form_data.append('id', id);
+                                                $.ajax({
+                                                    type: "POST",
+                                                    dataType: 'text',
+                                                    cache: false,
+                                                    contentType: false,
+                                                    processData: false,
+                                                    url: "database/remove_member.php",
+                                                    data: form_data,
+                                                    success: function (text) {
+                                                        if (text === "success") {
+                                                            window.location = window.location + "#deletemembersuccess";
+                                                            location.reload();
+                                                        } else {
+                                                            deleteAccountFail();
+                                                        }
+                                                    }
+                                                });
+                                            });
+                                            function toastrAlert() {
+                                                opts = {
+                                                    "closeButton": true,
+                                                    "debug": false,
+                                                    "positionClass": "toast-top-full-width",
+                                                    "onclick": null,
+                                                    "showDuration": "300",
+                                                    "hideDuration": "1000",
+                                                    "timeOut": "5000",
+                                                    "extendedTimeOut": "1000",
+                                                    "showEasing": "swing",
+                                                    "hideEasing": "linear",
+                                                    "showMethod": "fadeIn",
+                                                    "hideMethod": "fadeOut"
+                                                };
+                                            }
+                                            function addMemberSuccess() {
+                                                toastrAlert();
+                                                toastr.success("Member successfully added", opts);
+                                            }
+                                            function editMemberSuccess() {
+                                                toastrAlert();
+                                                toastr.success("Member successfully edited", opts);
+                                            }
+                                            function deleteMemberSuccess() {
+                                                toastrAlert();
+                                                toastr.success("Member successfully deleted", opts);
+                                            }
+                                            function addMemberFail() {
+                                                toastrAlert();
+                                                toastr.error("Unfortunately, we ran into some problems trying to add the member", opts);
+                                            }
+                                            function deleteMemberFail() {
+                                                toastrAlert();
+                                                toastr.error("Unfortunately, we ran into some problems trying to delete the member", opts);
+                                            }
+                                            function addSubscriptionSuccess() {
+                                                toastrAlert();
+                                                toastr.success("Subscription successfully added", opts);
+                                            }
+                                            function addSubscriptionFail() {
+                                                toastrAlert();
+                                                toastr.error("Unfortunately, we ran into some problems trying to add the subscription", opts);
+                                            }
+                                        });
+        </script>
+        <script src="assets/js/bootstrap.js"></script>
+
     </body>
 </html>

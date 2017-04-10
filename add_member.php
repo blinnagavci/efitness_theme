@@ -32,7 +32,7 @@ if (!isset($_SESSION['logged_in'])) {
 
 
     </head>
-    <body class="page-body  page-fade" data-url="http://neon.dev">
+    <body class="page-body  page-fade">
 
         <div class="page-container"><!-- add class "sidebar-collapsed" to close sidebar by default, "chat-visible" to make chat appear always -->
 
@@ -135,12 +135,12 @@ if (!isset($_SESSION['logged_in'])) {
                                 </li>
                             </ul>
                         </li>
-<!--                        <li class="">
-                            <a href="">
-                                <i class="entypo-folder"></i>
-                                <span class="title">Reports</span>
-                            </a>
-                        </li>-->
+                        <!--                        <li class="">
+                                                    <a href="">
+                                                        <i class="entypo-folder"></i>
+                                                        <span class="title">Reports</span>
+                                                    </a>
+                                                </li>-->
                         <li class="">
                             <a href="accounts.php">
                                 <i class="entypo-user"></i>
@@ -266,7 +266,7 @@ if (!isset($_SESSION['logged_in'])) {
 
                             <div class="panel-body">
 
-                                <form action='database/add_member.php' method="POST" enctype="multipart/form-data" role="form" class="form-horizontal form-groups-bordered validate" novalidate="novalidate">
+                                <form id="add-member-form" name="add-member-form" enctype="multipart/form-data" role="form" class="form-horizontal form-groups-bordered validate" novalidate="novalidate">
 
                                     <div class="form-group">
                                         <label for="member_firstname" class="col-sm-3 control-label" >First name</label>
@@ -288,7 +288,7 @@ if (!isset($_SESSION['logged_in'])) {
                                         <label class="col-sm-3 control-label">Gender</label>
 
                                         <div class="col-sm-5">
-                                            <select name="member_gender" class="form-control" data-validate="required" id="gender_select">
+                                            <select name="member_gender" id="member_gender" class="form-control" data-validate="required" id="gender_select">
                                                 <option value="disabled" disabled selected>Select</option>
                                                 <option value="Male">Male</option>
                                                 <option value="Female">Female</option>
@@ -302,7 +302,7 @@ if (!isset($_SESSION['logged_in'])) {
 
                                         <div class="col-sm-3">
                                             <div class="input-group">
-                                                <input type="text" name="member_date" data-validate="required" class="form-control datepicker" data-format="dd/mm/yyyy">
+                                                <input type="text" name="member_date" id="member_date" data-validate="required" class="form-control datepicker" data-format="dd/mm/yyyy">
 
                                                 <div class="input-group-addon">
                                                     <a href="#"><i class="entypo-calendar"></i></a>
@@ -406,7 +406,7 @@ if (!isset($_SESSION['logged_in'])) {
                                         <label for="membership_amount" class="col-sm-3 control-label">Amount</label>
 
                                         <div class="col-sm-5">
-                                            <input type="text" name="membership_amount" class="form-control" data-validate="required" id="membership_amount" placeholder="">
+                                            <input type="text" name="membership_amount" class="form-control" data-validate="required" id="membership-amount" placeholder="">
                                         </div>
                                     </div>
 
@@ -416,7 +416,7 @@ if (!isset($_SESSION['logged_in'])) {
 
                                         <div class="col-sm-3">
                                             <div class="input-group">
-                                                <input type="text" class="form-control datepicker" data-validate="required" name="membership_start" data-format="dd/mm/yyyy">
+                                                <input type="text" class="form-control datepicker" data-validate="required" id="membership-start" name="membership_start" data-format="dd/mm/yyyy">
 
                                                 <div class="input-group-addon">
                                                     <a href="#"><i class="entypo-calendar"></i></a>
@@ -429,7 +429,7 @@ if (!isset($_SESSION['logged_in'])) {
 
                                         <div class="col-sm-3">
                                             <div class="input-group">
-                                                <input type="text" class="form-control datepicker" data-validate="required" name="membership_end" data-format="dd/mm/yyyy">
+                                                <input type="text" class="form-control datepicker" data-validate="required" id="membership-end" name="membership_end" data-format="dd/mm/yyyy">
 
                                                 <div class="input-group-addon">
                                                     <a href="#"><i class="entypo-calendar"></i></a>
@@ -441,7 +441,7 @@ if (!isset($_SESSION['logged_in'])) {
 
                                     <div class="form-group">
                                         <div class="col-sm-offset-3 col-sm-5">
-                                            <button type="submit" name="submit" class="btn btn-primary btn-block">Submit</button>
+                                            <button type="submit" id="add-member-submit" name="add-member-submit" class="btn btn-primary btn-block">Submit</button>
                                         </div>
                                     </div>
                                 </form>
@@ -499,6 +499,110 @@ if (!isset($_SESSION['logged_in'])) {
 
         <!-- Demo Settings -->
         <script src="assets/js/neon-demo.js"></script>
+        <script src="assets/js/toastr.js" type="text/javascript"></script>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                var url = window.location.href;
+                var array = url.split('/');
+                var lastsegment = array[array.length - 1];
+                if (lastsegment === "add_member.php#addmembersuccess") {
+                    addSuccess();
+                    history.pushState("", document.title, window.location.pathname
+                            + window.location.search);
+                }
+            });
+            $("#add-member-form").submit(function (e) {
+                e.preventDefault();
+                if ($(this).valid()){
+                    var firstname = $("#member_firstname").val();
+                    var surname = $("#member_surname").val();
+                    var gender = $("#member_gender").val();
+                    var birthdate = $("#member_date").val();
+                    var address = $("#member_address").val();
+                    var city = $("#member_city").val();
+                    var phoneno = $("#member_telephone").val();
+                    var alternativeno = $("#member_alternative").val();
+                    var email = $("#member_email").val();
+                    var membershiptype = $("#member_subscription").val();
+                    var membershipamount = $("#membership-amount").val();
+                    var startdate = $("#membership-start").val();
+                    var enddate = $("#membership-end").val();
+                    var form_data = new FormData();
+                    var file_data;
+                    var test = '';
+                    if (!($("#member_upload").val().length === 0)) {
+                        file_data = $("#member_upload").prop('files')[0];
+                        form_data.append('file', file_data);
+                        var test = 'pic';
+                    }
+                    form_data.append('firstname', firstname);
+                    form_data.append('surname', surname);
+                    form_data.append('gender', gender);
+                    form_data.append('birthdate', birthdate);
+                    form_data.append('address', address);
+                    form_data.append('city', city);
+                    form_data.append('phoneno', phoneno);
+                    form_data.append('alternativeno', alternativeno);
+                    form_data.append('email', email);
+                    form_data.append('membershiptype', membershiptype);
+                    form_data.append('membershipamount', membershipamount);
+                    form_data.append('startdate', startdate);
+                    form_data.append('enddate', enddate);
+                    form_data.append('test', test);
+                    $.ajax({
+                        type: "POST",
+                        dataType: 'text',
+                        cache: false,
+                        contentType: false,
+                        processData: false,
+                        url: "database/add_member.php",
+                        data: form_data,
+                        success: function (text) {
+                            if (text === "success") {
+                                window.location = window.location + "#addmembersuccess";
+                                location.reload();
+                            } else {
+                                addFail();
+                            }
+                        }
+                    });
+                }
+            });
+            function addSuccess() {
+                opts = {
+                    "closeButton": true,
+                    "debug": false,
+                    "positionClass": "toast-top-full-width",
+                    "onclick": null,
+                    "showDuration": "300",
+                    "hideDuration": "1000",
+                    "timeOut": "5000",
+                    "extendedTimeOut": "1000",
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut"
+                };
+                toastr.success("Member successfully added", opts);
+            }
+            function addFail() {
+                opts = {
+                    "closeButton": true,
+                    "debug": false,
+                    "positionClass": "toast-top-full-width",
+                    "onclick": null,
+                    "showDuration": "300",
+                    "hideDuration": "1000",
+                    "timeOut": "5000",
+                    "extendedTimeOut": "1000",
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut"
+                };
+                toastr.error("Unfortunately, we ran into some problems trying to add the member", opts);
+            }
+        </script>
 
     </body>
 </html>

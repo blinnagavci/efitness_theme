@@ -5,7 +5,7 @@
     <h4 class="modal-title">Edit Member</h4>
 </div>
 <div class="modal-body">
-    <form action='database/edit_member_db.php' id="modal_form_edit_member" method="POST" role="form" enctype="multipart/form-data" class="form-horizontal form-groups-bordered">
+    <form id="modal_form_edit_member" name="modal_form_edit_member" role="form" enctype="multipart/form-data" class="form-horizontal form-groups-bordered">
         <?php
         require('database/db_connect.php');
         if (isset($_GET['id'])) {
@@ -15,7 +15,7 @@
         $result = $conn->query($sql);
         $row = $result->fetch_assoc();
         ?>
-        <input type="hidden" name="test-id" value="<?php echo $row['id']; ?>"/>
+        <input type="hidden" name="test-id" id="test-id" value="<?php echo $row['id']; ?>"/>
         <div class="form-group">
             <label for="member_firstname" class="col-sm-3 control-label" >First name</label>
 
@@ -36,7 +36,7 @@
             <label class="col-sm-3 control-label">Gender</label>
 
             <div class="col-sm-5">
-                <select name="member_gender" class="form-control"  id="gender_select" required>
+                <select name="member_gender_select" class="form-control"  id="member_gender_select" required>
                     <option value="<?php echo $row['gender']; ?>" selected><?php echo $row['gender']; ?></option>
                     <?php
                     switch ($row['gender']) {
@@ -63,7 +63,7 @@
             <label class="col-sm-3 control-label">Birth date</label>
 
             <div class="col-sm-5">
-                <input type="text" name="member_date" class="form-control datepicker" data-format="dd/mm/yyyy" value="<?php echo $row['birth_date']; ?>" required>
+                <input type="text" name="member_date" class="form-control datepicker" id="member_date" data-format="dd/mm/yyyy" value="<?php echo $row['birth_date']; ?>" required>
             </div>
         </div>
 
@@ -158,5 +158,77 @@
 <script src="assets/js/fileinput.js"></script>
 <script src="assets/js/jquery.validate.min.js"></script>
 <script src="assets/js/main.js" type="text/javascript"></script>
+<script type="text/javascript">
+    $("#modal_form_edit_member").submit(function (e) {
+        e.preventDefault();
+        if ($(this).valid()) {
+            var id = $("#test-id").val();
+            var firstname = $("#member_firstname").val();
+            var surname = $("#member_surname").val();
+            var gender = $("#member_gender_select").val();
+            var birthdate = $("#member_date").val();
+            var address = $("#member_address").val();
+            var city = $("#member_city").val();
+            var phoneno = $("#member_telephone").val();
+            var alternativeno = $("#member_alternative").val();
+            var email = $("#member_email").val();
+            var form_data = new FormData();
+            var file_data;
+            var test = '';
+            if (!($("#member_upload").val().length === 0)) {
+                file_data = $("#member_upload").prop('files')[0];
+                form_data.append('file', file_data);
+                var test = 'pic';
+            }
+            console.log(id);
+            console.log(firstname);
+            form_data.append('id', id);
+            form_data.append('firstname', firstname);
+            form_data.append('surname', surname);
+            form_data.append('gender', gender);
+            form_data.append('birthdate', birthdate);
+            form_data.append('address', address);
+            form_data.append('city', city);
+            form_data.append('phoneno', phoneno);
+            form_data.append('alternativeno', alternativeno);
+            form_data.append('email', email);
+            form_data.append('test', test);
+            $.ajax({
+                type: "POST",
+                dataType: 'text',
+                cache: false,
+                contentType: false,
+                processData: false,
+                url: "database/edit_member_db.php",
+                data: form_data,
+                success: function (text) {
+                    if (text === "success") {
+                        window.location = window.location + "#editmembersuccess";
+                        location.reload();
+                    } else {
+                        editMemberFail();
+                    }
+                }
+            });
+            function editMemberFail() {
+                var opts = {
+                    "closeButton": true,
+                    "debug": false,
+                    "positionClass": "toast-top-full-width",
+                    "onclick": null,
+                    "showDuration": "300",
+                    "hideDuration": "1000",
+                    "timeOut": "5000",
+                    "extendedTimeOut": "1000",
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut"
+                };
+                toastr.error("Unfortunately, we ran into some problems trying to edit the member", opts);
+            }
+        }
+    });
+</script>
 
 
