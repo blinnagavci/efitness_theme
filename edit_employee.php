@@ -5,7 +5,7 @@
     <h4 class="modal-title">Edit Employee</h4>
 </div>
 <div class="modal-body">
-    <form action="database/edit_employee_db.php" method="POST" id="modal_form_edit_employee" name="modal_form_edit_employee" role="form" enctype="multipart/form-data" class="form-horizontal form-groups-bordered">
+    <form id="modal_form_edit_employee" name="modal_form_edit_employee" role="form" enctype="multipart/form-data" class="form-horizontal form-groups-bordered">
         <?php
         require('database/db_connect.php');
         if (isset($_GET['id'])) {
@@ -107,7 +107,7 @@
                 <input type="email" class="form-control" name="employee_email" id="employee_email" value="<?php echo $row['email']; ?>" required>
             </div>
         </div>
-        
+
         <div class="form-group">
             <label class="col-sm-3 control-label">Upload photo</label>
 
@@ -158,3 +158,77 @@
 <script src="assets/js/fileinput.js"></script>
 <script src="assets/js/jquery.validate.min.js"></script>
 <script src="assets/js/main.js" type="text/javascript"></script>
+<script type="text/javascript">
+
+    $("#modal_form_edit_employee").submit(function (e) {
+        e.preventDefault();
+        if ($(this).valid()) {
+            var id = $("#test-id").val();
+            var firstname = $("#employee_firstname").val();
+            var surname = $("#employee_surname").val();
+            var gender = $("#employee_gender").val();
+            var birthdate = $("#employee_date").val();
+            var address = $("#employee_address").val();
+            var city = $("#employee_city").val();
+            var phoneno = $("#employee_telephone").val();
+            var alternativeno = $("#employee_alternative").val();
+            var email = $("#employee_email").val();
+            var form_data = new FormData();
+            var file_data;
+            var test = '';
+            if (!($("#employee_upload").val().length === 0)) {
+                file_data = $("#employee_upload").prop('files')[0];
+                form_data.append('file', file_data);
+                var test = 'pic';
+            }
+            form_data.append('id', id);
+            form_data.append('firstname', firstname);
+            form_data.append('surname', surname);
+            form_data.append('gender', gender);
+            form_data.append('birthdate', birthdate);
+            form_data.append('address', address);
+            form_data.append('city', city);
+            form_data.append('phoneno', phoneno);
+            form_data.append('alternativeno', alternativeno);
+            form_data.append('email', email);
+            form_data.append('test', test);
+            $.ajax({
+                type: "POST",
+                dataType: 'text',
+                cache: false,
+                contentType: false,
+                processData: false,
+                url: "database/edit_employee_db.php",
+                data: form_data,
+                success: function (text) {
+                    if (text === "success") {
+                        window.location = window.location + "#editemployeesuccess";
+                        location.reload();
+                    } else {
+                        editEmployeeFail();
+                    }
+                }
+            });
+            function editEmployeeFail() {
+                var opts = {
+                    "closeButton": true,
+                    "debug": false,
+                    "positionClass": "toast-top-full-width",
+                    "onclick": null,
+                    "showDuration": "300",
+                    "hideDuration": "1000",
+                    "timeOut": "5000",
+                    "extendedTimeOut": "1000",
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut"
+                };
+                toastr.error("Unfortunately, we ran into some problems trying to edit the employee.", opts);
+            }
+        }
+    });
+    $('input.datepicker').on('changeDate', function (e) {
+        $(this).datepicker('hide');
+    });
+</script>

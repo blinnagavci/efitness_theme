@@ -312,7 +312,7 @@ if (!isset($_SESSION['logged_in'])) {
                                         Edit
                                     </a>
 
-                                    <a onclick="return confirm('Are you sure you want to delete this employee?');" href='database/remove_employee.php?id=<?php echo $row['id'] ?>' class="btn btn-danger btn-sm btn-icon icon-left">
+                                    <a href="#" class="btn btn-danger btn-sm btn-icon icon-left delete-employee" name="delete-employee" data-toggle='modal' data-target='#modal-delete' data-id='<?php echo $row["id"]; ?>'>
                                         <i class="entypo-cancel"></i>
                                         Delete
                                     </a>
@@ -356,6 +356,29 @@ if (!isset($_SESSION['logged_in'])) {
         </div>
         <script>
             $(document).ready(function () {
+                var url = window.location.href;
+                var array = url.split('/');
+                var lastsegment = array[array.length - 1];
+                switch (lastsegment) {
+                    case "search_employees.php#deleteemployeesuccess":
+                        deleteEmployeeSuccess();
+                        removeHash();
+                        break;
+                    case "search_employees.php#editemployeesuccess":
+                        editEmployeeSuccess();
+                        removeHash();
+                        break;
+                    case "search_employees.php#addcontractsuccess":
+                        addContractSuccess();
+                        removeHash();
+                        break;
+                    default:
+                        break;
+                }
+                function removeHash() {
+                    history.pushState("", document.title, window.location.pathname
+                            + window.location.search);
+                }
                 $('.editButton').click(function () {
                     var id = $(this).attr('data-id');
                     $.ajax({
@@ -364,7 +387,14 @@ if (!isset($_SESSION['logged_in'])) {
                         }
                     });
                 });
-                
+                $(".delete-employee").click(function(){
+                    var id = $(this).attr('data-id');
+                    $.ajax({
+                        url: "remove_employee.php?id=" + id, cache: false, success: function (result) {
+                            $('#modal_edit_content').html(result);
+                        }
+                    });
+                });
                 $('.contractButton').click(function () {
                     var id = $(this).attr('data-id');
                     $.ajax({
@@ -374,6 +404,50 @@ if (!isset($_SESSION['logged_in'])) {
                     });
                 });
             });
+            function toastrAlert() {
+                opts = {
+                    "closeButton": true,
+                    "debug": false,
+                    "positionClass": "toast-top-full-width",
+                    "onclick": null,
+                    "showDuration": "300",
+                    "hideDuration": "1000",
+                    "timeOut": "5000",
+                    "extendedTimeOut": "1000",
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut"
+                };
+            }
+            function addEmployeeSuccess() {
+                toastrAlert();
+                toastr.success("Employee successfully added.", opts);
+            }
+            function editEmployeeSuccess() {
+                toastrAlert();
+                toastr.success("Employee successfully edited.", opts);
+            }
+            function deleteEmployeeSuccess() {
+                toastrAlert();
+                toastr.success("Member successfully deleted", opts);
+            }
+            function addEmployeeFail() {
+                toastrAlert();
+                toastr.error("Unfortunately, we ran into some problems trying to add the employee.", opts);
+            }
+            function deleteEmployeeFail() {
+                toastrAlert();
+                toastr.error("Unfortunately, we ran into some problems trying to delete the employee.", opts);
+            }
+            function addContractSuccess() {
+                toastrAlert();
+                toastr.success("Contract successfully added.", opts);
+            }
+            function addContractFail() {
+                toastrAlert();
+                toastr.error("Unfortunately, we ran into some problems trying to add the contract.", opts);
+            }
         </script>
 
         <!-- Imported styles on this page -->
@@ -397,6 +471,7 @@ if (!isset($_SESSION['logged_in'])) {
 
         <!-- JavaScripts initializations and stuff -->
         <script src="assets/js/neon-custom.js"></script>
+        <script src="assets/js/toastr.js"></script>
 
         <!-- Demo Settings -->
         <script src="assets/js/neon-demo.js"></script> 
