@@ -319,12 +319,12 @@ if (!isset($_SESSION['logged_in'])) {
                                         <i class="entypo-pencil"></i>
                                         Edit
                                     </a>
-                                    <a href="#" class="btn btn-danger btn-sm btn-icon icon-left" data-id='<?php echo $row["id"]; ?>' data-toggle='modal' data-target="#remove_member" name="delete-member" id="delete-member">
+                                    <a href="#" class="btn btn-danger btn-sm btn-icon icon-left delete-member" name="delete-member" data-toggle='modal' data-target='#modal-delete' data-id='<?php echo $row["id"]; ?>'>
                                         <i class="entypo-cancel"></i>
                                         Delete
                                     </a>
 
-                                    <a href="#" class="btn btn-info btn-sm btn-icon icon-left subscriptionButton" data-toggle='modal' data-target='#modal_add_subscription'  data-id='<?php echo $row["id"]; ?>'>
+                                    <a href="#" class="btn btn-info btn-sm btn-icon icon-left subscriptionButton" data-toggle='modal' data-target='#modal_add_subscription' >
                                         <i class="entypo-check"></i>
                                         Subscriptions
                                     </a>
@@ -335,29 +335,19 @@ if (!isset($_SESSION['logged_in'])) {
                     </tbody>
                 </table>
                 <br />
-                <div id="remove_member" class="modal fade" role="dialog">
-                    <div class="modal-dialog">
 
-                        <!-- Modal content-->
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                <h4 class="modal-title">Remove member?</h4>
-                            </div>
-                            <div class="modal-body">
-                                Are you sure you want to delete this member?
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                <a type="button" class="btn btn-danger" name="delete-member-submit" id="delete-member-submit">Delete</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
                 <a href="add_member.php" class="btn btn-primary" >
                     <i class="entypo-plus"></i>
                     Add Member
                 </a>
+                <div class="modal fade" id="modal-delete" role='dialog'>
+                    <div class="modal-dialog">
+                        <div class="modal-content" id="modal_delete_member_content">
+
+
+                        </div>
+                    </div>
+                </div>
                 <footer class="main">
 
                     <strong>E-Fitness 2017 </strong>&copy; All Rights Reserved
@@ -456,34 +446,15 @@ if (!isset($_SESSION['logged_in'])) {
                                 }
                             });
                         });
-
-
-                        $("#delete-member").click(function () {
+                        $(".delete-member").click(function () {
                             var id = $(this).attr('data-id');
-
-
-                            var form_data = new FormData();
-                            form_data.append('id', id);
-                            console.log(id);
                             $.ajax({
-                                type: "POST",
-                                dataType: 'text',
-                                cache: false,
-                                contentType: false,
-                                processData: false,
-                                url: "database/remove_member.php",
-                                data: form_data,
-                                success: function (text) {
-                                    if (text === "success") {
-                                        window.location = window.location + "#deletemembersuccess";
-                                        location.reload();
-                                    } else {
-                                        deleteAccountFail();
-                                    }
+                                url: "remove_member.php?id=" + id, cache: false, success: function (result) {
+                                    $('#modal_delete_member_content').html(result);
                                 }
                             });
-                        });
 
+                        });
 
                         function toastrAlert() {
                             opts = {
@@ -501,11 +472,6 @@ if (!isset($_SESSION['logged_in'])) {
                                 "hideMethod": "fadeOut"
                             };
                         }
-
-                        function addMemberSuccess() {
-                            toastrAlert();
-                            toastr.success("Member successfully added", opts);
-                        }
                         function editMemberSuccess() {
                             toastrAlert();
                             toastr.success("Member successfully edited", opts);
@@ -513,10 +479,6 @@ if (!isset($_SESSION['logged_in'])) {
                         function deleteMemberSuccess() {
                             toastrAlert();
                             toastr.success("Member successfully deleted", opts);
-                        }
-                        function addMemberFail() {
-                            toastrAlert();
-                            toastr.error("Unfortunately, we ran into some problems trying to add the member", opts);
                         }
                         function deleteMemberFail() {
                             toastrAlert();

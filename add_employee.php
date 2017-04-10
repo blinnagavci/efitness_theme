@@ -1,4 +1,10 @@
 <!DOCTYPE html>
+<?php
+session_start();
+if (!isset($_SESSION['logged_in'])) {
+    header('location: extra-login.php');
+}
+?>
 <html lang="en">
     <head>
         <?php require('database/db_connect.php'); ?>
@@ -26,11 +32,16 @@
 
 
     </head>
-    <body class="page-body  page-fade" data-url="">
+    <body class="page-body  page-fade">
+
         <div class="page-container"><!-- add class "sidebar-collapsed" to close sidebar by default, "chat-visible" to make chat appear always -->
+
             <div class="sidebar-menu">
-                <div class="sidebar-menu-inner">			
+
+                <div class="sidebar-menu-inner">
+
                     <header class="logo-env">
+
                         <!-- logo -->
                         <div class="logo">
                             <a href="index.php">
@@ -44,6 +55,7 @@
                                 <i class="entypo-menu"></i>
                             </a>
                         </div>
+
 
                         <!-- open/close menu icon (do not remove if you want to enable menu on mobile devices) -->
                         <div class="sidebar-mobile-menu visible-xs">
@@ -82,7 +94,7 @@
                                 </li>
                             </ul>
                         </li>
-                        <li class="has-sub opened active">
+                        <li class="has-sub  active opened active">
                             <a href="#">
                                 <i class="entypo-briefcase"></i>
                                 <span class="title">Employees</span>
@@ -112,7 +124,7 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="search_item.php">
+                                    <a href="search_inventory.php">
                                         <span class="title">Search inventory</span>
                                     </a>
                                 </li>
@@ -123,24 +135,27 @@
                                 </li>
                             </ul>
                         </li>
+                        <!--                        <li class="">
+                                                    <a href="">
+                                                        <i class="entypo-folder"></i>
+                                                        <span class="title">Reports</span>
+                                                    </a>
+                                                </li>-->
                         <li class="">
-                            <a href="">
-                                <i class="entypo-folder"></i>
-                                <span class="title">Reports</span>
-                            </a>
-                        </li>
-                        <li class="">
-                            <a href="">
+                            <a href="accounts.php">
                                 <i class="entypo-user"></i>
                                 <span class="title">Accounts</span>
                             </a>
                         </li>
+
                         <li class="">
                             <a href="other_settings.php">
-                                <i class="entypo-tools"></i>
+                                <i class="entypo-cog"></i>
                                 <span class="title">Settings</span>
                             </a>
                         </li>
+
+
                     </ul>
 
                 </div>
@@ -160,8 +175,14 @@
                             <li class="profile-info dropdown"><!-- add class "pull-right" if you want to place this from right -->
 
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                    <img src="assets/images/thumb-1@2x.png" alt="" class="img-circle" width="44" />
-                                    Blin Nagavci
+                                    <img src="repository/account_photos/<?php
+                                    if ($_SESSION['profile_photo'] == '') {
+                                        echo 'empty-profile-icon.png';
+                                    } else {
+                                        echo $_SESSION['profile_photo'];
+                                    }
+                                    ?>" alt="Profile" class="img-circle" width="44" />
+                                         <?php echo $_SESSION['username']; ?>
                                 </a>
 
                                 <ul class="dropdown-menu">
@@ -173,15 +194,7 @@
                                     <li>
                                         <a href="extra-timeline.html">
                                             <i class="entypo-user"></i>
-                                            Edit profile
-                                        </a>
-                                    </li>
-
-
-                                    <li>
-                                        <a href="extra-calendar.html">
-                                            <i class="entypo-calendar"></i>
-                                            Calendar
+                                            Edit Profile
                                         </a>
                                     </li>
                                 </ul>
@@ -203,7 +216,7 @@
                         <ul class="list-inline links-list pull-right">	
 
                             <li>
-                                <a href="extra-login.php.html">
+                                <a href="database/logout.php">
                                     Log Out <i class="entypo-logout right"></i>
                                 </a>
                             </li>
@@ -245,7 +258,7 @@
 
                             <div class="panel-body">
 
-                                <form action='database/add_employee.php' method="POST" role="form" class="form-horizontal form-groups-bordered validate" enctype="multipart/form-data" novalidate="novalidate">
+                                <form role="form" id="add_employee_form" name="add_employee_form" class="form-horizontal form-groups-bordered validate" enctype="multipart/form-data" novalidate="novalidate">
 
                                     <div class="form-group">
                                         <label for="employee_firstname" class="col-sm-3 control-label" >First name</label>
@@ -267,7 +280,7 @@
                                         <label for="gender_select" class="col-sm-3 control-label">Gender</label>
 
                                         <div class="col-sm-5">
-                                            <select name="employee_gender" class="form-control" data-validate="required" id="gender_select">
+                                            <select name="employee_gender" class="form-control" data-validate="required" id="employee_gender">
                                                 <option value="disabled" disabled selected>Select</option>
                                                 <option value="Male">Male</option>
                                                 <option value="Female">Female</option>
@@ -281,7 +294,7 @@
 
                                         <div class="col-sm-3">
                                             <div class="input-group">
-                                                <input type="text" name="employee_date" id="employee_date" data-validate="required" class="form-control datepicker" data-format="dd/mm/yyyy">
+                                                <input type="text" name="employee_date" id="employee_date" data-validate="required" class="form-control datepicker" data-end-date="+0d" data-format="dd/mm/yyyy">
 
                                                 <div class="input-group-addon">
                                                     <a href="#"><i class="entypo-calendar"></i></a>
@@ -328,7 +341,7 @@
 
                                         <div class="col-sm-5">
                                             <div class="input-group">
-                                                <input type="text" class="form-control" name="employee_email" data-validate="required, email" id="employee_email" placeholder="">
+                                                <input type="text" class="form-control" name="employee_email" data-validate="required,email" id="employee_email" placeholder="">
                                                 <span class="input-group-addon"><i class="entypo-mail"></i></span>
                                             </div>
                                         </div>
@@ -361,7 +374,7 @@
                                         <label for="employee_subscription" class="col-sm-3 control-label">Employee type</label>
 
                                         <div class="col-sm-5">
-                                            <select name="employee_subscription" class="form-control"  data-validate="required" id="employee_subscription">
+                                            <select name="employee_type" class="form-control"  data-validate="required" id="employee_type">
                                                 <option value="disabled" disabled selected>Select</option>
                                                 <?php
                                                 include('database/db_connect.php');
@@ -395,7 +408,7 @@
 
                                         <div class="col-sm-3">
                                             <div class="input-group">
-                                                <input type="text" class="form-control datepicker" data-validate="required" name="employee_start" id="employee_start" data-format="dd/mm/yyyy">
+                                                <input type="text" class="form-control datepicker" data-validate="required" name="employee_start" id="employee_start" data-start-date="+0d" data-format="dd/mm/yyyy">
 
                                                 <div class="input-group-addon">
                                                     <a href="#"><i class="entypo-calendar"></i></a>
@@ -408,7 +421,7 @@
 
                                         <div class="col-sm-3">
                                             <div class="input-group">
-                                                <input type="text" class="form-control datepicker" data-validate="required" name="employee_end" id="employee_end" data-format="dd/mm/yyyy">
+                                                <input type="text" class="form-control datepicker" data-validate="required" name="employee_end" id="employee_end" data-start-date="+0d" data-format="dd/mm/yyyy">
 
                                                 <div class="input-group-addon">
                                                     <a href="#"><i class="entypo-calendar"></i></a>
@@ -440,7 +453,7 @@
         <!-- Bottom scripts (common) -->
         <script src="assets/js/gsap/TweenMax.min.js"></script>
         <script src="assets/js/jquery-ui/js/jquery-ui-1.10.3.minimal.min.js"></script>
-        <script src="assets/js/bootstrap.js"></script>
+
         <script src="assets/js/joinable.js"></script>
         <script src="assets/js/resizeable.js"></script>
         <script src="assets/js/neon-api.js"></script>
@@ -470,6 +483,113 @@
 
         <!-- Demo Settings -->
         <script src="assets/js/neon-demo.js"></script>
-
+        <script src="assets/js/toastr.js"></script>
+        <script>
+            $(document).ready(function () {
+                var url = window.location.href;
+                var array = url.split('/');
+                var lastsegment = array[array.length - 1];
+                if (lastsegment === "add_employee.php#addemployeesuccess") {
+                    addSuccess();
+                    history.pushState("", document.title, window.location.pathname
+                            + window.location.search);
+                }
+            });
+            $('input.datepicker').on('changeDate', function (e) {
+                $(this).datepicker('hide');
+            });
+            $("#add_employee_form").submit(function (e) {
+                e.preventDefault();
+                if ($(this).valid()) {
+                    var firstname = $("#employee_firstname").val();
+                    var surname = $("#employee_surname").val();
+                    var gender = $("#employee_gender").val();
+                    var birthdate = $("#employee_date").val();
+                    var address = $("#employee_address").val();
+                    var city = $("#employee_city").val();
+                    var phoneno = $("#employee_telephone").val();
+                    var alternativeno = $("#employee_alternative").val();
+                    var email = $("#employee_email").val();
+                    var employeetype = $("#employee_type").val();
+                    var salaryamount = $("#salary_amount").val();
+                    var startdate = $("#employee_start").val();
+                    var enddate = $("#employee_end").val();
+                    var form_data = new FormData();
+                    var file_data;
+                    var test = '';
+                    if (!($("#employee_upload").val().length === 0)) {
+                        file_data = $("#employee_upload").prop('files')[0];
+                        form_data.append('file', file_data);
+                        var test = 'pic';
+                    }
+                    form_data.append('firstname', firstname);
+                    form_data.append('surname', surname);
+                    form_data.append('gender', gender);
+                    form_data.append('birthdate', birthdate);
+                    form_data.append('address', address);
+                    form_data.append('city', city);
+                    form_data.append('phoneno', phoneno);
+                    form_data.append('alternativeno', alternativeno);
+                    form_data.append('email', email);
+                    form_data.append('employeetype', employeetype);
+                    form_data.append('salaryamount', salaryamount);
+                    form_data.append('startdate', startdate);
+                    form_data.append('enddate', enddate);
+                    form_data.append('test', test);
+                    $.ajax({
+                        type: "POST",
+                        dataType: 'text',
+                        cache: false,
+                        contentType: false,
+                        processData: false,
+                        url: "database/add_employee.php",
+                        data: form_data,
+                        success: function (text) {
+                            if (text === "success") {
+                                window.location = window.location + "#addemployeesuccess";
+                                location.reload();
+                            } else {
+                                addFail();
+                            }
+                        }
+                    });
+                }
+            });
+            function addSuccess() {
+                opts = {
+                    "closeButton": true,
+                    "debug": false,
+                    "positionClass": "toast-top-full-width",
+                    "onclick": null,
+                    "showDuration": "300",
+                    "hideDuration": "1000",
+                    "timeOut": "5000",
+                    "extendedTimeOut": "1000",
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut"
+                };
+                toastr.success("Employee successfully added.", opts);
+            }
+            function addFail() {
+                opts = {
+                    "closeButton": true,
+                    "debug": false,
+                    "positionClass": "toast-top-full-width",
+                    "onclick": null,
+                    "showDuration": "300",
+                    "hideDuration": "1000",
+                    "timeOut": "5000",
+                    "extendedTimeOut": "1000",
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut"
+                };
+                toastr.error("Unfortunately, we ran into some problems trying to add the employee.", opts);
+            }
+        </script>
+        <script src="assets/js/bootstrap.js"></script>
     </body>
 </html>
