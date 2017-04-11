@@ -178,7 +178,7 @@
                             "showMethod": "fadeIn",
                             "hideMethod": "fadeOut"
                         };
-                        toastr.error("You must have at least one admin account.", opts);
+                        toastr.error("You must have at least one admin account", opts);
                     }
                     function editAccountFail() {
                         var opts = {

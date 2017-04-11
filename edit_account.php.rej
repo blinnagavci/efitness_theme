@@ -1,0 +1,10 @@
+diff a/edit_account.php b/edit_account.php	(rejected hunks)
+@@ -178,7 +178,7 @@
+                             "showMethod": "fadeIn",
+                             "hideMethod": "fadeOut"
+                         };
+-                        toastr.error("You must have at least one admin account", opts);
++                        toastr.error("You must have at least one admin account.", opts);
+                     }
+                     function editAccountFail() {
+                         var opts = {

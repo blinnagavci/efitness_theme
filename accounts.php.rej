@@ -1,0 +1,35 @@
+diff a/accounts.php b/accounts.php	(rejected hunks)
+@@ -593,27 +593,27 @@
+                                         }
+                                         function addAccountSuccess() {
+                                             toastrAlert();
+-                                            toastr.success("Account successfully added", opts);
++                                            toastr.success("Account successfully added.", opts);
+                                         }
+                                         function editAccountSuccess() {
+                                             toastrAlert();
+-                                            toastr.success("Account successfully edited", opts);
++                                            toastr.success("Account successfully edited.", opts);
+                                         }
+                                         function deleteAccountSuccess() {
+                                             toastrAlert();
+-                                            toastr.success("Account successfully deleted", opts);
++                                            toastr.success("Account successfully deleted.", opts);
+                                         }
+                                         function addAccountFail() {
+                                             toastrAlert();
+-                                            toastr.error("Unfortunately, we ran into some problems trying to add the account", opts);
++                                            toastr.error("Unfortunately, we ran into some problems trying to add the account.", opts);
+                                         }
+                                         function deleteAccountFail() {
+                                             toastrAlert();
+-                                            toastr.error("Unfortunately, we ran into some problems trying to delete the account", opts);
++                                            toastr.error("Unfortunately, we ran into some problems trying to delete the account.", opts);
+                                         }
+                                         function oneAdmin() {
+                                             toastrAlert();
+-                                            toastr.error("You must have at least one admin account", opts);
++                                            toastr.error("You must have at least one admin account.", opts);
+                                         }
+         </script>
+         <script src="assets/js/bootstrap.js"></script>

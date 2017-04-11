@@ -474,23 +474,23 @@ if (!isset($_SESSION['logged_in'])) {
                         }
                         function editMemberSuccess() {
                             toastrAlert();
-                            toastr.success("Member successfully edited.", opts);
+                            toastr.success("Member successfully edited", opts);
                         }
                         function deleteMemberSuccess() {
                             toastrAlert();
-                            toastr.success("Member successfully deleted.", opts);
+                            toastr.success("Member successfully deleted", opts);
                         }
                         function deleteMemberFail() {
                             toastrAlert();
-                            toastr.error("Unfortunately, we ran into some problems trying to delete the member.", opts);
+                            toastr.error("Unfortunately, we ran into some problems trying to delete the member", opts);
                         }
                         function addSubscriptionSuccess() {
                             toastrAlert();
-                            toastr.success("Subscription successfully added.", opts);
+                            toastr.success("Subscription successfully added", opts);
                         }
                         function addSubscriptionFail() {
                             toastrAlert();
-                            toastr.error("Unfortunately, we ran into some problems trying to add the subscription.", opts);
+                            toastr.error("Unfortunately, we ran into some problems trying to add the subscription", opts);
                         }
                     });
         </script>
