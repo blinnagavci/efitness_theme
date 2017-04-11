@@ -13,7 +13,7 @@ if (!isset($_SESSION['logged_in'])) {
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="description" content="Neon Admin Panel" />
+        <meta name="description" content="E-Fitness Admin Panel" />
         <meta name="Blin Nagavci, Labian Gashi, Besarber Tasholli" content="" />      
 
         <link rel="icon" href="assets/images/favicon.ico">
@@ -132,8 +132,8 @@ if (!isset($_SESSION['logged_in'])) {
                                 <span class="title">Reports</span>
                             </a>
                         </li>-->
-                        <li class="">
-                            <a href="">
+                        <li>
+                            <a href="accounts.php">
                                 <i class="entypo-user"></i>
                                 <span class="title">Accounts</span>
                             </a>
@@ -181,7 +181,7 @@ if (!isset($_SESSION['logged_in'])) {
 
                                     <!-- Profile sub-links -->
                                     <li>
-                                        <a href="extra-timeline.html">
+                                        <a href="edit_profile.php">
                                             <i class="entypo-user"></i>
                                             Edit Profile
                                         </a>
@@ -344,12 +344,12 @@ if (!isset($_SESSION['logged_in'])) {
                                                     <option value="disabled" disabled selected>Select</option>
                                                     <?php
                                                     include('database/db_connect.php');
-                                                    $sql = 'SELECT employee_type FROM employee_type WHERE status= "0"';
-                                                    $retval = mysqli_query($conn, $sql);
-                                                    if (!$retval) {
+                                                    $sql1 = 'SELECT employee_type FROM employee_type WHERE status= "0"';
+                                                    $retval1 = mysqli_query($conn, $sql1);
+                                                    if (!$retval1) {
                                                         echo ("Could not retrieve data" . mysql_error());
                                                     }
-                                                    while ($row = $retval->fetch_assoc()) {
+                                                    while ($row = $retval1->fetch_assoc()) {
                                                         $employeetype = $row['employee_type'];
                                                         echo "<option value='$employeetype'>$employeetype</option>";
                                                     }
@@ -406,12 +406,12 @@ if (!isset($_SESSION['logged_in'])) {
                                                     <option value="disabled" disabled selected>Select</option>
                                                     <?php
                                                     include('database/db_connect.php');
-                                                    $sql = 'SELECT category FROM item_category WHERE status= "0"';
-                                                    $retval = mysqli_query($conn, $sql);
-                                                    if (!$retval) {
+                                                    $sql2 = 'SELECT category FROM item_category WHERE status= "0"';
+                                                    $retval2 = mysqli_query($conn, $sql2);
+                                                    if (!$retval2) {
                                                         echo ("Could not retrieve data" . mysql_error());
                                                     }
-                                                    while ($row = $retval->fetch_assoc()) {
+                                                    while ($row = $retval2->fetch_assoc()) {
                                                         $itemcategory = $row['category'];
                                                         echo "<option value='$itemcategory'>$itemcategory</option>";
                                                     }

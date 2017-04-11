@@ -63,7 +63,7 @@ if (isset($_GET['id'])) {
             "showMethod": "fadeIn",
             "hideMethod": "fadeOut"
         };
-        toastr.error("Unfortunately, we ran into some problems trying to delete the member", opts);
+        toastr.error("Unfortunately, we ran into some problems trying to delete the member.", opts);
     }
 
 </script>

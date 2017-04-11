@@ -12,7 +12,7 @@ if (!isset($_SESSION['logged_in'])) {
 
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="description" content="Neon Admin Panel" />
+        <meta name="description" content="E-Fitness Admin Panel" />
         <meta name="Blin Nagavci, Labian Gashi, Besarber Tasholli" content="" />
 
         <link rel="icon" href="assets/images/favicon.ico">
@@ -192,7 +192,7 @@ if (!isset($_SESSION['logged_in'])) {
 
                                     <!-- Profile sub-links -->
                                     <li>
-                                        <a href="extra-timeline.html">
+                                        <a href="edit_profile.php">
                                             <i class="entypo-user"></i>
                                             Edit Profile
                                         </a>
@@ -280,7 +280,7 @@ if (!isset($_SESSION['logged_in'])) {
                                         <label class="col-sm-3 control-label">Gender</label>
 
                                         <div class="col-sm-5">
-                                            <select name="member_gender" id="member_gender" class="form-control" data-validate="required" id="gender_select">
+                                            <select name="member_gender" id="member_gender" class="form-control" data-validate="required">
                                                 <option value="disabled" disabled selected>Select</option>
                                                 <option value="Male">Male</option>
                                                 <option value="Female">Female</option>

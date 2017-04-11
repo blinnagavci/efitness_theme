@@ -12,7 +12,7 @@ if (!isset($_SESSION['logged_in'])) {
 
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="description" content="Neon Admin Panel" />
+        <meta name="description" content="E-Fitness Admin Panel" />
         <meta name="Blin Nagavci, Labian Gashi, Besarber Tasholli" content="" />
 
         <link rel="icon" href="assets/images/favicon.ico">
@@ -101,12 +101,12 @@ if (!isset($_SESSION['logged_in'])) {
                             </a>
                             <ul>
                                 <li>
-                                    <a href="">
+                                    <a href="add_employee.php">
                                         <span class="title">Add Employee</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="">
+                                    <a href="search_employees.php">
                                         <span class="title">Search Employees</span>
                                     </a>
                                 </li>
@@ -136,13 +136,13 @@ if (!isset($_SESSION['logged_in'])) {
                             </ul>
                         </li>
                         <li class="opened active">
-                            <a href="">
+                            <a href="accounts.php">
                                 <i class="entypo-user"></i>
                                 <span class="title">Accounts</span>
                             </a>
                         </li>
                         <li class="">
-                            <a href="">
+                            <a href="other_settings.php">
                                 <i class="entypo-cog"></i>
                                 <span class="title">Settings</span>
                             </a>
@@ -178,7 +178,7 @@ if (!isset($_SESSION['logged_in'])) {
 
                                     <!-- Profile sub-links -->
                                     <li>
-                                        <a href="extra-timeline.html">
+                                        <a href="edit_profile.php">
                                             <i class="entypo-user"></i>
                                             Edit Profile
                                         </a>
@@ -202,7 +202,7 @@ if (!isset($_SESSION['logged_in'])) {
                         <ul class="list-inline links-list pull-right">	
 
                             <li>
-                                <a href="extra-login.php.html">
+                                <a href="database/logout.php">
                                     Log Out <i class="entypo-logout right"></i>
                                 </a>
                             </li>
@@ -233,7 +233,6 @@ if (!isset($_SESSION['logged_in'])) {
                         // Initialize DataTable
                         $table3.DataTable({
                             "sDom": "Bfrtip",
-                            "bStateSave": false,
                             "iDisplayLength": 10,
                             "aoColumns": [
                                 null,

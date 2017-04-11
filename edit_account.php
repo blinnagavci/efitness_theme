@@ -195,7 +195,7 @@
                             "showMethod": "fadeIn",
                             "hideMethod": "fadeOut"
                         };
-                        toastr.error("Unfortunately, we ran into some problems trying to edit the account", opts);
+                        toastr.error("Unfortunately, we ran into some problems trying to edit the account.", opts);
                     }
 
 </script>
