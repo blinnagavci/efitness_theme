@@ -484,7 +484,7 @@ if (!isset($_SESSION['logged_in'])) {
                                                         "showMethod": "fadeIn",
                                                         "hideMethod": "fadeOut"
                                                     };
-                                                    toastr.success("Profile successfully edited", opts);
+                                                    toastr.success("Profile successfully edited.", opts);
                                                 }
                                                 function editProfileFail() {
                                                     var opts = {
@@ -501,7 +501,7 @@ if (!isset($_SESSION['logged_in'])) {
                                                         "showMethod": "fadeIn",
                                                         "hideMethod": "fadeOut"
                                                     };
-                                                    toastr.error("Unfortunately, we ran into some problems trying to edit your profile", opts);
+                                                    toastr.error("Unfortunately, we ran into some problems trying to edit your profile.", opts);
                                                 }
 
         </script>

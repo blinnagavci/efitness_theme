@@ -171,6 +171,6 @@
             "showMethod": "fadeIn",
             "hideMethod": "fadeOut"
         };
-        toastr.error("Unfortunately, we ran into some problems trying to add the subscription", opts);
+        toastr.error("Unfortunately, we ran into some problems trying to add the subscription.", opts);
     }
 </script>
