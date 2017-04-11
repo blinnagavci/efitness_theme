@@ -12,7 +12,7 @@ if (!isset($_SESSION['logged_in'])) {
 
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="description" content="Neon Admin Panel" />
+        <meta name="description" content="E-Fitness Admin Panel" />
         <meta name="Blin Nagavci, Labian Gashi, Besarber Tasholli" content="" />
 
         <link rel="icon" href="assets/images/favicon.ico">
@@ -192,7 +192,7 @@ if (!isset($_SESSION['logged_in'])) {
 
                                     <!-- Profile sub-links -->
                                     <li>
-                                        <a href="extra-timeline.html">
+                                        <a href="edit_profile.php">
                                             <i class="entypo-user"></i>
                                             Edit Profile
                                         </a>
@@ -277,7 +277,7 @@ if (!isset($_SESSION['logged_in'])) {
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="gender_select" class="col-sm-3 control-label">Gender</label>
+                                        <label for="employee_gender" class="col-sm-3 control-label">Gender</label>
 
                                         <div class="col-sm-5">
                                             <select name="employee_gender" class="form-control" data-validate="required" id="employee_gender">
@@ -371,7 +371,7 @@ if (!isset($_SESSION['logged_in'])) {
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="employee_subscription" class="col-sm-3 control-label">Employee type</label>
+                                        <label for="employee_type" class="col-sm-3 control-label">Employee type</label>
 
                                         <div class="col-sm-5">
                                             <select name="employee_type" class="form-control"  data-validate="required" id="employee_type">

@@ -12,7 +12,7 @@ if (!isset($_SESSION['logged_in'])) {
 
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="description" content="Neon Admin Panel" />
+        <meta name="description" content="E-Fitness Admin Panel" />
         <meta name="Blin Nagavci, Labian Gashi, Besarber Tasholli" content="" />
 
         <link rel="icon" href="assets/images/favicon.ico">
@@ -143,19 +143,18 @@ if (!isset($_SESSION['logged_in'])) {
                                 </li>
                             </ul>
                         </li>
-                        <!--                        <li class="">
-                                                    <a href="">
-                                                        <i class="entypo-folder"></i>
-                                                        <span class="title">Reports</span>
-                                                    </a>
-                                                </li>-->
+<!--                        <li class="">
+                            <a href="">
+                                <i class="entypo-folder"></i>
+                                <span class="title">Reports</span>
+                            </a>
+                        </li>-->
                         <li class="">
                             <a href="accounts.php">
                                 <i class="entypo-user"></i>
                                 <span class="title">Accounts</span>
                             </a>
                         </li>
-
                         <li class="">
                             <a href="other_settings.php">
                                 <i class="entypo-cog"></i>
@@ -200,7 +199,7 @@ if (!isset($_SESSION['logged_in'])) {
 
                                     <!-- Profile sub-links -->
                                     <li>
-                                        <a href="extra-timeline.html">
+                                        <a href="edit_profile.php">
                                             <i class="entypo-user"></i>
                                             Edit Profile
                                         </a>
@@ -260,7 +259,6 @@ if (!isset($_SESSION['logged_in'])) {
                         // Initialize DataTable
                         $table_employees.DataTable({
                             "sDom": "Bfrtip",
-                            "bStateSave": false,
                             "iDisplayLength": 10,
                             "aoColumns": [
                                 null,
@@ -317,7 +315,7 @@ if (!isset($_SESSION['logged_in'])) {
                                         Delete
                                     </a>
 
-                                    <a href="#" class="btn btn-info btn-sm btn-icon icon-left contractButton"data-toggle='modal' data-toggle='modal' data-target='#modal_add_contract' data-id='<?php echo $row["id"]; ?>' >
+                                    <a href="#" class="btn btn-info btn-sm btn-icon icon-left contractButton" data-toggle='modal' data-target='#modal_add_contract' data-id='<?php echo $row["id"]; ?>' >
                                         <i class="entypo-check"></i>
                                         Contracts
                                     </a>
@@ -401,7 +399,7 @@ if (!isset($_SESSION['logged_in'])) {
                         }
                     });
                 });
-                $(".delete-employee").click(function(){
+                $(".delete-employee").click(function () {
                     var id = $(this).attr('data-id');
                     $.ajax({
                         url: "remove_employee.php?id=" + id, cache: false, success: function (result) {

@@ -12,7 +12,7 @@ if (!isset($_SESSION['logged_in'])) {
 
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="description" content="Neon Admin Panel" />
+        <meta name="description" content="E-Fitness Admin Panel" />
         <meta name="Blin Nagavci, Labian Gashi, Besarber Tasholli" content="" />
 
         <link rel="icon" href="assets/images/favicon.ico">
@@ -76,13 +76,13 @@ if (!isset($_SESSION['logged_in'])) {
                                 <span class="title">Dashboard</span>
                             </a>
                         </li>
-                        <li class="has-sub active opened active">
+                        <li class="has-sub">
                             <a href="#">
                                 <i class="entypo-users"></i>
                                 <span class="title">Members</span>
                             </a>
                             <ul>
-                                <li class="active">
+                                <li>
                                     <a href="add_member.php">
                                         <span class="title">Add member</span>
                                     </a>
@@ -271,16 +271,15 @@ if (!isset($_SESSION['logged_in'])) {
                                         <label for="account_username" class="col-sm-3 control-label" >Username</label>
 
                                         <div class="col-sm-5">
-                                            <input type="text" name="account_username" class="form-control" required id="account_username" value='<?php echo $row['username']; ?>' required>
-
+                                            <input type="text" name="account_username" class="form-control" id="account_username" value='<?php echo $row['username']; ?>' required>
                                         </div>
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="account_password" class="col-sm-3 control-label" required>Password</label>
+                                        <label for="account_password" class="col-sm-3 control-label">Password</label>
 
                                         <div class="col-sm-5">
-                                            <input type="password" name="account_password" class="form-control" required id="account_password" value='<?php echo $row['password']; ?>' readonly="true" ondblclick="this.readOnly = ''; value = '';">
+                                            <input type="password" name="account_password" class="form-control" required id="account_password" value='<?php echo $row['password']; ?>' readonly ondblclick="this.readOnly = ''; value = '';">
                                             <p class="double-click">Double click to change the password</p>
                                         </div>
                                     </div>
@@ -424,7 +423,7 @@ if (!isset($_SESSION['logged_in'])) {
                                                 var url = window.location.href;
                                                 var array = url.split('/');
                                                 var lastsegment = array[array.length - 1];
-                                                if (lastsegment == "edit_profile.php#editprofilesuccess") {
+                                                if (lastsegment === "edit_profile.php#editprofilesuccess") {
                                                     editProfileSuccess();
                                                 }
                                                 $("#editprofile_form").submit(function (event) {

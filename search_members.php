@@ -12,7 +12,7 @@ if (!isset($_SESSION['logged_in'])) {
 
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="description" content="Neon Admin Panel" />
+        <meta name="description" content="E-Fitness Admin Panel" />
         <meta name="Blin Nagavci, Labian Gashi, Besarber Tasholli" content="" />
 
         <link rel="icon" href="assets/images/favicon.ico">
@@ -40,7 +40,7 @@ if (!isset($_SESSION['logged_in'])) {
 
 
     </head>
-    <body class="page-body  page-fade" data-url="http://neon.dev">
+    <body class="page-body page-fade" data-url="http://neon.dev">
 
         <div class="page-container"><!-- add class "sidebar-collapsed" to close sidebar by default, "chat-visible" to make chat appear always -->
 
@@ -200,7 +200,7 @@ if (!isset($_SESSION['logged_in'])) {
 
                                     <!-- Profile sub-links -->
                                     <li>
-                                        <a href="extra-timeline.html">
+                                        <a href="edit_profile.php">
                                             <i class="entypo-user"></i>
                                             Edit Profile
                                         </a>
@@ -268,7 +268,6 @@ if (!isset($_SESSION['logged_in'])) {
                         // Initialize DataTable
                         $table2.DataTable({
                             "sDom": "Bfrtip",
-                            "bStateSave": false,
                             "iDisplayLength": 10,
                             "aoColumns": [
                                 null,
@@ -319,6 +318,7 @@ if (!isset($_SESSION['logged_in'])) {
                                         <i class="entypo-pencil"></i>
                                         Edit
                                     </a>
+
                                     <a href="#" class="btn btn-danger btn-sm btn-icon icon-left delete-member" name="delete-member" data-toggle='modal' data-target='#modal-delete' data-id='<?php echo $row["id"]; ?>'>
                                         <i class="entypo-cancel"></i>
                                         Delete
