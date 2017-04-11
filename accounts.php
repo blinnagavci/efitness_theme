@@ -301,35 +301,14 @@ if (!isset($_SESSION['logged_in'])) {
                                         Edit
                                     </a>
 
-                                    <a href="javascript:;" onclick="jQuery('#modal-delete').modal('show', {backdrop: 'static'});" name="delete-account" id="delete-account" class="btn btn-danger btn-sm btn-icon icon-left" data-id="<?php echo $row['id']; ?>">
+                                    <a href="javascript:;" onclick="jQuery('#modal-delete').modal('show', {backdrop: 'static'});" name="delete-account" data-target="#modal_delete" data-toggle="modal" class="btn btn-danger btn-sm btn-icon icon-left delete-account" data-id="<?php echo $row['id']; ?>">
                                         <i class="entypo-cancel"></i>
                                         Delete
                                     </a>
 
                                 </td>
                             </tr>
-                        <div class="modal fade" id="modal-delete" data-backdrop="static">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-
-                                    <div class="modal-header">
-                                        <h4 class="modal-title">Delete Account</h4>
-                                    </div>
-
-                                    <div class="modal-body">
-
-                                        Are you sure you want to delete this account?
-
-                                    </div>
-
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                        <a type="button" class="btn btn-danger" name="delete-account-submit" id="delete-account-submit">Delete</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    <?php endwhile; ?>
+                        <?php endwhile; ?>
 
                     </tbody>
                 </table>
@@ -340,11 +319,11 @@ if (!isset($_SESSION['logged_in'])) {
                     Add Account
                 </a>
 
-                <div id="modal_edit" class="modal fade" role="dialog">
+                <div id="modal_delete" class="modal fade" role="dialog">
                     <div class="modal-dialog">
 
                         <!-- Modal content-->
-                        <div class="modal-content" id="modal_edit_content">
+                        <div class="modal-content" id="modal_delete_content">
 
                         </div>
 
@@ -478,143 +457,151 @@ if (!isset($_SESSION['logged_in'])) {
         <script src="assets/js/neon-demo.js"></script> 
         <script src="assets/js/toastr.js" type="text/javascript"></script>
         <script>
-                                        $(document).ready(function () {
-                                            var url = window.location.href;
-                                            var array = url.split('/');
-                                            var lastsegment = array[array.length - 1];
-                                            switch (lastsegment) {
-                                                case "accounts.php#editsuccess":
-                                                    editAccountSuccess();
-                                                    removeHash();
-                                                    break;
-                                                case "accounts.php#deletesuccess":
-                                                    deleteAccountSuccess();
-                                                    removeHash();
-                                                    break;
-                                                case "accounts.php#addsuccess":
-                                                    addAccountSuccess();
-                                                    removeHash();
-                                                    break;
-                                                default:
-                                                    break;
-                                            }
-                                        });
-                                        $("#add-account-form").submit(function (e) {
-                                            e.preventDefault();
-                                            if ($(this).valid()) {
-                                                var username = $("#account_username").val();
-                                                var temporarypassword = $("#account_password").val();
-                                                var email = $("#account_email").val();
-                                                var account_type = $("#add_account_type").val();
-                                                var form_data = new FormData();
-                                                var file_data;
-                                                var test = '';
-                                                if (!($("#account_upload").val().length === 0)) {
-                                                    file_data = $("#account_upload").prop('files')[0];
-                                                    form_data.append('file', file_data);
-                                                    var test = 'pic';
-                                                }
-                                                form_data.append('username', username);
-                                                form_data.append('temporarypassword', temporarypassword);
-                                                form_data.append('email', email);
-                                                form_data.append('account_type', account_type);
-                                                form_data.append('test', test);
-                                                $.ajax({
-                                                    type: "POST",
-                                                    dataType: 'text',
-                                                    cache: false,
-                                                    contentType: false,
-                                                    processData: false,
-                                                    url: "database/add_account.php",
-                                                    data: form_data,
-                                                    success: function (text) {
-                                                        if (text === "success") {
-                                                            window.location = window.location + "#addsuccess";
-                                                            location.reload();
-                                                        } else {
-                                                            addAccountFail();
-                                                        }
-                                                    }
-                                                });
-                                            }
-                                        });
-                                        $("#delete-account-submit").click(function () {
-                                            var id = $("#delete-account").attr('data-id');
+                                    $(document).ready(function () {
+                                        var url = window.location.href;
+                                        var array = url.split('/');
+                                        var lastsegment = array[array.length - 1];
+                                        switch (lastsegment) {
+                                            case "accounts.php#editsuccess":
+                                                editAccountSuccess();
+                                                removeHash();
+                                                break;
+                                            case "accounts.php#deletesuccess":
+                                                deleteAccountSuccess();
+                                                removeHash();
+                                                break;
+                                            case "accounts.php#addsuccess":
+                                                addAccountSuccess();
+                                                removeHash();
+                                                break;
+                                            default:
+                                                break;
+                                        }
+                                    });
+                                    $("#add-account-form").submit(function (e) {
+                                        e.preventDefault();
+                                        if ($(this).valid()) {
+                                            var username = $("#account_username").val();
+                                            var temporarypassword = $("#account_password").val();
+                                            var email = $("#account_email").val();
+                                            var account_type = $("#add_account_type").val();
                                             var form_data = new FormData();
-                                            form_data.append('id', id);
+                                            var file_data;
+                                            var test = '';
+                                            if (!($("#account_upload").val().length === 0)) {
+                                                file_data = $("#account_upload").prop('files')[0];
+                                                form_data.append('file', file_data);
+                                                var test = 'pic';
+                                            }
+                                            form_data.append('username', username);
+                                            form_data.append('temporarypassword', temporarypassword);
+                                            form_data.append('email', email);
+                                            form_data.append('account_type', account_type);
+                                            form_data.append('test', test);
                                             $.ajax({
                                                 type: "POST",
                                                 dataType: 'text',
                                                 cache: false,
                                                 contentType: false,
                                                 processData: false,
-                                                url: "database/remove_account.php",
+                                                url: "database/add_account.php",
                                                 data: form_data,
                                                 success: function (text) {
                                                     if (text === "success") {
-                                                        window.location = window.location + "#deletesuccess";
+                                                        window.location = window.location + "#addsuccess";
                                                         location.reload();
-                                                    } else if (text === "oneadmin") {
-                                                        oneAdmin();
                                                     } else {
-                                                        deleteAccountFail();
+                                                        addAccountFail();
                                                     }
                                                 }
                                             });
-                                        });
-                                        $('.editButton').click(function () {
-                                            var id = $(this).attr('data-id');
-                                            $.ajax({
-                                                url: "edit_account.php?id=" + id, cache: false, success: function (result) {
-                                                    $('#modal_edit_content').html(result);
+                                        }
+                                    });
+                                    $("#delete-account-submit").click(function () {
+                                        var id = $("#delete-account").attr('data-id');
+                                        var form_data = new FormData();
+                                        form_data.append('id', id);
+                                        $.ajax({
+                                            type: "POST",
+                                            dataType: 'text',
+                                            cache: false,
+                                            contentType: false,
+                                            processData: false,
+                                            url: "database/remove_account.php",
+                                            data: form_data,
+                                            success: function (text) {
+                                                if (text === "success") {
+                                                    window.location = window.location + "#deletesuccess";
+                                                    location.reload();
+                                                } else if (text === "oneadmin") {
+                                                    oneAdmin();
+                                                } else {
+                                                    deleteAccountFail();
                                                 }
-                                            });
+                                            }
                                         });
-                                        function removeHash() {
-                                            history.pushState("", document.title, window.location.pathname
-                                                    + window.location.search);
-                                        }
-                                        var opts;
-                                        function toastrAlert() {
-                                            opts = {
-                                                "closeButton": true,
-                                                "debug": false,
-                                                "positionClass": "toast-top-full-width",
-                                                "onclick": null,
-                                                "showDuration": "300",
-                                                "hideDuration": "1000",
-                                                "timeOut": "5000",
-                                                "extendedTimeOut": "1000",
-                                                "showEasing": "swing",
-                                                "hideEasing": "linear",
-                                                "showMethod": "fadeIn",
-                                                "hideMethod": "fadeOut"
-                                            };
-                                        }
-                                        function addAccountSuccess() {
-                                            toastrAlert();
-                                            toastr.success("Account successfully added", opts);
-                                        }
-                                        function editAccountSuccess() {
-                                            toastrAlert();
-                                            toastr.success("Account successfully edited", opts);
-                                        }
-                                        function deleteAccountSuccess() {
-                                            toastrAlert();
-                                            toastr.success("Account successfully deleted", opts);
-                                        }
-                                        function addAccountFail() {
-                                            toastrAlert();
-                                            toastr.error("Unfortunately, we ran into some problems trying to add the account", opts);
-                                        }
-                                        function deleteAccountFail() {
-                                            toastrAlert();
-                                            toastr.error("Unfortunately, we ran into some problems trying to delete the account", opts);
-                                        }
-                                        function oneAdmin() {
-                                            toastrAlert();
-                                            toastr.error("You must have at least one admin account", opts);
-                                        }
+                                    });
+                                    $('.editButton').click(function () {
+                                        var id = $(this).attr('data-id');
+                                        $.ajax({
+                                            url: "edit_account.php?id=" + id, cache: false, success: function (result) {
+                                                $('#modal_edit_content').html(result);
+                                            }
+                                        });
+                                    });
+                                    $('.delete-account').click(function () {
+                                        var id = $(this).attr('data-id');
+                                        $.ajax({
+                                            url: "remove_account.php?id=" + id, cache: false, success: function (result) {
+                                                $('#modal_delete_content').html(result);
+                                            }
+                                        });
+                                    });
+                                    function removeHash() {
+                                        history.pushState("", document.title, window.location.pathname
+                                                + window.location.search);
+                                    }
+                                    var opts;
+                                    function toastrAlert() {
+                                        opts = {
+                                            "closeButton": true,
+                                            "debug": false,
+                                            "positionClass": "toast-top-full-width",
+                                            "onclick": null,
+                                            "showDuration": "300",
+                                            "hideDuration": "1000",
+                                            "timeOut": "5000",
+                                            "extendedTimeOut": "1000",
+                                            "showEasing": "swing",
+                                            "hideEasing": "linear",
+                                            "showMethod": "fadeIn",
+                                            "hideMethod": "fadeOut"
+                                        };
+                                    }
+                                    function addAccountSuccess() {
+                                        toastrAlert();
+                                        toastr.success("Account successfully added", opts);
+                                    }
+                                    function editAccountSuccess() {
+                                        toastrAlert();
+                                        toastr.success("Account successfully edited", opts);
+                                    }
+                                    function deleteAccountSuccess() {
+                                        toastrAlert();
+                                        toastr.success("Account successfully deleted", opts);
+                                    }
+                                    function addAccountFail() {
+                                        toastrAlert();
+                                        toastr.error("Unfortunately, we ran into some problems trying to add the account", opts);
+                                    }
+                                    function deleteAccountFail() {
+                                        toastrAlert();
+                                        toastr.error("Unfortunately, we ran into some problems trying to delete the account", opts);
+                                    }
+                                    function oneAdmin() {
+                                        toastrAlert();
+                                        toastr.error("You must have at least one admin account", opts);
+                                    }
         </script>
         <script src="assets/js/bootstrap.js"></script>
     </body>
