@@ -578,7 +578,7 @@ if (!isset($_SESSION['logged_in'])) {
                     "showMethod": "fadeIn",
                     "hideMethod": "fadeOut"
                 };
-                toastr.success("Member successfully added", opts);
+                toastr.success("Member successfully added.", opts);
             }
             function addFail() {
                 opts = {
@@ -595,7 +595,7 @@ if (!isset($_SESSION['logged_in'])) {
                     "showMethod": "fadeIn",
                     "hideMethod": "fadeOut"
                 };
-                toastr.error("Unfortunately, we ran into some problems trying to add the member", opts);
+                toastr.error("Unfortunately, we ran into some problems trying to add the member.", opts);
             }
         </script>
 

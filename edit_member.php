@@ -224,7 +224,7 @@
                     "showMethod": "fadeIn",
                     "hideMethod": "fadeOut"
                 };
-                toastr.error("Unfortunately, we ran into some problems trying to edit the member", opts);
+                toastr.error("Unfortunately, we ran into some problems trying to edit the member.", opts);
             }
             function removeHash() {
                 history.pushState("", document.title, window.location.pathname
