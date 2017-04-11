@@ -131,12 +131,12 @@ if (!isset($_SESSION['logged_in'])) {
                                 </li>
                             </ul>
                         </li>
-<!--                        <li class="">
-                            <a href="">
-                                <i class="entypo-folder"></i>
-                                <span class="title">Reports</span>
-                            </a>
-                        </li>-->
+                        <!--                        <li class="">
+                                                    <a href="">
+                                                        <i class="entypo-folder"></i>
+                                                        <span class="title">Reports</span>
+                                                    </a>
+                                                </li>-->
                         <li class="">
                             <a href="accounts.php">
                                 <i class="entypo-user"></i>
@@ -261,6 +261,14 @@ if (!isset($_SESSION['logged_in'])) {
                                             <input type="text" class="form-control" name="item_name" id="item_name" data-validate="required">
                                         </div>
                                     </div>
+                                    
+                                     <div class="form-group">
+                                        <label for="company_name" class="col-sm-3 control-label">Company Name</label>
+
+                                        <div class="col-sm-5">
+                                            <input type="text" class="form-control" name="company_name" id="company_name" data-validate="required">
+                                        </div>
+                                    </div>
 
                                     <div class="form-group">
                                         <label for="item_category" class="col-sm-3 control-label">Category</label>
@@ -271,7 +279,7 @@ if (!isset($_SESSION['logged_in'])) {
                                                 <?php
                                                 include('database/db_connect.php');
 
-                                                $sql = 'SELECT category FROM item_category';
+                                                $sql = 'SELECT category FROM item_category WHERE status="0"';
                                                 $select_category = mysqli_query($conn, $sql);
                                                 if (!$select_category) {
                                                     echo ("Could not retrieve data" . mysql_error());
@@ -308,14 +316,6 @@ if (!isset($_SESSION['logged_in'])) {
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="field-1" class="col-sm-3 control-label">Register Date</label>
-
-                                        <div class="col-sm-5">
-                                            <input type="text" value="<?php echo date('d/m/Y') ?>" class="form-control" name="item_date" id="item_date" readonly>
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
                                         <label for="item_price" class="col-sm-3 control-label">Cost Price</label>
 
                                         <div class="col-sm-5">
@@ -327,6 +327,30 @@ if (!isset($_SESSION['logged_in'])) {
 
                                         <div class="col-sm-5">
                                             <input type="number" class="form-control" name="item_selling_price" id="item_selling_price" data-validate="required">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="item_unit" class="col-sm-3 control-label">Unit</label>
+
+                                        <div class="col-sm-5">
+                                            <select name="item_unit" id="item_unit" class="form-control" data-validate="required">
+                                                <option value="disabled" disabled selected>Select</option>
+                                                <?php
+                                                include('database/db_connect.php');
+
+                                                $sql = 'SELECT * FROM item_unit WHERE status="0" ';
+                                                $select_unit = mysqli_query($conn, $sql);
+                                                if (!$select_unit) {
+                                                    echo ("Could not retrieve data" . mysql_error());
+                                                }
+                                                while ($row = $select_unit->fetch_assoc()) {
+                                                    $select_unitt = $row['unit'];
+                                                    echo "<option value='$select_unitt'>$select_unitt</option>";
+                                                }
+                                                mysqli_close($conn);
+                                                ?>
+                                            </select>
                                         </div>
                                     </div>
 
