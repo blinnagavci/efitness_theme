@@ -126,12 +126,12 @@ if (!isset($_SESSION['logged_in'])) {
                                 </li>
                             </ul>
                         </li>
-<!--                        <li class="">
-                            <a href="">
-                                <i class="entypo-folder"></i>
-                                <span class="title">Reports</span>
-                            </a>
-                        </li>-->
+                        <!--                        <li class="">
+                                                    <a href="">
+                                                        <i class="entypo-folder"></i>
+                                                        <span class="title">Reports</span>
+                                                    </a>
+                                                </li>-->
                         <li>
                             <a href="accounts.php">
                                 <i class="entypo-user"></i>
@@ -241,7 +241,7 @@ if (!isset($_SESSION['logged_in'])) {
                         <div class="panel panel-primary" data-collapsed="0">
 
                             <div class="panel-heading">
-                                <div class="panel-title">Membership settings</div>
+                                <div class="panel-title">Membership</div>
 
                                 <div class="panel-options">
                                     <a href="#" data-rel="collapse"><i class="entypo-down-open"></i></a>
@@ -307,7 +307,7 @@ if (!isset($_SESSION['logged_in'])) {
                         <div class="panel panel-primary" data-collapsed="0">
 
                             <div class="panel-heading">
-                                <div class="panel-title">Employee settings</div>
+                                <div class="panel-title">Employee type</div>
 
                                 <div class="panel-options">
                                     <a href="#" data-rel="collapse"><i class="entypo-down-open"></i></a>
@@ -369,7 +369,7 @@ if (!isset($_SESSION['logged_in'])) {
                         <div class="panel panel-primary" data-collapsed="0">
 
                             <div class="panel-heading">
-                                <div class="panel-title">Inventory Settings</div>
+                                <div class="panel-title">Category</div>
 
                                 <div class="panel-options">
                                     <a href="#" data-rel="collapse"><i class="entypo-down-open"></i></a>
@@ -383,17 +383,25 @@ if (!isset($_SESSION['logged_in'])) {
                                     <div class="form-group">
                                         <label for="employeetype_settings" class="col-sm-3 control-label" >New item category</label>
 
-                                        <div class="col-sm-5">
-                                            <div class="input-group">
-                                                <input type="text"  name="item_category_settings" id="item_category_settings" class="form-control" data-validate="required">
+                                        <div class="col-md-5">
+                                            <input type="text"  name="item_category_settings" id="item_category_settings" class="form-control" data-validate="required">
+
+                                            <div class="input-group" style="margin-top: 10px;">
+                                                <select name="item_category_sellable" id="item_category_sellable" class="form-control" data-validate="required">
+                                                    <option value="disabled" disabled selected>Select</option>
+                                                    <option value="0">Sellable</option>
+                                                    <option value="1">Not sellable</option>
+                                                </select>
                                                 <span class="input-group-btn">
                                                     <button type="submit" name="add_item_category_submit" id="add_item_category_submit" class="width-72 btn btn-primary">Add</button>
                                                 </span>
                                             </div>
                                         </div>
+
+
                                     </div>
-                                    <div class="form-group">
-                                    </div>
+                                    <div class="form-group"></div>
+
                                 </form>
                                 <form action='database/remove_item_category.php' method="POST" role="form" class="form-horizontal form-groups-bordered validate">
 
@@ -428,12 +436,12 @@ if (!isset($_SESSION['logged_in'])) {
                                 </form>
                             </div>
                         </div>
-                        
-                        
+
+
                         <div class="panel panel-primary" data-collapsed="0">
 
                             <div class="panel-heading">
-                                <div class="panel-title">Inventory Settings</div>
+                                <div class="panel-title">Unit</div>
 
                                 <div class="panel-options">
                                     <a href="#" data-rel="collapse"><i class="entypo-down-open"></i></a>
@@ -492,7 +500,7 @@ if (!isset($_SESSION['logged_in'])) {
                                 </form>
                             </div>
                         </div>
-                        
+
                     </div>
                 </div>
                 <footer class="main">

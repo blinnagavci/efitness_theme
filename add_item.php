@@ -261,8 +261,8 @@ if (!isset($_SESSION['logged_in'])) {
                                             <input type="text" class="form-control" name="item_name" id="item_name" data-validate="required">
                                         </div>
                                     </div>
-                                    
-                                     <div class="form-group">
+
+                                    <div class="form-group">
                                         <label for="company_name" class="col-sm-3 control-label">Company Name</label>
 
                                         <div class="col-sm-5">
@@ -288,23 +288,30 @@ if (!isset($_SESSION['logged_in'])) {
                                                     $item_category = $row['category'];
                                                     echo "<option value='$item_category'>$item_category</option>";
                                                 }
-                                                mysqli_close($conn);
                                                 ?>
                                             </select>
                                         </div>
-                                        <script type="text/javascript">
+
+<!--                                        <script type="text/javascript">
                                             $("#item_category").change(function () {
-                                                var val = $("#item_category").val();
-                                                if (val === "Equipment") {
+                                                <?php
+                                               // $test = $_GET['item_category'];
+                                                //$category_s = mysqli_query($conn, "SELECT sellable FROM item_category WHERE sellable = '$test'");
+                                                //$sellable = mysqli_fetch_row($category_s);                                                
+                                                ?>
+                                                
+                                                var val = '<?php //echo $sellable[0]; ?>';
+                                                console.log(val);
+                                                if (val === "1") {
                                                     if ($(".form-group").hasClass("selling-price")) {
                                                         $(".selling-price").addClass("hide");
                                                         $(".selling-price input").attr("data-validate: ''");
                                                     }
-                                                } else if (val !== "Equipment") {
+                                                } else if (val !== "1") {
                                                     $(".selling-price").removeClass("hide");
                                                 }
                                             });
-                                        </script>
+                                        </script>-->
                                     </div>
 
                                     <div class="form-group">
