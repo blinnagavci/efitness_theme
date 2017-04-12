@@ -402,7 +402,7 @@ if (!isset($_SESSION['logged_in'])) {
 
                                         <div class="col-sm-5">
                                             <div class="input-group">
-                                                <select name="remove_item_category_select" class="form-control" data-validate="required" id="remove_item_category_select">
+                                                <select id="remove_item_category_select" name="remove_item_category_select" class="form-control" data-validate="required">
                                                     <option value="disabled" disabled selected>Select</option>
                                                     <?php
                                                     include('database/db_connect.php');
@@ -428,6 +428,71 @@ if (!isset($_SESSION['logged_in'])) {
                                 </form>
                             </div>
                         </div>
+                        
+                        
+                        <div class="panel panel-primary" data-collapsed="0">
+
+                            <div class="panel-heading">
+                                <div class="panel-title">Inventory Settings</div>
+
+                                <div class="panel-options">
+                                    <a href="#" data-rel="collapse"><i class="entypo-down-open"></i></a>
+                                </div>
+                            </div>
+
+                            <div class="panel-body">
+
+                                <form action='database/add_item_unit.php' method="POST" role="form" class="form-horizontal form-groups-bordered validate">
+
+                                    <div class="form-group">
+                                        <label for="item_unit_settings" class="col-sm-3 control-label" >New item unit</label>
+
+                                        <div class="col-sm-5">
+                                            <div class="input-group">
+                                                <input type="text" id="item_unit_settings" name="item_unit_settings" class="form-control" data-validate="required">
+                                                <span class="input-group-btn">
+                                                    <button type="submit" name="add_item_unit_submit" id="add_item_unit_submit" class="width-72 btn btn-primary">Add</button>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                    </div>
+                                </form>
+                                <form action='database/remove_item_unit.php' method="POST" role="form" class="form-horizontal form-groups-bordered validate">
+
+                                    <div class="form-group">
+                                        <label for="remove_item_unit_select" class="col-sm-3 control-label">Item units</label>
+
+                                        <div class="col-sm-5">
+                                            <div class="input-group">
+                                                <select id="remove_item_unit_select" name="remove_item_unit_select" class="form-control" data-validate="required">
+                                                    <option value="disabled" disabled selected>Select</option>
+                                                    <?php
+                                                    include('database/db_connect.php');
+                                                    $sql4 = 'SELECT unit FROM item_unit WHERE status= "0"';
+                                                    $retval4 = mysqli_query($conn, $sql4);
+                                                    if (!$retval4) {
+                                                        echo ("Could not retrieve data" . mysql_error());
+                                                    }
+                                                    while ($row = $retval4->fetch_assoc()) {
+                                                        $itemunit = $row['unit'];
+                                                        echo "<option value='$itemunit'>$itemunit</option>";
+                                                    }
+                                                    mysqli_close($conn);
+                                                    ?>
+
+                                                </select>
+                                                <span class="input-group-btn">
+                                                    <button type="submit" name="remove_item_unit_submit" id="remove_item_unit_submit" class="btn btn-primary">Remove</button>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        
                     </div>
                 </div>
                 <footer class="main">
