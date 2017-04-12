@@ -268,6 +268,8 @@ if (!isset($_SESSION['logged_in'])) {
                             <th>ID</th>
                             <th>Name</th>
                             <th>Category</th>
+                            <th>Unit</th>
+                            <th>Company Name</th>
                             <th>Barcode</th>
                             <th>Selling Price</th>
                             <th>Quantity</th>
@@ -278,9 +280,19 @@ if (!isset($_SESSION['logged_in'])) {
                     <tbody>
                         <?php while ($row = $result->fetch_assoc()): ?>
                             <tr>
+                                <?php $tempCategoryID = $row['category_id'] ?>
+                                <?php $tempUnitID = $row['unit_id'] ?>
                                 <td><?php echo $row['id'] ?></td>
                                 <td><?php echo $row['name'] ?></td>
-                                <td><?php echo $row['category'] ?></td>
+                                <?php $sql1 = "SELECT category FROM item_category where id= '$tempCategoryID'";
+                                $result1 = $conn->query($sql1);
+                                $row1 = $result1->fetch_assoc(); ?>
+                                <td><?php echo $row1['category'] ?></td>
+                                <?php $sql2 = "SELECT unit FROM item_unit where id= '$tempUnitID'";
+                                $result2 = $conn->query($sql2);
+                                $row2 = $result2->fetch_assoc(); ?>
+                                <td><?php echo $row2['unit'] ?></td>
+                                <td><?php echo $row['company_name'] ?></td>
                                 <td><?php echo $row['barcode'] ?></td>
                                 <td><?php echo $row['selling_price'] ?></td>
                                 <td><?php echo $row['quantity'] ?></td>
