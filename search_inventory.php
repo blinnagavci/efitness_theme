@@ -250,6 +250,8 @@ if (!isset($_SESSION['logged_in'])) {
                                 null,
                                 null,
                                 null,
+                                null,
+                                null,
                                 {"bSortable": false}
                             ],
                             buttons: [
@@ -302,14 +304,18 @@ if (!isset($_SESSION['logged_in'])) {
                                         Edit
                                     </a>
 
-                                    <a href="javascript:;" onclick="jQuery('#modal-delete').modal('show', {backdrop: 'static'});" name="remove_item" class="btn btn-danger btn-sm btn-icon icon-left">
+                                    <a href="#" class="btn btn-danger btn-sm btn-icon icon-left">
                                         <i class="entypo-cancel"></i>
                                         Delete
                                     </a>
 
                                     <a href="#" class="btn btn-info btn-sm btn-icon icon-left">
-                                        <i class="entypo-info"></i>
-                                        Details
+                                        <i class="entypo-plus"></i>
+                                        Add
+                                    </a>
+                                    <a href="#" class="btn btn-sm btn-icon btn-green icon-left">
+                                        <i class="entypo-minus"></i>
+                                        Sell
                                     </a>
                                 </td>
                             </tr>
