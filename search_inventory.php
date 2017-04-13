@@ -241,8 +241,12 @@ if (!isset($_SESSION['logged_in'])) {
 
                         // Initialize DataTable
                         $table2.DataTable({
+                            "autoWidth": false,
                             "sDom": "Bfrtip",
                             "iDisplayLength": 10,
+//                            "columnDefs": [
+//                                {"width": "20%", "targets": 0}
+//                            ],
                             "aoColumns": [
                                 null,
                                 null,
@@ -250,7 +254,7 @@ if (!isset($_SESSION['logged_in'])) {
                                 null,
                                 null,
                                 null,
-                                null,
+                                {"width": "20px"},
                                 null,
                                 {"bSortable": false}
                             ],
@@ -286,13 +290,17 @@ if (!isset($_SESSION['logged_in'])) {
                                 <?php $tempUnitID = $row['unit_id'] ?>
                                 <td><?php echo $row['id'] ?></td>
                                 <td><?php echo $row['name'] ?></td>
-                                <?php $sql1 = "SELECT category FROM item_category where id= '$tempCategoryID'";
+                                <?php
+                                $sql1 = "SELECT category FROM item_category where id= '$tempCategoryID'";
                                 $result1 = $conn->query($sql1);
-                                $row1 = $result1->fetch_assoc(); ?>
+                                $row1 = $result1->fetch_assoc();
+                                ?>
                                 <td><?php echo $row1['category'] ?></td>
-                                <?php $sql2 = "SELECT unit FROM item_unit where id= '$tempUnitID'";
+                                <?php
+                                $sql2 = "SELECT unit FROM item_unit where id= '$tempUnitID'";
                                 $result2 = $conn->query($sql2);
-                                $row2 = $result2->fetch_assoc(); ?>
+                                $row2 = $result2->fetch_assoc();
+                                ?>
                                 <td><?php echo $row2['unit'] ?></td>
                                 <td><?php echo $row['company_name'] ?></td>
                                 <td><?php echo $row['barcode'] ?></td>
@@ -309,7 +317,7 @@ if (!isset($_SESSION['logged_in'])) {
                                         Delete
                                     </a>
 
-                                    <a href="#" class="btn btn-info btn-sm btn-icon icon-left">
+                                    <a href="#" class="btn btn-info btn-sm btn-icon icon-left addButton" data-toggle='modal' data-target='#modal_add'  data-id='<?php echo $row["id"]; ?>'>
                                         <i class="entypo-plus"></i>
                                         Add
                                     </a>
@@ -343,11 +351,35 @@ if (!isset($_SESSION['logged_in'])) {
                     </tbody>
                 </table>
                 <br />
+                <div id="modal_add" class="modal fade" role="dialog">
+                    <div class="modal-dialog">
+
+                        <!-- Modal content-->
+                        <div class="modal-content" id="modal_add_content">
+
+                        </div>
+
+                    </div>
+                </div>
                 <footer class="main">
                     <strong>E-Fitness 2017 </strong>&copy; All Rights Reserved
                 </footer>
             </div>
         </div>
+        <script>
+
+            $(document).ready(function () {
+                $('.addButton').click(function () {
+                    var id = $(this).attr('data-id');
+                    $.ajax({
+                        url: "add_item_quantity.php?id=" + id, cache: false, success: function (result) {
+                            $('#modal_add_content').html(result);
+                        }
+                    });
+                });
+            });
+
+        </script>
 
         <!-- Imported styles on this page -->
         <link rel="stylesheet" href="assets/js/datatables/datatables.css">

@@ -294,20 +294,22 @@ if (!isset($_SESSION['logged_in'])) {
 
 <!--                                        <script type="text/javascript">
                                             $("#item_category").change(function () {
-                                                <?php
-                                               // $test = $_GET['item_category'];
-                                                //$category_s = mysqli_query($conn, "SELECT sellable FROM item_category WHERE sellable = '$test'");
-                                                //$sellable = mysqli_fetch_row($category_s);                                                
-                                                ?>
-                                                
-                                                var val = '<?php //echo $sellable[0]; ?>';
+
+                                                var model = $('#item_category').val();
+                                        <?php
+                                        //$test = $_GET['item_category'];
+                                        //$category_s = mysqli_query($conn, "SELECT sellable FROM item_category WHERE sellable = '$test'");
+                                        //$sellable = mysqli_fetch_row($category_s);
+                                        ?>
+
+                                                var val = '<?php //echo $sellable[0];      ?>';
                                                 console.log(val);
-                                                if (val === "1") {
+                                                if (val == '1') {
                                                     if ($(".form-group").hasClass("selling-price")) {
                                                         $(".selling-price").addClass("hide");
                                                         $(".selling-price input").attr("data-validate: ''");
                                                     }
-                                                } else if (val !== "1") {
+                                                } else if (val != '1') {
                                                     $(".selling-price").removeClass("hide");
                                                 }
                                             });
@@ -323,10 +325,10 @@ if (!isset($_SESSION['logged_in'])) {
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="item_price" class="col-sm-3 control-label">Cost Price</label>
+                                        <label for="item_price" class="col-sm-3 control-label ">Cost Price</label>
 
                                         <div class="col-sm-5">
-                                            <input type="number" class="form-control" name="item_price" id="item_price" data-validate="required">
+                                            <input type="number" class="form-control totalControl" name="item_price" id="item_price" data-validate="required">
                                         </div>
                                     </div>
                                     <div class="form-group selling-price">
@@ -361,26 +363,37 @@ if (!isset($_SESSION['logged_in'])) {
                                         </div>
                                     </div>
 
+                                                                      
                                     <div class="form-group">
-                                        <label class="col-sm-3 control-label">Quantity</label>
+                                        <label for="item_quantity" class="col-sm-3 control-label">Quantity</label>
 
                                         <div class="col-sm-5">
-
-                                            <!-- Spinner Markup -->
-                                            <div class="input-spinner">
-                                                <button type="button" class="btn btn-default">-</button>
-                                                <input type="text" class="form-control size-1" value="1" name="item_quantity" id="item_quantity" data-validate="number,minlength[1]" />
-                                                <button type="button" class="btn btn-default">+</button>
-                                            </div>
-
+                                            <input type="number" class="form-control totalControl" name="item_quantity" id="item_quantity" value="1" data-validate="required">
                                         </div>
                                     </div>
+
+                                    <div class="form-group">
+                                        <label for="item_tax" class="col-sm-3 control-label">Tax</label>
+
+                                        <div class="col-sm-5">
+                                            <input type="number" class="form-control totalControl" name="item_tax" id="item_tax" data-validate="required" value="18.00" readonly ondblclick="this.readOnly = ''; value = '';">
+                                            <p class="double-click" style="margin: 10px 0px 0px 0px">Double click to change the tax value</p>
+                                        </div>
+                                    </div>                
+
+                                    <div class="form-group">
+                                        <label for="item_total" class="col-sm-3 control-label">TOTAL</label>
+
+                                        <div class="col-sm-5">
+                                            <input type="number" class="form-control" name="item_total" id="item_total" data-validate="required" value="0.00" readonly>
+                                        </div>
+                                    </div>
+
                                     <div class="form-group">
                                         <div class="col-sm-offset-3 col-sm-5">
                                             <button type="submit" name="add_item" class="btn btn-block btn-primary">Add Item</button>
                                         </div>
                                     </div>
-
                                 </form>
                             </div>
                         </div>
@@ -392,6 +405,21 @@ if (!isset($_SESSION['logged_in'])) {
                 </footer>
             </div>
         </div>
+        <script type="text/javascript">
+            $(".totalControl").change(function () {
+                var price = $('#item_price').val();
+                var quantity = $('#item_quantity').val();
+                var tax = $('#item_tax').val();
+                var temporary = tax / 100;
+                var realTax = (price * quantity) * temporary;
+                
+                var total = (price * quantity) + realTax;
+                
+                console.log(total);
+                
+                $('#item_total').val(total);
+            });
+        </script>
 
 
         <link rel="stylesheet" href="assets/js/jvectormap/jquery-jvectormap-1.2.2.css">
