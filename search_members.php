@@ -267,6 +267,7 @@ if (!isset($_SESSION['logged_in'])) {
 
                         // Initialize DataTable
                         $table2.DataTable({
+                            "autoWidth": false,
                             "sDom": "Bfrtip",
                             "iDisplayLength": 10,
                             "aoColumns": [

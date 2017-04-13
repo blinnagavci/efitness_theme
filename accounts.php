@@ -232,6 +232,7 @@ if (!isset($_SESSION['logged_in'])) {
                         var $table3 = jQuery("#table-accounts");
                         // Initialize DataTable
                         $table3.DataTable({
+                            "autoWidth": false,
                             "sDom": "Bfrtip",
                             "iDisplayLength": 10,
                             "aoColumns": [

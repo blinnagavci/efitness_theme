@@ -258,6 +258,7 @@ if (!isset($_SESSION['logged_in'])) {
 
                         // Initialize DataTable
                         $table_employees.DataTable({
+                            "autoWidth": false,
                             "sDom": "Bfrtip",
                             "iDisplayLength": 10,
                             "aoColumns": [
