@@ -252,52 +252,18 @@ if (!isset($_SESSION['logged_in'])) {
 
                                 <form action='database/add_membership.php' method="POST" role="form" class="form-horizontal form-groups-bordered validate">
                                     <div class="form-group">
-                                        <label for="membership_name" class="col-sm-3 control-label" >Membership name</label>
+                                        <label for="membership_name" class="col-sm-3 control-label" >Membership type</label>
 
                                         <div class="col-sm-5">
-                                            <input type="text" id="membership_name" name="membership_name" class="form-control" data-validate="required">
+                                            <input type="text" id="membership_type" name="membership_type" class="form-control" data-validate="required">
                                         </div>
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="membership_offer_name" class="col-sm-3 control-label" >Offer</label>
+                                        <label for="membership_offer_name" class="col-sm-3 control-label" >Offer (optional description)</label>
 
                                         <div class="col-sm-5">
-                                            <input type="text" id="membership_offer_name" name="membership_offer_name" class="form-control" data-validate="required">
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="membership_payment_amount" class="col-sm-3 control-label" >Amount</label>
-
-                                        <div class="col-sm-5">
-                                            <input type="text" id="membership_payment_amount" name="membership_payment_amount" class="form-control" data-validate="required">
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="branches_select" class="col-sm-3 control-label">Branches</label>
-
-                                        <div class="col-sm-5">
-
-                                            <select name="branches_select" class="select2" multiple data-validate="required">
-                                                <?php
-                                                include('database/db_connect.php');
-                                                $sqlb = 'SELECT * FROM branches WHERE status= "0"';
-                                                $retvalb = mysqli_query($conn, $sqlb);
-                                                if (!$retvalb) {
-                                                    echo ("Could not retrieve data" . mysql_error());
-                                                }
-                                                while ($rowb = $retvalb->fetch_assoc()) {
-                                                    $branch_temp_id = $rowb['id'];
-                                                    $branch_city = $rowb['city'];
-                                                    $branch_name = $rowb['branch'];
-                                                    echo "<option value='$branch_temp_id'>$branch_city, $branch_name</option>";
-                                                }
-                                                mysqli_close($conn);
-                                                ?>
-                                            </select>
-
+                                            <input type="text" id="membership_offer_name" name="membership_offer_name" class="form-control">
                                         </div>
                                     </div>
 
@@ -326,10 +292,10 @@ if (!isset($_SESSION['logged_in'])) {
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="membershiptype_settings" class="col-sm-3 control-label" ></label>
+                                        <label for="membership_payment_amount" class="col-sm-3 control-label" >Amount</label>
                                         <div class="col-sm-5">
                                             <div class="input-group">
-                                                <input type="text"  name="membershiptype_settings" id="membershiptype_settings" class="form-control" data-validate="required">
+                                                <input type="text"  name="membership_payment_amount" id="membership_payment_amount" class="form-control" data-validate="required">
                                                 <span class="input-group-btn">
                                                     <button type="submit" name="add_membership_submit" id="add_membership_submit" class="width-72 btn btn-primary">Add</button>
                                                 </span>
@@ -353,14 +319,21 @@ if (!isset($_SESSION['logged_in'])) {
 
                                                     <?php
                                                     include('database/db_connect.php');
-                                                    $sql = 'SELECT membership_type FROM membership WHERE status= "0"';
+                                                    $sql = 'SELECT * FROM membership WHERE status= "0"';
                                                     $retval = mysqli_query($conn, $sql);
                                                     if (!$retval) {
                                                         echo ("Could not retrieve data" . mysql_error());
                                                     }
                                                     while ($row = $retval->fetch_assoc()) {
+                                                        $tempId = $row['id'];
                                                         $membership = $row['membership_type'];
-                                                        echo "<option value='$membership'>$membership</option>";
+                                                        $offer = $row['offer'];
+                                                        if($offer===""){
+                                                            echo "<option value='$tempId'>$membership</option>";
+                                                        }
+                                                        else{
+                                                            echo "<option value='$tempId'>$membership, $offer</option>";
+                                                        }
                                                     }
                                                     mysqli_close($conn);
                                                     ?>
@@ -418,14 +391,15 @@ if (!isset($_SESSION['logged_in'])) {
                                                     <option value="disabled" disabled selected>Select</option>
                                                     <?php
                                                     include('database/db_connect.php');
-                                                    $sql1 = 'SELECT employee_type FROM employee_type WHERE status= "0"';
+                                                    $sql1 = 'SELECT id, employee_type FROM employee_type WHERE status= "0"';
                                                     $retval1 = mysqli_query($conn, $sql1);
                                                     if (!$retval1) {
                                                         echo ("Could not retrieve data" . mysql_error());
                                                     }
                                                     while ($row = $retval1->fetch_assoc()) {
+                                                        $employeeId = $row['id'];
                                                         $employeetype = $row['employee_type'];
-                                                        echo "<option value='$employeetype'>$employeetype</option>";
+                                                        echo "<option value='$employeeId'>$employeetype</option>";
                                                     }
                                                     mysqli_close($conn);
                                                     ?>
@@ -489,14 +463,15 @@ if (!isset($_SESSION['logged_in'])) {
                                                     <option value="disabled" disabled selected>Select</option>
                                                     <?php
                                                     include('database/db_connect.php');
-                                                    $sql2 = 'SELECT category FROM item_category WHERE status= "0"';
+                                                    $sql2 = 'SELECT id, category FROM item_category WHERE status= "0"';
                                                     $retval2 = mysqli_query($conn, $sql2);
                                                     if (!$retval2) {
                                                         echo ("Could not retrieve data" . mysql_error());
                                                     }
                                                     while ($row = $retval2->fetch_assoc()) {
+                                                        $itemcategoryId = $row['id'];
                                                         $itemcategory = $row['category'];
-                                                        echo "<option value='$itemcategory'>$itemcategory</option>";
+                                                        echo "<option value='$itemcategoryId'>$itemcategory</option>";
                                                     }
                                                     mysqli_close($conn);
                                                     ?>
@@ -553,14 +528,15 @@ if (!isset($_SESSION['logged_in'])) {
                                                     <option value="disabled" disabled selected>Select</option>
                                                     <?php
                                                     include('database/db_connect.php');
-                                                    $sql4 = 'SELECT unit FROM item_unit WHERE status= "0"';
+                                                    $sql4 = 'SELECT id, unit FROM item_unit WHERE status= "0"';
                                                     $retval4 = mysqli_query($conn, $sql4);
                                                     if (!$retval4) {
                                                         echo ("Could not retrieve data" . mysql_error());
                                                     }
                                                     while ($row = $retval4->fetch_assoc()) {
+                                                        $itemunitId = $row['id'];
                                                         $itemunit = $row['unit'];
-                                                        echo "<option value='$itemunit'>$itemunit</option>";
+                                                        echo "<option value='$itemunitId'>$itemunit</option>";
                                                     }
                                                     mysqli_close($conn);
                                                     ?>

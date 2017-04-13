@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 13, 2017 at 02:20 PM
+-- Generation Time: Apr 13, 2017 at 08:42 PM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 5.6.24
 
@@ -247,9 +247,7 @@ INSERT INTO `item_unit` (`id`, `unit`, `status`) VALUES
 (1, 'KG', 0),
 (2, 'Litre', 0),
 (3, 'Pound', 0),
-(4, 'Piece', 0),
-(5, 'Piece', 0),
-(6, 'Pound', 0);
+(4, 'Piece', 0);
 
 -- --------------------------------------------------------
 
@@ -292,7 +290,7 @@ CREATE TABLE `membership` (
   `offer` varchar(255) DEFAULT NULL,
   `amount` double NOT NULL,
   `branches` varchar(255) NOT NULL,
-  `status` int(11) NOT NULL
+  `status` int(11) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -300,9 +298,12 @@ CREATE TABLE `membership` (
 --
 
 INSERT INTO `membership` (`id`, `membership_type`, `offer`, `amount`, `branches`, `status`) VALUES
-(1, 'Daily', '', 0, '', 0),
-(2, 'Weekly', '', 0, '', 0),
-(3, 'Monthly', '', 0, '', 0);
+(1, 'Daily', '', 2, '1,2,3,4,5,6,7,8', 0),
+(2, 'Weekly', '', 15, '1,2,3,4,5,6,7,8', 0),
+(3, 'Monthly', '', 30, '1,2,3,4,5,6,7,8', 0),
+(4, '6 Months', '', 150, '1,2,3,4,5,6,7,8', 0),
+(5, 'Yearly', '', 300, '1,2,3,4,5,6,7,8', 0),
+(6, 'Yearly', 'Dragodan', 270, '1', 0);
 
 -- --------------------------------------------------------
 
@@ -463,7 +464,7 @@ ALTER TABLE `item_payment_out`
 -- AUTO_INCREMENT for table `item_unit`
 --
 ALTER TABLE `item_unit`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `member`
 --
@@ -473,7 +474,7 @@ ALTER TABLE `member`
 -- AUTO_INCREMENT for table `membership`
 --
 ALTER TABLE `membership`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `membership_payment`
 --

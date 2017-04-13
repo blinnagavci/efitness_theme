@@ -3,9 +3,9 @@
 require('db_connect.php');
 
 if (isset($_POST['remove_employee_type_submit'])) {
-    $employeetype = filter_input(INPUT_POST, 'remove_employee_type_select');
+    $employeeId = filter_input(INPUT_POST, 'remove_employee_type_select');
 
-    $sql = "UPDATE employee_type SET status='1' WHERE employee_type = '$employeetype'";
+    $sql = "UPDATE employee_type SET status='1' WHERE id = '$employeeId'";
 
     $retval1 = mysqli_query($conn, $sql);
     if (!$retval1) {

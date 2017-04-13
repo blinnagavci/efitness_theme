@@ -3,9 +3,9 @@
 require('db_connect.php');
 
 if (isset($_POST['remove_item_unit_submit'])) {
-    $itemunit = filter_input(INPUT_POST, 'remove_item_unit_select');
+    $itemunitId = filter_input(INPUT_POST, 'remove_item_unit_select');
 
-    $sql = "UPDATE item_unit SET status='1' WHERE unit = '$itemunit'";
+    $sql = "UPDATE item_unit SET status='1' WHERE id = '$itemunitId'";
 
     $retval1 = mysqli_query($conn, $sql);
     if (!$retval1) {

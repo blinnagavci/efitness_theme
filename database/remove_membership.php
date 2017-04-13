@@ -3,9 +3,9 @@
 require('db_connect.php');
 
 if (isset($_POST['remove_membership_submit'])) {
-    $membershiptype = $_POST['remove_membership_select'];
+    $membershipId = $_POST['remove_membership_select'];
 
-    $sql = "UPDATE membership SET status='1' WHERE membership_type = '$membershiptype'";
+    $sql = "UPDATE membership SET status='1' WHERE id = '$membershipId'";
 
     $retval1 = mysqli_query($conn, $sql);
     if (!$retval1) {

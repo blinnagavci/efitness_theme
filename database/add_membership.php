@@ -3,10 +3,14 @@
 require('db_connect.php');
 
 if (isset($_POST['add_membership_submit'])) {
-    $membership_type = $_POST['membershiptype_settings'];
+    $membership_type = $_POST['membership_type'];
+    $membership_offer_name = $_POST['membership_offer_name'];
+    $branches = implode(',', $_POST['branches_select_multiple']);
+    $membership_payment_amount = $_POST['membership_payment_amount'];
 
-    $sql = "INSERT INTO membership (membership_type, status)
-    VALUES ('$membership_type', '0')";
+
+    $sql = "INSERT INTO membership (membership_type, offer, amount, branches)
+    VALUES ('$membership_type', '$membership_offer_name', '$membership_payment_amount', '$branches')";
 
     $retval1 = mysqli_query($conn, $sql);
 

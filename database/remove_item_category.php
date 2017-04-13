@@ -3,9 +3,9 @@
 require('db_connect.php');
 
 if (isset($_POST['remove_item_category_submit'])) {
-    $itemcategory = filter_input(INPUT_POST, 'remove_item_category_select');
+    $itemcategoryId = filter_input(INPUT_POST, 'remove_item_category_select');
 
-    $sql = "UPDATE item_category SET status='1' WHERE category = '$itemcategory'";
+    $sql = "UPDATE item_category SET status='1' WHERE id = '$itemcategoryId'";
 
     $retval1 = mysqli_query($conn, $sql);
     if (!$retval1) {
