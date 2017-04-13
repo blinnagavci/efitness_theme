@@ -143,12 +143,12 @@ if (!isset($_SESSION['logged_in'])) {
                                 </li>
                             </ul>
                         </li>
-<!--                        <li class="">
-                            <a href="">
-                                <i class="entypo-folder"></i>
-                                <span class="title">Reports</span>
-                            </a>
-                        </li>-->
+                        <!--                        <li class="">
+                                                    <a href="">
+                                                        <i class="entypo-folder"></i>
+                                                        <span class="title">Reports</span>
+                                                    </a>
+                                                </li>-->
                         <li class="">
                             <a href="accounts.php">
                                 <i class="entypo-user"></i>
@@ -284,12 +284,12 @@ if (!isset($_SESSION['logged_in'])) {
                     <thead>
                         <tr>
                             <th>ID</th>
-                            <th>First Name</th>
-                            <th>Last Name</th>
+                            <th>Full Name</th>
                             <th>Gender</th>
                             <th>City</th>
                             <th>Date of Birth</th>
                             <th>Phone no.</th>
+                            <th>Position</th>
                             <th>Options</th>
                         </tr>
                     </thead>
@@ -298,12 +298,19 @@ if (!isset($_SESSION['logged_in'])) {
                         <?php while ($row = $result->fetch_assoc()): ?>
                             <tr>
                                 <td><?php echo $row['id'] ?></td>
-                                <td><?php echo $row['first_name'] ?></td>
-                                <td><?php echo $row['last_name'] ?></td>
+                                <td><?php echo $row['first_name'] . ' ', $row['last_name'] ?></td>
                                 <td><?php echo $row['gender'] ?></td>
                                 <td><?php echo $row['city'] ?></td>
                                 <td><?php echo $row['birth_date'] ?></td>
                                 <td><?php echo $row['telephone_no'] ?></td>
+                                <?php
+                                $employeeID = $row['id'];
+                                $employeeLastestContract = mysqli_query($conn, "SELECT employee_type_id from employee_contract WHERE employee_id ='$employeeID' ORDER BY id DESC");
+                                $employeeContract = mysqli_fetch_row($employeeLastestContract);
+                                $employeeJobPosition = mysqli_query($conn, "SELECT employee_type from employee_type WHERE id ='$employeeContract[0]'");
+                                $employeeJob = mysqli_fetch_row($employeeJobPosition);
+                                ?>
+                                <td><?php echo $employeeJob[0] ?></td>
                                 <td>
                                     <a href="#" class="btn btn-default btn-sm btn-icon icon-left editButton" data-toggle='modal' data-target='#modal_edit'  data-id='<?php echo $row["id"]; ?>'>
                                         <i class="entypo-pencil"></i>

@@ -276,7 +276,6 @@ if (!isset($_SESSION['logged_in'])) {
                                 null,
                                 null,
                                 null,
-                                null,
                                 {"bSortable": false}
                             ],
                             buttons: [
@@ -293,8 +292,7 @@ if (!isset($_SESSION['logged_in'])) {
                     <thead>
                         <tr>
                             <th>ID</th>
-                            <th>First Name</th>
-                            <th>Last Name</th>
+                            <th>Full Name</th>
                             <th>Gender</th>
                             <th>City</th>
                             <th>Date of Birth</th>
@@ -307,8 +305,7 @@ if (!isset($_SESSION['logged_in'])) {
                         <?php while ($row = $result->fetch_assoc()): ?>
                             <tr>
                                 <td><?php echo $row['id'] ?></td>
-                                <td><?php echo $row['first_name'] ?></td>
-                                <td><?php echo $row['last_name'] ?></td>
+                                <td><?php echo $row['first_name'] . ' ' . $row['last_name'] ?></td>
                                 <td><?php echo $row['gender'] ?></td>
                                 <td><?php echo $row['city'] ?></td>
                                 <td><?php echo $row['birth_date'] ?></td>
