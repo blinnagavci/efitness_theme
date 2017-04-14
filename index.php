@@ -138,7 +138,7 @@ if (!isset($_SESSION['logged_in'])) {
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="sales.php">
+                                    <a href="payments.php">
                                         <span class="title">Sales</span>
                                     </a>
                                 </li>

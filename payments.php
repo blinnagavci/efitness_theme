@@ -17,7 +17,7 @@ if (!isset($_SESSION['logged_in'])) {
 
         <link rel="icon" href="assets/images/favicon.ico">
 
-        <title>E-Fitness | Search inventory</title>
+        <title>E-Fitness | Payments</title>
 
         <link rel="stylesheet" href="assets/js/jquery-ui/css/no-theme/jquery-ui-1.10.3.custom.min.css">
         <link rel="stylesheet" href="assets/css/font-icons/entypo/css/entypo.css">
@@ -121,14 +121,14 @@ if (!isset($_SESSION['logged_in'])) {
                                         <span class="title">Add item</span>
                                     </a>
                                 </li>
-                                <li class="active">
+                                <li >
                                     <a href="search_inventory.php">
                                         <span class="title">Search inventory</span>
                                     </a>
                                 </li>
-                                <li>
+                                <li class="active">
                                     <a href="payments.php">
-                                        <span class="title">Sales</span>
+                                        <span class="title">Payments</span>
                                     </a>
                                 </li>
                             </ul>
@@ -224,185 +224,183 @@ if (!isset($_SESSION['logged_in'])) {
                         Inventory
                     </li>
                     <li class="active">
-                        <strong>Search inventory</strong>
+                        <strong>Payments</strong>
                     </li>
                 </ol>
-                <?php
-                $sql = "SELECT * FROM item where status='0'";
-                $result = $conn->query($sql);
 
-                // output data of each row
-                ?>
-                <h2>Search inventory</h2>
+                <h2>Payments</h2>
                 <br />
-                <script type="text/javascript">
-                    jQuery(window).load(function () {
-                        var $table2 = jQuery("#table-2");
+                <div class="row">
+                    <div class="col-md-12">
 
-                        // Initialize DataTable
-                        $table2.DataTable({
-                            "autoWidth": false,
-                            "sDom": "Bfrtip",
-                            "iDisplayLength": 10,
-//                            "columnDefs": [
-//                                {"width": "20%", "targets": 0}
-//                            ],
-                            "aoColumns": [
-                                null,
-                                null,
-                                null,
-                                null,
-                                null,
-                                null,
-                                {"width": "20px"},
-                                null,
-                                {"bSortable": false}
-                            ],
-                            buttons: [
-                                'excelHtml5',
-                                'pdfHtml5'
-                            ],
-                            "bStateSave": true
-                        });
-                    });
+                        <div class="panel minimal minimal-gray">
 
-                </script>
+                            <div class="panel-heading">
+                                <div class="panel-title"><h4></h4></div>
+                                <div class="panel-options">
 
-                <table class="table table-bordered table-striped datatable" id="table-2">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Name</th>
-                            <th>Category</th>
-                            <th>Unit</th>
-                            <th>Company Name</th>
-                            <th>Barcode</th>
-                            <th>Selling Price</th>
-                            <th>Quantity</th>
-                            <th>Options</th>
-                        </tr>
-                    </thead>
+                                    <ul class="nav nav-tabs">
+                                        <li class="active"><a href="#profile-1" data-toggle="tab">Purchases</a></li>
+                                        <li><a href="#profile-2" data-toggle="tab">Sales</a></li>
+                                    </ul>
+                                </div>
+                            </div>
 
-                    <tbody>
-                        <?php while ($row = $result->fetch_assoc()): ?>
-                            <tr>
-                                <?php $tempCategoryID = $row['category_id'] ?>
-                                <?php $tempUnitID = $row['unit_id'] ?>
-                                <td><?php echo $row['id'] ?></td>
-                                <td><?php echo $row['name'] ?></td>
-                                <?php
-                                $sql1 = "SELECT category FROM item_category where id= '$tempCategoryID'";
-                                $result1 = $conn->query($sql1);
-                                $row1 = $result1->fetch_assoc();
-                                ?>
-                                <td><?php echo $row1['category'] ?></td>
-                                <?php
-                                $sql2 = "SELECT unit FROM item_unit where id= '$tempUnitID'";
-                                $result2 = $conn->query($sql2);
-                                $row2 = $result2->fetch_assoc();
-                                ?>
-                                <td><?php echo $row2['unit'] ?></td>
-                                <td><?php echo $row['company_name'] ?></td>
-                                <td><?php echo $row['barcode'] ?></td>
-                                <td><?php echo $row['selling_price'] ?></td>
-                                <td><?php echo $row['quantity'] ?></td>
-                                <td>
-                                    <a href="#" class="btn btn-default btn-sm btn-icon icon-left">
-                                        <i class="entypo-pencil"></i>
-                                        Edit
-                                    </a>
+                            <div class="panel-body">
 
-                                    <a href="#" class="btn btn-danger btn-sm btn-icon icon-left">
-                                        <i class="entypo-cancel"></i>
-                                        Delete
-                                    </a>
+                                <div class="tab-content">
+                                    <div class="tab-pane active" id="profile-1">
+                                        <?php
+                                        $sql = "SELECT * FROM item_payment_in";
+                                        $result = $conn->query($sql);
 
-                                    <a href="#" class="btn btn-info btn-sm btn-icon icon-left addButton" data-toggle='modal' data-target='#modal_add'  data-id='<?php echo $row["id"]; ?>'>
-                                        <i class="entypo-plus"></i>
-                                        Add
-                                    </a>
-                                    <a href="#" class="btn btn-sm btn-icon btn-green icon-left sellButton" data-toggle="modal" data-target="#modal_sell" data-id="<?php echo $row['id']; ?>">
-                                        <i class="entypo-minus"></i>
-                                        Sell
-                                    </a>
-                                </td>
-                            </tr>
-                        <div class="modal fade" id="modal-delete" data-backdrop="static">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
+                                        // output data of each row
+                                        ?>
+                                        <script type="text/javascript">
+                                            jQuery(window).load(function () {
+                                                var $table2 = jQuery("#table-2");
 
-                                    <div class="modal-header">
-                                        <h4 class="modal-title">Delete item</h4>
+                                                // Initialize DataTable
+                                                $table2.DataTable({
+                                                    "autoWidth": false,
+                                                    "sDom": "Bfrtip",
+                                                    "iDisplayLength": 10,
+                                                    //                            "columnDefs": [
+                                                    //                                {"width": "20%", "targets": 0}
+                                                    //                            ],
+                                                    "aoColumns": [
+                                                        null,
+                                                        null,
+                                                        null,
+                                                        null,
+                                                        null,
+                                                        null,
+                                                    ],
+                                                    buttons: [
+                                                        'excelHtml5',
+                                                        'pdfHtml5'
+                                                    ],
+                                                    "bStateSave": true
+                                                });
+                                            });
+
+                                        </script>
+
+                                        <table class="table table-bordered table-striped datatable" id="table-2">
+                                            <thead>
+                                                <tr>
+                                                    <th>ID</th>
+                                                    <th>Payment Date</th>                            
+                                                    <th>Product</th>
+                                                    <th>Quantity</th>
+                                                    <th>Cost Price</th>
+                                                    <th>Amount</th>
+                                                </tr>
+                                            </thead>
+
+                                            <tbody>
+                                                <?php while ($row = $result->fetch_assoc()): ?>
+                                                    <tr>
+                                                        <td><?php echo $row['id'] ?></td>
+                                                        <td><?php echo $row['payment_date'] ?></td>
+                                                        <?php
+                                                        $productID = $row['id'];
+                                                        $sql1 = "SELECT * FROM item where id= '$productID'";
+                                                        $result1 = $conn->query($sql1);
+                                                        $row1 = $result1->fetch_assoc();
+                                                        ?>
+                                                        <td><?php echo $row1['name'] ?></td>
+                                                        <td><?php echo $row['quantity'] ?></td>
+                                                        <td><?php echo $row['cost_price'] . ' €' ?></td>
+                                                        <td><?php echo $row['payment_amount'] . ' €' ?></td>
+                                                    </tr>
+
+                                                <?php endwhile; ?>
+                                            </tbody>
+                                        </table>
                                     </div>
 
-                                    <div class="modal-body">
+                                    <div class="tab-pane" id="profile-2">
+                                        <?php
+                                        $sql = "SELECT * FROM item_payment_out";
+                                        $result = $conn->query($sql);
 
-                                        Are you sure you want to delete this item?<?php echo $row['id']; ?>
+                                        // output data of each row
+                                        ?>
+                                        <script type="text/javascript">
+                                            jQuery(window).load(function () {
+                                                var $table2 = jQuery("#table-3");
 
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                        <a type="button" class="btn btn-danger" href="database/remove_item.php?id=<?php echo $row['id']; ?>">Delete</a>
+                                                // Initialize DataTable
+                                                $table2.DataTable({
+                                                    "autoWidth": false,
+                                                    "sDom": "Bfrtip",
+                                                    "iDisplayLength": 10,
+                                                    //                            "columnDefs": [
+                                                    //                                {"width": "20%", "targets": 0}
+                                                    //                            ],
+                                                    "aoColumns": [
+                                                        null,
+                                                        null,
+                                                        null,
+                                                        null,
+                                                        null,
+                                                        null,
+                                                    ],
+                                                    buttons: [
+                                                        'excelHtml5',
+                                                        'pdfHtml5'
+                                                    ],
+                                                    "bStateSave": true
+                                                });
+                                            });
+
+                                        </script>
+
+                                        <table class="table table-bordered table-striped datatable" id="table-3">
+                                            <thead>
+                                                <tr>
+                                                    <th>ID</th>
+                                                    <th>Payment Date</th>                            
+                                                    <th>Product</th>
+                                                    <th>Quantity</th>
+                                                    <th>Unit Price</th>
+                                                    <th>Amount</th>
+                                                </tr>
+                                            </thead>
+
+                                            <tbody>
+                                                <?php while ($row = $result->fetch_assoc()): ?>
+                                                    <tr>
+                                                        <td><?php echo $row['id'] ?></td>
+                                                        <td><?php echo $row['payment_date'] ?></td>
+                                                        <?php
+                                                        $productID = $row['id'];
+                                                        $sql1 = "SELECT * FROM item where id= '$productID'";
+                                                        $result1 = $conn->query($sql1);
+                                                        $row1 = $result1->fetch_assoc();
+                                                        ?>
+                                                        <td><?php echo $row1['name'] ?></td>
+                                                        <td><?php echo $row['quantity'] ?></td>
+                                                        <td><?php echo $row['unit_price'] . ' ' ?></td>
+                                                        <td><?php echo $row['payment_amount'] . ' €'?></td>
+                                                    </tr>
+
+                                                <?php endwhile; ?>
+                                            </tbody>
+                                        </table>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    <?php endwhile; ?>
-                    </tbody>
-                </table>
+                    </div>
+                </div>
                 <br />
-
-                <div id="modal_add" class="modal fade" role="dialog">
-                    <div class="modal-dialog">
-
-                        <!-- Modal content-->
-                        <div class="modal-content" id="modal_add_content">
-
-                        </div>
-
-                    </div>
-                </div>
-
-                <div id="modal_sell" class="modal fade" role="dialog">
-                    <div class="modal-dialog">
-
-                        <!-- Modal content-->
-                        <div class="modal-content" id="modal_sell_content">
-
-                        </div>
-
-                    </div>
-                </div>
-
                 <footer class="main">
                     <strong>E-Fitness 2017 </strong>&copy; All Rights Reserved
                 </footer>
             </div>
         </div>
-        <script>
-
-            $(document).ready(function () {
-                $('.addButton').click(function () {
-                    var id = $(this).attr('data-id');
-                    $.ajax({
-                        url: "add_item_quantity.php?id=" + id, cache: false, success: function (result) {
-                            $('#modal_add_content').html(result);
-                        }
-                    });
-                });
-
-                $('.sellButton').click(function () {
-                    var id = $(this).attr('data-id');
-                    $.ajax({
-                        url: "sell_item.php?id=" + id, cache: false, success: function (result) {
-                            $('#modal_sell_content').html(result);
-                        }
-                    });
-                });
-                
-            });
-
-        </script>
 
         <!-- Imported styles on this page -->
         <link rel="stylesheet" href="assets/js/datatables/datatables.css">

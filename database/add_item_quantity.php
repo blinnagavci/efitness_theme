@@ -6,7 +6,12 @@ if (isset($_POST['add_item_quantity'])) {
     $id = ($_POST['test-id']);
     $item_price = ($_POST['item_price']);
     $item_quantity = ($_POST['item_quantity']);
-    $item_total = ($_POST['item_total']);
+    $item_tax = $_POST['item_tax'];
+    
+    $item_temporary_tax = $item_tax / 100;
+    $tax = ($item_price * $item_quantity) * $item_temporary_tax;
+    $item_total = ($item_price * $item_quantity) + $tax;
+    
     $item_amount = $item_total;
     
     $getProductID = mysqli_query($conn, "SELECT id from item WHERE id = '$id'");

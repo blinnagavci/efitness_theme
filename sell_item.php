@@ -1,9 +1,9 @@
 <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal">&times;</button>
-    <h4 class="modal-title">Add new quantity</h4>
+    <h4 class="modal-title">Sell Item</h4>
 </div>
 <div class="modal-body">
-    <form action="database/add_item_quantity.php" method="POST" id="modal_form_add_quantity" name="modal_form_add_quantity" role="form" enctype="multipart/form-data" class="form-horizontal form-groups-bordered">
+    <form action="database/sell_item.php" method="POST" id="modal_form_sell_item" name="modal_form_sell_item" role="form" enctype="multipart/form-data" class="form-horizontal form-groups-bordered">
         <?php
         require('database/db_connect.php');
         if (isset($_GET['id'])) {
@@ -18,41 +18,41 @@
         <input type="hidden" name="test-id" id="test-id" value="<?php echo $row['id']; ?>"/>
 
         <div class="form-group">
-            <label for="item_price" class="col-sm-3 control-label ">Cost Price</label>
+            <label for="selling_price_sell" class="col-sm-3 control-label ">Selling Price</label>
 
             <div class="col-sm-5">
-                <input type="number" class="form-control totalControl" name="item_price" id="item_price" required>
+                <input type="number" class="form-control totalControlSell" name="selling_price_sell" id="selling_price_sell" value="<?php echo $row['selling_price']; ?>" readonly required>
             </div>
         </div>
 
         <div class="form-group">
-            <label for="item_quantity" class="col-sm-3 control-label">Quantity</label>
+            <label for="item_quantity_sell" class="col-sm-3 control-label">Quantity</label>
 
             <div class="col-sm-5">
-                <input type="number" class="form-control totalControl" name="item_quantity" id="item_quantity" value="" required>
+                <input type="number" class="form-control totalControlSell" name="item_quantity_sell" id="item_quantity_sell" required>
             </div>
         </div>
 
         <div class="form-group">
-            <label for="item_tax" class="col-sm-3 control-label">Tax</label>
+            <label for="item_tax_sell" class="col-sm-3 control-label">Tax</label>
 
             <div class="col-sm-5">
-                <input type="number" class="form-control totalControl" name="item_tax" id="item_tax" required value="18.00" readonly ondblclick="this.readOnly = ''; value = '';">
+                <input type="number" class="form-control totalControlSell" name="item_tax_sell" id="item_tax_sell" required value="18.00" readonly ondblclick="this.readOnly = ''; value = '';">
                 <p class="double-click" style="margin: 10px 0px 0px 0px">Double click to change the tax value</p>
             </div>
         </div>                
 
         <div class="form-group">
-            <label for="item_total" class="col-sm-3 control-label">TOTAL</label>
+            <label for="item_total_sell" class="col-sm-3 control-label">TOTAL</label>
 
             <div class="col-sm-5">
-                <input type="text" class="form-control" name="item_total" id="item_total" required value="0 €" readonly>
+                <input type="text" class="form-control" name="item_total_sell" id="item_total_sell" required value="0 €" readonly>
             </div>
         </div>
 
         <div class="form-group">
             <div class="col-sm-offset-3 col-sm-5">
-                <button type="submit" name="add_item_quantity" class="btn btn-primary btn-block">Submit</button>
+                <button type="submit" name="sell_item" class="btn btn-primary btn-block">Submit</button>
             </div>
         </div>
     </form>
@@ -65,16 +65,18 @@
     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 </div>
 <script type="text/javascript">
-    $(".totalControl").bind('paste change keyup', function () {
-        var price = $('#item_price').val();
-        var quantity = $('#item_quantity').val();
-        var tax = $('#item_tax').val();
+
+    
+    $(".totalControlSell").change(function () {
+        var price = $('#selling_price_sell').val();
+        var quantity = $('#item_quantity_sell').val();
+        var tax = $('#item_tax_sell').val();
         var temporary = tax / 100;
         var realTax = (price * quantity) * temporary;
 
         var total = (price * quantity) + realTax;
 
-        $('#item_total').val(total + " €");
+        $('#item_total_sell').val(total + " €");
     });
 </script>
 

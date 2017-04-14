@@ -125,7 +125,7 @@ if (!isset($_SESSION['logged_in'])) {
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="sales.php">
+                                    <a href="payments.php">
                                         <span class="title">Sales</span>
                                     </a>
                                 </li>
@@ -385,7 +385,7 @@ if (!isset($_SESSION['logged_in'])) {
                                         <label for="item_total" class="col-sm-3 control-label">TOTAL</label>
 
                                         <div class="col-sm-5">
-                                            <input type="number" class="form-control" name="item_total" id="item_total" data-validate="required" value="0.00" readonly>
+                                            <input type="text" class="form-control" name="item_total" id="item_total" data-validate="required" value="0 €" readonly>
                                         </div>
                                     </div>
 
@@ -417,7 +417,7 @@ if (!isset($_SESSION['logged_in'])) {
                 
                 console.log(total);
                 
-                $('#item_total').val(total);
+                $('#item_total').val(total + " €");
             });
         </script>
 

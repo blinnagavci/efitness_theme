@@ -11,7 +11,11 @@ if (isset($_POST['add_item'])) {
     $item_quantity = ($_POST['item_quantity']);
     $item_category = $_POST['item_category'];
     $item_unit = $_POST['item_unit'];
-    $item_total = $_POST['item_total'];
+    $item_tax = $_POST['item_tax'];
+    
+    $item_temporary_tax = $item_tax / 100;
+    $tax = ($item_price * $item_quantity) * $item_temporary_tax;
+    $item_total = ($item_price * $item_quantity) + $tax;
 
     $getCategory = mysqli_query($conn, "SELECT id from item_category WHERE category = '$item_category'");
     $categoryID = mysqli_fetch_row($getCategory);
