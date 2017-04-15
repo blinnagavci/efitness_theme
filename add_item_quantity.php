@@ -18,32 +18,32 @@
         <input type="hidden" name="test-id" id="test-id" value="<?php echo $row['id']; ?>"/>
 
         <div class="form-group">
-            <label for="item_price" class="col-sm-3 control-label ">Cost Price</label>
+            <label for="item_price_add" class="col-sm-3 control-label ">Cost Price</label>
 
             <div class="col-sm-5">
-                <input type="number" class="form-control totalControl" name="item_price" id="item_price" required>
+                <input type="number" class="form-control totalControlAdd" name="item_price_add" id="item_price_add" required>
             </div>
         </div>
 
         <div class="form-group">
-            <label for="item_quantity" class="col-sm-3 control-label">Quantity</label>
+            <label for="item_quantity_add" class="col-sm-3 control-label">Quantity</label>
 
             <div class="col-sm-5">
-                <input type="number" class="form-control totalControl" name="item_quantity" id="item_quantity" value="" required>
+                <input type="number" class="form-control totalControlAdd" name="item_quantity_add" id="item_quantity_add" value="" required>
             </div>
         </div>        
 
         <div class="form-group">
-            <label for="item_total" class="col-sm-3 control-label">TOTAL</label>
+            <label for="item_total_add" class="col-sm-3 control-label">TOTAL</label>
 
             <div class="col-sm-5">
-                <input type="text" class="form-control" name="item_total" id="item_total" required value="0 €" readonly>
+                <input type="text" class="form-control" name="item_total_add" id="item_total_add" required value="0 €" readonly>
             </div>
         </div>
 
         <div class="form-group">
             <div class="col-sm-offset-3 col-sm-5">
-                <button type="submit" name="add_item_quantity" class="btn btn-primary btn-block">Submit</button>
+                <button type="submit" name="add_item_quantity_add" class="btn btn-primary btn-block">Submit</button>
             </div>
         </div>
     </form>
@@ -56,13 +56,13 @@
     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 </div>
 <script type="text/javascript">
-    $(".totalControl").bind('paste change keyup', function () {
-        var price = $('#item_price').val();
-        var quantity = $('#item_quantity').val();
+    $(".totalControlAdd").bind('paste change keyup', function () {
+        var price = $('#item_price_add').val();
+        var quantity = $('#item_quantity_add').val();
 
         var total = (price * quantity);
 
-        $('#item_total').val(total + " €");
+        $('#item_total_add').val(total + " €");
     });
 </script>
 

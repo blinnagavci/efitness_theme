@@ -11,6 +11,7 @@ $(document).ready(function () {
     $('#modal_form_contract_employee').validate();
     $('#modal_form_add_quantity').validate();
     $('#modal_form_sell_item').validate();
+    $('#modal_form_edit_item').validate();
 });
 
 // Datepicker
