@@ -127,8 +127,8 @@ if (!isset($_SESSION['logged_in'])) {
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="sales.php">
-                                        <span class="title">Sales</span>
+                                    <a href="payments.php">
+                                        <span class="title">Payments</span>
                                     </a>
                                 </li>
                             </ul>
@@ -307,12 +307,12 @@ if (!isset($_SESSION['logged_in'])) {
                                 <td><?php echo $row['selling_price'] ?></td>
                                 <td><?php echo $row['quantity'] ?></td>
                                 <td>
-                                    <a href="#" class="btn btn-default btn-sm btn-icon icon-left">
+                                    <a href="#" class="btn btn-default btn-sm btn-icon icon-left editButton" data-toggle='modal' data-target='#modal_edit'  data-id='<?php echo $row["id"]; ?>'>
                                         <i class="entypo-pencil"></i>
                                         Edit
                                     </a>
 
-                                    <a href="#" class="btn btn-danger btn-sm btn-icon icon-left">
+                                    <a href="database/remove_item.php?id=<?php echo $row['id'] ?>" class="btn btn-danger btn-sm btn-icon icon-left deleteButton" onclick="return confirm('Are you sure you want to delete this item?');">
                                         <i class="entypo-cancel"></i>
                                         Delete
                                     </a>
@@ -321,36 +321,39 @@ if (!isset($_SESSION['logged_in'])) {
                                         <i class="entypo-plus"></i>
                                         Add
                                     </a>
-                                    <a href="#" class="btn btn-sm btn-icon btn-green icon-left">
+                                    <a href="#" class="btn btn-sm btn-icon btn-green icon-left sellButton" data-toggle="modal" data-target="#modal_sell" data-id="<?php echo $row['id']; ?>">
                                         <i class="entypo-minus"></i>
                                         Sell
                                     </a>
                                 </td>
                             </tr>
-                        <div class="modal fade" id="modal-delete" data-backdrop="static">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-
-                                    <div class="modal-header">
-                                        <h4 class="modal-title">Delete item</h4>
-                                    </div>
-
-                                    <div class="modal-body">
-
-                                        Are you sure you want to delete this item?<?php echo $row['id']; ?>
-
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                        <a type="button" class="btn btn-danger" href="database/remove_item.php?id=<?php echo $row['id']; ?>">Delete</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     <?php endwhile; ?>
                     </tbody>
                 </table>
                 <br />
+
+                <div id="modal_edit" class="modal fade" role="dialog">
+                    <div class="modal-dialog">
+
+                        <!-- Modal content-->
+                        <div class="modal-content" id="modal_edit_content">
+
+                        </div>
+
+                    </div>
+                </div>
+                
+                <div id="modal_delete" class="modal fade" role="dialog">
+                    <div class="modal-dialog">
+
+                        <!-- Modal content-->
+                        <div class="modal-content" id="modal_delete_content">
+
+                        </div>
+
+                    </div>
+                </div>
+
                 <div id="modal_add" class="modal fade" role="dialog">
                     <div class="modal-dialog">
 
@@ -361,6 +364,18 @@ if (!isset($_SESSION['logged_in'])) {
 
                     </div>
                 </div>
+
+                <div id="modal_sell" class="modal fade" role="dialog">
+                    <div class="modal-dialog">
+
+                        <!-- Modal content-->
+                        <div class="modal-content" id="modal_sell_content">
+
+                        </div>
+
+                    </div>
+                </div>
+
                 <footer class="main">
                     <strong>E-Fitness 2017 </strong>&copy; All Rights Reserved
                 </footer>
@@ -369,6 +384,15 @@ if (!isset($_SESSION['logged_in'])) {
         <script>
 
             $(document).ready(function () {
+                $('.editButton').click(function () {
+                    var id = $(this).attr('data-id');
+                    $.ajax({
+                        url: "edit_item.php?id=" + id, cache: false, success: function (result) {
+                            $('#modal_edit_content').html(result);
+                        }
+                    });
+                });
+
                 $('.addButton').click(function () {
                     var id = $(this).attr('data-id');
                     $.ajax({
@@ -377,6 +401,16 @@ if (!isset($_SESSION['logged_in'])) {
                         }
                     });
                 });
+
+                $('.sellButton').click(function () {
+                    var id = $(this).attr('data-id');
+                    $.ajax({
+                        url: "sell_item.php?id=" + id, cache: false, success: function (result) {
+                            $('#modal_sell_content').html(result);
+                        }
+                    });
+                });
+
             });
 
         </script>

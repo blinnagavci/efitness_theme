@@ -138,8 +138,8 @@ if (!isset($_SESSION['logged_in'])) {
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="sales.php">
-                                        <span class="title">Sales</span>
+                                    <a href="payments.php">
+                                        <span class="title">Payments</span>
                                     </a>
                                 </li>
                             </ul>
@@ -446,7 +446,7 @@ if (!isset($_SESSION['logged_in'])) {
                                                         <tbody>
                                                                 <tr>
                                                                         <td class="panel-heading">
-                                                                                <h4>Monthly Sales</h4>
+                                                                                <h4>Monthly Payments</h4>
                                                                         </td>
                                                                 </tr>
                                                         </tbody>

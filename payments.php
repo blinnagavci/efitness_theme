@@ -17,7 +17,7 @@ if (!isset($_SESSION['logged_in'])) {
 
         <link rel="icon" href="assets/images/favicon.ico">
 
-        <title>E-Fitness | Search members</title>
+        <title>E-Fitness | Payments</title>
 
         <link rel="stylesheet" href="assets/js/jquery-ui/css/no-theme/jquery-ui-1.10.3.custom.min.css">
         <link rel="stylesheet" href="assets/css/font-icons/entypo/css/entypo.css">
@@ -30,19 +30,10 @@ if (!isset($_SESSION['logged_in'])) {
 
         <script src="assets/js/jquery-1.11.3.min.js"></script>
 
-        <!--[if lt IE 9]><script src="assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
-
-        <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-        <!--[if lt IE 9]>
-                <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-                <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-        <![endif]-->
-
-
     </head>
-    <body class="page-body page-fade" data-url="http://neon.dev">
+    <body class="page-body  page-fade" data-url="">
 
-        <div class="page-container"><!-- add class "sidebar-collapsed" to close sidebar by default, "chat-visible" to make chat appear always -->
+        <div class="page-container">
 
             <div class="sidebar-menu">
 
@@ -64,7 +55,6 @@ if (!isset($_SESSION['logged_in'])) {
                             </a>
                         </div>
 
-
                         <!-- open/close menu icon (do not remove if you want to enable menu on mobile devices) -->
                         <div class="sidebar-mobile-menu visible-xs">
                             <a href="#" class="with-animation"><!-- add class "with-animation" to support animation -->
@@ -78,13 +68,13 @@ if (!isset($_SESSION['logged_in'])) {
                     <ul id="main-menu" class="main-menu">
                         <!-- add class "multiple-expanded" to allow multiple submenus to open -->
                         <!-- class "auto-inherit-active-class" will automatically add "active" class for parent elements who are marked already with class "active" -->
-                        <li class="">
+                        <li>
                             <a href="index.php">
                                 <i class="entypo-gauge"></i>
                                 <span class="title">Dashboard</span>
                             </a>
                         </li>
-                        <li class="has-sub active opened active">
+                        <li class="has-sub">
                             <a href="#">
                                 <i class="entypo-users"></i>
                                 <span class="title">Members</span>
@@ -95,7 +85,7 @@ if (!isset($_SESSION['logged_in'])) {
                                         <span class="title">Add member</span>
                                     </a>
                                 </li>
-                                <li class="active">
+                                <li>
                                     <a href="search_members.php">
                                         <span class="title">Search members</span>
                                     </a>
@@ -120,7 +110,7 @@ if (!isset($_SESSION['logged_in'])) {
                                 </li>
                             </ul>
                         </li>
-                        <li class="has-sub">
+                        <li class="has-sub  opened active">
                             <a href="#">
                                 <i class="entypo-database"></i>
                                 <span class="title">Inventory</span>
@@ -131,12 +121,12 @@ if (!isset($_SESSION['logged_in'])) {
                                         <span class="title">Add item</span>
                                     </a>
                                 </li>
-                                <li>
+                                <li >
                                     <a href="search_inventory.php">
                                         <span class="title">Search inventory</span>
                                     </a>
                                 </li>
-                                <li>
+                                <li class="active">
                                     <a href="payments.php">
                                         <span class="title">Payments</span>
                                     </a>
@@ -155,25 +145,17 @@ if (!isset($_SESSION['logged_in'])) {
                                 <span class="title">Accounts</span>
                             </a>
                         </li>
-
                         <li class="">
                             <a href="other_settings.php">
                                 <i class="entypo-cog"></i>
                                 <span class="title">Settings</span>
                             </a>
                         </li>
-
-
                     </ul>
-
                 </div>
-
             </div>
-
             <div class="main-content">
-
                 <div class="row">
-
                     <!-- Profile Info and Notifications -->
                     <div class="col-md-6 col-sm-8 clearfix">
 
@@ -206,7 +188,6 @@ if (!isset($_SESSION['logged_in'])) {
                                         </a>
                                     </li>
 
-
                                     <li>
                                         <a href="extra-calendar.html">
                                             <i class="entypo-calendar"></i>
@@ -215,16 +196,11 @@ if (!isset($_SESSION['logged_in'])) {
                                     </li>
                                 </ul>
                             </li>
-
                         </ul>
 
                         <ul class="user-info pull-left pull-right-xs pull-none-xsm">
-
-
                         </ul>
-
                     </div>
-
 
                     <!-- Raw Links -->
                     <div class="col-md-6 col-sm-4 clearfix hidden-xs">
@@ -241,141 +217,190 @@ if (!isset($_SESSION['logged_in'])) {
                     </div>
 
                 </div>
-
                 <hr />
 
                 <ol class="breadcrumb bc-3" >
                     <li>
-                        Members
+                        Inventory
                     </li>
                     <li class="active">
-                        <strong>Search members</strong>
+                        <strong>Payments</strong>
                     </li>
                 </ol>
-                <?php
-                $sql = "SELECT id, first_name, last_name, gender, city, birth_date, telephone_no FROM member where status='0'";
-                $result = $conn->query($sql);
 
-
-                // output data of each row
-                ?>
-                <h2>Search members</h2>
+                <h2>Payments</h2>
                 <br />
-                <script type="text/javascript">
-                    jQuery(window).load(function () {
-                        var $table2 = jQuery("#table-2");
+                <div class="row">
+                    <div class="col-md-12">
 
-                        // Initialize DataTable
-                        $table2.DataTable({
-                            "autoWidth": false,
-                            "sDom": "Bfrtip",
-                            "iDisplayLength": 10,
-                            "aoColumns": [
-                                null,
-                                null,
-                                null,
-                                null,
-                                null,
-                                null,
-                                {"bSortable": false}
-                            ],
-                            buttons: [
-                                'excelHtml5',
-                                'pdfHtml5'
-                            ],
-                            "bStateSave": true
-                        });
-                    });
+                        <div class="panel minimal minimal-gray">
 
-                </script>
+                            <div class="panel-heading">
+                                <div class="panel-title"><h4></h4></div>
+                                <div class="panel-options">
 
-                <table class="table table-bordered table-striped datatable" id="table-2">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Full Name</th>
-                            <th>Gender</th>
-                            <th>City</th>
-                            <th>Date of Birth</th>
-                            <th>Phone no.</th>
-                            <th>Options</th>
-                        </tr>
-                    </thead>
+                                    <ul class="nav nav-tabs">
+                                        <li class="active"><a href="#profile-1" data-toggle="tab">Purchases</a></li>
+                                        <li><a href="#profile-2" data-toggle="tab">Sales</a></li>
+                                    </ul>
+                                </div>
+                            </div>
 
-                    <tbody>
-                        <?php while ($row = $result->fetch_assoc()): ?>
-                            <tr>
-                                <td><?php echo $row['id'] ?></td>
-                                <td><?php echo $row['first_name'] . ' ' . $row['last_name'] ?></td>
-                                <td><?php echo $row['gender'] ?></td>
-                                <td><?php echo $row['city'] ?></td>
-                                <td><?php echo $row['birth_date'] ?></td>
-                                <td><?php echo $row['telephone_no'] ?></td>
-                                <td>
-                                    <a href="#" class="btn btn-default btn-sm btn-icon icon-left editButton" data-toggle='modal' data-target='#modal_edit'  data-id='<?php echo $row["id"]; ?>'>
-                                        <i class="entypo-pencil"></i>
-                                        Edit
-                                    </a>
+                            <div class="panel-body">
 
-                                    <a href="#" class="btn btn-danger btn-sm btn-icon icon-left delete-member" name="delete-member" data-toggle='modal' data-target='#modal-delete' data-id='<?php echo $row["id"]; ?>'>
-                                        <i class="entypo-cancel"></i>
-                                        Delete
-                                    </a>
+                                <div class="tab-content">
+                                    <div class="tab-pane active" id="profile-1">
+                                        <?php
+                                        $sql = "SELECT * FROM item_payment_in";
+                                        $result = $conn->query($sql);
 
-                                    <a href="#" class="btn btn-info btn-sm btn-icon icon-left subscriptionButton" data-toggle='modal' data-target='#modal_add_subscription' data-id='<?php echo $row["id"]; ?>'>
-                                        <i class="entypo-check"></i>
-                                        Subscriptions
-                                    </a>
-                                </td>
-                            </tr>
+                                        // output data of each row
+                                        ?>
+                                        <script type="text/javascript">
+                                            jQuery(window).load(function () {
+                                                var $table2 = jQuery("#table-2");
 
-                        <?php endwhile; ?>
-                    </tbody>
-                </table>
-                <br />
+                                                // Initialize DataTable
+                                                $table2.DataTable({
+                                                    "autoWidth": false,
+                                                    "sDom": "Bfrtip",
+                                                    "iDisplayLength": 10,
+                                                    //                            "columnDefs": [
+                                                    //                                {"width": "20%", "targets": 0}
+                                                    //                            ],
+                                                    "aoColumns": [
+                                                        null,
+                                                        null,
+                                                        null,
+                                                        null,
+                                                        null,
+                                                        null,
+                                                    ],
+                                                    buttons: [
+                                                        'excelHtml5',
+                                                        'pdfHtml5'
+                                                    ],
+                                                    "bStateSave": true
+                                                });
+                                            });
 
-                <a href="add_member.php" class="btn btn-primary" >
-                    <i class="entypo-plus"></i>
-                    Add Member
-                </a>
-                <div class="modal fade" id="modal-delete" role='dialog'>
-                    <div class="modal-dialog">
-                        <div class="modal-content" id="modal_delete_member_content">
+                                        </script>
 
+                                        <table class="table table-bordered table-striped datatable" id="table-2">
+                                            <thead>
+                                                <tr>
+                                                    <th>ID</th>
+                                                    <th>Payment Date</th>                            
+                                                    <th>Product</th>
+                                                    <th>Quantity</th>
+                                                    <th>Cost Price</th>
+                                                    <th>Amount</th>
+                                                </tr>
+                                            </thead>
 
+                                            <tbody>
+                                                <?php while ($row = $result->fetch_assoc()): ?>
+                                                    <tr>
+                                                        <td><?php echo $row['id'] ?></td>
+                                                        <td><?php echo $row['payment_date'] ?></td>
+                                                        <?php
+                                                        $productID = $row['product_id'];
+                                                        $sql1 = "SELECT * FROM item where id= '$productID'";
+                                                        $result1 = $conn->query($sql1);
+                                                        $row1 = $result1->fetch_assoc();
+                                                        ?>
+                                                        <td><?php echo $row1['name'] ?></td>
+                                                        <td><?php echo $row['quantity'] ?></td>
+                                                        <td><?php echo $row['cost_price'] . ' €' ?></td>
+                                                        <td><?php echo $row['payment_amount'] . ' €' ?></td>
+                                                    </tr>
+
+                                                <?php endwhile; ?>
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                    <div class="tab-pane" id="profile-2">
+                                        <?php
+                                        $sql = "SELECT * FROM item_payment_out";
+                                        $result = $conn->query($sql);
+
+                                        // output data of each row
+                                        ?>
+                                        <script type="text/javascript">
+                                            jQuery(window).load(function () {
+                                                var $table2 = jQuery("#table-3");
+
+                                                // Initialize DataTable
+                                                $table2.DataTable({
+                                                    "autoWidth": false,
+                                                    "sDom": "Bfrtip",
+                                                    "iDisplayLength": 10,
+                                                    //                            "columnDefs": [
+                                                    //                                {"width": "20%", "targets": 0}
+                                                    //                            ],
+                                                    "aoColumns": [
+                                                        null,
+                                                        null,
+                                                        null,
+                                                        null,
+                                                        null,
+                                                        null,
+                                                    ],
+                                                    buttons: [
+                                                        'excelHtml5',
+                                                        'pdfHtml5'
+                                                    ],
+                                                    "bStateSave": true
+                                                });
+                                            });
+
+                                        </script>
+
+                                        <table class="table table-bordered table-striped datatable" id="table-3">
+                                            <thead>
+                                                <tr>
+                                                    <th>ID</th>
+                                                    <th>Payment Date</th>                            
+                                                    <th>Product</th>
+                                                    <th>Quantity</th>
+                                                    <th>Unit Price</th>
+                                                    <th>Amount</th>
+                                                </tr>
+                                            </thead>
+
+                                            <tbody>
+                                                <?php while ($row = $result->fetch_assoc()): ?>
+                                                    <tr>
+                                                        <td><?php echo $row['id'] ?></td>
+                                                        <td><?php echo $row['payment_date'] ?></td>
+                                                        <?php
+                                                        $productID = $row['product_id'];
+                                                        $sql2 = "SELECT * FROM item where id= '$productID'";
+                                                        $result2 = $conn->query($sql2);
+                                                        $row2 = $result2->fetch_assoc();
+                                                        ?>
+                                                        <td><?php echo $row2['name'] ?></td>
+                                                        <td><?php echo $row['quantity'] ?></td>
+                                                        <td><?php echo $row['unit_price'] . ' ' ?></td>
+                                                        <td><?php echo $row['payment_amount'] . ' €' ?></td>
+                                                    </tr>
+
+                                                <?php endwhile; ?>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
+                <br />
                 <footer class="main">
-
                     <strong>E-Fitness 2017 </strong>&copy; All Rights Reserved
-
                 </footer>
             </div>
-            <div id="modal_edit" class="modal fade" role="dialog">
-                <div class="modal-dialog">
-
-                    <!-- Modal content-->
-                    <div class="modal-content" id="modal_edit_content">
-
-                    </div>
-
-                </div>
-            </div>
-
-            <div id="modal_add_subscription" class="modal fade" role="dialog">
-                <div class="modal-dialog" style="width: 80%">
-
-                    <!-- Modal content-->
-                    <div class="modal-content" id="modal_add_subscription_content">
-
-                    </div>
-
-                </div>
-            </div>
         </div>
-        <script src="assets/js/toastr.js" type="text/javascript"></script>
-
 
         <!-- Imported styles on this page -->
         <link rel="stylesheet" href="assets/js/datatables/datatables.css">
@@ -389,110 +414,16 @@ if (!isset($_SESSION['logged_in'])) {
         <script src="assets/js/resizeable.js"></script>
         <script src="assets/js/neon-api.js"></script>
 
-
         <!-- Imported scripts on this page -->
         <script src="assets/js/datatables/datatables.js"></script>
         <script src="assets/js/select2/select2.min.js"></script>
         <script src="assets/js/neon-chat.js"></script>
 
-
         <!-- JavaScripts initializations and stuff -->
         <script src="assets/js/neon-custom.js"></script>
 
-
         <!-- Demo Settings -->
         <script src="assets/js/neon-demo.js"></script> 
-        <script>
-                    $(document).ready(function () {
-                        var url = window.location.href;
-                        var array = url.split('/');
-                        var lastsegment = array[array.length - 1];
-                        switch (lastsegment) {
-                            case "search_members.php#deletemembersuccess":
-                                deleteMemberSuccess();
-                                removeHash();
-                                break;
-                            case "search_members.php#editmembersuccess":
-                                editMemberSuccess();
-                                removeHash();
-                                break;
-                            case "search_members.php#addsubscriptionsuccess":
-                                addSubscriptionSuccess();
-                                removeHash();
-                                break;
-                            default:
-                                break;
-                        }
-                        function removeHash() {
-                            history.pushState("", document.title, window.location.pathname
-                                    + window.location.search);
-                        }
-                        $('.editButton').click(function () {
-                            var id = $(this).attr('data-id');
-                            $.ajax({
-                                url: "edit_member.php?id=" + id, cache: false, success: function (result) {
-                                    $('#modal_edit_content').html(result);
-                                }
-                            });
-                        });
-
-                        $('.subscriptionButton').click(function () {
-                            var id = $(this).attr('data-id');
-                            $.ajax({
-                                url: "add_subscription_member.php?id=" + id, cache: false, success: function (result) {
-                                    $('#modal_add_subscription_content').html(result);
-                                }
-                            });
-                        });
-                        $(".delete-member").click(function () {
-                            var id = $(this).attr('data-id');
-                            $.ajax({
-                                url: "remove_member.php?id=" + id, cache: false, success: function (result) {
-                                    $('#modal_delete_member_content').html(result);
-                                }
-                            });
-
-                        });
-
-                        function toastrAlert() {
-                            opts = {
-                                "closeButton": true,
-                                "debug": false,
-                                "positionClass": "toast-top-full-width",
-                                "onclick": null,
-                                "showDuration": "300",
-                                "hideDuration": "1000",
-                                "timeOut": "5000",
-                                "extendedTimeOut": "1000",
-                                "showEasing": "swing",
-                                "hideEasing": "linear",
-                                "showMethod": "fadeIn",
-                                "hideMethod": "fadeOut"
-                            };
-                        }
-                        function editMemberSuccess() {
-                            toastrAlert();
-                            toastr.success("Member successfully edited", opts);
-                        }
-                        function deleteMemberSuccess() {
-                            toastrAlert();
-                            toastr.success("Member successfully deleted", opts);
-                        }
-                        function deleteMemberFail() {
-                            toastrAlert();
-                            toastr.error("Unfortunately, we ran into some problems trying to delete the member", opts);
-                        }
-                        function addSubscriptionSuccess() {
-                            toastrAlert();
-                            toastr.success("Subscription successfully added", opts);
-                        }
-                        function addSubscriptionFail() {
-                            toastrAlert();
-                            toastr.error("Unfortunately, we ran into some problems trying to add the subscription", opts);
-                        }
-                    });
-        </script>
         <script src="assets/js/bootstrap.js"></script>
-
     </body>
 </html>

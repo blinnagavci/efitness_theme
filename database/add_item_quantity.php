@@ -2,11 +2,14 @@
 
 require('db_connect.php');
 
-if (isset($_POST['add_item_quantity'])) {
+if (isset($_POST['add_item_quantity_add'])) {
     $id = ($_POST['test-id']);
-    $item_price = ($_POST['item_price']);
-    $item_quantity = ($_POST['item_quantity']);
-    $item_total = ($_POST['item_total']);
+    $item_price = ($_POST['item_price_add']);
+    $item_quantity = ($_POST['item_quantity_add']);
+    
+
+    $item_total = ($item_price * $item_quantity);
+    
     $item_amount = $item_total;
     
     $getProductID = mysqli_query($conn, "SELECT id from item WHERE id = '$id'");

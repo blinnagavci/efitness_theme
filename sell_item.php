@@ -1,9 +1,9 @@
 <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal">&times;</button>
-    <h4 class="modal-title">Add new quantity</h4>
+    <h4 class="modal-title">Sell Item</h4>
 </div>
 <div class="modal-body">
-    <form action="database/add_item_quantity.php" method="POST" id="modal_form_add_quantity" name="modal_form_add_quantity" role="form" enctype="multipart/form-data" class="form-horizontal form-groups-bordered">
+    <form action="database/sell_item.php" method="POST" id="modal_form_sell_item" name="modal_form_sell_item" role="form" enctype="multipart/form-data" class="form-horizontal form-groups-bordered">
         <?php
         require('database/db_connect.php');
         if (isset($_GET['id'])) {
@@ -18,32 +18,32 @@
         <input type="hidden" name="test-id" id="test-id" value="<?php echo $row['id']; ?>"/>
 
         <div class="form-group">
-            <label for="item_price_add" class="col-sm-3 control-label ">Cost Price</label>
+            <label for="selling_price_sell" class="col-sm-3 control-label ">Selling Price</label>
 
             <div class="col-sm-5">
-                <input type="number" class="form-control totalControlAdd" name="item_price_add" id="item_price_add" required>
+                <input type="number" class="form-control totalControlSell" name="selling_price_sell" id="selling_price_sell" value="<?php echo $row['selling_price']; ?>" readonly required>
             </div>
         </div>
 
         <div class="form-group">
-            <label for="item_quantity_add" class="col-sm-3 control-label">Quantity</label>
+            <label for="item_quantity_sell" class="col-sm-3 control-label">Quantity</label>
 
             <div class="col-sm-5">
-                <input type="number" class="form-control totalControlAdd" name="item_quantity_add" id="item_quantity_add" value="" required>
+                <input type="number" class="form-control totalControlSell" name="item_quantity_sell" id="item_quantity_sell" required>
             </div>
-        </div>        
+        </div>              
 
         <div class="form-group">
-            <label for="item_total_add" class="col-sm-3 control-label">TOTAL</label>
+            <label for="item_total_sell" class="col-sm-3 control-label">TOTAL</label>
 
             <div class="col-sm-5">
-                <input type="text" class="form-control" name="item_total_add" id="item_total_add" required value="0 €" readonly>
+                <input type="text" class="form-control" name="item_total_sell" id="item_total_sell" required value="0 €" readonly>
             </div>
         </div>
 
         <div class="form-group">
             <div class="col-sm-offset-3 col-sm-5">
-                <button type="submit" name="add_item_quantity_add" class="btn btn-primary btn-block">Submit</button>
+                <button type="submit" name="sell_item" class="btn btn-primary btn-block">Submit</button>
             </div>
         </div>
     </form>
@@ -56,14 +56,17 @@
     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 </div>
 <script type="text/javascript">
-    $(".totalControlAdd").bind('paste change keyup', function () {
-        var price = $('#item_price_add').val();
-        var quantity = $('#item_quantity_add').val();
+
+    
+    $(".totalControlSell").bind('paste change keyup', function () {
+        var price = $('#selling_price_sell').val();
+        var quantity = $('#item_quantity_sell').val();
 
         var total = (price * quantity);
 
-        $('#item_total_add').val(total + " €");
+        $('#item_total_sell').val(total + " €");
     });
+ 
 </script>
 
 <script src="assets/js/bootstrap-datepicker.js"></script>
