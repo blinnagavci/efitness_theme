@@ -650,8 +650,6 @@ if (!isset($_SESSION['logged_in'])) {
         <script src="assets/js/typeahead.min.js"></script>
         <script src="assets/js/selectboxit/jquery.selectBoxIt.min.js"></script>
         <script src="assets/js/bootstrap-datepicker.js"></script>
-        <script src="assets/js/bootstrap-timepicker.min.js"></script>
-        <script src="assets/js/bootstrap-colorpicker.min.js"></script>
         <script src="assets/js/moment.min.js"></script>
         <script src="assets/js/daterangepicker/daterangepicker.js"></script>
         <script src="assets/js/jquery.multi-select.js"></script>

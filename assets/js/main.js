@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-$(document).ready(function () {
+ $(document).ready(function () {
     $('#modal_form_edit_member').validate();
     $('#editaccount_form').validate();
     $('#modal_form_subscription_member').validate();
@@ -18,16 +18,16 @@ if ($.isFunction($.fn.datepicker))
     $(".datepicker").each(function (i, el)
     {
         var $this = $(el),
-                opts = {
-                    format: attrDefault($this, 'format', 'mm/dd/yyyy'),
-                    startDate: attrDefault($this, 'startDate', ''),
-                    endDate: attrDefault($this, 'endDate', ''),
-                    daysOfWeekDisabled: attrDefault($this, 'disabledDays', ''),
-                    startView: attrDefault($this, 'startView', 0),
-                    rtl: rtl()
-                },
-                $n = $this.next(),
-                $p = $this.prev();
+        opts = {
+            format: attrDefault($this, 'format', 'mm/dd/yyyy'),
+            startDate: attrDefault($this, 'startDate', ''),
+            endDate: attrDefault($this, 'endDate', ''),
+            daysOfWeekDisabled: attrDefault($this, 'disabledDays', ''),
+            startView: attrDefault($this, 'startView', 0),
+            rtl: rtl()
+        },
+        $n = $this.next(),
+        $p = $this.prev();
 
         $this.datepicker(opts);
 
@@ -56,13 +56,13 @@ if ($.isFunction($.fn.datepicker))
 $(".input-spinner").each(function (i, el)
 {
     var $this = $(el),
-            $minus = $this.find('button:first'),
-            $plus = $this.find('button:last'),
-            $input = $this.find('input'),
-            minus_step = attrDefault($minus, 'step', -1),
-            plus_step = attrDefault($minus, 'step', 1),
-            min = attrDefault($input, 'min', null),
-            max = attrDefault($input, 'max', null);
+    $minus = $this.find('button:first'),
+    $plus = $this.find('button:last'),
+    $input = $this.find('input'),
+    minus_step = attrDefault($minus, 'step', -1),
+    plus_step = attrDefault($minus, 'step', 1),
+    min = attrDefault($input, 'min', null),
+    max = attrDefault($input, 'max', null);
 
 
     $this.find('button').on('click', function (ev)
@@ -70,8 +70,8 @@ $(".input-spinner").each(function (i, el)
         ev.preventDefault();
 
         var $this = $(this),
-                val = $input.val(),
-                step = attrDefault($this, 'step', $this[0] == $minus[0] ? -1 : 1);
+        val = $input.val(),
+        step = attrDefault($this, 'step', $this[0] == $minus[0] ? -1 : 1);
 
         if (!step.toString().match(/^[0-9-\.]+$/))
         {
@@ -100,3 +100,9 @@ $(".input-spinner").each(function (i, el)
     });
 
 });
+
+// Multi-select
+if($.isFunction($.fn.multiSelect))
+{
+    $(".multi-select").multiSelect();
+}
