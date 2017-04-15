@@ -241,7 +241,7 @@ if (!isset($_SESSION['logged_in'])) {
 
                                     <ul class="nav nav-tabs">
                                         <li class="active"><a href="#profile-1" data-toggle="tab">Purchases</a></li>
-                                        <li><a href="#profile-2" data-toggle="tab">Payments</a></li>
+                                        <li><a href="#profile-2" data-toggle="tab">Sales</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -304,7 +304,7 @@ if (!isset($_SESSION['logged_in'])) {
                                                         <td><?php echo $row['id'] ?></td>
                                                         <td><?php echo $row['payment_date'] ?></td>
                                                         <?php
-                                                        $productID = $row['id'];
+                                                        $productID = $row['product_id'];
                                                         $sql1 = "SELECT * FROM item where id= '$productID'";
                                                         $result1 = $conn->query($sql1);
                                                         $row1 = $result1->fetch_assoc();
@@ -375,15 +375,15 @@ if (!isset($_SESSION['logged_in'])) {
                                                         <td><?php echo $row['id'] ?></td>
                                                         <td><?php echo $row['payment_date'] ?></td>
                                                         <?php
-                                                        $productID = $row['id'];
-                                                        $sql1 = "SELECT * FROM item where id= '$productID'";
-                                                        $result1 = $conn->query($sql1);
-                                                        $row1 = $result1->fetch_assoc();
+                                                        $productID = $row['product_id'];
+                                                        $sql2 = "SELECT * FROM item where id= '$productID'";
+                                                        $result2 = $conn->query($sql2);
+                                                        $row2 = $result2->fetch_assoc();
                                                         ?>
-                                                        <td><?php echo $row1['name'] ?></td>
+                                                        <td><?php echo $row2['name'] ?></td>
                                                         <td><?php echo $row['quantity'] ?></td>
                                                         <td><?php echo $row['unit_price'] . ' ' ?></td>
-                                                        <td><?php echo $row['payment_amount'] . ' €'?></td>
+                                                        <td><?php echo $row['payment_amount'] . ' €' ?></td>
                                                     </tr>
 
                                                 <?php endwhile; ?>

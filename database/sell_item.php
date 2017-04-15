@@ -6,11 +6,7 @@ if (isset($_POST['sell_item'])) {
     $id = ($_POST['test-id']);
     $unit_price = ($_POST['selling_price_sell']);
     $item_quantity = ($_POST['item_quantity_sell']);
-    $item_tax = $_POST['item_tax_sell'];
-
-    $item_temporary_tax = $item_tax / 100;
-    $tax = ($unit_price * $item_quantity) * $item_temporary_tax;
-    $item_total = ($unit_price * $item_quantity) + $tax;
+    $item_total = ($unit_price * $item_quantity);
 
     $item_amount = $item_total;
 

@@ -31,16 +31,7 @@
             <div class="col-sm-5">
                 <input type="number" class="form-control totalControlSell" name="item_quantity_sell" id="item_quantity_sell" required>
             </div>
-        </div>
-
-        <div class="form-group">
-            <label for="item_tax_sell" class="col-sm-3 control-label">Tax</label>
-
-            <div class="col-sm-5">
-                <input type="number" class="form-control totalControlSell" name="item_tax_sell" id="item_tax_sell" required value="18.00" readonly ondblclick="this.readOnly = ''; value = '';">
-                <p class="double-click" style="margin: 10px 0px 0px 0px">Double click to change the tax value</p>
-            </div>
-        </div>                
+        </div>              
 
         <div class="form-group">
             <label for="item_total_sell" class="col-sm-3 control-label">TOTAL</label>
@@ -67,17 +58,15 @@
 <script type="text/javascript">
 
     
-    $(".totalControlSell").change(function () {
+    $(".totalControlSell").bind('paste change keyup', function () {
         var price = $('#selling_price_sell').val();
         var quantity = $('#item_quantity_sell').val();
-        var tax = $('#item_tax_sell').val();
-        var temporary = tax / 100;
-        var realTax = (price * quantity) * temporary;
 
-        var total = (price * quantity) + realTax;
+        var total = (price * quantity);
 
         $('#item_total_sell').val(total + " €");
     });
+ 
 </script>
 
 <script src="assets/js/bootstrap-datepicker.js"></script>

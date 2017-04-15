@@ -324,13 +324,6 @@ if (!isset($_SESSION['logged_in'])) {
                                         </div>
                                     </div>
 
-                                    <div class="form-group">
-                                        <label for="item_price" class="col-sm-3 control-label ">Cost Price</label>
-
-                                        <div class="col-sm-5">
-                                            <input type="number" class="form-control totalControl" name="item_price" id="item_price" data-validate="required">
-                                        </div>
-                                    </div>
                                     <div class="form-group selling-price">
                                         <label for="item_selling_price" class="col-sm-3 control-label">Selling Price</label>
 
@@ -363,32 +356,6 @@ if (!isset($_SESSION['logged_in'])) {
                                         </div>
                                     </div>
 
-                                                                      
-                                    <div class="form-group">
-                                        <label for="item_quantity" class="col-sm-3 control-label">Quantity</label>
-
-                                        <div class="col-sm-5">
-                                            <input type="number" class="form-control totalControl" name="item_quantity" id="item_quantity" value="1" data-validate="required">
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="item_tax" class="col-sm-3 control-label">Tax</label>
-
-                                        <div class="col-sm-5">
-                                            <input type="number" class="form-control totalControl" name="item_tax" id="item_tax" data-validate="required" value="18.00" readonly ondblclick="this.readOnly = ''; value = '';">
-                                            <p class="double-click" style="margin: 10px 0px 0px 0px">Double click to change the tax value</p>
-                                        </div>
-                                    </div>                
-
-                                    <div class="form-group">
-                                        <label for="item_total" class="col-sm-3 control-label">TOTAL</label>
-
-                                        <div class="col-sm-5">
-                                            <input type="text" class="form-control" name="item_total" id="item_total" data-validate="required" value="0 €" readonly>
-                                        </div>
-                                    </div>
-
                                     <div class="form-group">
                                         <div class="col-sm-offset-3 col-sm-5">
                                             <button type="submit" name="add_item" class="btn btn-block btn-primary">Add Item</button>
@@ -405,23 +372,7 @@ if (!isset($_SESSION['logged_in'])) {
                 </footer>
             </div>
         </div>
-        <script type="text/javascript">
-            $(".totalControl").change(function () {
-                var price = $('#item_price').val();
-                var quantity = $('#item_quantity').val();
-                var tax = $('#item_tax').val();
-                var temporary = tax / 100;
-                var realTax = (price * quantity) * temporary;
-                
-                var total = (price * quantity) + realTax;
-                
-                console.log(total);
-                
-                $('#item_total').val(total + " €");
-            });
-        </script>
-
-
+        
         <link rel="stylesheet" href="assets/js/jvectormap/jquery-jvectormap-1.2.2.css">
         <link rel="stylesheet" href="assets/js/rickshaw/rickshaw.min.css">
 

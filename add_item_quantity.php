@@ -31,16 +31,7 @@
             <div class="col-sm-5">
                 <input type="number" class="form-control totalControl" name="item_quantity" id="item_quantity" value="" required>
             </div>
-        </div>
-
-        <div class="form-group">
-            <label for="item_tax" class="col-sm-3 control-label">Tax</label>
-
-            <div class="col-sm-5">
-                <input type="number" class="form-control totalControl" name="item_tax" id="item_tax" required value="18.00" readonly ondblclick="this.readOnly = ''; value = '';">
-                <p class="double-click" style="margin: 10px 0px 0px 0px">Double click to change the tax value</p>
-            </div>
-        </div>                
+        </div>        
 
         <div class="form-group">
             <label for="item_total" class="col-sm-3 control-label">TOTAL</label>
@@ -68,11 +59,8 @@
     $(".totalControl").bind('paste change keyup', function () {
         var price = $('#item_price').val();
         var quantity = $('#item_quantity').val();
-        var tax = $('#item_tax').val();
-        var temporary = tax / 100;
-        var realTax = (price * quantity) * temporary;
 
-        var total = (price * quantity) + realTax;
+        var total = (price * quantity);
 
         $('#item_total').val(total + " €");
     });
