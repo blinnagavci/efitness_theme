@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 13, 2017 at 08:42 PM
+-- Generation Time: Apr 15, 2017 at 11:25 PM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 5.6.24
 
@@ -32,6 +32,7 @@ CREATE TABLE `account` (
   `password` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `admin_status` int(1) NOT NULL,
+  `branches` varchar(255) NOT NULL,
   `status` int(11) NOT NULL,
   `photo` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -40,13 +41,19 @@ CREATE TABLE `account` (
 -- Dumping data for table `account`
 --
 
-INSERT INTO `account` (`id`, `username`, `password`, `email`, `admin_status`, `status`, `photo`) VALUES
-(1, 'admin', 'd033e22ae348aeb5660fc2140aec35850c4da997', 'admin@gmail.com', 0, 0, '1_admin.png'),
-(2, 'granit', '32724aa43dc14f38141fc2fde69a3dd36bfb396b', '123@asd.com', 0, 0, '5_granit.png'),
-(3, 'blini', 'ad8129c19640687edde4881085b614fa3b78b3ba', 'granii@granii.granii', 1, 0, '3_granii.jpg'),
-(4, 'blend', 'f9b1cd1ec91a928e22d44a2a2f77f941450bf666', 'blend@blend.be', 0, 0, '4_blend.jpg'),
-(5, 'labian', 'labian', 'labian', 0, 0, ''),
-(6, 'blinnagavci', 'd033e22ae348aeb5660fc2140aec35850c4da997', 'blinnagavci@gmail.com', 0, 0, '6_blinnagavci.png');
+INSERT INTO `account` (`id`, `username`, `password`, `email`, `admin_status`, `branches`, `status`, `photo`) VALUES
+(1, 'admin', 'd033e22ae348aeb5660fc2140aec35850c4da997', 'admin@gmail.com', 0, '', 0, '1_admin.png'),
+(2, 'granit', '32724aa43dc14f38141fc2fde69a3dd36bfb396b', '123@asd.com', 0, '', 0, '5_granit.png'),
+(3, 'blini', 'ad8129c19640687edde4881085b614fa3b78b3ba', 'granii@granii.granii', 1, '', 0, '3_granii.jpg'),
+(4, 'blend', 'f9b1cd1ec91a928e22d44a2a2f77f941450bf666', 'blend@blend.be', 0, '', 0, '4_blend.jpg'),
+(5, 'labian', 'labian', 'labian', 0, '', 0, ''),
+(6, 'blinnagavci', 'd033e22ae348aeb5660fc2140aec35850c4da997', 'blinnagavci@gmail.com', 0, '', 0, '6_blinnagavci.png'),
+(7, 'Graniiit', '9b903cfd61c0f5fcd0cd9ffe4920bd820075b91b', 'granit@sdfsdfd.ss', 0, '', 0, '7_Graniiit.png'),
+(8, 'ad', '4aeb195cd69ed93520b9b4129636264e0cdc0153', 'ad@asd', 0, '', 0, ''),
+(9, 'asd', 'f10e2821bbbea527ea02200352313bc059445190', 'ad@asd.com', 0, '', 0, ''),
+(13, 'asfjsadfkj', '44cd2f20cd58a871d1ff336e5db776e1b670e3e6', 'kjhkjkjkj@dsadf.de', 0, '', 0, ''),
+(14, 'afjksadfjk', '8a5e897af9f95fb35cd53621fd1c937f4e70b030', 'asfsad@sd.de', 0, '', 0, '14_afjksadfjk.png'),
+(15, 'asfjksdf', '9e265c8883e790ca19085873fe07abedbf049ad8', 'asfdsf@dfasdf.de', 0, '', 0, '15_asfjksdf.png');
 
 -- --------------------------------------------------------
 
@@ -96,6 +103,13 @@ CREATE TABLE `employee` (
   `status` int(11) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `employee`
+--
+
+INSERT INTO `employee` (`id`, `first_name`, `last_name`, `gender`, `residential_address`, `city`, `telephone_no`, `alternative_no`, `email`, `birth_date`, `photo`, `status`) VALUES
+(1, 'Granit', 'Abdu', 'Male', 'afdsfjn', 'asjkfsdf', 'asdfjksnjk', 'dajksfnaskdjf', 'sadfsadf@acs.de', '06/04/2017', NULL, 0);
+
 -- --------------------------------------------------------
 
 --
@@ -110,6 +124,13 @@ CREATE TABLE `employee_contract` (
   `employee_id` int(11) NOT NULL,
   `employee_type_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `employee_contract`
+--
+
+INSERT INTO `employee_contract` (`id`, `amount_of_salary`, `start_date`, `end_date`, `employee_id`, `employee_type_id`) VALUES
+(1, 52, '19/04/2017', '03/05/2017', 1, 3);
 
 -- --------------------------------------------------------
 
@@ -156,7 +177,7 @@ CREATE TABLE `item` (
 --
 
 INSERT INTO `item` (`id`, `name`, `company_name`, `barcode`, `selling_price`, `quantity`, `status`, `category_id`, `unit_id`) VALUES
-(1, 'Candy bar', 'Bio Tech', '48956894156', 2, 20, 0, 1, 4),
+(1, 'Candy bar', 'Bio Tech', '48956894156', 2, 30, 0, 1, 4),
 (2, 'Water', 'Viva', '87451851', 0.5, 100, 0, 2, 2),
 (3, 'Whey', 'Bio Tech', '984518451', 30, 15, 0, 3, 1),
 (4, 'Snickers protein bar', 'Snickers', '8515610', 1, 50, 0, 1, 4),
@@ -210,7 +231,8 @@ INSERT INTO `item_payment_in` (`id`, `cost_price`, `quantity`, `payment_date`, `
 (2, 0.2, 100, '2017-04-12 08:07:15', 20, 2),
 (3, 20, 15, '2017-04-12 08:11:15', 300, 3),
 (4, 0.4, 50, '2017-04-12 08:15:38', 20, 4),
-(5, 400, 1, '2017-04-12 08:19:55', 400, 5);
+(5, 400, 1, '2017-04-12 08:19:55', 400, 5),
+(6, 1.5, 10, '2017-04-13 22:12:38', 17.7, 1);
 
 -- --------------------------------------------------------
 
@@ -303,7 +325,8 @@ INSERT INTO `membership` (`id`, `membership_type`, `offer`, `amount`, `branches`
 (3, 'Monthly', '', 30, '1,2,3,4,5,6,7,8', 0),
 (4, '6 Months', '', 150, '1,2,3,4,5,6,7,8', 0),
 (5, 'Yearly', '', 300, '1,2,3,4,5,6,7,8', 0),
-(6, 'Yearly', 'Dragodan', 270, '1', 0);
+(6, 'Yearly', 'Dragodan', 270, '1', 0),
+(7, 'Monthly', 'Ferizaj', 25, '4,5,6', 0);
 
 -- --------------------------------------------------------
 
@@ -419,7 +442,7 @@ ALTER TABLE `membership_payment`
 -- AUTO_INCREMENT for table `account`
 --
 ALTER TABLE `account`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 --
 -- AUTO_INCREMENT for table `branches`
 --
@@ -429,12 +452,12 @@ ALTER TABLE `branches`
 -- AUTO_INCREMENT for table `employee`
 --
 ALTER TABLE `employee`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `employee_contract`
 --
 ALTER TABLE `employee_contract`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `employee_type`
 --
@@ -454,7 +477,7 @@ ALTER TABLE `item_category`
 -- AUTO_INCREMENT for table `item_payment_in`
 --
 ALTER TABLE `item_payment_in`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `item_payment_out`
 --
@@ -474,7 +497,7 @@ ALTER TABLE `member`
 -- AUTO_INCREMENT for table `membership`
 --
 ALTER TABLE `membership`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `membership_payment`
 --
