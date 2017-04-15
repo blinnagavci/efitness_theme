@@ -241,7 +241,7 @@ if (!isset($_SESSION['logged_in'])) {
 
                                     <ul class="nav nav-tabs">
                                         <li class="active"><a href="#profile-1" data-toggle="tab">Purchases</a></li>
-                                        <li><a href="#profile-2" data-toggle="tab">Sales</a></li>
+                                        <li><a href="#profile-2" data-toggle="tab">Payments</a></li>
                                     </ul>
                                 </div>
                             </div>

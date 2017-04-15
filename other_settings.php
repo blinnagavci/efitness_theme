@@ -121,7 +121,7 @@ if (!isset($_SESSION['logged_in'])) {
                                 </li>
                                 <li>
                                     <a href="payments.php">
-                                        <span class="title">Sales</span>
+                                        <span class="title">Payments</span>
                                     </a>
                                 </li>
                             </ul>
