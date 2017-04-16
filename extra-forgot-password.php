@@ -51,7 +51,7 @@ var baseurl = '';
 				<img src="assets/images/logo@2x.png" width="120" alt="" />
 			</a>
 			
-			<p class="description">Enter your email, and we will send the reset link.</p>
+			<p class="description">Enter your email, and we will send you your password.</p>
 			
 			<!-- progress bar indicator -->
 			<div class="login-progressbar-indicator">
@@ -74,8 +74,7 @@ var baseurl = '';
 				
 				<div class="form-forgotpassword-success">
 					<i class="entypo-check"></i>
-					<h3>Reset email has been sent.</h3>
-					<p>Please check your email, reset password link will expire in 24 hours.</p>
+					<h3>An email with your login info has been sent.</h3>
 				</div>
 				
 				<div class="form-steps">
@@ -94,7 +93,7 @@ var baseurl = '';
 						
 						<div class="form-group">
 							<button type="submit" class="btn btn-info btn-block btn-login">
-								Complete Registration
+								Request Login Info
 								<i class="entypo-right-open-mini"></i>
 							</button>
 						</div>
@@ -108,14 +107,13 @@ var baseurl = '';
 			
 			<div class="login-bottom-links">
 				
-				<a href="extra-login.php.html" class="link">
+				<a href="extra-login.php" class="link">
 					<i class="entypo-lock"></i>
 					Return to Login Page
 				</a>
 				
 				<br />
 				
-				<a href="#">ToS</a>  - <a href="#">Privacy Policy</a>
 				
 			</div>
 			

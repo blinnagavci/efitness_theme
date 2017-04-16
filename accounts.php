@@ -505,10 +505,48 @@ if (!isset($_SESSION['logged_in'])) {
                                     });
                                     $("#add-account-form").submit(function (e) {
                                         e.preventDefault();
-                                        var branches_array = [];
-                                        $('select#branches_select_multiple option:selected').each(function (i) {
-                                            branches_array[i] = $(this).val();
-                                        });
+                                        if ($(this).valid()) {
+                                            var username = $("#account_username").val();
+                                            var temporarypassword = $("#account_password").val();
+                                            var email = $("#account_email").val();
+                                            var account_type = $("#add_account_type").val();
+                                            var branches_array = [];
+                                            $('select#branches_select_multiple option:selected').each(function (i) {
+                                                branches_array[i] = $(this).val();
+                                            });
+                                            console.log(branches_array);
+                                            var form_data = new FormData();
+                                            var file_data;
+                                            var test = '';
+                                            if (!($("#account_upload").val().length === 0)) {
+                                                file_data = $("#account_upload").prop('files')[0];
+                                                form_data.append('file', file_data);
+                                                var test = 'pic';
+                                            }
+                                            form_data.append('username', username);
+                                            form_data.append('temporarypassword', temporarypassword);
+                                            form_data.append('email', email);
+                                            form_data.append('account_type', account_type);
+                                            form_data.append('branches_array', branches_array);
+                                            form_data.append('test', test);
+                                            $.ajax({
+                                                type: "POST",
+                                                dataType: 'text',
+                                                cache: false,
+                                                contentType: false,
+                                                processData: false,
+                                                url: "database/add_account.php",
+                                                data: form_data,
+                                                success: function (text) {
+                                                    if (text === "success") {
+                                                        window.location = window.location + "#addsuccess";
+                                                        location.reload();
+                                                    } else {
+                                                        addAccountFail();
+                                                    }
+                                                }
+                                            });
+                                        }
                                     });
                                     $("#delete-account-submit").click(function () {
                                         var id = $("#delete-account").attr('data-id');

@@ -261,7 +261,6 @@ if (!isset($_SESSION['logged_in'])) {
                                             <input type="text" class="form-control" name="company_name" id="company_name" data-validate="required">
                                         </div>
                                     </div>
-
                                     <div class="form-group">
                                         <label for="item_category" class="col-sm-3 control-label">Category</label>
 
@@ -284,28 +283,27 @@ if (!isset($_SESSION['logged_in'])) {
                                             </select>
                                         </div>
 
-<!--                                        <script type="text/javascript">
+                                        <script type="text/javascript">
                                             $("#item_category").change(function () {
-
-                                                var model = $('#item_category').val();
-                                        <?php
-                                        //$test = $_GET['item_category'];
-                                        //$category_s = mysqli_query($conn, "SELECT sellable FROM item_category WHERE sellable = '$test'");
-                                        //$sellable = mysqli_fetch_row($category_s);
-                                        ?>
-
-                                                var val = '<?php //echo $sellable[0];              ?>';
-                                                console.log(val);
-                                                if (val == '1') {
-                                                    if ($(".form-group").hasClass("selling-price")) {
-                                                        $(".selling-price").addClass("hide");
-                                                        $(".selling-price input").attr("data-validate: ''");
+                                                var $model = $(this).val();
+                                                $.ajax({
+                                                    url: "database/check_sellable.php",
+                                                    type: 'post',
+                                                    data: {
+                                                        "model": $model
+                                                    },
+                                                    success: function (text) {
+                                                        if (text === 'nonsellable') {
+                                                            $(".selling-price").addClass("hide");
+                                                            $(".selling-price input").attr("data-validate: ''");
+                                                        } else {
+                                                            console.log("asdd");
+                                                            $(".selling-price").removeClass("hide");
+                                                        }
                                                     }
-                                                } else if (val != '1') {
-                                                    $(".selling-price").removeClass("hide");
-                                                }
+                                                });
                                             });
-                                        </script>-->
+                                        </script>
                                     </div>
 
                                     <div class="form-group">
@@ -392,85 +390,85 @@ if (!isset($_SESSION['logged_in'])) {
         <!-- JavaScripts initializations and stuff -->
         <script src="assets/js/neon-custom.js"></script>
         <script type="text/javascript">
-            $(document).ready(function () {
-                var url = window.location.href;
-                var array = url.split('/');
-                var lastsegment = array[array.length - 1];
-                if (lastsegment == '#addsuccess') {
-                    addAccountSuccess();
-                    history.pushState("", document.title, window.location.pathname
-                            + window.location.search);
-                }
-            });
-            $("#add_item_form").click(function (e) {
-                e.preventDefault();
-                if ($(this).valid()) {
-                    var name = $("#item_name").val();
-                    var company = $("#company_name").val();
-                    var category = $("#item_category").val();
-                    var barcode = $("#item_barcode").val();
-                    var sellingprice = $("#item_selling_price").val();
-                    var unit = $("#item_unit").val();
-                    var form_data = new FormData();
-                    form_data.append('name', name);
-                    form_data.append('company', company);
-                    form_data.append('category', category);
-                    form_data.append('barcode', barcode);
-                    form_data.append('sellingprice', sellingprice);
-                    form_data.append('unit', unit);
-                    $.ajax({
-                        type: "POST",
-                        dataType: 'text',
-                        cache: false,
-                        contentType: false,
-                        processData: false,
-                        url: "database/remove_account.php",
-                        data: form_data,
-                        success: function (text) {
-                            if (text === "success") {
-                                window.location = window.location + "#addsuccess";
-                                location.reload();
-                            } else {
-                                addItemFail();
-                            }
-                        }
-                    });
-                }
-            });
-            function addItemSuccess() {
-                opts = {
-                    "closeButton": true,
-                    "debug": false,
-                    "positionClass": "toast-top-full-width",
-                    "onclick": null,
-                    "showDuration": "300",
-                    "hideDuration": "1000",
-                    "timeOut": "5000",
-                    "extendedTimeOut": "1000",
-                    "showEasing": "swing",
-                    "hideEasing": "linear",
-                    "showMethod": "fadeIn",
-                    "hideMethod": "fadeOut"
-                };
-                toastr.success("Item successfully added.", opts);
-            }
-            function addItemFail() {
-                opts = {
-                    "closeButton": true,
-                    "debug": false,
-                    "positionClass": "toast-top-full-width",
-                    "onclick": null,
-                    "showDuration": "300",
-                    "hideDuration": "1000",
-                    "timeOut": "5000",
-                    "extendedTimeOut": "1000",
-                    "showEasing": "swing",
-                    "hideEasing": "linear",
-                    "showMethod": "fadeIn",
-                    "hideMethod": "fadeOut"
-                };
-                toastr.error("Unfortunately, we ran into some problems trying to add the item", opts);
-            }
+                                            $(document).ready(function () {
+                                                var url = window.location.href;
+                                                var array = url.split('/');
+                                                var lastsegment = array[array.length - 1];
+                                                if (lastsegment === 'add_item.php#addsuccess') {
+                                                    addItemSuccess();
+                                                    history.pushState("", document.title, window.location.pathname
+                                                            + window.location.search);
+                                                }
+                                            });
+                                            $("#add_item_form").submit(function (e) {
+                                                e.preventDefault();
+                                                if ($(this).valid()) {
+                                                    var name = $("#item_name").val();
+                                                    var company = $("#company_name").val();
+                                                    var category = $("#item_category").val();
+                                                    var barcode = $("#item_barcode").val();
+                                                    var sellingprice = $("#item_selling_price").val();
+                                                    var unit = $("#item_unit").val();
+                                                    var form_data = new FormData();
+                                                    form_data.append('name', name);
+                                                    form_data.append('company', company);
+                                                    form_data.append('category', category);
+                                                    form_data.append('barcode', barcode);
+                                                    form_data.append('sellingprice', sellingprice);
+                                                    form_data.append('unit', unit);
+                                                    $.ajax({
+                                                        type: "POST",
+                                                        dataType: 'text',
+                                                        cache: false,
+                                                        contentType: false,
+                                                        processData: false,
+                                                        url: "database/add_item.php",
+                                                        data: form_data,
+                                                        success: function (text) {
+                                                            if (text === "success") {
+                                                                window.location = window.location + "#addsuccess";
+                                                                location.reload();
+                                                            } else {
+                                                                addItemFail();
+                                                            }
+                                                        }
+                                                    });
+                                                }
+                                            });
+                                            function addItemSuccess() {
+                                                opts = {
+                                                    "closeButton": true,
+                                                    "debug": false,
+                                                    "positionClass": "toast-top-full-width",
+                                                    "onclick": null,
+                                                    "showDuration": "300",
+                                                    "hideDuration": "1000",
+                                                    "timeOut": "5000",
+                                                    "extendedTimeOut": "1000",
+                                                    "showEasing": "swing",
+                                                    "hideEasing": "linear",
+                                                    "showMethod": "fadeIn",
+                                                    "hideMethod": "fadeOut"
+                                                };
+                                                toastr.success("Item successfully added", opts);
+                                            }
+                                            function addItemFail() {
+                                                opts = {
+                                                    "closeButton": true,
+                                                    "debug": false,
+                                                    "positionClass": "toast-top-full-width",
+                                                    "onclick": null,
+                                                    "showDuration": "300",
+                                                    "hideDuration": "1000",
+                                                    "timeOut": "5000",
+                                                    "extendedTimeOut": "1000",
+                                                    "showEasing": "swing",
+                                                    "hideEasing": "linear",
+                                                    "showMethod": "fadeIn",
+                                                    "hideMethod": "fadeOut"
+                                                };
+                                                toastr.error("Unfortunately, we ran into some problems trying to add the item", opts);
+                                            }
         </script>
     </body>
 </html>
