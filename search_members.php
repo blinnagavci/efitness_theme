@@ -123,7 +123,7 @@ if (!isset($_SESSION['logged_in'])) {
                         <li class="has-sub">
                             <a href="#">
                                 <i class="entypo-database"></i>
-                                <span class="title">Inventory</span>
+                                <span class="title">Stock</span>
                             </a>
                             <ul>
                                 <li>
@@ -133,7 +133,7 @@ if (!isset($_SESSION['logged_in'])) {
                                 </li>
                                 <li>
                                     <a href="search_inventory.php">
-                                        <span class="title">Search inventory</span>
+                                        <span class="title">Search stock</span>
                                     </a>
                                 </li>
                                 <li>
@@ -203,14 +203,6 @@ if (!isset($_SESSION['logged_in'])) {
                                         <a href="edit_profile.php">
                                             <i class="entypo-user"></i>
                                             Edit Profile
-                                        </a>
-                                    </li>
-
-
-                                    <li>
-                                        <a href="extra-calendar.html">
-                                            <i class="entypo-calendar"></i>
-                                            Calendar
                                         </a>
                                     </li>
                                 </ul>

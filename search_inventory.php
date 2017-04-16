@@ -17,7 +17,7 @@ if (!isset($_SESSION['logged_in'])) {
 
         <link rel="icon" href="assets/images/favicon.ico">
 
-        <title>E-Fitness | Search inventory</title>
+        <title>E-Fitness | Search stock</title>
 
         <link rel="stylesheet" href="assets/js/jquery-ui/css/no-theme/jquery-ui-1.10.3.custom.min.css">
         <link rel="stylesheet" href="assets/css/font-icons/entypo/css/entypo.css">
@@ -113,7 +113,7 @@ if (!isset($_SESSION['logged_in'])) {
                         <li class="has-sub  opened active">
                             <a href="#">
                                 <i class="entypo-database"></i>
-                                <span class="title">Inventory</span>
+                                <span class="title">Stock</span>
                             </a>
                             <ul>
                                 <li>
@@ -123,7 +123,7 @@ if (!isset($_SESSION['logged_in'])) {
                                 </li>
                                 <li class="active">
                                     <a href="search_inventory.php">
-                                        <span class="title">Search inventory</span>
+                                        <span class="title">Search stock</span>
                                     </a>
                                 </li>
                                 <li>
@@ -187,13 +187,6 @@ if (!isset($_SESSION['logged_in'])) {
                                             Edit Profile
                                         </a>
                                     </li>
-
-                                    <li>
-                                        <a href="extra-calendar.html">
-                                            <i class="entypo-calendar"></i>
-                                            Calendar
-                                        </a>
-                                    </li>
                                 </ul>
                             </li>
                         </ul>
@@ -221,10 +214,10 @@ if (!isset($_SESSION['logged_in'])) {
 
                 <ol class="breadcrumb bc-3" >
                     <li>
-                        Inventory
+                        Stock
                     </li>
                     <li class="active">
-                        <strong>Search inventory</strong>
+                        <strong>Search stock</strong>
                     </li>
                 </ol>
                 <?php
@@ -233,7 +226,7 @@ if (!isset($_SESSION['logged_in'])) {
 
                 // output data of each row
                 ?>
-                <h2>Search inventory</h2>
+                <h2>Search stock</h2>
                 <br />
                 <script type="text/javascript">
                     jQuery(window).load(function () {

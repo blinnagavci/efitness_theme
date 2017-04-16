@@ -111,7 +111,7 @@ if (!isset($_SESSION['logged_in'])) {
                         <li class="has-sub opened active">
                             <a href="#">
                                 <i class="entypo-database"></i>
-                                <span class="title">Inventory</span>
+                                <span class="title">Stock</span>
                             </a>
                             <ul>
                                 <li class="active">
@@ -121,7 +121,7 @@ if (!isset($_SESSION['logged_in'])) {
                                 </li>
                                 <li>
                                     <a href="search_inventory.php">
-                                        <span class="title">Search inventory</span>
+                                        <span class="title">Search stock</span>
                                     </a>
                                 </li>
                                 <li>
@@ -185,14 +185,6 @@ if (!isset($_SESSION['logged_in'])) {
                                             Edit Profile
                                         </a>
                                     </li>
-
-
-                                    <li>
-                                        <a href="extra-calendar.html">
-                                            <i class="entypo-calendar"></i>
-                                            Calendar
-                                        </a>
-                                    </li>
                                 </ul>
                             </li>
 
@@ -225,7 +217,7 @@ if (!isset($_SESSION['logged_in'])) {
 
                 <ol class="breadcrumb bc-3" >
                     <li>
-                        Inventory
+                        Stock
                     </li>
                     <li class="active">
                         <strong>Add item</strong>
