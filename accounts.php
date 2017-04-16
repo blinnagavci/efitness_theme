@@ -377,7 +377,7 @@ if (!isset($_SESSION['logged_in'])) {
 
                                             <div class="fileinput fileinput-new" data-provides="fileinput">
                                                 <div class="fileinput-new thumbnail" style="width: 200px; height: 150px;" data-trigger="fileinput">
-                                                    <img src="http://placehold.it/200x150" alt="...">
+                                                    <img src="assets/images/img200x150.png" alt="...">
                                                 </div>
                                                 <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px; max-height: 150px"></div>
                                                 <div>
@@ -394,7 +394,7 @@ if (!isset($_SESSION['logged_in'])) {
                                     </div>
 
                                     <div class="form-group">
-                                        <label class="col-sm-3 control-label">Account Type</label>
+                                        <label class="col-sm-3 control-label">Account type</label>
 
                                         <div class="col-sm-5">
                                             <select name="add_account_type" id="add_account_type" data-validate="required" class="form-control">

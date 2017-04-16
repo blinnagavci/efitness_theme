@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 15, 2017 at 11:25 PM
+-- Generation Time: Apr 16, 2017 at 02:36 PM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 5.6.24
 
@@ -48,12 +48,7 @@ INSERT INTO `account` (`id`, `username`, `password`, `email`, `admin_status`, `b
 (4, 'blend', 'f9b1cd1ec91a928e22d44a2a2f77f941450bf666', 'blend@blend.be', 0, '', 0, '4_blend.jpg'),
 (5, 'labian', 'labian', 'labian', 0, '', 0, ''),
 (6, 'blinnagavci', 'd033e22ae348aeb5660fc2140aec35850c4da997', 'blinnagavci@gmail.com', 0, '', 0, '6_blinnagavci.png'),
-(7, 'Graniiit', '9b903cfd61c0f5fcd0cd9ffe4920bd820075b91b', 'granit@sdfsdfd.ss', 0, '', 0, '7_Graniiit.png'),
-(8, 'ad', '4aeb195cd69ed93520b9b4129636264e0cdc0153', 'ad@asd', 0, '', 0, ''),
-(9, 'asd', 'f10e2821bbbea527ea02200352313bc059445190', 'ad@asd.com', 0, '', 0, ''),
-(13, 'asfjsadfkj', '44cd2f20cd58a871d1ff336e5db776e1b670e3e6', 'kjhkjkjkj@dsadf.de', 0, '', 0, ''),
-(14, 'afjksadfjk', '8a5e897af9f95fb35cd53621fd1c937f4e70b030', 'asfsad@sd.de', 0, '', 0, '14_afjksadfjk.png'),
-(15, 'asfjksdf', '9e265c8883e790ca19085873fe07abedbf049ad8', 'asfdsf@dfasdf.de', 0, '', 0, '15_asfjksdf.png');
+(7, 'Graniiit', '9b903cfd61c0f5fcd0cd9ffe4920bd820075b91b', 'granit@sdfsdfd.ss', 0, '', 0, '7_Graniiit.png');
 
 -- --------------------------------------------------------
 
@@ -78,7 +73,7 @@ INSERT INTO `branches` (`id`, `city`, `branch`, `status`) VALUES
 (3, 'Prishtine', 'Bregu i diellit', 0),
 (4, 'Ferizaj', 'Adem Jashari', 0),
 (5, 'Ferizaj', 'Nene Tereza', 0),
-(6, 'Ferizaj', 'Nene Tereza', 0),
+(6, 'Ferizaj', 'Zahir Pajaziti', 0),
 (7, 'Gjilan', 'Sami Frasheri', 0),
 (8, 'Gjilan', 'Papaku', 0);
 
@@ -298,7 +293,10 @@ CREATE TABLE `member` (
 --
 
 INSERT INTO `member` (`id`, `first_name`, `last_name`, `gender`, `residential_address`, `city`, `telephone_no`, `alternative_no`, `email`, `birth_date`, `photo`, `date_added`, `status`) VALUES
-(1, 'asd', 'asd', 'Male', 'mati i', 'Prishtine', 'asdasd', 'asdasd', 'labiangashi@gmail.com', '10/04/2017', '1_asd_asd.png', '2017-04-12 11:05:27', 0);
+(1, 'asd', 'asd', 'Male', 'mati i', 'Prishtine', 'asdasd', 'asdasd', 'labiangashi@gmail.com', '10/04/2017', '1_asd_asd.png', '2017-04-12 11:05:27', 0),
+(2, 'Granit', 'Graniti', 'Male', 'afdsfasdf', 'adsfasdfasf', 'adfasdf', 'adfadsff', 'asdf@sadfdas.de', '27/03/2017', '2_Granit_Graniti.png', '2017-04-16 11:31:14', 0),
+(3, 'Blend', 'Blendi', 'Other', 'blend', 'blend', 'blend', 'blend', 'blend@blend.blend', '09/04/2017', '3_Blend_Blendi.png', '2017-04-16 11:32:57', 0),
+(4, 'Fatmir', 'Fatmir', 'Female', 'fatmir', 'fatmir', 'fatmir', 'fatmir', 'fatmir@fatmir.fatmir', '09/04/2017', '4_Fatmir_Fatmir.png', '2017-04-16 12:10:11', 0);
 
 -- --------------------------------------------------------
 
@@ -326,7 +324,8 @@ INSERT INTO `membership` (`id`, `membership_type`, `offer`, `amount`, `branches`
 (4, '6 Months', '', 150, '1,2,3,4,5,6,7,8', 0),
 (5, 'Yearly', '', 300, '1,2,3,4,5,6,7,8', 0),
 (6, 'Yearly', 'Dragodan', 270, '1', 0),
-(7, 'Monthly', 'Ferizaj', 25, '4,5,6', 0);
+(7, 'Monthly', 'Ferizaj', 25, '4,5,6', 0),
+(8, 'Yearly', 'Gjilan', 285, '7,8', 0);
 
 -- --------------------------------------------------------
 
@@ -336,7 +335,6 @@ INSERT INTO `membership` (`id`, `membership_type`, `offer`, `amount`, `branches`
 
 CREATE TABLE `membership_payment` (
   `id` int(11) NOT NULL,
-  `amount_of_payment` double NOT NULL,
   `start_date` varchar(50) NOT NULL,
   `end_date` varchar(50) NOT NULL,
   `id_member` int(11) NOT NULL,
@@ -347,9 +345,15 @@ CREATE TABLE `membership_payment` (
 -- Dumping data for table `membership_payment`
 --
 
-INSERT INTO `membership_payment` (`id`, `amount_of_payment`, `start_date`, `end_date`, `id_member`, `id_membership`) VALUES
-(1, 35, '12/04/2017', '11/05/2017', 1, 3),
-(2, 20, '12/04/2017', '19/04/2017', 1, 2);
+INSERT INTO `membership_payment` (`id`, `start_date`, `end_date`, `id_member`, `id_membership`) VALUES
+(1, '16/04/2017', '17/04/2017', 1, 1),
+(2, '17/04/2017', '26/04/2017', 1, 2),
+(3, '19/04/2017', '04/05/2017', 1, 3),
+(4, '18/04/2017', '28/04/2017', 1, 4),
+(5, '19/04/2017', '04/05/2017', 1, 5),
+(6, '18/04/2017', '27/04/2017', 1, 6),
+(7, '19/04/2017', '16/04/2017', 1, 7),
+(8, '17/04/2017', '04/10/2017', 1, 8);
 
 --
 -- Indexes for dumped tables
@@ -442,7 +446,7 @@ ALTER TABLE `membership_payment`
 -- AUTO_INCREMENT for table `account`
 --
 ALTER TABLE `account`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `branches`
 --
@@ -492,17 +496,17 @@ ALTER TABLE `item_unit`
 -- AUTO_INCREMENT for table `member`
 --
 ALTER TABLE `member`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `membership`
 --
 ALTER TABLE `membership`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `membership_payment`
 --
 ALTER TABLE `membership_payment`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

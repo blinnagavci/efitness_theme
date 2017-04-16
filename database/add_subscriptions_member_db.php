@@ -2,15 +2,12 @@
 
 require('db_connect.php');
 $id = $_POST['id'];
-$membershiptype = $_POST['membershiptype'];
-$membershipamount = $_POST['membershipamount'];
+$membershipId = $_POST['membershipId'];
 $membershipstart = $_POST['membershipstart'];
 $membershipend = $_POST['membershipend'];
-$membershipid = mysqli_query($conn, "SELECT id from membership WHERE membership_type = '$membershiptype'");
-$membershiprow = mysqli_fetch_row($membershipid);
 
-$sql = "INSERT INTO membership_payment (amount_of_payment, start_date, end_date, id_member, id_membership)
-    VALUES ('$membershipamount', '$membershipstart', '$membershipend', '$id', '$membershiprow[0]')";
+$sql = "INSERT INTO membership_payment (start_date, end_date, id_member, id_membership)
+    VALUES ('$membershipstart', '$membershipend', '$id', '$membershipId')";
 
 $retval1 = mysqli_query($conn, $sql);
 if (!$retval1) {

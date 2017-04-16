@@ -13,17 +13,17 @@ $email = ($_POST['email']);
 $telephoneno = ($_POST['phoneno']);
 $alternativeno = ($_POST['alternativeno']);
 $birthdate = ($_POST['birthdate']);
-$membershiptype = $_POST['membershiptype'];
-$membershipamount = $_POST['membershipamount'];
+$membershipId = $_POST['membershipId'];
 $membershipstart = $_POST['startdate'];
 $membershipend = $_POST['enddate'];
 $test = ($_POST['test']);
 
 $getID = mysqli_query($conn, "SELECT id FROM member ORDER BY id DESC");
 $idRow = mysqli_fetch_row($getID);
+$memberId = $idRow[0]+1;
 
 if ($test === 'pic') {
-    $newfilename = $idRow[0] + 1 . "_" . $firstname . "_" . $surname . ".png";
+    $newfilename = $memberId . "_" . $firstname . "_" . $surname . ".png";
     $upload_directory = "../repository/member_photos/";
     move_uploaded_file($_FILES['file']['tmp_name'], $upload_directory . $newfilename);
     $sql_member = "INSERT INTO member (first_name, last_name, gender, residential_address, city, telephone_no,
@@ -41,13 +41,8 @@ if (!$retval1) {
 }
 
 
-$memberid = mysqli_query($conn, "SELECT id from member ORDER BY id DESC");
-$membershipid = mysqli_query($conn, "SELECT id from membership WHERE membership_type = '$membershiptype'");
-$memberrow = mysqli_fetch_row($memberid);
-$membershiprow = mysqli_fetch_row($membershipid);
-
-$sql_membershippayment = "INSERT INTO membership_payment(amount_of_payment, start_date, end_date, id_member, id_membership)
-VALUES ('$membershipamount','$membershipstart','$membershipend', '$memberrow[0]', '$membershiprow[0]')";
+$sql_membershippayment = "INSERT INTO membership_payment(start_date, end_date, id_member, id_membership)
+VALUES ('$membershipstart','$membershipend', '$memberId', '$membershipId')";
 
 $retval2 = mysqli_query($conn, $sql_membershippayment);
 if (!$retval2) {

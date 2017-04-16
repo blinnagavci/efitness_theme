@@ -354,7 +354,7 @@ if (!isset($_SESSION['logged_in'])) {
 
                                             <div class="fileinput fileinput-new" data-provides="fileinput">
                                                 <div class="fileinput-new thumbnail" style="width: 200px; height: 150px;" data-trigger="fileinput">
-                                                    <img src="http://placehold.it/200x150" alt="...">
+                                                    <img src="assets/images/img200x150.png" alt="...">
                                                 </div>
                                                 <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px; max-height: 150px"></div>
                                                 <div>

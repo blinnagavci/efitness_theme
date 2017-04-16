@@ -26,14 +26,20 @@
                             <?php
                             //include('inc/database/db_connect.php');
 
-                            $sql = 'SELECT membership_type FROM membership WHERE status= "0"';
+                            $sql = 'SELECT id, membership_type, offer FROM membership WHERE status= "0"';
                             $retval = mysqli_query($conn, $sql);
                             if (!$retval) {
                                 echo ("Could not retrieve data" . mysql_error());
                             }
                             while ($row = $retval->fetch_assoc()) {
+                                $membershipId = $row['id'];
                                 $membership = $row['membership_type'];
-                                echo "<option value='$membership'>$membership</option>";
+                                $membershipOffer = $row['offer'];
+                                if ($membershipOffer === "") {
+                                    echo "<option value='$membershipId'>$membership</option>";
+                                } else {
+                                    echo "<option value='$membershipId'>$membership, $membershipOffer</option>";
+                                }
                             }
                             //mysqli_close($conn);
                             ?>
@@ -41,13 +47,6 @@
                     </div>
                 </div>
 
-                <div class="form-group">
-                    <label for="membership_amount" class="col-sm-3 control-label">Amount</label>
-
-                    <div class="col-sm-5">
-                        <input type="number" name="membership_amount" class="form-control" id="membership-amount" placeholder="" required>
-                    </div>
-                </div>
 
                 <div class="form-group">
                     <label class="col-sm-3 control-label">Start Date</label>
@@ -76,7 +75,7 @@
             <?php
             if (isset($_GET['id'])) {
                 $id = $_GET['id'];
-                $sql = "SELECT id, start_date, end_date, amount_of_payment FROM membership_payment WHERE id_member = '$id' ORDER BY id DESC";
+                $sql = "SELECT id, start_date, end_date, id_membership FROM membership_payment WHERE id_member = '$id' ORDER BY id DESC";
                 $result = $conn->query($sql);
             }
             if ($result->num_rows > 0) {
@@ -88,17 +87,25 @@
                             <th>ID</th>
                             <th>Start Date</th>
                             <th>End Date</th>
+                            <th>Type</th>
                             <th>Amount</th>
                         </tr>
                     </thead>
 
                     <tbody>
-                        <?php while ($row = $result->fetch_assoc()): ?>
+                        <?php while ($row1 = $result->fetch_assoc()): ?>
                             <tr>
-                                <td><?php echo $row["id"]; ?></td>
-                                <td><?php echo $row['start_date']; ?></td>
-                                <td><?php echo $row['end_date']; ?></td>
-                                <td><?php echo $row['amount_of_payment'] . '€'; ?></td>
+                                <td><?php echo $row1["id"]; ?></td>
+                                <td><?php echo $row1['start_date']; ?></td>
+                                <td><?php echo $row1['end_date']; ?></td>
+                                <?php
+                                $tempId = $row1["id_membership"];
+                                $sql1 = "SELECT membership_type, amount FROM membership where id= '$tempId'";
+                                $result1 = $conn->query($sql1);
+                                $row2 = $result1->fetch_assoc();
+                                ?>
+                                <td><?php echo $row2['membership_type']; ?></td>
+                                <td><?php echo $row2['amount'] . '€'; ?></td>
                             </tr>
                         <?php endwhile; ?>
                     </tbody>
@@ -120,21 +127,19 @@
 <script src="assets/js/jquery.validate.min.js"></script>
 <script src="assets/js/main.js" type="text/javascript"></script>
 <script type="text/javascript">
-    $('input.datepicker').on('changeDate', function(e){
+    $('input.datepicker').on('changeDate', function (e) {
         $(this).datepicker('hide');
     });
     $("#modal_form_subscription_member").submit(function (e) {
         e.preventDefault();
         if ($(this).valid()) {
             var id = $("#test-id").val();
-            var membershiptype = $("#member-subscription").val();
-            var membershipamount = $("#membership-amount").val();
+            var membershipId = $("#member-subscription").val();
             var membershipstart = $("#membership-start").val();
             var membershipend = $("#membership-end").val();
             var form_data = new FormData();
             form_data.append('id', id);
-            form_data.append('membershiptype', membershiptype);
-            form_data.append('membershipamount', membershipamount);
+            form_data.append('membershipId', membershipId);
             form_data.append('membershipstart', membershipstart);
             form_data.append('membershipend', membershipend);
             $.ajax({

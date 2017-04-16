@@ -354,7 +354,7 @@ if (!isset($_SESSION['logged_in'])) {
 
                                             <div class="fileinput fileinput-new" data-provides="fileinput">
                                                 <div class="fileinput-new thumbnail" style="width: 200px; height: 150px;" data-trigger="fileinput">
-                                                    <img src="http://placehold.it/200x150" alt="...">
+                                                    <img src="assets/images/img200x150.png" alt="...">
                                                 </div>
                                                 <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px; max-height: 150px"></div>
                                                 <div>
@@ -379,29 +379,26 @@ if (!isset($_SESSION['logged_in'])) {
                                                 <?php
                                                 include('inc/database/db_connect.php');
 
-                                                $sql = 'SELECT membership_type FROM membership WHERE status= "0"';
+                                                $sql = 'SELECT id, membership_type, offer FROM membership WHERE status= "0"';
                                                 $retval = mysqli_query($conn, $sql);
                                                 if (!$retval) {
                                                     echo ("Could not retrieve data" . mysql_error());
                                                 }
                                                 while ($row = $retval->fetch_assoc()) {
+                                                    $membershipId = $row['id'];
                                                     $membership = $row['membership_type'];
-                                                    echo "<option value='$membership'>$membership</option>";
+                                                    $membershipOffer = $row['offer'];
+                                                    if ($membershipOffer === "") {
+                                                        echo "<option value='$membershipId'>$membership</option>";
+                                                    } else {
+                                                        echo "<option value='$membershipId'>$membership, $membershipOffer</option>";
+                                                    }
                                                 }
                                                 mysqli_close($conn);
                                                 ?>
                                             </select>
                                         </div>
                                     </div>
-
-                                    <div class="form-group">
-                                        <label for="membership_amount" class="col-sm-3 control-label">Amount</label>
-
-                                        <div class="col-sm-5">
-                                            <input type="number" name="membership_amount" class="form-control" data-validate="required" id="membership-amount" placeholder="">
-                                        </div>
-                                    </div>
-
 
                                     <div class="form-group">
                                         <label class="col-sm-3 control-label">Start date</label>
@@ -518,8 +515,7 @@ if (!isset($_SESSION['logged_in'])) {
                     var phoneno = $("#member_telephone").val();
                     var alternativeno = $("#member_alternative").val();
                     var email = $("#member_email").val();
-                    var membershiptype = $("#member_subscription").val();
-                    var membershipamount = $("#membership-amount").val();
+                    var membershipId = $("#member_subscription").val();
                     var startdate = $("#membership-start").val();
                     var enddate = $("#membership-end").val();
                     var form_data = new FormData();
@@ -539,8 +535,7 @@ if (!isset($_SESSION['logged_in'])) {
                     form_data.append('phoneno', phoneno);
                     form_data.append('alternativeno', alternativeno);
                     form_data.append('email', email);
-                    form_data.append('membershiptype', membershiptype);
-                    form_data.append('membershipamount', membershipamount);
+                    form_data.append('membershipId', membershipId);
                     form_data.append('startdate', startdate);
                     form_data.append('enddate', enddate);
                     form_data.append('test', test);
