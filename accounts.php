@@ -509,8 +509,6 @@ if (!isset($_SESSION['logged_in'])) {
                                         $('select#branches_select_multiple option:selected').each(function (i) {
                                             branches_array[i] = $(this).val();
                                         });
-                                        console.log(branches_array);
-
                                     });
                                     $("#delete-account-submit").click(function () {
                                         var id = $("#delete-account").attr('data-id');

@@ -3,12 +3,12 @@
 require('db_connect.php');
 
 if (isset($_POST['add_item'])) {
-    $itemname = $_POST['item_name'];
-    $item_company_name = ($_POST['company_name']);
-    $item_barcode = $_POST['item_barcode'];
-    $item_selling_price = ($_POST['item_selling_price']);
-    $item_category = $_POST['item_category'];
-    $item_unit = $_POST['item_unit'];
+    $itemname = $_POST['name'];
+    $item_company_name = ($_POST['company']);
+    $item_barcode = $_POST['barcode'];
+    $item_selling_price = ($_POST['sellingprice']);
+    $item_category = $_POST['category'];
+    $item_unit = $_POST['unit'];
 
 
     $getCategory = mysqli_query($conn, "SELECT id from item_category WHERE category = '$item_category'");
@@ -24,9 +24,10 @@ if (isset($_POST['add_item'])) {
 
     if (!$retval1) {
         die('Could not enter data to item table' . mysqli_connect_error());
+    }else{
+        echo "success";
     }
 
     mysqli_close($conn);
-    header("location: ../add_item.php");
 }
 
