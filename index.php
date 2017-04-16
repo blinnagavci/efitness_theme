@@ -191,6 +191,7 @@ if (!isset($_SESSION['logged_in'])) {
                                         echo 'repository/account_photos/' . $_SESSION['profile_photo'];
                                     }
                                     ?>" alt="Profile" class="img-circle" width="44" />
+                                    <script> var username = "<?php echo $_SESSION['username'] ?>";</script>
                                          <?php echo $_SESSION['username']; ?>
                                 </a>
 
@@ -267,7 +268,7 @@ if (!isset($_SESSION['logged_in'])) {
                             "showMethod": "fadeIn",
                             "hideMethod": "fadeOut"
                     };
-                            toastr.success("Welcome", opts);
+                            toastr.success("Welcome back " + username + ".", opts);
                     }, 2000);
                             function getRandomInt(min, max)
                             {
