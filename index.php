@@ -144,12 +144,12 @@ if (!isset($_SESSION['logged_in'])) {
                                 </li>
                             </ul>
                         </li>
-<!--                        <li class="">
-                            <a href="">
-                                <i class="entypo-folder"></i>
-                                <span class="title">Reports</span>
-                            </a>
-                        </li>-->
+                        <!--                        <li class="">
+                                                    <a href="">
+                                                        <i class="entypo-folder"></i>
+                                                        <span class="title">Reports</span>
+                                                    </a>
+                                                </li>-->
                         <li class="">
                             <a href="accounts.php">
                                 <i class="entypo-user"></i>
@@ -184,11 +184,11 @@ if (!isset($_SESSION['logged_in'])) {
                             <li class="profile-info dropdown"><!-- add class "pull-right" if you want to place this from right -->
 
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                    <img src="repository/account_photos/<?php
+                                    <img src="<?php
                                     if ($_SESSION['profile_photo'] == '') {
-                                        echo 'empty-profile-icon.png';
+                                        echo 'assets/images/empty-profile-icon.png';
                                     } else {
-                                        echo $_SESSION['profile_photo'];
+                                        echo 'repository/account_photos/' . $_SESSION['profile_photo'];
                                     }
                                     ?>" alt="Profile" class="img-circle" width="44" />
                                          <?php echo $_SESSION['username']; ?>
@@ -272,7 +272,7 @@ if (!isset($_SESSION['logged_in'])) {
                             function getRandomInt(min, max)
                             {
                             return Math.floor(Math.random() * (max - min + 1)) + min;
-                            }
+                            }});
                 </script>
 
 
@@ -281,7 +281,14 @@ if (!isset($_SESSION['logged_in'])) {
 
                         <div class="tile-stats tile-red">
                             <div class="icon"><i class="entypo-users"></i></div>
-                            <div class="num" data-start="0" data-end="83" data-postfix="" data-duration="1500" data-delay="0">0</div>
+                            <div class="num" data-start="0" data-end="
+                            <?php
+                            include('database/db_connect.php');
+                            $result = mysqli_query($conn, "SELECT * FROM member where status = '0'");
+                            $numrows = mysqli_num_rows($result);
+                            echo "$numrows";
+                            ?>
+                            " data-postfix="" data-duration="1500" data-delay="0">0</div>
 
                             <h3>Registered Members</h3>
                             <p>all members in our fitness.</p>
@@ -307,7 +314,14 @@ if (!isset($_SESSION['logged_in'])) {
 
                         <div class="tile-stats tile-aqua">
                             <div class="icon"><i class="entypo-briefcase"></i></div>
-                            <div class="num" data-start="0" data-end="23" data-postfix="" data-duration="1500" data-delay="1200">0</div>
+                            <div class="num" data-start="0" data-end="
+                            <?php
+                            include('database/db_connect.php');
+                            $result1 = mysqli_query($conn, "SELECT * FROM employee where status = '0'");
+                            $numrows1 = mysqli_num_rows($result1);
+                            echo "$numrows1";
+                            ?>
+                            " data-postfix="" data-duration="1500" data-delay="1200">0</div>
 
                             <h3>Registered Employees</h3>
                             <p>all employees in our fitness.</p>
@@ -319,7 +333,17 @@ if (!isset($_SESSION['logged_in'])) {
 
                         <div class="tile-stats tile-blue">
                             <div class="icon"><i class="entypo-user-add"></i></div>
-                            <div class="num" data-start="0" data-end="52" data-postfix="" data-duration="1500" data-delay="1800">0</div>
+                            <div class="num" data-start="0" data-end="<?php
+                            include('database/db_connect.php');
+                            $result2 = mysqli_query($conn, "SELECT count(*) as numRecords FROM member WHERE date_added >= NOW() - INTERVAL 1 WEEK");
+                            if (($result2->num_rows > 0)) {
+                                while ($row = $result2->fetch_assoc()) {
+                                    echo '$row["numRecords"]';
+                                }
+                            } else {
+                                echo 'jkfkj';
+                            }
+                            ?>" data-postfix="" data-duration="1500" data-delay="1800">0</div>
 
                             <h3>This Week</h3>
                             <p>weekly member joining</p>

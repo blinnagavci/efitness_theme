@@ -408,7 +408,7 @@ if (!isset($_SESSION['logged_in'])) {
                                         <label class="col-sm-3 control-label">Branches</label>
 
                                         <div class="col-sm-8">
-                                            <select multiple="multiple" name="branches_select_multiple[]" class="form-control multi-select" data-validate="required">
+                                            <select multiple="multiple" id="branches_select_multiple" name="branches_select_multiple[]" class="form-control multi-select" data-validate="required">
                                                 <?php
                                                 include('database/db_connect.php');
                                                 $sqlb = 'SELECT * FROM branches WHERE status= "0"';
@@ -511,7 +511,11 @@ if (!isset($_SESSION['logged_in'])) {
                                                 var email = $("#account_email").val();
                                                 var account_type = $("#add_account_type").val();
                                                 var branches_array = [];
-                                                branches_array.join($("#branches_select_multiple").val());
+                                                $('.ms-selection .ms-selected span').each(function (i) {
+                                                    //branches_array[i] = $('#branches_select_multiple :selected').val();
+                                                    //branches_array[i] = $('select#branches_select_multiple').val();
+                                                    branches_array[i] = $('select#branches_select_multiple').find(":selected").val();
+                                                });
                                                 console.log(branches_array);
                                                 var form_data = new FormData();
                                                 var file_data;
@@ -525,7 +529,7 @@ if (!isset($_SESSION['logged_in'])) {
                                                 form_data.append('temporarypassword', temporarypassword);
                                                 form_data.append('email', email);
                                                 form_data.append('account_type', account_type);
-                                                form_data.append('branches', branches_array);
+                                                form_data.append('branches_array', branches_array);
                                                 form_data.append('test', test);
                                                 $.ajax({
                                                     type: "POST",
