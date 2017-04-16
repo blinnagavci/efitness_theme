@@ -1,15 +1,19 @@
 <?php
 
 require('db_connect.php');
-$id = $_POST['id'];
+$memberId = $_POST['id'];
 $membershipId = $_POST['membershipId'];
 $membershipstart = $_POST['membershipstart'];
 $membershipend = $_POST['membershipend'];
 
-$sql = "INSERT INTO membership_payment (start_date, end_date, id_member, id_membership)
-    VALUES ('$membershipstart', '$membershipend', '$id', '$membershipId')";
+$sql = "SELECT amount FROM membership WHERE id= '$membershipId'";
+$retval = mysqli_query($conn, $sql);
+$amount = mysqli_fetch_row($retval);
 
-$retval1 = mysqli_query($conn, $sql);
+$sql1 = "INSERT INTO membership_payment (start_date, end_date, amount, id_member, id_membership)
+    VALUES ('$membershipstart', '$membershipend', '$amount[0]', '$memberId', '$membershipId')";
+
+$retval1 = mysqli_query($conn, $sql1);
 if (!$retval1) {
     die('Could not edit data.' . mysqli_connect_error());
 } else {

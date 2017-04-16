@@ -26,7 +26,7 @@
                             <?php
                             //include('inc/database/db_connect.php');
 
-                            $sql = 'SELECT id, membership_type, offer FROM membership WHERE status= "0"';
+                            $sql = 'SELECT id, membership_type, offer, amount FROM membership WHERE status= "0"';
                             $retval = mysqli_query($conn, $sql);
                             if (!$retval) {
                                 echo ("Could not retrieve data" . mysql_error());
@@ -35,10 +35,11 @@
                                 $membershipId = $row['id'];
                                 $membership = $row['membership_type'];
                                 $membershipOffer = $row['offer'];
+                                $membershipAmount = $row['amount'];
                                 if ($membershipOffer === "") {
-                                    echo "<option value='$membershipId'>$membership</option>";
+                                    echo "<option value='$membershipId'>$membership, $membershipAmount €</option>";
                                 } else {
-                                    echo "<option value='$membershipId'>$membership, $membershipOffer</option>";
+                                    echo "<option value='$membershipId'>$membership, $membershipOffer, $membershipAmount €</option>";
                                 }
                             }
                             //mysqli_close($conn);
@@ -75,7 +76,7 @@
             <?php
             if (isset($_GET['id'])) {
                 $id = $_GET['id'];
-                $sql = "SELECT id, start_date, end_date, id_membership FROM membership_payment WHERE id_member = '$id' ORDER BY id DESC";
+                $sql = "SELECT id, start_date, end_date, amount, id_membership FROM membership_payment WHERE id_member = '$id' ORDER BY id DESC";
                 $result = $conn->query($sql);
             }
             if ($result->num_rows > 0) {
@@ -100,12 +101,12 @@
                                 <td><?php echo $row1['end_date']; ?></td>
                                 <?php
                                 $tempId = $row1["id_membership"];
-                                $sql1 = "SELECT membership_type, amount FROM membership where id= '$tempId'";
+                                $sql1 = "SELECT membership_type FROM membership where id= '$tempId'";
                                 $result1 = $conn->query($sql1);
                                 $row2 = $result1->fetch_assoc();
                                 ?>
                                 <td><?php echo $row2['membership_type']; ?></td>
-                                <td><?php echo $row2['amount'] . '€'; ?></td>
+                                <td><?php echo $row1['amount'] . '€'; ?></td>
                             </tr>
                         <?php endwhile; ?>
                     </tbody>

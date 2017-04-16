@@ -379,7 +379,7 @@ if (!isset($_SESSION['logged_in'])) {
                                                 <?php
                                                 include('inc/database/db_connect.php');
 
-                                                $sql = 'SELECT id, membership_type, offer FROM membership WHERE status= "0"';
+                                                $sql = 'SELECT id, membership_type, offer, amount FROM membership WHERE status= "0"';
                                                 $retval = mysqli_query($conn, $sql);
                                                 if (!$retval) {
                                                     echo ("Could not retrieve data" . mysql_error());
@@ -388,10 +388,11 @@ if (!isset($_SESSION['logged_in'])) {
                                                     $membershipId = $row['id'];
                                                     $membership = $row['membership_type'];
                                                     $membershipOffer = $row['offer'];
+                                                    $membershipAmount = $row['amount'];
                                                     if ($membershipOffer === "") {
-                                                        echo "<option value='$membershipId'>$membership</option>";
+                                                        echo "<option value='$membershipId'>$membership, $membershipAmount €</option>";
                                                     } else {
-                                                        echo "<option value='$membershipId'>$membership, $membershipOffer</option>";
+                                                        echo "<option value='$membershipId'>$membership, $membershipOffer, $membershipAmount €</option>";
                                                     }
                                                 }
                                                 mysqli_close($conn);

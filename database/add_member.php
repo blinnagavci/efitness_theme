@@ -40,9 +40,13 @@ if (!$retval1) {
     die('Could not enter data to member table' . mysqli_connect_error());
 }
 
+$sqlAmount = "SELECT amount FROM membership WHERE id= '$membershipId'";
+$retvalAmount = mysqli_query($conn, $sqlAmount);
+$amount = mysqli_fetch_row($retvalAmount);
 
-$sql_membershippayment = "INSERT INTO membership_payment(start_date, end_date, id_member, id_membership)
-VALUES ('$membershipstart','$membershipend', '$memberId', '$membershipId')";
+
+$sql_membershippayment = "INSERT INTO membership_payment(start_date, end_date, amount, id_member, id_membership)
+VALUES ('$membershipstart','$membershipend', '$amount[0]', '$memberId', '$membershipId')";
 
 $retval2 = mysqli_query($conn, $sql_membershippayment);
 if (!$retval2) {

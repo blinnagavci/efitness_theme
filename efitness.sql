@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 16, 2017 at 02:36 PM
+-- Generation Time: Apr 16, 2017 at 05:07 PM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 5.6.24
 
@@ -296,7 +296,8 @@ INSERT INTO `member` (`id`, `first_name`, `last_name`, `gender`, `residential_ad
 (1, 'asd', 'asd', 'Male', 'mati i', 'Prishtine', 'asdasd', 'asdasd', 'labiangashi@gmail.com', '10/04/2017', '1_asd_asd.png', '2017-04-12 11:05:27', 0),
 (2, 'Granit', 'Graniti', 'Male', 'afdsfasdf', 'adsfasdfasf', 'adfasdf', 'adfadsff', 'asdf@sadfdas.de', '27/03/2017', '2_Granit_Graniti.png', '2017-04-16 11:31:14', 0),
 (3, 'Blend', 'Blendi', 'Other', 'blend', 'blend', 'blend', 'blend', 'blend@blend.blend', '09/04/2017', '3_Blend_Blendi.png', '2017-04-16 11:32:57', 0),
-(4, 'Fatmir', 'Fatmir', 'Female', 'fatmir', 'fatmir', 'fatmir', 'fatmir', 'fatmir@fatmir.fatmir', '09/04/2017', '4_Fatmir_Fatmir.png', '2017-04-16 12:10:11', 0);
+(4, 'Fatmir', 'Fatmir', 'Female', 'fatmir', 'fatmir', 'fatmir', 'fatmir', 'fatmir@fatmir.fatmir', '09/04/2017', '4_Fatmir_Fatmir.png', '2017-04-16 12:10:11', 0),
+(5, 'Admir', 'Admir', 'Male', 'Admir', 'Admir', 'Admir', 'Admir', 'Admir@admir.admir', '01/03/2016', '5_Admir_Admir.png', '2017-04-16 15:02:46', 0);
 
 -- --------------------------------------------------------
 
@@ -337,6 +338,7 @@ CREATE TABLE `membership_payment` (
   `id` int(11) NOT NULL,
   `start_date` varchar(50) NOT NULL,
   `end_date` varchar(50) NOT NULL,
+  `amount` double NOT NULL,
   `id_member` int(11) NOT NULL,
   `id_membership` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -345,15 +347,12 @@ CREATE TABLE `membership_payment` (
 -- Dumping data for table `membership_payment`
 --
 
-INSERT INTO `membership_payment` (`id`, `start_date`, `end_date`, `id_member`, `id_membership`) VALUES
-(1, '16/04/2017', '17/04/2017', 1, 1),
-(2, '17/04/2017', '26/04/2017', 1, 2),
-(3, '19/04/2017', '04/05/2017', 1, 3),
-(4, '18/04/2017', '28/04/2017', 1, 4),
-(5, '19/04/2017', '04/05/2017', 1, 5),
-(6, '18/04/2017', '27/04/2017', 1, 6),
-(7, '19/04/2017', '16/04/2017', 1, 7),
-(8, '17/04/2017', '04/10/2017', 1, 8);
+INSERT INTO `membership_payment` (`id`, `start_date`, `end_date`, `amount`, `id_member`, `id_membership`) VALUES
+(1, '16/04/2017', '17/04/2017', 2, 1, 1),
+(2, '18/04/2017', '25/04/2017', 15, 1, 2),
+(3, '26/04/2017', '26/05/2017', 30, 1, 3),
+(4, '27/04/2017', '05/05/2017', 150, 1, 4),
+(5, '18/04/2017', '29/04/2017', 300, 1, 5);
 
 --
 -- Indexes for dumped tables
@@ -496,7 +495,7 @@ ALTER TABLE `item_unit`
 -- AUTO_INCREMENT for table `member`
 --
 ALTER TABLE `member`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `membership`
 --
@@ -506,7 +505,7 @@ ALTER TABLE `membership`
 -- AUTO_INCREMENT for table `membership_payment`
 --
 ALTER TABLE `membership_payment`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
