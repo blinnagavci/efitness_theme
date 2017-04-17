@@ -3,7 +3,7 @@
     <h4 class="modal-title">Edit Item</h4>
 </div>
 <div class="modal-body">
-    <form action="database/edit_item.php" method="POST" id="modal_form_edit_item" name="modal_form_edit_item" role="form" enctype="multipart/form-data" class="form-horizontal form-groups-bordered">
+    <form id="modal_form_edit_item" name="modal_form_edit_item" role="form" enctype="multipart/form-data" class="form-horizontal form-groups-bordered">
         <?php
         require('database/db_connect.php');
         if (isset($_GET['id'])) {
@@ -40,14 +40,17 @@
                 <select name="item_category_edit" id="item_category_edit" class="form-control" required>
                     <?php
                     $categoryID = $row['category_id'];
-
                     $getCategory = "SELECT * FROM item_category WHERE id='$categoryID'";
                     $categoryResult = $conn->query($getCategory);
                     $row_category = $categoryResult->fetch_assoc();
+
+                    if ($row_category['sellable'] == '1') {
+                        ?><script>
+                                $(".selling-price-group").addClass("hide");
+                        </script>
+                    <?php }
                     ?>
-
                     <option value="<?php echo $row_category['category'] ?>" selected><?php echo $row_category['category'] ?></option>
-
                     <?php
                     $all_cateogry = 'SELECT category FROM item_category WHERE status="0"';
                     $select_category = mysqli_query($conn, $all_cateogry);
@@ -56,6 +59,7 @@
                     }
                     while ($row2 = $select_category->fetch_assoc()) {
                         $item_category = $row2['category'];
+
                         if ($row_category['category'] == $item_category) {
                             continue;
                         } else {
@@ -75,7 +79,7 @@
             </div>
         </div>
 
-        <div class="form-group">
+        <div class="form-group selling-price-group">
             <label for="item_selling_price_edit" class="col-sm-3 control-label">Selling Price</label>
 
             <div class="col-sm-5">
@@ -136,3 +140,63 @@
 <script src="assets/js/fileinput.js"></script>
 <script src="assets/js/jquery.validate.min.js"></script>
 <script src="assets/js/main.js" type="text/javascript"></script>
+<script src="assets/js/toastr.js" type="text/javascript"></script>
+<script>
+
+                            $("#modal_form_edit_item").submit(function (event) {
+                                $editForm = $(this);
+                                event.preventDefault();
+                                if ($editForm.valid()) {
+                                    var id = $("#test-id").val();
+                                    var name = $("#item_name_edit").val();
+                                    var company = $("#company_name_edit").val();
+                                    var barcode = $("#item_barcode_edit").val();
+                                    var sellingprice = $("#item_selling_price_edit").val();
+                                    var unit = $("#item_unit_edit").val();
+                                    var category = $("#item_category_edit").val();
+                                    var form_data = new FormData();
+                                    form_data.append('name', name);
+                                    form_data.append('company', company);
+                                    form_data.append('barcode', barcode);
+                                    form_data.append('unit', unit);
+                                    form_data.append('category', category);
+                                    form_data.append('sellingprice', sellingprice);
+                                    form_data.append('id', id);
+                                    $.ajax({
+                                        type: "POST",
+                                        dataType: 'text',
+                                        cache: false,
+                                        contentType: false,
+                                        processData: false,
+                                        url: "database/edit_item.php",
+                                        data: form_data,
+                                        success: function (text) {
+                                            if (text === "success") {
+                                                window.location = window.location + "#edititemsuccess";
+                                                location.reload();
+                                            } else {
+                                                editItemFail();
+                                            }
+                                        }
+                                    });
+                                }
+
+                            });
+                            function editItemFail() {
+                                var opts = {
+                                    "closeButton": true,
+                                    "debug": false,
+                                    "positionClass": "toast-top-full-width",
+                                    "onclick": null,
+                                    "showDuration": "300",
+                                    "hideDuration": "1000",
+                                    "timeOut": "5000",
+                                    "extendedTimeOut": "1000",
+                                    "showEasing": "swing",
+                                    "hideEasing": "linear",
+                                    "showMethod": "fadeIn",
+                                    "hideMethod": "fadeOut"
+                                };
+                                toastr.error("Unfortunately, we ran into some problems trying to edit the item.", opts);
+                            }
+</script>

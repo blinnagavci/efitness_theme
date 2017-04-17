@@ -57,6 +57,7 @@ if ($login_status == 'success') {
     $_SESSION['logged_in'] = TRUE;
     $_SESSION['admin_status'] = $row['admin_status'];
     $_SESSION['profile_photo'] = $row['photo'];
+    $_SESSION['popup'] = 1;
     $resp['redirect_url'] = 'index.php';
 }
 

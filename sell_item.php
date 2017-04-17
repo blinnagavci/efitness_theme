@@ -3,7 +3,7 @@
     <h4 class="modal-title">Sell Item</h4>
 </div>
 <div class="modal-body">
-    <form action="database/sell_item.php" method="POST" id="modal_form_sell_item" name="modal_form_sell_item" role="form" enctype="multipart/form-data" class="form-horizontal form-groups-bordered">
+    <form id="modal_form_sell_item" name="modal_form_sell_item" role="form" enctype="multipart/form-data" class="form-horizontal form-groups-bordered">
         <?php
         require('database/db_connect.php');
         if (isset($_GET['id'])) {
@@ -56,8 +56,70 @@
     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 </div>
 <script type="text/javascript">
+    $("#modal_form_sell_item").submit(function (e) {
+        e.preventDefault();
+        var id = $("#test-id").val();
+        var quantity = $("#item_quantity_sell").val();
+        var sellingprice = $("#selling_price_sell").val();
+        var form_data = new FormData();
+        form_data.append('id', id);
+        form_data.append('quantity', quantity);
+        form_data.append('sellingprice', sellingprice);
+        $.ajax({
+            type: "POST",
+            dataType: 'text',
+            cache: false,
+            contentType: false,
+            processData: false,
+            url: "database/sell_item.php",
+            data: form_data,
+            success: function (text) {
+                if (text === "success") {
+                    window.location = window.location + "#sellitemsuccess";
+                    location.reload();
+                } else if (text === "outofstock") {
+                    outOfStock();
+                } else {
+                    sellItemFail();
+                }
+            }
+        });
 
-    
+    });
+    function sellItemFail() {
+        opts = {
+            "closeButton": true,
+            "debug": false,
+            "positionClass": "toast-top-full-width",
+            "onclick": null,
+            "showDuration": "300",
+            "hideDuration": "1000",
+            "timeOut": "5000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+        };
+        toastr.error("Unfortunately, we ran into some problems trying to sell the item.", opts);
+    }
+    function outOfStock() {
+        opts = {
+            "closeButton": true,
+            "debug": false,
+            "positionClass": "toast-top-full-width",
+            "onclick": null,
+            "showDuration": "300",
+            "hideDuration": "1000",
+            "timeOut": "5000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+        };
+        toastr.error("Not enough quantity to complete the transaction.", opts);
+    }
     $(".totalControlSell").bind('paste change keyup', function () {
         var price = $('#selling_price_sell').val();
         var quantity = $('#item_quantity_sell').val();
@@ -66,7 +128,7 @@
 
         $('#item_total_sell').val(total + " €");
     });
- 
+
 </script>
 
 <script src="assets/js/bootstrap-datepicker.js"></script>

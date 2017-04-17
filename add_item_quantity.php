@@ -3,7 +3,7 @@
     <h4 class="modal-title">Add new quantity</h4>
 </div>
 <div class="modal-body">
-    <form action="database/add_item_quantity.php" method="POST" id="modal_form_add_quantity" name="modal_form_add_quantity" role="form" enctype="multipart/form-data" class="form-horizontal form-groups-bordered">
+    <form id="modal_form_add_quantity" name="modal_form_add_quantity" role="form" enctype="multipart/form-data" class="form-horizontal form-groups-bordered">
         <?php
         require('database/db_connect.php');
         if (isset($_GET['id'])) {
@@ -56,6 +56,35 @@
     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 </div>
 <script type="text/javascript">
+    $("#modal_form_add_quantity").submit(function (e) {
+        e.preventDefault();
+        var id = $("#test-id").val();
+        var costprice = $("#item_price_add").val();
+        var quantity = $("#item_quantity_add").val();
+        var form_data = new FormData();
+        form_data.append('id', id);
+        form_data.append('costprice', costprice);
+        form_data.append('quantity', quantity);
+
+        $.ajax({
+            type: "POST",
+            dataType: 'text',
+            cache: false,
+            contentType: false,
+            processData: false,
+            url: "database/add_item_quantity.php",
+            data: form_data,
+            success: function (text) {
+                if (text === "success") {
+                    window.location = window.location + "#addquantitysuccess";
+                    location.reload();
+                } else {
+                    addQuantityFail();
+                }
+            }
+        });
+
+    });
     $(".totalControlAdd").bind('paste change keyup', function () {
         var price = $('#item_price_add').val();
         var quantity = $('#item_quantity_add').val();
@@ -64,6 +93,23 @@
 
         $('#item_total_add').val(total + " €");
     });
+    function addQuantityFail() {
+        opts = {
+            "closeButton": true,
+            "debug": false,
+            "positionClass": "toast-top-full-width",
+            "onclick": null,
+            "showDuration": "300",
+            "hideDuration": "1000",
+            "timeOut": "5000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+        };
+        toastr.error("Unfortunately, we ran into some problems trying to add the item quantity.", opts);
+    }
 </script>
 
 <script src="assets/js/bootstrap-datepicker.js"></script>

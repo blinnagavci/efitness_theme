@@ -86,7 +86,7 @@ if (!isset($_SESSION['logged_in'])) {
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="search_members.php">
+                                    <a href="search_inventory.php">
                                         <span class="title">Search members</span>
                                     </a>
                                 </li>
@@ -222,8 +222,14 @@ if (!isset($_SESSION['logged_in'])) {
                 </ol>
 
                 <?php
-                $sql = "SELECT * FROM item where status='0'";
-                $result = $conn->query($sql);
+                $checksellable2 = "SELECT * FROM item_category where sellable='0' and status='0'";
+                $retval = mysqli_query($conn, $checksellable2);
+                $array2 = array();
+                while ($thisrow2 = mysqli_fetch_assoc($retval)) {
+                    $array2[] = $thisrow2['id'];
+                }
+                $sqlnotsellable = 'SELECT * FROM item where category_id in (' . implode(',', array_map('intval', $array2)) . ') and status="0"';
+                $resultnonsellable = $conn->query($sqlnotsellable);
                 ?>
                 <h2>Search Inventory</h2>
                 <br />
@@ -294,7 +300,7 @@ if (!isset($_SESSION['logged_in'])) {
                                             </thead>
 
                                             <tbody>
-                                                <?php while ($row = $result->fetch_assoc()): ?>
+                                                <?php while ($row = $resultnonsellable->fetch_assoc()): ?>
                                                     <tr>
                                                         <?php $tempCategoryID = $row['category_id'] ?>
                                                         <?php $tempUnitID = $row['unit_id'] ?>
@@ -322,7 +328,7 @@ if (!isset($_SESSION['logged_in'])) {
                                                                 Edit
                                                             </a>
 
-                                                            <a href="database/remove_item.php?id=<?php echo $row['id'] ?>" class="btn btn-danger btn-sm btn-icon icon-left deleteButton" onclick="return confirm('Are you sure you want to delete this item?');">
+                                                            <a class="btn btn-danger btn-sm btn-icon icon-left deleteButton" data-toggle='modal' data-target='#modal_delete' data-id='<?php echo $row["id"]; ?>'>
                                                                 <i class="entypo-cancel"></i>
                                                                 Delete
                                                             </a>
@@ -373,13 +379,13 @@ if (!isset($_SESSION['logged_in'])) {
                                             });
                                         </script>
                                         <?php
-                                        $checksellable = "SELECT * FROM item_category where sellable='1'";
+                                        $checksellable = "SELECT * FROM item_category where sellable='1' and status='0'";
                                         $retval2 = mysqli_query($conn, $checksellable);
                                         $array = array();
                                         while ($thisrow = mysqli_fetch_assoc($retval2)) {
                                             $array[] = $thisrow['id'];
                                         }
-                                        $sqlsellable = 'SELECT * FROM item where category_id in (' . implode(',', array_map('intval', $array)) . ')';
+                                        $sqlsellable = 'SELECT * FROM item where category_id in (' . implode(',', array_map('intval', $array)) . ') and status="0"';
                                         $resultsellable = $conn->query($sqlsellable);
                                         ?>
                                         <table class="table table-bordered table-striped datatable" id="table-3">
@@ -423,7 +429,7 @@ if (!isset($_SESSION['logged_in'])) {
                                                                 Edit
                                                             </a>
 
-                                                            <a href="database/remove_item.php?id=<?php echo $row['id'] ?>" class="btn btn-danger btn-sm btn-icon icon-left deleteButton" onclick="return confirm('Are you sure you want to delete this item?');">
+                                                            <a class="btn btn-danger btn-sm btn-icon icon-left deleteButton" data-toggle="modal" data-target="#modal_delete"  data-id="<?php echo $row['id']; ?>">
                                                                 <i class="entypo-cancel"></i>
                                                                 Delete
                                                             </a>
@@ -454,16 +460,6 @@ if (!isset($_SESSION['logged_in'])) {
                     </div>
                 </div>
 
-                <div id="modal_delete" class="modal fade" role="dialog">
-                    <div class="modal-dialog">
-
-                        <!-- Modal content-->
-                        <div class="modal-content" id="modal_delete_content">
-
-                        </div>
-
-                    </div>
-                </div>
 
                 <div id="modal_add" class="modal fade" role="dialog">
                     <div class="modal-dialog">
@@ -486,7 +482,14 @@ if (!isset($_SESSION['logged_in'])) {
 
                     </div>
                 </div>
+                <div class="modal fade" id="modal_delete" role='dialog'>
+                    <div class="modal-dialog">
+                        <div class="modal-content" id="modal_delete_item_content">
 
+
+                        </div>
+                    </div>
+                </div>
                 <footer class="main">
                     <strong>E-Fitness 2017 </strong>&copy; All Rights Reserved
                 </footer>
@@ -495,6 +498,41 @@ if (!isset($_SESSION['logged_in'])) {
         <script>
 
             $(document).ready(function () {
+                var url = window.location.href;
+                var array = url.split('/');
+                var lastsegment = array[array.length - 1];
+                switch (lastsegment) {
+                    case "search_inventory.php#edititemsuccess":
+                        editItemSuccess();
+                        removeHash();
+                        break;
+                    case "search_inventory.php#deleteitemsuccess":
+                        deleteItemSuccess();
+                        removeHash();
+                        break;
+                    case "search_inventory.php#addquantitysuccess":
+                        addQuantitySuccess();
+                        removeHash();
+                        break;
+                    case "search_inventory.php#sellitemsuccess":
+                        sellItemSuccess();
+                        removeHash();
+                    default:
+                        break;
+                }
+                function removeHash() {
+                    history.pushState("", document.title, window.location.pathname
+                            + window.location.search);
+                }
+                $(".deleteButton").click(function () {
+                    var id = $(this).attr('data-id');
+                    $.ajax({
+                        url: "remove_item.php?id=" + id, cache: false, success: function (result) {
+                            $('#modal_delete_item_content').html(result);
+                        }
+                    });
+
+                });
                 $('.editButton').click(function () {
                     var id = $(this).attr('data-id');
                     $.ajax({
@@ -523,7 +561,42 @@ if (!isset($_SESSION['logged_in'])) {
                 });
 
             });
-
+            function toastrAlert() {
+                opts = {
+                    "closeButton": true,
+                    "debug": false,
+                    "positionClass": "toast-top-full-width",
+                    "onclick": null,
+                    "showDuration": "300",
+                    "hideDuration": "1000",
+                    "timeOut": "5000",
+                    "extendedTimeOut": "1000",
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut"
+                };
+            }
+            function editItemSuccess() {
+                toastrAlert();
+                toastr.success("Item successfully edited.", opts);
+            }
+            function deleteItemSuccess() {
+                toastrAlert();
+                toastr.success("Item successfully deleted.", opts);
+            }
+            function deleteItemFail() {
+                toastrAlert();
+                toastr.error("Unfortunately, we ran into some problems trying to delete the item.", opts);
+            }
+            function addQuantitySuccess() {
+                toastrAlert();
+                toastr.success("Item quantity succesfully added.", opts);
+            }
+            function sellItemSuccess() {
+                toastrAlert();
+                toastr.success("Item successfully sold.", opts);
+            }
         </script>
 
         <!-- Imported styles on this page -->
@@ -545,6 +618,7 @@ if (!isset($_SESSION['logged_in'])) {
 
         <!-- JavaScripts initializations and stuff -->
         <script src="assets/js/neon-custom.js"></script>
+        <script src="assets/js/toastr.js"></script>
 
         <!-- Demo Settings -->
         <script src="assets/js/neon-demo.js"></script> 
