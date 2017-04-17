@@ -26,10 +26,10 @@
         </div>
 
         <div class="form-group">
-            <label for="company_name_edit" class="col-sm-3 control-label">Company Name</label>
+            <label for="brand_edit" class="col-sm-3 control-label">Brand</label>
 
             <div class="col-sm-5">
-                <input type="text" class="form-control" name="company_name_edit" id="company_name_edit" value="<?php echo $row['company_name'] ?>" required>
+                <input type="text" class="form-control" name="brand_edit" id="brand_edit" value="<?php echo $row['company_name'] ?>" required>
             </div>
         </div>
 
@@ -149,7 +149,7 @@
                                 if ($editForm.valid()) {
                                     var id = $("#test-id").val();
                                     var name = $("#item_name_edit").val();
-                                    var company = $("#company_name_edit").val();
+                                    var company = $("#brand_edit").val();
                                     var barcode = $("#item_barcode_edit").val();
                                     var sellingprice = $("#item_selling_price_edit").val();
                                     var unit = $("#item_unit_edit").val();

@@ -255,10 +255,10 @@ if (!isset($_SESSION['logged_in'])) {
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="company_name" class="col-sm-3 control-label">Company Name</label>
+                                        <label for="brand" class="col-sm-3 control-label">Brand</label>
 
                                         <div class="col-sm-5">
-                                            <input type="text" class="form-control" name="company_name" id="company_name" data-validate="required">
+                                            <input type="text" class="form-control" name="brand" id="brand" data-validate="required">
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -404,7 +404,7 @@ if (!isset($_SESSION['logged_in'])) {
                                                 e.preventDefault();
                                                 if ($(this).valid()) {
                                                     var name = $("#item_name").val();
-                                                    var company = $("#company_name").val();
+                                                    var company = $("#brand").val();
                                                     var category = $("#item_category").val();
                                                     var barcode = $("#item_barcode").val();
                                                     var sellingprice = $("#item_selling_price").val();
