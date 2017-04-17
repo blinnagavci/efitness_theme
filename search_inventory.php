@@ -17,7 +17,7 @@ if (!isset($_SESSION['logged_in'])) {
 
         <link rel="icon" href="assets/images/favicon.ico">
 
-        <title>E-Fitness | Search stock</title>
+        <title>E-Fitness | Search Inventory</title>
 
         <link rel="stylesheet" href="assets/js/jquery-ui/css/no-theme/jquery-ui-1.10.3.custom.min.css">
         <link rel="stylesheet" href="assets/css/font-icons/entypo/css/entypo.css">
@@ -113,7 +113,7 @@ if (!isset($_SESSION['logged_in'])) {
                         <li class="has-sub  opened active">
                             <a href="#">
                                 <i class="entypo-database"></i>
-                                <span class="title">Stock</span>
+                                <span class="title">Inventory</span>
                             </a>
                             <ul>
                                 <li>
@@ -123,7 +123,7 @@ if (!isset($_SESSION['logged_in'])) {
                                 </li>
                                 <li class="active">
                                     <a href="search_inventory.php">
-                                        <span class="title">Search stock</span>
+                                        <span class="title">Search Inventory</span>
                                     </a>
                                 </li>
                                 <li>
@@ -214,10 +214,10 @@ if (!isset($_SESSION['logged_in'])) {
 
                 <ol class="breadcrumb bc-3" >
                     <li>
-                        Stock
+                        Inventory
                     </li>
                     <li class="active">
-                        <strong>Search stock</strong>
+                        <strong>Search Inventory</strong>
                     </li>
                 </ol>
 
@@ -225,7 +225,7 @@ if (!isset($_SESSION['logged_in'])) {
                 $sql = "SELECT * FROM item where status='0'";
                 $result = $conn->query($sql);
                 ?>
-                <h2>Search stock</h2>
+                <h2>Search Inventory</h2>
                 <br />
                 <div class='row'>
                     <div class='col-md-12'>

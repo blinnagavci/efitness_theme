@@ -116,7 +116,7 @@ if (!isset($_SESSION['logged_in'])) {
                         <li class="has-sub">
                             <a href="#">
                                 <i class="entypo-database"></i>
-                                <span class="title">Stock</span>
+                                <span class="title">Inventory</span>
                             </a>
                             <ul>
                                 <li class="">
@@ -126,7 +126,7 @@ if (!isset($_SESSION['logged_in'])) {
                                 </li>
                                 <li>
                                     <a href="search_inventory.php">
-                                        <span class="title">Search stock</span>
+                                        <span class="title">Search inventory</span>
                                     </a>
                                 </li>
                                 <li>
@@ -514,7 +514,6 @@ if (!isset($_SESSION['logged_in'])) {
                                             $('select#branches_select_multiple option:selected').each(function (i) {
                                                 branches_array[i] = $(this).val();
                                             });
-                                            console.log(branches_array);
                                             var form_data = new FormData();
                                             var file_data;
                                             var test = '';
