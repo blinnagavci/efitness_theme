@@ -388,6 +388,7 @@ if (!isset($_SESSION['logged_in'])) {
                                         $sqlsellable = 'SELECT * FROM item where category_id in (' . implode(',', array_map('intval', $array)) . ') and status="0"';
                                         $resultsellable = $conn->query($sqlsellable);
                                         ?>
+
                                         <table class="table table-bordered table-striped datatable" id="table-3">
                                             <thead>
                                                 <tr>
