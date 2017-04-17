@@ -220,111 +220,229 @@ if (!isset($_SESSION['logged_in'])) {
                         <strong>Search stock</strong>
                     </li>
                 </ol>
+
                 <?php
                 $sql = "SELECT * FROM item where status='0'";
                 $result = $conn->query($sql);
-
-                // output data of each row
                 ?>
                 <h2>Search stock</h2>
                 <br />
-                <script type="text/javascript">
-                    jQuery(window).load(function () {
-                        var $table2 = jQuery("#table-2");
+                <div class='row'>
+                    <div class='col-md-12'>
+                        <div class="panel minimal minimal-gray">
 
-                        // Initialize DataTable
-                        $table2.DataTable({
-                            "autoWidth": false,
-                            "sDom": "Bfrtip",
-                            "iDisplayLength": 10,
-//                            "columnDefs": [
-//                                {"width": "20%", "targets": 0}
-//                            ],
-                            "aoColumns": [
-                                null,
-                                null,
-                                null,
-                                null,
-                                null,
-                                null,
-                                {"width": "20px"},
-                                null,
-                                {"bSortable": false}
-                            ],
-                            buttons: [
-                                'excelHtml5',
-                                'pdfHtml5'
-                            ],
-                            "bStateSave": true
-                        });
-                    });
+                            <div class="panel-heading">
+                                <div class="panel-title"><h4></h4></div>
+                                <div class="panel-options">
 
-                </script>
+                                    <ul class="nav nav-tabs">
+                                        <li class="active"><a href="#stock" data-toggle="tab">Stock</a></li>
+                                        <li><a href="#other" data-toggle="tab">Other</a></li>
+                                    </ul>
+                                </div>
+                            </div>
 
-                <table class="table table-bordered table-striped datatable" id="table-2">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Name</th>
-                            <th>Category</th>
-                            <th>Unit</th>
-                            <th>Company Name</th>
-                            <th>Barcode</th>
-                            <th>Selling Price</th>
-                            <th>Quantity</th>
-                            <th>Options</th>
-                        </tr>
-                    </thead>
+                            <div class="panel-body">
+                                <div class="tab-content">
+                                    <div class="tab-pane active" id="stock">
+                                        <script type="text/javascript">
+                                            jQuery(window).load(function () {
+                                                var $table2 = jQuery("#table-2");
 
-                    <tbody>
-                        <?php while ($row = $result->fetch_assoc()): ?>
-                            <tr>
-                                <?php $tempCategoryID = $row['category_id'] ?>
-                                <?php $tempUnitID = $row['unit_id'] ?>
-                                <td><?php echo $row['id'] ?></td>
-                                <td><?php echo $row['name'] ?></td>
-                                <?php
-                                $sql1 = "SELECT category FROM item_category where id= '$tempCategoryID'";
-                                $result1 = $conn->query($sql1);
-                                $row1 = $result1->fetch_assoc();
-                                ?>
-                                <td><?php echo $row1['category'] ?></td>
-                                <?php
-                                $sql2 = "SELECT unit FROM item_unit where id= '$tempUnitID'";
-                                $result2 = $conn->query($sql2);
-                                $row2 = $result2->fetch_assoc();
-                                ?>
-                                <td><?php echo $row2['unit'] ?></td>
-                                <td><?php echo $row['company_name'] ?></td>
-                                <td><?php echo $row['barcode'] ?></td>
-                                <td><?php echo $row['selling_price'] ?></td>
-                                <td><?php echo $row['quantity'] ?></td>
-                                <td>
-                                    <a href="#" class="btn btn-default btn-sm btn-icon icon-left editButton" data-toggle='modal' data-target='#modal_edit'  data-id='<?php echo $row["id"]; ?>'>
-                                        <i class="entypo-pencil"></i>
-                                        Edit
-                                    </a>
+                                                // Initialize DataTable
+                                                $table2.DataTable({
+                                                    "autoWidth": false,
+                                                    "sDom": "Bfrtip",
+                                                    "iDisplayLength": 10,
+                                                    //                            "columnDefs": [
+                                                    //                                {"width": "20%", "targets": 0}
+                                                    //                            ],
+                                                    "aoColumns": [
+                                                        null,
+                                                        null,
+                                                        null,
+                                                        null,
+                                                        null,
+                                                        null,
+                                                        {"width": "20px"},
+                                                        null,
+                                                        {"bSortable": false}
+                                                    ],
+                                                    buttons: [
+                                                        'excelHtml5',
+                                                        'pdfHtml5'
+                                                    ],
+                                                    "bStateSave": true
+                                                });
+                                            });
 
-                                    <a href="database/remove_item.php?id=<?php echo $row['id'] ?>" class="btn btn-danger btn-sm btn-icon icon-left deleteButton" onclick="return confirm('Are you sure you want to delete this item?');">
-                                        <i class="entypo-cancel"></i>
-                                        Delete
-                                    </a>
+                                        </script>
 
-                                    <a href="#" class="btn btn-info btn-sm btn-icon icon-left addButton" data-toggle='modal' data-target='#modal_add'  data-id='<?php echo $row["id"]; ?>'>
-                                        <i class="entypo-plus"></i>
-                                        Add
-                                    </a>
-                                    <a href="#" class="btn btn-sm btn-icon btn-green icon-left sellButton" data-toggle="modal" data-target="#modal_sell" data-id="<?php echo $row['id']; ?>">
-                                        <i class="entypo-minus"></i>
-                                        Sell
-                                    </a>
-                                </td>
-                            </tr>
-                    <?php endwhile; ?>
-                    </tbody>
-                </table>
-                <br />
+                                        <table class="table table-bordered table-striped datatable" id="table-2">
+                                            <thead>
+                                                <tr>
+                                                    <th>ID</th>
+                                                    <th>Name</th>
+                                                    <th>Category</th>
+                                                    <th>Unit</th>
+                                                    <th>Company Name</th>
+                                                    <th>Barcode</th>
+                                                    <th>Selling Price</th>
+                                                    <th>Quantity</th>
+                                                    <th>Options</th>
+                                                </tr>
+                                            </thead>
 
+                                            <tbody>
+                                                <?php while ($row = $result->fetch_assoc()): ?>
+                                                    <tr>
+                                                        <?php $tempCategoryID = $row['category_id'] ?>
+                                                        <?php $tempUnitID = $row['unit_id'] ?>
+                                                        <td><?php echo $row['id'] ?></td>
+                                                        <td><?php echo $row['name'] ?></td>
+                                                        <?php
+                                                        $sql1 = "SELECT category FROM item_category where id= '$tempCategoryID'";
+                                                        $result1 = $conn->query($sql1);
+                                                        $row1 = $result1->fetch_assoc();
+                                                        ?>
+                                                        <td><?php echo $row1['category'] ?></td>
+                                                        <?php
+                                                        $sql2 = "SELECT unit FROM item_unit where id= '$tempUnitID'";
+                                                        $result2 = $conn->query($sql2);
+                                                        $row2 = $result2->fetch_assoc();
+                                                        ?>
+                                                        <td><?php echo $row2['unit'] ?></td>
+                                                        <td><?php echo $row['company_name'] ?></td>
+                                                        <td><?php echo $row['barcode'] ?></td>
+                                                        <td><?php echo $row['selling_price'] ?></td>
+                                                        <td><?php echo $row['quantity'] ?></td>
+                                                        <td>
+                                                            <a href="#" class="btn btn-default btn-sm btn-icon icon-left editButton" data-toggle='modal' data-target='#modal_edit'  data-id='<?php echo $row["id"]; ?>'>
+                                                                <i class="entypo-pencil"></i>
+                                                                Edit
+                                                            </a>
+
+                                                            <a href="database/remove_item.php?id=<?php echo $row['id'] ?>" class="btn btn-danger btn-sm btn-icon icon-left deleteButton" onclick="return confirm('Are you sure you want to delete this item?');">
+                                                                <i class="entypo-cancel"></i>
+                                                                Delete
+                                                            </a>
+
+                                                            <a href="#" class="btn btn-info btn-sm btn-icon icon-left addButton" data-toggle='modal' data-target='#modal_add'  data-id='<?php echo $row["id"]; ?>'>
+                                                                <i class="entypo-plus"></i>
+                                                                Add
+                                                            </a>
+                                                            <a href="#" class="btn btn-sm btn-icon btn-green icon-left sellButton" data-toggle="modal" data-target="#modal_sell" data-id="<?php echo $row['id']; ?>">
+                                                                <i class="entypo-minus"></i>
+                                                                Sell
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                <?php endwhile; ?>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="tab-pane" id="other">
+                                        <script type="text/javascript">
+                                            jQuery(window).load(function () {
+                                                var $table3 = jQuery("#table-3");
+
+                                                // Initialize DataTable
+                                                $table3.DataTable({
+                                                    "autoWidth": false,
+                                                    "sDom": "Bfrtip",
+                                                    "iDisplayLength": 10,
+                                                    //                            "columnDefs": [
+                                                    //                                {"width": "20%", "targets": 0}
+                                                    //                            ],
+                                                    "aoColumns": [
+                                                        null,
+                                                        null,
+                                                        null,
+                                                        null,
+                                                        null,
+                                                        {"width": "20px"},
+                                                        null,
+                                                        {"bSortable": false}
+                                                    ],
+                                                    buttons: [
+                                                        'excelHtml5',
+                                                        'pdfHtml5'
+                                                    ],
+                                                    "bStateSave": true
+                                                });
+                                            });
+                                        </script>
+                                        <?php
+                                        $checksellable = "SELECT * FROM item_category where sellable='1'";
+                                        $retval2 = mysqli_query($conn, $checksellable);
+                                        $array = array();
+                                        while ($thisrow = mysqli_fetch_assoc($retval2)) {
+                                            $array[] = $thisrow['id'];
+                                        }
+                                        $sqlsellable = 'SELECT * FROM item where category_id in (' . implode(',', array_map('intval', $array)) . ')';
+                                        $resultsellable = $conn->query($sqlsellable);
+                                        ?>
+                                        <table class="table table-bordered table-striped datatable" id="table-3">
+                                            <thead>
+                                                <tr>
+                                                    <th>ID</th>
+                                                    <th>Name</th>
+                                                    <th>Category</th>
+                                                    <th>Unit</th>
+                                                    <th>Company Name</th>
+                                                    <th>Barcode</th>
+                                                    <th>Quantity</th>
+                                                    <th>Options</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <?php while ($row = $resultsellable->fetch_assoc()): ?>
+                                                    <tr>
+                                                        <?php $tempCategoryID = $row['category_id'] ?>
+                                                        <?php $tempUnitID = $row['unit_id'] ?>
+                                                        <td><?php echo $row['id'] ?></td>
+                                                        <td><?php echo $row['name'] ?></td>
+                                                        <?php
+                                                        $sql1 = "SELECT category FROM item_category where id= '$tempCategoryID'";
+                                                        $result1 = $conn->query($sql1);
+                                                        $row1 = $result1->fetch_assoc();
+                                                        ?>
+                                                        <td><?php echo $row1['category'] ?></td>
+                                                        <?php
+                                                        $sql2 = "SELECT unit FROM item_unit where id= '$tempUnitID'";
+                                                        $result2 = $conn->query($sql2);
+                                                        $row2 = $result2->fetch_assoc();
+                                                        ?>
+                                                        <td><?php echo $row2['unit'] ?></td>
+                                                        <td><?php echo $row['company_name'] ?></td>
+                                                        <td><?php echo $row['barcode'] ?></td>
+                                                        <td><?php echo $row['quantity'] ?></td>
+                                                        <td>
+                                                            <a href="#" class="btn btn-default btn-sm btn-icon icon-left editButton" data-toggle='modal' data-target='#modal_edit'  data-id='<?php echo $row["id"]; ?>'>
+                                                                <i class="entypo-pencil"></i>
+                                                                Edit
+                                                            </a>
+
+                                                            <a href="database/remove_item.php?id=<?php echo $row['id'] ?>" class="btn btn-danger btn-sm btn-icon icon-left deleteButton" onclick="return confirm('Are you sure you want to delete this item?');">
+                                                                <i class="entypo-cancel"></i>
+                                                                Delete
+                                                            </a>
+
+                                                            <a href="#" class="btn btn-info btn-sm btn-icon icon-left addButton" data-toggle='modal' data-target='#modal_add'  data-id='<?php echo $row["id"]; ?>'>
+                                                                <i class="entypo-plus"></i>
+                                                                Add
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                <?php endwhile; ?>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div id="modal_edit" class="modal fade" role="dialog">
                     <div class="modal-dialog">
 
@@ -335,7 +453,7 @@ if (!isset($_SESSION['logged_in'])) {
 
                     </div>
                 </div>
-                
+
                 <div id="modal_delete" class="modal fade" role="dialog">
                     <div class="modal-dialog">
 
