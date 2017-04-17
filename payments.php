@@ -214,7 +214,7 @@ if (!isset($_SESSION['logged_in'])) {
 
                 <ol class="breadcrumb bc-3" >
                     <li>
-                        Stock
+                        Inventory
                     </li>
                     <li class="active">
                         <strong>Payments</strong>
