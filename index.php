@@ -256,7 +256,7 @@ if (!isset($_SESSION['logged_in'])) {
                                  " data-postfix="" data-duration="1500" data-delay="0">0</div>
 
                             <h3>Registered Members</h3>
-                            <p>all members in our fitness.</p>
+                            <p>total number of members registered</p>
                         </div>
 
                     </div>
@@ -268,7 +268,7 @@ if (!isset($_SESSION['logged_in'])) {
                             <div class="num" data-start="0" data-end="135" data-postfix="" data-duration="1500" data-delay="600">0</div>
 
                             <h3>Membership</h3>
-                            <p>most popular membership so far.</p>
+                            <p>most popular membership so far</p>
                         </div>
 
                     </div>
@@ -289,7 +289,7 @@ if (!isset($_SESSION['logged_in'])) {
                                  " data-postfix="" data-duration="1500" data-delay="1200">0</div>
 
                             <h3>Registered Employees</h3>
-                            <p>all employees in our fitness.</p>
+                            <p>total number of employees working</p>
                         </div>
 
                     </div>
@@ -311,7 +311,7 @@ if (!isset($_SESSION['logged_in'])) {
                             ?>" data-postfix="" data-duration="1500" data-delay="1800">0</div>
 
                             <h3>This Week</h3>
-                            <p>weekly member joining</p>
+                            <p>weekly member joinings</p>
                         </div>
 
                     </div>
