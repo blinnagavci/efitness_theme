@@ -124,7 +124,7 @@ if (!isset($_SESSION['logged_in'])) {
                         <li class="has-sub">
                             <a href="#">
                                 <i class="entypo-database"></i>
-                                <span class="title">Stock</span>
+                                <span class="title">Inventory</span>
                             </a>
                             <ul>
                                 <li>
@@ -134,7 +134,7 @@ if (!isset($_SESSION['logged_in'])) {
                                 </li>
                                 <li>
                                     <a href="search_inventory.php">
-                                        <span class="title">Search stock</span>
+                                        <span class="title">Search inventory</span>
                                     </a>
                                 </li>
                                 <li>
@@ -192,7 +192,7 @@ if (!isset($_SESSION['logged_in'])) {
                                     }
                                     ?>" alt="Profile" class="img-circle" width="44" />
                                     <script> var username = "<?php echo $_SESSION['username'] ?>";</script>
-                                         <?php echo $_SESSION['username']; ?>
+                                    <?php echo $_SESSION['username']; ?>
                                 </a>
 
                                 <ul class="dropdown-menu">
@@ -239,34 +239,6 @@ if (!isset($_SESSION['logged_in'])) {
                 <hr />
 
 
-                <script type="text/javascript">
-                    jQuery(document).ready(function($)
-                    {
-                    // Sample Toastr Notification
-                    setTimeout(function()
-                    {
-                    var opts = {
-                    "closeButton": true,
-                            "debug": false,
-                            "positionClass": rtl() || public_vars.$pageContainer.hasClass('right-sidebar') ? "toast-top-left" : "toast-top-right",
-                            "toastClass": "red",
-                            "onclick": null,
-                            "showDuration": "300",
-                            "hideDuration": "1000",
-                            "timeOut": "5000",
-                            "extendedTimeOut": "1000",
-                            "showEasing": "swing",
-                            "hideEasing": "linear",
-                            "showMethod": "fadeIn",
-                            "hideMethod": "fadeOut"
-                    };
-                            toastr.success("Welcome back " + username + ".", opts);
-                    }, 2000);
-                            function getRandomInt(min, max)
-                            {
-                            return Math.floor(Math.random() * (max - min + 1)) + min;
-                            }});
-                </script>
 
 
                 <div class="row">
@@ -281,7 +253,7 @@ if (!isset($_SESSION['logged_in'])) {
                             $numrows = mysqli_num_rows($result);
                             echo "$numrows";
                             ?>
-                            " data-postfix="" data-duration="1500" data-delay="0">0</div>
+                                 " data-postfix="" data-duration="1500" data-delay="0">0</div>
 
                             <h3>Registered Members</h3>
                             <p>all members in our fitness.</p>
@@ -314,7 +286,7 @@ if (!isset($_SESSION['logged_in'])) {
                             $numrows1 = mysqli_num_rows($result1);
                             echo "$numrows1";
                             ?>
-                            " data-postfix="" data-duration="1500" data-delay="1200">0</div>
+                                 " data-postfix="" data-duration="1500" data-delay="1200">0</div>
 
                             <h3>Registered Employees</h3>
                             <p>all employees in our fitness.</p>
@@ -710,7 +682,36 @@ if (!isset($_SESSION['logged_in'])) {
         <!-- <script src="assets/js/morris.min.js"></script> -->
         <script src="assets/js/toastr.js"></script>
         <script src="assets/js/neon-chat.js"></script>
-
+        <?php if ($_SESSION['popup'] === 1) {
+            ?>
+            <script type="text/javascript">
+                                            jQuery(document).ready(function ($)
+                                            {
+                                                setTimeout(function ()
+                                                {
+                                                    var opts = {
+                                                        "closeButton": true,
+                                                        "debug": false,
+                                                        "positionClass": rtl() || public_vars.$pageContainer.hasClass('right-sidebar') ? "toast-top-left" : "toast-top-right",
+                                                        "toastClass": "red",
+                                                        "onclick": null,
+                                                        "showDuration": "300",
+                                                        "hideDuration": "1000",
+                                                        "timeOut": "5000",
+                                                        "extendedTimeOut": "1000",
+                                                        "showEasing": "swing",
+                                                        "hideEasing": "linear",
+                                                        "showMethod": "fadeIn",
+                                                        "hideMethod": "fadeOut"
+                                                    };
+                                                    toastr.success("Welcome back " + username + ".", opts);
+                                                }, 1000);
+                                            });
+            </script>
+            <?php
+        }
+        $_SESSION['popup'] = NULL;
+        ?>
 
         <!-- JavaScripts initializations and stuff -->
         <script src="assets/js/neon-custom.js"></script>
