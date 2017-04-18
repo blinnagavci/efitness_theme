@@ -95,7 +95,7 @@ require_once ('header.php')
                         <label for="employee_telephone" class="col-sm-3 control-label">Phone no.</label>
 
                         <div class="col-sm-5">
-                            <input type="text" name="employee_telephone" class="form-control" data-validate="required" id="employee_telephone" placeholder="">
+                            <input type="text" name="employee_telephone" class="form-control" data-validate="required" id="employee_telephone" data-mask="^\+?\d*$" data-is-regex="true">
                         </div>
                     </div>
 
@@ -103,7 +103,7 @@ require_once ('header.php')
                         <label for="employee_alternative" class="col-sm-3 control-label">Alternative no.</label>
 
                         <div class="col-sm-5">
-                            <input type="text" name="employee_alternative" class="form-control"  data-validate="required" id="employee_alternative" placeholder="">
+                            <input type="text" name="employee_alternative" class="form-control"  data-validate="required" id="employee_alternative" data-mask="^\+?\d*$" data-is-regex="true">
                         </div>
                     </div>
 
@@ -179,7 +179,7 @@ require_once ('header.php')
 
                         <div class="col-sm-3">
                             <div class="input-group">
-                                <input type="text" class="form-control datepicker" data-validate="required" name="employee_start" id="employee_start" data-start-date="+0d" data-format="dd/mm/yyyy">
+                                <input type="text" class="form-control datepicker" data-validate="required" name="employee_start" id="employee_start" data-start-date="+0d" data-format="dd/mm/yyyy" readonly style="background-color: transparent; cursor: pointer;">
 
                                 <div class="input-group-addon">
                                     <a href="#"><i class="entypo-calendar"></i></a>
@@ -192,7 +192,7 @@ require_once ('header.php')
 
                         <div class="col-sm-3">
                             <div class="input-group">
-                                <input type="text" class="form-control datepicker" data-validate="required" name="employee_end" id="employee_end" data-start-date="+0d" data-format="dd/mm/yyyy">
+                                <input type="text" class="form-control datepicker" data-validate="required" name="employee_end" id="employee_end" data-start-date="+0d" data-format="dd/mm/yyyy" readonly style="background-color: transparent; cursor: pointer;">
 
                                 <div class="input-group-addon">
                                     <a href="#"><i class="entypo-calendar"></i></a>

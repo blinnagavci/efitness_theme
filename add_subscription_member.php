@@ -53,7 +53,7 @@
                     <label class="col-sm-3 control-label">Start Date</label>
 
                     <div class="col-sm-5">
-                        <input type="text" id="membership-start" name="membership_start" class="form-control datepicker" data-start-date="+0d" data-format="dd/mm/yyyy" required>
+                        <input type="text" id="membership-start" name="membership_start" class="form-control datepicker" data-start-date="+0d" data-format="dd/mm/yyyy" readonly style="background-color: transparent; cursor: pointer;" required>
                     </div>
                 </div>
 
@@ -61,7 +61,7 @@
                     <label class="col-sm-3 control-label">End Date</label>
 
                     <div class="col-sm-5">
-                        <input type="text" id="membership-end" name="membership_end" class="form-control datepicker" data-start-date="+0d" data-format="dd/mm/yyyy" required>
+                        <input type="text" id="membership-end" name="membership_end" class="form-control datepicker" data-start-date="+0d" data-format="dd/mm/yyyy" readonly style="background-color: transparent; cursor: pointer;" required>
                     </div>
                 </div>
 

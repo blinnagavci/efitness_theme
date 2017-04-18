@@ -88,7 +88,7 @@
             <label for="employee_telephone" class="col-sm-3 control-label">Phone no.</label>
 
             <div class="col-sm-5">
-                <input type="text" name="employee_telephone" class="form-control" id="employee_telephone" value="<?php echo $row['telephone_no']; ?>" required>
+                <input type="text" name="employee_telephone" class="form-control" id="employee_telephone" data-mask="^\+?\d*$" data-is-regex="true" value="<?php echo $row['telephone_no']; ?>" required>
             </div>
         </div>
 
@@ -96,7 +96,7 @@
             <label for="employee_alternative" class="col-sm-3 control-label">Alternative no.</label>
 
             <div class="col-sm-5">
-                <input type="text" name="employee_alternative" class="form-control"id="employee_alternative" value="<?php echo $row['alternative_no']; ?>" required>
+                <input type="text" name="employee_alternative" class="form-control"id="employee_alternative" data-mask="^\+?\d*$" data-is-regex="true" value="<?php echo $row['alternative_no']; ?>" required>
             </div>
         </div>
 
