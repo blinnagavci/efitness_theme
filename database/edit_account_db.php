@@ -2,11 +2,12 @@
 
 require('db_connect.php');
 
+$id = ($_POST['id']);
 $username = ($_POST['username']);
 $temporarypassword = ($_POST['temporarypassword']);
 $email = ($_POST['email']);
-$id = ($_POST['id']);
 $accounttypeselect = $_POST['account_type'];
+$branches = $_POST['branches_array'];
 $test = ($_POST['test']);
 if ($test === 'pic') {
     //we can use temp but we are converting every pic to PNG for less space
@@ -36,9 +37,9 @@ if (!($accountPassword[0] == $temporarypassword)) {
     $password = $temporarypassword;
 }
 if ($test === 'pic') {
-    $sql = "UPDATE account SET username='$username', password='$password', email='$email', admin_status='$accounttypeselect', photo='$newfilename' WHERE id = '$id'";
+    $sql = "UPDATE account SET username='$username', password='$password', email='$email', admin_status='$accounttypeselect', branches='$branches', photo='$newfilename' WHERE id = '$id'";
 } else {
-    $sql = "UPDATE account SET username='$username', password='$password', email='$email', admin_status='$accounttypeselect' WHERE id = '$id'";
+    $sql = "UPDATE account SET username='$username', password='$password', email='$email', admin_status='$accounttypeselect', branches='$branches' WHERE id = '$id'";
 }
 
 

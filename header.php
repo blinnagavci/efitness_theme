@@ -8,6 +8,7 @@ if (!isset($_SESSION['logged_in'])) {
 ?>
 <!DOCTYPE html>
 <html lang="en">
+    <script type="text/javascript" async="" src="http://www.google-analytics.com/ga.js"></script>
     <head>
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
@@ -166,6 +167,8 @@ if (!isset($_SESSION['logged_in'])) {
                                         echo 'repository/account_photos/' . $_SESSION['profile_photo'];
                                     }
                                     ?>" alt="Profile" class="img-circle" width="44" />
+                                    <script> var username = "<?php echo $_SESSION['username']; ?>";
+                                </script>
                                          <?php echo "<span>" . $_SESSION['username'] . "</span>"; ?>
                                 </a>
                                 <ul class="dropdown-menu">

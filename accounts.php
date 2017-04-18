@@ -117,7 +117,13 @@ $result = $conn->query($sql);
     </div>
 </div>
 
-
+<div id="modal_edit" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content" id="modal_edit_content">
+            
+        </div>
+    </div>
+</div>
 <div id="add_account" class="modal fade" role="dialog">
     <div class="modal-dialog">
 

@@ -100,6 +100,29 @@
             </div>
         </div>
         <div class="form-group">
+            <label class="col-sm-3 control-label">Branches</label>
+
+            <div class="col-sm-8">
+                <select multiple="multiple" id="branches_select_multiple1" name="branches_select_multiple1[]" class="form-control multi-select" data-validate="required">
+                    <?php
+                    include('database/db_connect.php');
+                    $sqlb = 'SELECT * FROM branches WHERE status= "0"';
+                    
+                    $retvalb = mysqli_query($conn, $sqlb);
+                    if (!$retvalb) {
+                        echo ("Could not retrieve data" . mysql_error());
+                    }
+                    while ($rowb = $retvalb->fetch_assoc()) {
+                        $branch_temp_id = $rowb['id'];
+                        $branch_city = $rowb['city'];
+                        $branch_name = $rowb['branch'];
+                        echo "<option value='$branch_temp_id'>$branch_city, $branch_name</option>";
+                    }
+                    ?>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
             <div class="col-sm-offset-3 col-sm-5">
                 <input  type="submit" value="Submit" name="account_edit_submit" id="account_edit_submit" class="btn btn-primary btn-block" />
             </div>
@@ -114,7 +137,12 @@
     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 </div>
 
+<script src="assets/js/neon-custom.js"></script>
+<script src="assets/js/neon-demo.js"></script>
+
 <script src="assets/js/jquery.validate.min.js"></script>
+<script src="assets/js/jquery.multi-select.js"></script>
+<script src="assets/js/jquery-ui/js/jquery-ui-1.10.3.minimal.min.js"></script>
 <script src="assets/js/main.js" type="text/javascript"></script>
 <script>
 
@@ -127,6 +155,10 @@
                             var temporarypassword = $("#account_password").val();
                             var email = $("#account_email").val();
                             var account_type = $("#account_type").val();
+                            var branches_array = [];
+                                $('select#branches_select_multiple1 option:selected').each(function (i) {
+                                    branches_array[i] = $(this).val();
+                                });
                             var form_data = new FormData();
                             var file_data;
                             var test = '';
@@ -140,6 +172,7 @@
                             form_data.append('email', email);
                             form_data.append('id', id);
                             form_data.append('account_type', account_type);
+                            form_data.append('branches_array', branches_array);
                             form_data.append('test', test);
                             $.ajax({
                                 type: "POST",
