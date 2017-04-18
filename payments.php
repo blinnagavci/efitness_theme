@@ -69,7 +69,7 @@ require_once ('header.php');
 
                         </script>
 
-                        <table class="table table-bordered table-striped datatable" id="table-2">
+                        <table class="table table-bordered table-striped datatable responsive" id="table-2">
                             <thead>
                                 <tr>
                                     <th>ID</th>
@@ -140,7 +140,7 @@ require_once ('header.php');
 
                         </script>
 
-                        <table class="table table-bordered table-striped datatable" id="table-3">
+                        <table class="table table-bordered table-striped datatable responsive" id="table-3">
                             <thead>
                                 <tr>
                                     <th>ID</th>

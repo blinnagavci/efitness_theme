@@ -82,6 +82,7 @@
                 ?>
 
                 <table class="table table-bordered table-striped datatable" id="contract_table">
+                <table class="table table-bordered table-striped datatable responsive" id="contract_table">
                     <thead>
                         <tr>
                             <th>ID</th>

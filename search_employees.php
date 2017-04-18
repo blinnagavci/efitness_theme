@@ -45,7 +45,7 @@ $result = $conn->query($sql);
 
 </script>
 
-<table class="table table-bordered table-striped datatable" id="tableEmployees">
+<table class="table table-bordered table-striped datatable responsive" id="tableEmployees">
     <thead>
         <tr>
             <th>ID</th>

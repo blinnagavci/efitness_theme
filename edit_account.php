@@ -111,8 +111,7 @@
                     $ret = mysqli_query($conn, "SELECT branches from account WHERE id = '$id'");
                     $query = mysqli_fetch_row($ret);
                     $branchesArray = explode(",", $query[0]);
-                    end($branchesArray);
-                    $lastElementKey = key($branchesArray);
+                    $lastElementKey = end($branchesArray);
                     echo "<script>console.log( 'Branches: " . $branches . "' );</script>";
 
                     $sqlb = 'SELECT * FROM branches WHERE status= "0"';
@@ -128,9 +127,9 @@
                         foreach ($branchesArray as $branch) {
                             $tempBranch = trim($branch);
                             if ($branch_temp_id === $tempBranch) {
-                                echo "<option selected value='$branch_temp_id'>$branch_city, $branch_name</option>";
+                                echo "<option value='$branch_temp_id' selected>$branch_city, $branch_name</option>";
                                 echo "<script>console.log( 'Branch selected: " . $branch_temp_id . "' );</script>";
-                            } else if ($branch_temp_id !== $tempBranch && $tempBranch === $branchesArray['$lastElementKey']) {
+                            } else if ($tempBranch === $lastElementKey && $branch_temp_id !== $tempBranch) {
                                 echo "<option value='$branch_temp_id'>$branch_city, $branch_name</option>";
                                 echo "<script>console.log( 'Branch unselected: " . $branch_temp_id . "' );</script>";
                             }

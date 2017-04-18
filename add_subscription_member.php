@@ -82,7 +82,7 @@
             if ($result->num_rows > 0) {
                 ?>
 
-                <table class="table table-bordered table-striped datatable" id="membership_table">
+                <table class="table table-bordered table-striped datatable responsive" id="membership_table">
                     <thead>
                         <tr>
                             <th>ID</th>

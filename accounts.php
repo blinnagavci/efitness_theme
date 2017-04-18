@@ -49,7 +49,7 @@ $result = $conn->query($sql);
 
 </script>
 
-<table class="table table-bordered table-striped datatable" id="table-accounts">
+<table class="table table-bordered table-striped datatable responsive" id="table-accounts">
     <thead>
         <tr>
             <th>ID</th>
