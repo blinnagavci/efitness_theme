@@ -150,6 +150,7 @@ $result = $conn->query($sql);
 
 
 <!-- Imported scripts on this page -->
+<script src="assets/js/jquery.inputmask.bundle.js"></script>
 <script src="assets/js/datatables/datatables.js"></script>
 <script src="assets/js/select2/select2.min.js"></script>
 <script src="assets/js/neon-chat.js"></script>

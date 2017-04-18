@@ -19,7 +19,7 @@
             <label for="account_username" class="col-sm-3 control-label" >Username</label>
 
             <div class="col-sm-5">
-                <input type="text" name="account_username" class="form-control" required id="account_username" value='<?php echo $row['username']; ?>' required>
+                <input type="text" name="account_username" class="form-control" required id="account_username" value='<?php echo $row['username']; ?>' required >
 
             </div>
         </div>

@@ -65,7 +65,7 @@ require_once ('header.php')
 
                         <div class="col-sm-3">
                             <div class="input-group">
-                                <input type="text" name="employee_date" id="employee_date" data-validate="required" class="form-control datepicker" data-end-date="+0d" data-format="dd/mm/yyyy">
+                                <input type="text" name="employee_date" id="employee_date" data-validate="required" class="form-control datepicker" data-end-date="+0d" data-format="dd/mm/yyyy" readonly style="background-color: transparent; cursor: pointer;">
 
                                 <div class="input-group-addon">
                                     <a href="#"><i class="entypo-calendar"></i></a>
