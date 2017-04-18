@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.1
--- http://www.phpmyadmin.net
+-- version 4.6.5.2
+-- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 16, 2017 at 05:07 PM
--- Server version: 10.1.16-MariaDB
--- PHP Version: 5.6.24
+-- Generation Time: Apr 18, 2017 at 06:36 PM
+-- Server version: 10.1.21-MariaDB
+-- PHP Version: 7.1.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -31,6 +31,7 @@ CREATE TABLE `account` (
   `username` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
+  `random_string` varchar(255) DEFAULT NULL,
   `admin_status` int(1) NOT NULL,
   `branches` varchar(255) NOT NULL,
   `status` int(11) NOT NULL,
@@ -41,14 +42,14 @@ CREATE TABLE `account` (
 -- Dumping data for table `account`
 --
 
-INSERT INTO `account` (`id`, `username`, `password`, `email`, `admin_status`, `branches`, `status`, `photo`) VALUES
-(1, 'admin', 'd033e22ae348aeb5660fc2140aec35850c4da997', 'admin@gmail.com', 0, '', 0, '1_admin.png'),
-(2, 'granit', '32724aa43dc14f38141fc2fde69a3dd36bfb396b', '123@asd.com', 0, '', 0, '5_granit.png'),
-(3, 'blini', 'ad8129c19640687edde4881085b614fa3b78b3ba', 'granii@granii.granii', 1, '', 0, '3_granii.jpg'),
-(4, 'blend', 'f9b1cd1ec91a928e22d44a2a2f77f941450bf666', 'blend@blend.be', 0, '', 0, '4_blend.jpg'),
-(5, 'labian', 'labian', 'labian', 0, '', 0, ''),
-(6, 'blinnagavci', 'd033e22ae348aeb5660fc2140aec35850c4da997', 'blinnagavci@gmail.com', 0, '', 0, '6_blinnagavci.png'),
-(7, 'Graniiit', '9b903cfd61c0f5fcd0cd9ffe4920bd820075b91b', 'granit@sdfsdfd.ss', 0, '', 0, '7_Graniiit.png');
+INSERT INTO `account` (`id`, `username`, `password`, `email`, `random_string`, `admin_status`, `branches`, `status`, `photo`) VALUES
+(1, 'admin', 'd033e22ae348aeb5660fc2140aec35850c4da997', 'admin@gmail.com', '', 0, '', 0, '1_admin.png'),
+(2, 'granit', '32724aa43dc14f38141fc2fde69a3dd36bfb396b', '123@asd.com', '', 0, '', 0, '5_granit.png'),
+(3, 'blini', 'ad8129c19640687edde4881085b614fa3b78b3ba', 'granii@granii.granii', '', 1, '', 0, '3_granii.jpg'),
+(4, 'blend', 'f9b1cd1ec91a928e22d44a2a2f77f941450bf666', 'blend@blend.be', '', 0, '', 0, '4_blend.jpg'),
+(5, 'labian', 'labian', 'labian', '', 0, '', 0, ''),
+(6, 'blinnagavci', 'd033e22ae348aeb5660fc2140aec35850c4da997', 'blinnagavci@gmail.com', 'pjSnDJyNpGlPF9kpN9eFVPUWP', 0, '', 0, '6_blinnagavci.png'),
+(7, 'Graniiit', '9b903cfd61c0f5fcd0cd9ffe4920bd820075b91b', 'granit@sdfsdfd.ss', '', 0, '', 0, '7_Graniiit.png');
 
 -- --------------------------------------------------------
 
@@ -172,7 +173,7 @@ CREATE TABLE `item` (
 --
 
 INSERT INTO `item` (`id`, `name`, `company_name`, `barcode`, `selling_price`, `quantity`, `status`, `category_id`, `unit_id`) VALUES
-(1, 'Candy bar', 'Bio Tech', '48956894156', 2, 30, 0, 1, 4),
+(1, 'Candy bar', 'Bio Tech', '48956894156', 2, 38, 0, 1, 4),
 (2, 'Water', 'Viva', '87451851', 0.5, 100, 0, 2, 2),
 (3, 'Whey', 'Bio Tech', '984518451', 30, 15, 0, 3, 1),
 (4, 'Snickers protein bar', 'Snickers', '8515610', 1, 50, 0, 1, 4),
@@ -200,7 +201,7 @@ INSERT INTO `item_category` (`id`, `category`, `sellable`, `status`) VALUES
 (2, 'Drink', 0, 0),
 (3, 'Supplement', 0, 0),
 (4, 'Furniture', 0, 0),
-(5, 'Equipment', 0, 0);
+(5, 'Equipment', 1, 0);
 
 -- --------------------------------------------------------
 
@@ -227,7 +228,9 @@ INSERT INTO `item_payment_in` (`id`, `cost_price`, `quantity`, `payment_date`, `
 (3, 20, 15, '2017-04-12 08:11:15', 300, 3),
 (4, 0.4, 50, '2017-04-12 08:15:38', 20, 4),
 (5, 400, 1, '2017-04-12 08:19:55', 400, 5),
-(6, 1.5, 10, '2017-04-13 22:12:38', 17.7, 1);
+(6, 1.5, 10, '2017-04-13 22:12:38', 17.7, 1),
+(7, 30, 2, '2017-04-18 13:10:23', 60, 1),
+(8, 2, 6, '2017-04-18 13:10:35', 12, 1);
 
 -- --------------------------------------------------------
 
@@ -480,7 +483,7 @@ ALTER TABLE `item_category`
 -- AUTO_INCREMENT for table `item_payment_in`
 --
 ALTER TABLE `item_payment_in`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `item_payment_out`
 --
