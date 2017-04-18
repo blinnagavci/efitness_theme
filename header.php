@@ -161,15 +161,16 @@ if (!isset($_SESSION['logged_in'])) {
                             <li class="profile-info dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                     <img src="<?php
-                                    if ($_SESSION['profile_photo'] == '') {
+                                    $photo = "repository/account_photos/" . $_SESSION['profile_photo'];
+                                    if ($_SESSION['profile_photo'] == '' || (!file_exists($photo))) {
                                         echo 'assets/images/empty-profile-icon.png';
                                     } else {
                                         echo 'repository/account_photos/' . $_SESSION['profile_photo'];
                                     }
                                     ?>" alt="Profile" class="img-circle" width="44" />
                                     <script> var username = "<?php echo $_SESSION['username']; ?>";
-                                </script>
-                                         <?php echo "<span>" . $_SESSION['username'] . "</span>"; ?>
+                                    </script>
+                                    <?php echo "<span>" . $_SESSION['username'] . "</span>"; ?>
                                 </a>
                                 <ul class="dropdown-menu">
 
