@@ -1,14 +1,13 @@
 <!DOCTYPE html>
-<?php 
+<?php
 session_start();
-//require('data/sample-login-form.php');
 if (isset($_SESSION['logged_in'])) {
     header('location: index.php');
 }
 ?>
 <html lang="en">
     <head>
-      
+
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
         <meta charset="utf-8">
