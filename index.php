@@ -565,8 +565,36 @@ require_once ('header.php');
 
 </div>
 
-
-<!-- Footer -->
+<?php if ($_SESSION['popup'] === 1) {
+    ?>
+    <script type="text/javascript">
+        jQuery(document).ready(function ($)
+        {
+            setTimeout(function ()
+            {
+                var opts = {
+                    "closeButton": true,
+                    "debug": false,
+                    "positionClass": rtl() || public_vars.$pageContainer.hasClass('right-sidebar') ? "toast-top-left" : "toast-top-right",
+                    "toastClass": "red",
+                    "onclick": null,
+                    "showDuration": "300",
+                    "hideDuration": "1000",
+                    "timeOut": "5000",
+                    "extendedTimeOut": "1000",
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut"
+                };
+                toastr.success("Welcome back " + username + ".", opts);
+            }, 1000);
+        });
+    </script>
+    <?php
+}
+$_SESSION['popup'] = NULL;
+?>
 <footer class="main">
 
     <strong>E-Fitness 2017 </strong>&copy; All Rights Reserved
@@ -598,36 +626,7 @@ require_once ('header.php');
 <script src="assets/js/morris.min.js"></script>
 <script src="assets/js/toastr.js"></script>
 <script src="assets/js/neon-chat.js"></script>
-<?php if ($_SESSION['popup'] === 1) {
-    ?>
-    <script type="text/javascript">
-                jQuery(document).ready(function ($)
-                {
-                    setTimeout(function ()
-                    {
-                        var opts = {
-                            "closeButton": true,
-                            "debug": false,
-                            "positionClass": rtl() || public_vars.$pageContainer.hasClass('right-sidebar') ? "toast-top-left" : "toast-top-right",
-                            "toastClass": "red",
-                            "onclick": null,
-                            "showDuration": "300",
-                            "hideDuration": "1000",
-                            "timeOut": "5000",
-                            "extendedTimeOut": "1000",
-                            "showEasing": "swing",
-                            "hideEasing": "linear",
-                            "showMethod": "fadeIn",
-                            "hideMethod": "fadeOut"
-                        };
-                        toastr.success("Welcome back " + username + ".", opts);
-                    }, 1000);
-                });
-    </script>
-    <?php
-}
-$_SESSION['popup'] = NULL;
-?>
+
 
 <!-- JavaScripts initializations and stuff -->
 <script src="assets/js/neon-custom.js"></script>
