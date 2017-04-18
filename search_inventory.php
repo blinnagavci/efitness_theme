@@ -1,6 +1,6 @@
 <?php
 $title = 'Search Inventory';
-require ('header.php');
+require_once ('header.php');
 ?>
 <ol class="breadcrumb bc-3" >
     <li>
@@ -382,7 +382,7 @@ $resultnonsellable = $conn->query($sqlnotsellable);
     }
     function addQuantitySuccess() {
         toastrAlert();
-        toastr.success("Item quantity succesfully added.", opts);
+        toastr.success("Item quantity successfully added.", opts);
     }
     function sellItemSuccess() {
         toastrAlert();

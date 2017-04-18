@@ -1,6 +1,6 @@
 <?php
 $title = 'Search Members';
-require ('header.php');
+require_once ('header.php');
 ?>
 
 <ol class="breadcrumb bc-3" >

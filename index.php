@@ -1,6 +1,6 @@
 <?php 
 $title = 'Dashboard';
-require ('header.php');
+require_once ('header.php');
 ?>
 <div class="row">
     <div class="col-sm-3 col-xs-6">
@@ -63,10 +63,11 @@ require ('header.php');
             $result2 = mysqli_query($conn, "SELECT count(*) as numRecords FROM member WHERE date_added >= NOW() - INTERVAL 1 WEEK");
             if (($result2->num_rows > 0)) {
                 while ($row = $result2->fetch_assoc()) {
-                    echo '$row["numRecords"]';
+                    $records = $row['numRecords'];
+                    echo "$records";
                 }
             } else {
-                echo 'jkfkj';
+                echo '0';
             }
             ?>" data-postfix="" data-duration="1500" data-delay="1800">0</div>
 
