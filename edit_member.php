@@ -20,7 +20,7 @@
             <label for="member_firstname" class="col-sm-3 control-label" >First name</label>
 
             <div class="col-sm-5">
-                <input type="text" name="member_firstname" class="form-control" id="member_firstname" value="<?php echo $row['first_name']; ?>" required>
+                <input type="text" name="member_firstname" class="form-control" id="member_firstname" data-mask="^[a-zçëA-ZËÇ\s]+$" data-is-regex="true" value="<?php echo $row['first_name']; ?>"  required >
             </div>
         </div>
 
@@ -28,7 +28,7 @@
             <label for="member_surname" class="col-sm-3 control-label">Last name</label>
 
             <div class="col-sm-5">
-                <input type="text" name="member_surname" class="form-control" id="member_surname" placeholder="" value="<?php echo $row['last_name']; ?>" required>
+                <input type="text" name="member_surname" class="form-control" id="member_surname" data-mask="^[a-zçëA-ZËÇ\s]+$" data-is-regex="true" value="<?php echo $row['last_name']; ?>" required>
             </div>
         </div>
 
@@ -63,7 +63,7 @@
             <label class="col-sm-3 control-label">Birth date</label>
 
             <div class="col-sm-5">
-                <input type="text" name="member_date" class="form-control datepicker" data-end-date="+0d" id="member_date" data-format="dd/mm/yyyy" value="<?php echo $row['birth_date']; ?>" required>
+                <input type="text" name="member_date" class="form-control datepicker" data-end-date="+0d" id="member_date" data-format="dd/mm/yyyy" value="<?php echo $row['birth_date']; ?>" readonly style="background-color: transparent; cursor: pointer;" required>
             </div>
         </div>
 
@@ -88,7 +88,7 @@
             <label for="member_telephone" class="col-sm-3 control-label">Phone no.</label>
 
             <div class="col-sm-5">
-                <input type="text" name="member_telephone" class="form-control" required id="member_telephone" placeholder="" value="<?php echo $row['telephone_no']; ?>">
+                <input type="text" name="member_telephone" class="form-control" required id="member_telephone" data-mask="^\+?\d*$" data-is-regex="true" value="<?php echo $row['telephone_no']; ?>">
             </div>
         </div>
 
@@ -96,7 +96,7 @@
             <label for="member_alternative" class="col-sm-3 control-label">Alternative no.</label>
 
             <div class="col-sm-5">
-                <input type="text" name="member_alternative" class="form-control"  required id="member_alternative" placeholder="" value="<?php echo $row['alternative_no']; ?>">
+                <input type="text" name="member_alternative" class="form-control"  required id="member_alternative" data-mask="^\+?\d*$" data-is-regex="true" value="<?php echo $row['alternative_no']; ?>">
             </div>
         </div>
 
@@ -157,6 +157,7 @@
 <script src="assets/js/bootstrap-datepicker.js"></script>
 <script src="assets/js/fileinput.js"></script>
 <script src="assets/js/jquery.validate.min.js"></script>
+<script src="assets/js/jquery.inputmask.bundle.js"></script>
 <script src="assets/js/main.js" type="text/javascript"></script>
 <script type="text/javascript">
 

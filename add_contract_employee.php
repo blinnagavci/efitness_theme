@@ -50,7 +50,7 @@
                     <label for="employee_start" class="col-sm-3 control-label">Start date</label>
 
                     <div class="col-sm-5">
-                        <input type="text" class="form-control datepicker" name="employee_start" id="employee_start" data-start-date="+0d" data-format="dd/mm/yyyy" required>
+                        <input type="text" class="form-control datepicker" name="employee_start" id="employee_start" data-start-date="+0d" data-format="dd/mm/yyyy" readonly style="background-color: transparent; cursor: pointer;" required>
 
                     </div>
                 </div>
@@ -59,7 +59,7 @@
                     <label for="employee_end" class="col-sm-3 control-label">End date</label>
 
                     <div class="col-sm-5">
-                        <input type="text" class="form-control datepicker" name="employee_end" id="employee_end" data-start-date="+0d" data-format="dd/mm/yyyy" required>
+                        <input type="text" class="form-control datepicker" name="employee_end" id="employee_end" data-start-date="+0d" data-format="dd/mm/yyyy" readonly style="background-color: transparent; cursor: pointer;" required>
 
                     </div>
                 </div>
@@ -81,7 +81,7 @@
             if ($result->num_rows > 0) {
                 ?>
 
-                <table class="table table-bordered table-striped datatable" id=contract_table">
+                <table class="table table-bordered table-striped datatable" id="contract_table">
                     <thead>
                         <tr>
                             <th>ID</th>

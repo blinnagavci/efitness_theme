@@ -106,11 +106,8 @@ $result = $conn->query($sql);
     </div>
 </div>
 <footer class="main">
-
     <strong>E-Fitness 2017 </strong>&copy; All Rights Reserved
-
 </footer>
-</div>
 <div id="modal_edit" class="modal fade" role="dialog">
     <div class="modal-dialog">
 
@@ -132,7 +129,6 @@ $result = $conn->query($sql);
 
     </div>
 </div>
-</div>
 <script src="assets/js/toastr.js" type="text/javascript"></script>
 
 
@@ -150,6 +146,7 @@ $result = $conn->query($sql);
 
 
 <!-- Imported scripts on this page -->
+<script src="assets/js/jquery.inputmask.bundle.js"></script>
 <script src="assets/js/datatables/datatables.js"></script>
 <script src="assets/js/select2/select2.min.js"></script>
 <script src="assets/js/neon-chat.js"></script>

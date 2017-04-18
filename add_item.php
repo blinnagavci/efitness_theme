@@ -147,9 +147,6 @@ require_once ('header.php');
 <footer class="main">
     <strong>E-Fitness 2017 </strong>&copy; All Rights Reserved
 </footer>
-</div>
-</div>
-
 <link rel="stylesheet" href="assets/js/jvectormap/jquery-jvectormap-1.2.2.css">
 <link rel="stylesheet" href="assets/js/rickshaw/rickshaw.min.css">
 
@@ -163,6 +160,7 @@ require_once ('header.php');
 <script src="assets/js/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
 
 <!-- Imported scripts on this page -->
+
 <script src="assets/js/jvectormap/jquery-jvectormap-europe-merc-en.js"></script>
 <script src="assets/js/jquery.sparkline.min.js"></script>
 <script src="assets/js/rickshaw/vendor/d3.v3.js"></script>

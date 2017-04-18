@@ -38,7 +38,7 @@ require_once ('header.php'); ?>
                         <label for="member_firstname" class="col-sm-3 control-label" >First name</label>
 
                         <div class="col-sm-5">
-                            <input type="text" name="member_firstname" class="form-control" data-validate="required" id="member_firstname">
+                            <input type="text" name="member_firstname" class="form-control" data-validate="required" id="member_firstname" data-mask="^[a-zçëA-ZËÇ\s]+$" data-is-regex="true">
                         </div>
                     </div>
 
@@ -46,7 +46,7 @@ require_once ('header.php'); ?>
                         <label for="member_surname" class="col-sm-3 control-label">Last name</label>
 
                         <div class="col-sm-5">
-                            <input type="text" name="member_surname" class="form-control" data-validate="required" id="member_surname" placeholder="">
+                            <input type="text" name="member_surname" class="form-control" data-validate="required" id="member_surname" data-mask="^[a-zçëA-ZËÇ\s]+$" data-is-regex="true">
                         </div>
                     </div>
 
@@ -68,7 +68,7 @@ require_once ('header.php'); ?>
 
                         <div class="col-sm-3">
                             <div class="input-group">
-                                <input type="text" name="member_date" id="member_date" data-validate="required" class="form-control datepicker" data-end-date="+0d" data-format="dd/mm/yyyy">
+                                <input type="text" name="member_date" id="member_date" data-validate="required" class="form-control datepicker" data-end-date="+0d" data-format="dd/mm/yyyy" readonly style="background-color: transparent; cursor: pointer;">
 
                                 <div class="input-group-addon">
                                     <a href="#"><i class="entypo-calendar"></i></a>
@@ -98,7 +98,7 @@ require_once ('header.php'); ?>
                         <label for="member_telephone" class="col-sm-3 control-label">Phone no.</label>
 
                         <div class="col-sm-5">
-                            <input type="text" name="member_telephone" class="form-control" data-validate="required" id="member_telephone" placeholder="">
+                            <input type="text" name="member_telephone" class="form-control" data-validate="required" id="member_telephone" data-mask="^\+?\d*$" data-is-regex="true">
                         </div>
                     </div>
 
@@ -106,7 +106,7 @@ require_once ('header.php'); ?>
                         <label for="member_alternative" class="col-sm-3 control-label">Alternative no.</label>
 
                         <div class="col-sm-5">
-                            <input type="text" name="member_alternative" class="form-control"  data-validate="required" id="member_alternative" placeholder="">
+                            <input type="text" name="member_alternative" class="form-control"  data-validate="required" id="member_alternative" data-mask="^\+?\d*$" data-is-regex="true">
                         </div>
                     </div>
 
@@ -192,7 +192,7 @@ require_once ('header.php'); ?>
 
                         <div class="col-sm-3">
                             <div class="input-group">
-                                <input type="text" class="form-control datepicker" data-validate="required" id="membership-start" name="membership_start" data-format="dd/mm/yyyy">
+                                <input type="text" class="form-control datepicker" data-validate="required" id="membership-start" name="membership_start" data-format="dd/mm/yyyy" readonly style="background-color: transparent; cursor: pointer;">
 
                                 <div class="input-group-addon">
                                     <a href="#"><i class="entypo-calendar"></i></a>
@@ -205,7 +205,7 @@ require_once ('header.php'); ?>
 
                         <div class="col-sm-3">
                             <div class="input-group">
-                                <input type="text" class="form-control datepicker" data-validate="required" id="membership-end" name="membership_end" data-format="dd/mm/yyyy">
+                                <input type="text" class="form-control datepicker" data-validate="required" id="membership-end" name="membership_end" data-format="dd/mm/yyyy" readonly style="background-color: transparent; cursor: pointer;">
 
                                 <div class="input-group-addon">
                                     <a href="#"><i class="entypo-calendar"></i></a>
@@ -256,6 +256,7 @@ require_once ('header.php'); ?>
 <script src="assets/js/neon-chat.js"></script>
 <script src="assets/js/jquery.validate.min.js"></script>
 <!-- Imported scripts on this page -->
+<script src="assets/js/jquery.inputmask.bundle.js"></script>
 <script src="assets/js/bootstrap-switch.min.js"></script>
 <script src="assets/js/neon-chat.js"></script>
 

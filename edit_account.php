@@ -20,6 +20,7 @@
 
             <div class="col-sm-5">
                 <input type="text" name="account_username" class="form-control" required id="account_username" value='<?php echo $row['username']; ?>'>
+                <input type="text" name="account_username" class="form-control" required id="account_username" value='<?php echo $row['username']; ?>'>
 
             </div>
         </div>
@@ -129,24 +130,9 @@
                             if ($branch_temp_id === $tempBranch) {
                                 echo "<option selected value='$branch_temp_id'>$branch_city, $branch_name</option>";
                                 echo "<script>console.log( 'Branch selected: " . $branch_temp_id . "' );</script>";
-                            } else if ($branch_temp_id !== $tempBranch & $tempBranch === $branchesArray['$lastElementKey']) {
+                            } else if ($branch_temp_id !== $tempBranch && $tempBranch === $branchesArray['$lastElementKey']) {
                                 echo "<option value='$branch_temp_id'>$branch_city, $branch_name</option>";
                                 echo "<script>console.log( 'Branch unselected: " . $branch_temp_id . "' );</script>";
-                            }
-                        }
-                    }
-                    foreach ($branchesArray as $branch) {
-                        echo "<script>console.log( 'Branch: " . $branch . "' );</script>";
-                        while ($rowb = $retvalb->fetch_assoc()) {
-                            $branch_temp_id = $rowb['id'];
-                            $branch_city = $rowb['city'];
-                            $branch_name = $rowb['branch'];
-                            if ($branch === $branch_temp_id) {
-                                echo "<option selected value='$branch_temp_id'>$branch_city, $branch_name</option>";
-                                echo "<script>console.log( 'Branch: " . $branch . "' );</script>";
-                            } else if ($branch === $lastElement & $branch !== $branch_temp_id) {
-                                echo "<script>console.log( 'Branch: " . $branch . "' );</script>";
-                                echo "<option value='$branch_temp_id'>$branch_city, $branch_name</option>";
                             }
                         }
                     }

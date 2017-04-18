@@ -169,7 +169,6 @@ require_once ('header.php');
         return Math.floor(Math.random() * (max - min + 1)) + min;
     }
 </script>
-</script>
 <div class="row">
     <div class="col-sm-3 col-xs-6">
         <div class="tile-stats tile-red">
@@ -565,16 +564,39 @@ require_once ('header.php');
 
 </div>
 
-
-<!-- Footer -->
+<?php if ($_SESSION['popup'] === 1) {
+    ?>
+    <script type="text/javascript">
+        jQuery(document).ready(function ($)
+        {
+            setTimeout(function ()
+            {
+                var opts = {
+                    "closeButton": true,
+                    "debug": false,
+                    "positionClass": rtl() || public_vars.$pageContainer.hasClass('right-sidebar') ? "toast-top-left" : "toast-top-right",
+                    "toastClass": "red",
+                    "onclick": null,
+                    "showDuration": "300",
+                    "hideDuration": "1000",
+                    "timeOut": "5000",
+                    "extendedTimeOut": "1000",
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut"
+                };
+                toastr.success("Welcome back " + username + ".", opts);
+            }, 1000);
+        });
+    </script>
+    <?php
+}
+$_SESSION['popup'] = NULL;
+?>
 <footer class="main">
-
     <strong>E-Fitness 2017 </strong>&copy; All Rights Reserved
-
 </footer>
-</div>
-
-</div>
 
 <!-- Imported styles on this page -->
 <link rel="stylesheet" href="assets/js/jvectormap/jquery-jvectormap-1.2.2.css">
@@ -598,36 +620,7 @@ require_once ('header.php');
 <script src="assets/js/morris.min.js"></script>
 <script src="assets/js/toastr.js"></script>
 <script src="assets/js/neon-chat.js"></script>
-<?php if ($_SESSION['popup'] === 1) {
-    ?>
-    <script type="text/javascript">
-                jQuery(document).ready(function ($)
-                {
-                    setTimeout(function ()
-                    {
-                        var opts = {
-                            "closeButton": true,
-                            "debug": false,
-                            "positionClass": rtl() || public_vars.$pageContainer.hasClass('right-sidebar') ? "toast-top-left" : "toast-top-right",
-                            "toastClass": "red",
-                            "onclick": null,
-                            "showDuration": "300",
-                            "hideDuration": "1000",
-                            "timeOut": "5000",
-                            "extendedTimeOut": "1000",
-                            "showEasing": "swing",
-                            "hideEasing": "linear",
-                            "showMethod": "fadeIn",
-                            "hideMethod": "fadeOut"
-                        };
-                        toastr.success("Welcome back " + username + ".", opts);
-                    }, 1000);
-                });
-    </script>
-    <?php
-}
-$_SESSION['popup'] = NULL;
-?>
+
 
 <!-- JavaScripts initializations and stuff -->
 <script src="assets/js/neon-custom.js"></script>
