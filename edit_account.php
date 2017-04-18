@@ -19,16 +19,16 @@
             <label for="account_username" class="col-sm-3 control-label" >Username</label>
 
             <div class="col-sm-5">
-                <input type="text" name="account_username" class="form-control" required id="account_username" value='<?php echo $row['username']; ?>' required>
+                <input type="text" name="account_username" class="form-control" required id="account_username" value='<?php echo $row['username']; ?>'>
 
             </div>
         </div>
 
         <div class="form-group">
-            <label for="account_password" class="col-sm-3 control-label" required>Password</label>
+            <label for="account_password" class="col-sm-3 control-label">Password</label>
 
             <div class="col-sm-5">
-                <input type="password" name="account_password" class="form-control" required id="account_password" value='<?php echo $row['password']; ?>' readonly="true" ondblclick="this.readOnly = ''; value = '';">
+                <input type="password" name="account_password" class="form-control" required id="account_password" value='<?php echo $row['password']; ?>' readonly ondblclick="this.readOnly = ''; value = '';">
                 <p class="double-click">Double click to change the password</p>
             </div>
         </div>
@@ -50,7 +50,7 @@
                     <div class="fileinput-new thumbnail" style="width: 200px; height: 150px;" data-trigger="fileinput">
                         <?php
                         if ($row['photo'] === '') {
-                            echo '<img src="http://placehold.it/200x150" alt="Empty Photo"/>';
+                            echo '<img src="assets/images/img200x150.png" alt="Empty Photo"/>';
                         } else {
                             ?>
                             <img src="repository/account_photos/<?php echo $row["photo"]; ?>" alt="Photo">
@@ -105,18 +105,50 @@
             <div class="col-sm-8">
                 <select multiple="multiple" id="branches_select_multiple1" name="branches_select_multiple1[]" class="form-control multi-select" data-validate="required">
                     <?php
-                    include('database/db_connect.php');
+                    include('inc/database/db_connect.php');
+
+                    $ret = mysqli_query($conn, "SELECT branches from account WHERE id = '$id'");
+                    $query = mysqli_fetch_row($ret);
+                    $branchesArray = explode(",", $query[0]);
+                    end($branchesArray);
+                    $lastElementKey = key($branchesArray);
+                    echo "<script>console.log( 'Branches: " . $branches . "' );</script>";
+
                     $sqlb = 'SELECT * FROM branches WHERE status= "0"';
-                    
                     $retvalb = mysqli_query($conn, $sqlb);
                     if (!$retvalb) {
                         echo ("Could not retrieve data" . mysql_error());
                     }
+                    echo "<script>console.log( 'Last key element: " . $lastElementKey . "' );</script>";
                     while ($rowb = $retvalb->fetch_assoc()) {
                         $branch_temp_id = $rowb['id'];
                         $branch_city = $rowb['city'];
                         $branch_name = $rowb['branch'];
-                        echo "<option value='$branch_temp_id'>$branch_city, $branch_name</option>";
+                        foreach ($branchesArray as $branch) {
+                            $tempBranch = trim($branch);
+                            if ($branch_temp_id === $tempBranch) {
+                                echo "<option selected value='$branch_temp_id'>$branch_city, $branch_name</option>";
+                                echo "<script>console.log( 'Branch selected: " . $branch_temp_id . "' );</script>";
+                            } else if ($branch_temp_id !== $tempBranch & $tempBranch === $branchesArray['$lastElementKey']) {
+                                echo "<option value='$branch_temp_id'>$branch_city, $branch_name</option>";
+                                echo "<script>console.log( 'Branch unselected: " . $branch_temp_id . "' );</script>";
+                            }
+                        }
+                    }
+                    foreach ($branchesArray as $branch) {
+                        echo "<script>console.log( 'Branch: " . $branch . "' );</script>";
+                        while ($rowb = $retvalb->fetch_assoc()) {
+                            $branch_temp_id = $rowb['id'];
+                            $branch_city = $rowb['city'];
+                            $branch_name = $rowb['branch'];
+                            if ($branch === $branch_temp_id) {
+                                echo "<option selected value='$branch_temp_id'>$branch_city, $branch_name</option>";
+                                echo "<script>console.log( 'Branch: " . $branch . "' );</script>";
+                            } else if ($branch === $lastElement & $branch !== $branch_temp_id) {
+                                echo "<script>console.log( 'Branch: " . $branch . "' );</script>";
+                                echo "<option value='$branch_temp_id'>$branch_city, $branch_name</option>";
+                            }
+                        }
                     }
                     ?>
                 </select>
@@ -156,9 +188,9 @@
                             var email = $("#account_email").val();
                             var account_type = $("#account_type").val();
                             var branches_array = [];
-                                $('select#branches_select_multiple1 option:selected').each(function (i) {
-                                    branches_array[i] = $(this).val();
-                                });
+                            $('select#branches_select_multiple1 option:selected').each(function (i) {
+                                branches_array[i] = $(this).val();
+                            });
                             var form_data = new FormData();
                             var file_data;
                             var test = '';

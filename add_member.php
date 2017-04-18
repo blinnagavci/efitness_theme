@@ -157,9 +157,10 @@ require_once ('header.php'); ?>
                                 $ret = mysqli_query($conn, "SELECT branches from account WHERE id = '$tempId'");
                                 $query = mysqli_fetch_row($ret);
                                 $branches = $query[0];
-//                                                echo "<script>console.log( 'Branches: " . $branches . "' );</script>";
+                                echo "<script>console.log( 'Branches: " . $branches . "' );</script>";
                                 $branchesArray = explode(",", $branches);
                                 foreach ($branchesArray as $branch) {
+                                    echo "<script>console.log( 'Branch: " . $branch . "' );</script>";
                                     if (strpos($a, 'are') !== false) {
                                         echo 'true';
                                     }
@@ -228,14 +229,8 @@ require_once ('header.php'); ?>
 </div>
 
 <footer class="main">
-
     <strong>E-Fitness 2017 </strong>&copy; All Rights Reserved
-
 </footer>
-</div>
-
-
-</div>
 
 
 
