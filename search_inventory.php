@@ -90,10 +90,10 @@ $resultnonsellable = $conn->query($sqlnotsellable);
                             </thead>
 
                             <tbody>
-                                    <?php while ($row = $resultnonsellable->fetch_assoc()): ?>
+                                <?php while ($row = $resultnonsellable->fetch_assoc()): ?>
                                     <tr>
                                         <?php $tempCategoryID = $row['category_id'] ?>
-    <?php $tempUnitID = $row['unit_id'] ?>
+                                        <?php $tempUnitID = $row['unit_id'] ?>
                                         <td><?php echo $row['id'] ?></td>
                                         <td><?php echo $row['name'] ?></td>
                                         <?php
@@ -133,7 +133,7 @@ $resultnonsellable = $conn->query($sqlnotsellable);
                                             </a>
                                         </td>
                                     </tr>
-<?php endwhile; ?>
+                                <?php endwhile; ?>
                             </tbody>
                         </table>
                     </div>
@@ -193,10 +193,10 @@ $resultnonsellable = $conn->query($sqlnotsellable);
                                 </tr>
                             </thead>
                             <tbody>
-                                    <?php while ($row = $resultsellable->fetch_assoc()): ?>
+                                <?php while ($row = $resultsellable->fetch_assoc()): ?>
                                     <tr>
                                         <?php $tempCategoryID = $row['category_id'] ?>
-    <?php $tempUnitID = $row['unit_id'] ?>
+                                        <?php $tempUnitID = $row['unit_id'] ?>
                                         <td><?php echo $row['id'] ?></td>
                                         <td><?php echo $row['name'] ?></td>
                                         <?php
@@ -231,13 +231,18 @@ $resultnonsellable = $conn->query($sqlnotsellable);
                                             </a>
                                         </td>
                                     </tr>
-<?php endwhile; ?>
+                                <?php endwhile; ?>
                             </tbody>
                         </table>
                     </div>
                 </div>
             </div>
+            <a href="add_item.php" class="btn btn-primary" >
+                <i class="entypo-plus"></i>
+                Add Item
+            </a>
         </div>
+
     </div>
 </div>
 <div id="modal_edit" class="modal fade" role="dialog">

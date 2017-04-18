@@ -56,9 +56,9 @@ if ($email2[0] === $email) {
     $mail->Port = 587;                                    // TCP port to connect to
     $mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
     $mail->SMTPAuth = true;                               // Enable SMTP authentication
-    $mail->Username = 'smpks17@gmail.com';                 // SMTP username
-    $mail->Password = 'smponline';                           // SMTP password
-    $mail->setFrom('smpks17@gmail.com', 'E-Fitness');
+    $mail->Username = 'efitnessmanagement@gmail.com';     // SMTP username
+    $mail->Password = 'Test12345';                           // SMTP password
+    $mail->setFrom('efitnessmanagement@gmail.com', 'E-Fitness');
     $mail->addAddress($email, '');     // Add a recipient
 //$mail->addAddress('ellen@example.com');               // Name is optional
 //$mail->addReplyTo('smpks17@gmail.com', 'Information');
