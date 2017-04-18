@@ -165,7 +165,7 @@ if (!isset($_SESSION['logged_in'])) {
                                     if ($_SESSION['profile_photo'] == '' || (!file_exists($photo))) {
                                         echo 'assets/images/empty-profile-icon.png';
                                     } else {
-                                        echo 'repository/account_photos/' . $_SESSION['profile_photo'];
+                                        echo $photo;
                                     }
                                     ?>" alt="Profile" class="img-circle" width="44" />
                                     <script> var username = "<?php echo $_SESSION['username']; ?>";
