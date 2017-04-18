@@ -382,7 +382,7 @@ $resultnonsellable = $conn->query($sqlnotsellable);
     }
     function addQuantitySuccess() {
         toastrAlert();
-        toastr.success("Item quantity succesfully added.", opts);
+        toastr.success("Item quantity successfully added.", opts);
     }
     function sellItemSuccess() {
         toastrAlert();
