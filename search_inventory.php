@@ -237,7 +237,12 @@ $resultnonsellable = $conn->query($sqlnotsellable);
                     </div>
                 </div>
             </div>
+            <a href="add_item.php" class="btn btn-primary" >
+                <i class="entypo-plus"></i>
+                Add Item
+            </a>
         </div>
+
     </div>
 </div>
 <div id="modal_edit" class="modal fade" role="dialog">

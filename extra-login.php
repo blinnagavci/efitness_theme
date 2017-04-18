@@ -17,7 +17,7 @@ if (isset($_SESSION['logged_in'])) {
 
         <link rel="icon" href="assets/images/favicon.ico">
 
-        <title>E-Fitness | Login</title>
+        <title>E-Fitness | Log In</title>
 
         <link rel="stylesheet" href="assets/js/jquery-ui/css/no-theme/jquery-ui-1.10.3.custom.min.css">
         <link rel="stylesheet" href="assets/css/font-icons/entypo/css/entypo.css">
@@ -29,15 +29,6 @@ if (isset($_SESSION['logged_in'])) {
         <link rel="stylesheet" href="assets/css/custom.css">
 
         <script src="assets/js/jquery-1.11.3.min.js"></script>
-
-
-        <!--[if lt IE 9]><script src="assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
-
-        <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-        <!--[if lt IE 9]>
-                <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-                <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-        <![endif]-->
 
 
     </head>
@@ -116,36 +107,13 @@ if (isset($_SESSION['logged_in'])) {
                             </button>
                         </div>
 
-                        <!-- Implemented in v1.1.4 -->
-
-
-                        <!-- 
-                        
-                        You can also use other social network buttons
-                        <div class="form-group">
-                        
-                                <button type="button" class="btn btn-default btn-lg btn-block btn-icon icon-left twitter-button">
-                                        Login with Twitter
-                                        <i class="entypo-twitter"></i>
-                                </button>
-                                
-                        </div>
-                        
-                        <div class="form-group">
-                        
-                                <button type="button" class="btn btn-default btn-lg btn-block btn-icon icon-left google-button">
-                                        Login with Google+
-                                        <i class="entypo-gplus"></i>
-                                </button>
-                                
-                        </div> -->
 
                     </form>
 
 
                     <div class="login-bottom-links">
 
-                        <a href="extra-forgot-password.html" class="link">Forgot your password?</a>
+                        <a href="extra-forgot-password.php" class="link">Forgot your password?</a>
 
                         <br />
 
