@@ -12,6 +12,18 @@ $test = ($_POST['test']);
 $password = sha1($temporary_password);
 $getID = mysqli_query($conn, "SELECT id FROM account ORDER BY id DESC");
 $idRow = mysqli_fetch_row($getID);
+
+$getEmails = "SELECT * FROM account";
+
+$result = $conn->query($getEmails);
+
+while($row = $result->fetch_assoc()){
+    if($row['email'] === $email){
+        echo 'emailexists';
+        exit();
+    }
+}
+
 if ($test === 'pic') {
     //we can use temp but we are converting every pic to PNG for less space
     $newfilename = $idRow[0] + 1 . "_" . $username . "." . "png";

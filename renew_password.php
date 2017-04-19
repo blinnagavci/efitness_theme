@@ -1,8 +1,16 @@
 <!DOCTYPE html>
 <?php
+require('database/db_connect.php');
 if (isset($_GET['code'])) {
     $code = $_GET['code'];
 }
+$getAccountString = mysqli_query($conn, "SELECT random_string FROM account WHERE random_string='$code'");
+$accountString = mysqli_fetch_row($getAccountString);
+
+if($accountString[0] == null){
+    exit('This link has expired');
+}   
+    
 ?>
 <html lang="en">
     <head>

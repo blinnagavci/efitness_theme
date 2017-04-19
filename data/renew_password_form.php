@@ -27,10 +27,16 @@ $login_status = 'invalid';
 
 if ($password === $confirm_password) {
     $pass = sha1($password);
-    $sql = "UPDATE account set password='$pass' WHERE random_string='$code'";
+
+    $getAccountID = mysqli_query($conn, "SELECT id FROM account WHERE random_string='$code'");
+    $accountID = mysqli_fetch_row($getAccountID);
+
+    $sql = "UPDATE account set password='$pass', random_string='expired' WHERE id='$accountID[0]'";
+
     if (mysqli_query($conn, $sql)) {
         $login_status = 'success';
     }
+
 }
 
 $resp['login_status'] = $login_status;

@@ -149,9 +149,6 @@
     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 </div>
 
-<script src="assets/js/neon-custom.js"></script>
-<script src="assets/js/neon-demo.js"></script>
-
 <script src="assets/js/jquery.validate.min.js"></script>
 <script src="assets/js/jquery.multi-select.js"></script>
 <script src="assets/js/jquery-ui/js/jquery-ui-1.10.3.minimal.min.js"></script>
