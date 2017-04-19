@@ -197,6 +197,8 @@
                                         location.reload();
                                     } else if (text === "2") {
                                         oneAdmin();
+                                    } else if (text === "emailexists") {
+                                        emailExists();
                                     } else {
                                         editAccountFail();
                                     }
@@ -238,6 +240,24 @@
                             "hideMethod": "fadeOut"
                         };
                         toastr.error("Unfortunately, we ran into some problems trying to edit the account.", opts);
+                    }
+
+                    function emailExists() {
+                        var opts = {
+                            "closeButton": true,
+                            "debug": false,
+                            "positionClass": "toast-top-full-width",
+                            "onclick": null,
+                            "showDuration": "300",
+                            "hideDuration": "1000",
+                            "timeOut": "5000",
+                            "extendedTimeOut": "1000",
+                            "showEasing": "swing",
+                            "hideEasing": "linear",
+                            "showMethod": "fadeIn",
+                            "hideMethod": "fadeOut"
+                        };
+                        toastr.error("Email already exists", opts);
                     }
 
 </script>

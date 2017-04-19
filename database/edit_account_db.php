@@ -28,6 +28,24 @@ if ($accountType[0] == 0) {
         }
     }
 }
+
+
+$checkEmail = mysqli_query($conn, "SELECT email FROM account WHERE id='$id'");
+$idRow = mysqli_fetch_row($checkEmail);
+if ($idRow[0] !== $email) {
+    $getEmails = "SELECT * FROM account";
+    $result = $conn->query($getEmails);
+
+    while ($row = $result->fetch_assoc()) {
+        if ($row['email'] === $email) {
+            echo 'emailexists';
+            exit();
+        }
+    }
+}
+
+
+
 $getAccountPassword = mysqli_query($conn, "SELECT password FROM account WHERE id = '$id'");
 $accountPassword = mysqli_fetch_row($getAccountPassword);
 
