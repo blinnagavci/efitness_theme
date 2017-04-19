@@ -449,8 +449,7 @@ require_once ('header.php');
             <?php
             include('database/db_connect.php');
             $id = $_SESSION['id'];
-            $executequery = mysqli_query($conn, "SELECT * FROM tasks where account_id='$id' AND status='0'");
-            $executequery2 = mysqli_query($conn, "SELECT * FROM tasks WHERE account_id='$id' AND DATEDIFF(NOW(), `timestamp`) < 5");
+            $executequery = mysqli_query($conn, "SELECT * FROM tasks where account_id='$id' AND status='0' UNION SELECT * FROM tasks where account_id='$id' AND status='1' AND timestamp >= NOW() - INTERVAL 2 DAY");
             ?>
             <div class="tile-content">
                 <form id="add-task-form" name="add-task-form">
@@ -459,7 +458,7 @@ require_once ('header.php');
                 </form>
 
                 <ul class="todo-list" style="margin-top: 20px;">
-                    <?php while ($row = $executequery2->fetch_assoc()): ?>
+                    <?php while ($row = $executequery->fetch_assoc()): ?>
                         <li>
                             <div class="checkbox checkbox-replace color-white">
                                 <?php if ($row['status'] == '1') { ?>
