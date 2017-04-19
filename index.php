@@ -356,7 +356,7 @@ require_once ('header.php');
                 <tbody>
                     <tr>
                         <td class="panel-heading">
-                            <h4>Monthly Sales</h4>
+                            <h4>Members per day</h4>
                         </td>
                     </tr>
                 </tbody>
@@ -418,11 +418,9 @@ require_once ('header.php');
         {
             if (ev.keyCode == 13)
             {
-
                 if ($.trim($(this).val()).length)
                 {
                     var $todo_entry = $('<li><div class="checkbox checkbox-replace color-white"><input type="checkbox" /><label>' + $(this).val() + '</label></div></li>');
-
 
                     $todo_entry.appendTo($todo_tasks.find('.todo-list'));
                     $todo_entry.hide().slideDown('fast');
@@ -461,16 +459,17 @@ require_once ('header.php');
                     <?php while ($row = $executequery->fetch_assoc()): ?>
                         <li>
                             <div class="checkbox checkbox-replace color-white">
-                                <?php if ($row['status'] == '1') { ?>
-                                    <input type="checkbox" id='task-checkbox' name='task-checkbox' checked/>
-                                <?php } else {
-                                    ?>
-                                    <input type="checkbox" id='task-checkbox' name='task-checkbox'/>
-                                <?php } ?>
+                                <?php
+                                if ($row['status'] == '1') {
+                                    echo "<input type='checkbox' id='task-checkbox' name='task-checkbox' checked/>";
+                                } else {
+                                    echo "<input type='checkbox' id='task-checkbox' name='task-checkbox'/>";
+                                }
+                                ?>
                                 <label class='task-text' data-attr='<?php echo $row['id'] ?>'><?php echo $row['name']; ?></label>
                             </div>
                         </li>
-                    <?php endwhile; ?>
+<?php endwhile; ?>
                 </ul>
             </div>
         </div>
