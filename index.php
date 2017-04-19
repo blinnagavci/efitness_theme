@@ -265,23 +265,17 @@ require_once ('header.php');
             </div>
 
             <div class="panel-body">
-
                 <div class="tab-content">
-
                     <div class="tab-pane" id="area-chart">
                         <div id="area-chart-demo" class="morrischart" style="height: 300px"></div>
                     </div>
-
                     <div class="tab-pane active" id="line-chart">
                         <div id="line-chart-demo" class="morrischart" style="height: 300px"></div>
                     </div>
-
                     <div class="tab-pane" id="pie-chart">
                         <div id="donut-chart-demo" class="morrischart" style="height: 300px;"></div>
                     </div>
-
                 </div>
-
             </div>
 
             <table class="table table-bordered table-responsive">
@@ -424,12 +418,11 @@ require_once ('header.php');
         {
             if (ev.keyCode == 13)
             {
-                ev.preventDefault();
 
                 if ($.trim($(this).val()).length)
                 {
                     var $todo_entry = $('<li><div class="checkbox checkbox-replace color-white"><input type="checkbox" /><label>' + $(this).val() + '</label></div></li>');
-                    $(this).val('');
+
 
                     $todo_entry.appendTo($todo_tasks.find('.todo-list'));
                     $todo_entry.hide().slideDown('fast');
@@ -453,60 +446,32 @@ require_once ('header.php');
                     <span>To do list, tick one.</span>
                 </a>
             </div>
-
+            <?php
+            include('database/db_connect.php');
+            $id = $_SESSION['id'];
+            $executequery = mysqli_query($conn, "SELECT * FROM tasks where account_id='$id' AND status='0'");
+            ?>
             <div class="tile-content">
+                <form id="add-task-form" name="add-task-form">
+                    <input type='hidden' id='hidden-id' value='<?php echo $id; ?>'>
+                    <input type="text" class="form-control" placeholder="Add Task" id="add-task" name="add-task"/>
+                </form>
 
-                <input type="text" class="form-control" placeholder="Add Task" />
-
-
-                <ul class="todo-list">
-                    <li>
-                        <div class="checkbox checkbox-replace color-white">
-                            <input type="checkbox" />
-                            <label>Website Design</label>
-                        </div>
-                    </li>
-
-                    <li>
-                        <div class="checkbox checkbox-replace color-white">
-                            <input type="checkbox" id="task-2" checked />
-                            <label>Slicing</label>
-                        </div>
-                    </li>
-
-                    <li>
-                        <div class="checkbox checkbox-replace color-white">
-                            <input type="checkbox" id="task-3" />
-                            <label>WordPress Integration</label>
-                        </div>
-                    </li>
-
-                    <li>
-                        <div class="checkbox checkbox-replace color-white">
-                            <input type="checkbox" id="task-4" />
-                            <label>SEO Optimize</label>
-                        </div>
-                    </li>
-
-                    <li>
-                        <div class="checkbox checkbox-replace color-white">
-                            <input type="checkbox" id="task-5" checked="" />
-                            <label>Minify &amp; Compress</label>
-                        </div>
-                    </li>
+                <ul class="todo-list" style="margin-top: 20px;">
+                    <?php while ($row = $executequery->fetch_assoc()): ?>
+                        <li>
+                            <div class="checkbox checkbox-replace color-white">
+                                <input type="checkbox" id='task-checkbox' name='task-checkbox'/>
+                                <label class='task-text' data-attr='<?php echo $row['id'] ?>'><?php echo $row['name']; ?></label>
+                            </div>
+                        </li>
+                    <?php endwhile; ?>
                 </ul>
-
             </div>
-
-            <div class="tile-footer">
-                <a href="#">View all tasks</a>
-            </div>
-
         </div>
     </div>
 
     <div class="col-sm-9">
-
         <script type="text/javascript">
             jQuery(document).ready(function ($)
             {
@@ -517,6 +482,43 @@ require_once ('header.php');
                     zoomMin: '3',
                     backgroundColor: '#383f47',
                     focusOn: {x: 0.5, y: 0.8, scale: 3}
+                });
+                $("#add-task-form").submit(function (e) {
+                    e.preventDefault();
+                    if (!($("#add-task").val() === "")) {
+                        var id = $("#hidden-id").val();
+                        var taskname = $("#add-task").val();
+                        var form_data = new FormData();
+                        form_data.append('id', id);
+                        form_data.append('taskname', taskname);
+                        $.ajax({
+                            type: "POST",
+                            dataType: 'text',
+                            cache: false,
+                            contentType: false,
+                            processData: false,
+                            url: "database/add_task.php",
+                            data: form_data
+                        });
+                        $("#add-task").val('');
+                    }
+                });
+                $(".checkbox").change(function () {
+                    if ($(this).find("#task-checkbox").is(":checked")) {
+                        console.log("asd");
+                        var id = $(this).find(".task-text").attr('data-attr');
+                        var form_data = new FormData();
+                        form_data.append('id', id);
+                        $.ajax({
+                            type: "POST",
+                            dataType: 'text',
+                            cache: false,
+                            contentType: false,
+                            processData: false,
+                            url: "database/remove_task.php",
+                            data: form_data
+                        });
+                    }
                 });
             });
         </script>
