@@ -96,7 +96,7 @@ if($accountString[0] == null){
                                     <i class="entypo-key"></i>
                                 </div>
 
-                                <input type="password" class="form-control" name="password" id="password" placeholder="Password" autocomplete="off" />
+                                <input type="password" class="form-control" name="password" id="password" placeholder="New Password" autocomplete="off" />
                             </div>
 
                         </div>
@@ -108,7 +108,7 @@ if($accountString[0] == null){
                                     <i class="entypo-key"></i>
                                 </div>
 
-                                <input type="password" class="form-control" name="confirm_password" id="confirm_password" placeholder="Confirm Password" autocomplete="off" />
+                                <input type="password" class="form-control" name="confirm_password" id="confirm_password" placeholder="Confirm New Password" autocomplete="off" />
                             </div>
 
                         </div>
