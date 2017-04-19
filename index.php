@@ -443,7 +443,7 @@ require_once ('header.php');
 
                 <a href="#">
                     Tasks
-                    <span>To do list, tick one.</span>
+                    <span>To do list</span>
                 </a>
             </div>
             <?php
