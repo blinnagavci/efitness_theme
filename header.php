@@ -136,19 +136,21 @@ if (!isset($_SESSION['logged_in'])) {
                                 </li>
                             </ul>
                         </li>
-                        <li class="<?php active('accounts.php') ? 'active' : NULL ?>">
-                            <a href="accounts.php">
-                                <i class="entypo-user"></i>
-                                <span class="title">Accounts</span>
-                            </a>
-                        </li>
+                        <?php if ($_SESSION['admin_status'] == 0) { ?>
+                            <li class="<?php active('accounts.php') ? 'active' : NULL ?>">
+                                <a href="accounts.php">
+                                    <i class="entypo-user"></i>
+                                    <span class="title">Accounts</span>
+                                </a>
+                            </li>
 
-                        <li class="<?php active('other_settings.php') ? 'active' : NULL ?>">
-                            <a href="other_settings.php">
-                                <i class="entypo-cog"></i>
-                                <span class="title">Settings</span>
-                            </a>
-                        </li>
+                            <li class="<?php active('other_settings.php') ? 'active' : NULL ?>">
+                                <a href="other_settings.php">
+                                    <i class="entypo-cog"></i>
+                                    <span class="title">Settings</span>
+                                </a>
+                            </li>
+                        <?php } ?>
                     </ul>
                 </div>
             </div>
