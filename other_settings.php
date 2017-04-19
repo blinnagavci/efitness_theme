@@ -402,16 +402,13 @@ require_once ('header.php');
             </div>
         </div>
 
-
-
-
     </div>
 </div>
+
 <footer class="main">
     <strong>E-Fitness 2017 </strong>&copy; All Rights Reserved
 </footer>
-</div>
-</div>
+
 <!-- Bottom scripts (common) -->
 <link rel="stylesheet" href="assets/js/select2/select2-bootstrap.css">
 <link rel="stylesheet" href="assets/js/select2/select2.css">

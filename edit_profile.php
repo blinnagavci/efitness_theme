@@ -142,13 +142,6 @@ require_once ('header.php');
         <strong>E-Fitness 2017 </strong>&copy; All Rights Reserved
     </div>
 </footer>
-</div>
-
-
-</div>
-
-
-
 
 <!-- Bottom scripts (common) -->
 <script src="assets/js/gsap/TweenMax.min.js"></script>

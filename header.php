@@ -8,7 +8,6 @@ if (!isset($_SESSION['logged_in'])) {
 ?>
 <!DOCTYPE html>
 <html lang="en">
-    <script type="text/javascript" async="" src="http://www.google-analytics.com/ga.js"></script>
     <head>
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
@@ -30,6 +29,7 @@ if (!isset($_SESSION['logged_in'])) {
         <link rel="stylesheet" href="assets/css/neon-forms.css">
         <link rel="stylesheet" href="assets/css/custom.css">
 
+        <script type="text/javascript" async="" src="http://www.google-analytics.com/ga.js"></script>
         <script src="assets/js/jquery-1.11.3.min.js"></script>
 
         <!--[if lt IE 9]><script src="assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
