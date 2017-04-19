@@ -450,6 +450,7 @@ require_once ('header.php');
             include('database/db_connect.php');
             $id = $_SESSION['id'];
             $executequery = mysqli_query($conn, "SELECT * FROM tasks where account_id='$id' AND status='0'");
+            $executequery2 = mysqli_query($conn, "SELECT * FROM tasks WHERE account_id='$id' AND DATEDIFF(NOW(), `timestamp`) < 5");
             ?>
             <div class="tile-content">
                 <form id="add-task-form" name="add-task-form">
@@ -458,10 +459,15 @@ require_once ('header.php');
                 </form>
 
                 <ul class="todo-list" style="margin-top: 20px;">
-                    <?php while ($row = $executequery->fetch_assoc()): ?>
+                    <?php while ($row = $executequery2->fetch_assoc()): ?>
                         <li>
                             <div class="checkbox checkbox-replace color-white">
-                                <input type="checkbox" id='task-checkbox' name='task-checkbox'/>
+                                <?php if ($row['status'] == '1') { ?>
+                                    <input type="checkbox" id='task-checkbox' name='task-checkbox' checked/>
+                                <?php } else {
+                                    ?>
+                                    <input type="checkbox" id='task-checkbox' name='task-checkbox'/>
+                                <?php } ?>
                                 <label class='task-text' data-attr='<?php echo $row['id'] ?>'><?php echo $row['name']; ?></label>
                             </div>
                         </li>
