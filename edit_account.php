@@ -20,8 +20,6 @@
 
             <div class="col-sm-5">
                 <input type="text" name="account_username" class="form-control" required id="account_username" value='<?php echo $row['username']; ?>'>
-                <input type="text" name="account_username" class="form-control" required id="account_username" value='<?php echo $row['username']; ?>'>
-
             </div>
         </div>
 
@@ -104,22 +102,20 @@
             <label class="col-sm-3 control-label">Branches</label>
 
             <div class="col-sm-8">
-                <select multiple="multiple" id="branches_select_multiple1" name="branches_select_multiple1[]" class="form-control multi-select" data-validate="required">
+                <select multiple="multiple" id="branches_select_multiple1" required name="branches_select_multiple1[]" class="form-control multi-select" data-validate="required">
                     <?php
-                    include('inc/database/db_connect.php');
+                    include('database/db_connect.php');
 
                     $ret = mysqli_query($conn, "SELECT branches from account WHERE id = '$id'");
                     $query = mysqli_fetch_row($ret);
                     $branchesArray = explode(",", $query[0]);
                     $lastElementKey = end($branchesArray);
-                    echo "<script>console.log( 'Branches: " . $branches . "' );</script>";
 
                     $sqlb = 'SELECT * FROM branches WHERE status= "0"';
                     $retvalb = mysqli_query($conn, $sqlb);
                     if (!$retvalb) {
                         echo ("Could not retrieve data" . mysql_error());
                     }
-                    echo "<script>console.log( 'Last key element: " . $lastElementKey . "' );</script>";
                     while ($rowb = $retvalb->fetch_assoc()) {
                         $branch_temp_id = $rowb['id'];
                         $branch_city = $rowb['city'];
@@ -128,10 +124,9 @@
                             $tempBranch = trim($branch);
                             if ($branch_temp_id === $tempBranch) {
                                 echo "<option value='$branch_temp_id' selected>$branch_city, $branch_name</option>";
-                                echo "<script>console.log( 'Branch selected: " . $branch_temp_id . "' );</script>";
+                                break 1;
                             } else if ($tempBranch === $lastElementKey && $branch_temp_id !== $tempBranch) {
                                 echo "<option value='$branch_temp_id'>$branch_city, $branch_name</option>";
-                                echo "<script>console.log( 'Branch unselected: " . $branch_temp_id . "' );</script>";
                             }
                         }
                     }
