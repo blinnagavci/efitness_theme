@@ -120,7 +120,7 @@ $result = $conn->query($sql);
 <div id="modal_edit" class="modal fade" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content" id="modal_edit_content">
-            
+
         </div>
     </div>
 </div>
@@ -234,12 +234,8 @@ $result = $conn->query($sql);
     </div>
 </div>
 <footer class="main">
-
     <strong>E-Fitness 2017 </strong>&copy; All Rights Reserved
-
 </footer>
-</div>
-</div>
 
 <!-- Imported styles on this page -->
 <link rel="stylesheet" href="assets/js/datatables/datatables.css">
@@ -332,6 +328,8 @@ $result = $conn->query($sql);
                                         if (text === "success") {
                                             window.location = window.location + "#addsuccess";
                                             location.reload();
+                                        } else if (text === "emailexists") {
+                                            emailExists();
                                         } else {
                                             addAccountFail();
                                         }
@@ -403,6 +401,10 @@ $result = $conn->query($sql);
                         function addAccountSuccess() {
                             toastrAlert();
                             toastr.success("Account successfully added", opts);
+                        }
+                        function emailExists() {
+                            toastrAlert();
+                            toastr.error("Email already exists", opts);
                         }
                         function editAccountSuccess() {
                             toastrAlert();

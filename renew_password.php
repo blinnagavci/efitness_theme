@@ -1,6 +1,20 @@
 <!DOCTYPE html>
+<?php
+require('database/db_connect.php');
+if (isset($_GET['code'])) {
+    $code = $_GET['code'];
+}
+$getAccountString = mysqli_query($conn, "SELECT random_string FROM account WHERE random_string='$code'");
+$accountString = mysqli_fetch_row($getAccountString);
+
+if($accountString[0] == null){
+    exit('This link has expired');
+}   
+    
+?>
 <html lang="en">
     <head>
+
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
         <meta charset="utf-8">
@@ -10,7 +24,7 @@
 
         <link rel="icon" href="assets/images/favicon.ico">
 
-        <title>E-Fitness | Forgot Password</title>
+        <title>E-Fitness | Reset Password</title>
 
         <link rel="stylesheet" href="assets/js/jquery-ui/css/no-theme/jquery-ui-1.10.3.custom.min.css">
         <link rel="stylesheet" href="assets/css/font-icons/entypo/css/entypo.css">
@@ -43,12 +57,12 @@
                         <img src="assets/images/logo@2x.png" width="120" alt="" />
                     </a>
 
-                    <p class="description">Enter your email, and we will send you a reset link.</p>
+                    <p class="description">Dear user, please enter your new password!</p>
 
                     <!-- progress bar indicator -->
                     <div class="login-progressbar-indicator">
                         <h3>43%</h3>
-                        <span>sending reset link...</span>
+                        <span>resetting password...</span>
                     </div>
                 </div>
 
@@ -62,47 +76,52 @@
 
                 <div class="login-content">
 
-                    <form method="post" role="form" id="form_forgot_password">
+                    <div class="form-login-error">
+                        <h3>Error</h3>
+                        <p>The password fields must match</p>
+                    </div>
 
-                        <div class="form-forgotpassword-success">
-                            <i class="entypo-check"></i>
-                            <h3>Reset email has been sent</h3>
-                            <p>Please check your email and reset the password </p>
-                        </div>
+                    <div class="form-forgotpassword-success">
+                        <i class="entypo-check"></i>
+                        <h3>Password has been reset</h3>
+                        <p>Please return to the log in form </p>
+                    </div>
 
-                        <div class="form-login-error">
-                            <h3>Error</h3>
-                            <p>Something went wrong! Please make sure the email address is valid.</p>
-                        </div>
+                    <form method="post" role="form" id="form_renew_password">
 
-                        <div class="form-steps">
+                        <div class="form-group">
 
-                            <div class="step current" id="step-1">
-
-                                <div class="form-group">
-                                    <div class="input-group">
-                                        <div class="input-group-addon">
-                                            <i class="entypo-mail"></i>
-                                        </div>
-
-                                        <input type="text" class="form-control" name="email" id="email" placeholder="Email" data-mask="email" autocomplete="off" />
-                                    </div>
+                            <div class="input-group">
+                                <div class="input-group-addon">
+                                    <i class="entypo-key"></i>
                                 </div>
 
-                                <div class="form-group">
-                                    <button type="submit" class="btn btn-info btn-block btn-login">
-                                        Proceed
-                                        <i class="entypo-right-open-mini"></i>
-                                    </button>
-                                </div>
-
+                                <input type="password" class="form-control" name="password" id="password" placeholder="New Password" autocomplete="off" />
                             </div>
 
                         </div>
 
+                        <div class="form-group">
+
+                            <div class="input-group">
+                                <div class="input-group-addon">
+                                    <i class="entypo-key"></i>
+                                </div>
+
+                                <input type="password" class="form-control" name="confirm_password" id="confirm_password" placeholder="Confirm New Password" autocomplete="off" />
+                            </div>
+
+                        </div>
+
+                        <input type="hidden" name="test_code" id="test_code" value="<?php echo $code ?>"/>
+
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary btn-block btn-login">
+                                <i class="entypo-login"></i>
+                                Reset
+                            </button>
+                        </div>
                     </form>
-
-
                     <div class="login-bottom-links">
 
                         <a href="extra-login.php" class="link">
@@ -114,6 +133,9 @@
 
 
                     </div>
+
+
+
 
                 </div>
 
@@ -130,8 +152,7 @@
         <script src="assets/js/resizeable.js"></script>
         <script src="assets/js/neon-api.js"></script>
         <script src="assets/js/jquery.validate.min.js"></script>
-        <script src="assets/js/neon-forgotpassword.js"></script>
-        <script src="assets/js/jquery.inputmask.bundle.js"></script>
+        <script src="assets/js/renew_password.js"></script>
 
 
         <!-- JavaScripts initializations and stuff -->

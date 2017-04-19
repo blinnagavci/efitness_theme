@@ -123,3 +123,9 @@ if ($.isFunction($.fn.datepicker))
     });
 }
 
+// Multi-select
+if ($.isFunction($.fn.multiSelect))
+{
+    $(".multi-select").multiSelect();
+}
+

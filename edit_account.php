@@ -149,9 +149,6 @@
     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 </div>
 
-<script src="assets/js/neon-custom.js"></script>
-<script src="assets/js/neon-demo.js"></script>
-
 <script src="assets/js/jquery.validate.min.js"></script>
 <script src="assets/js/jquery.multi-select.js"></script>
 <script src="assets/js/jquery-ui/js/jquery-ui-1.10.3.minimal.min.js"></script>
@@ -200,6 +197,8 @@
                                         location.reload();
                                     } else if (text === "2") {
                                         oneAdmin();
+                                    } else if (text === "emailexists") {
+                                        emailExists();
                                     } else {
                                         editAccountFail();
                                     }
@@ -241,6 +240,24 @@
                             "hideMethod": "fadeOut"
                         };
                         toastr.error("Unfortunately, we ran into some problems trying to edit the account.", opts);
+                    }
+
+                    function emailExists() {
+                        var opts = {
+                            "closeButton": true,
+                            "debug": false,
+                            "positionClass": "toast-top-full-width",
+                            "onclick": null,
+                            "showDuration": "300",
+                            "hideDuration": "1000",
+                            "timeOut": "5000",
+                            "extendedTimeOut": "1000",
+                            "showEasing": "swing",
+                            "hideEasing": "linear",
+                            "showMethod": "fadeIn",
+                            "hideMethod": "fadeOut"
+                        };
+                        toastr.error("Email already exists", opts);
                     }
 
 </script>
