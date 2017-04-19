@@ -289,8 +289,6 @@ $resultnonsellable = $conn->query($sqlnotsellable);
 <footer class="main">
     <strong>E-Fitness 2017 </strong>&copy; All Rights Reserved
 </footer>
-</div>
-</div>
 <script>
 
     $(document).ready(function () {

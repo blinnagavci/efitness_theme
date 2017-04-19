@@ -182,8 +182,6 @@ require_once ('header.php');
 <footer class="main">
     <strong>E-Fitness 2017 </strong>&copy; All Rights Reserved
 </footer>
-</div>
-</div>
 
 <!-- Imported styles on this page -->
 <link rel="stylesheet" href="assets/js/datatables/datatables.css">
