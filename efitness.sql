@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 19, 2017 at 07:17 PM
+-- Generation Time: Apr 20, 2017 at 02:15 PM
 -- Server version: 10.1.21-MariaDB
 -- PHP Version: 5.6.30
 
@@ -49,7 +49,9 @@ INSERT INTO `account` (`id`, `username`, `password`, `email`, `random_string`, `
 (4, 'cccxcxcxcxcxcx', '1504dd62f7cd38fdf9ad409aaa391a42838697ac', 'cxc@asd.com', NULL, 0, '1,2,3', 0, ''),
 (5, 'cccxcxcxcxcxcx', '0e7d699da5c1b3124c9244cf0ad47785bd4cfd9e', 'cxc@asd.com', NULL, 1, '1,2', 0, ''),
 (6, 'aiiiiiii', '85c8c7d75f204c56e910aa381b99f28c099bb6c2', 'aii@asd.cio', NULL, 0, '1,2', 0, ''),
-(7, 'aiiiiiii', 'e4ddd71d524027981493b1deda8ac0ba2af4ddf7', 'aii@asd.cio', NULL, 0, '2,3', 0, '');
+(7, 'aiiiiiii', 'e4ddd71d524027981493b1deda8ac0ba2af4ddf7', 'aii@asd.cio', NULL, 0, '2,3', 0, ''),
+(8, 'asdasd2', '85136c79cbf9fe36bb9d05d0639c70c265c18d37', '2@asd', NULL, 0, '1,2', 0, ''),
+(9, 'cxcxcx', '38305bf0c3060e1b09146924f1e27df4d0de5417', 'cx@c', NULL, 0, '2', 0, '');
 
 -- --------------------------------------------------------
 
@@ -296,8 +298,9 @@ CREATE TABLE `member` (
 --
 
 INSERT INTO `member` (`id`, `first_name`, `last_name`, `gender`, `residential_address`, `city`, `telephone_no`, `alternative_no`, `email`, `birth_date`, `photo`, `date_added`, `status`) VALUES
-(1, 'asd', 'asd', 'Male', 'mati i', 'Prishtine', 'asdasd', 'asdasd', 'labiangashi@gmail.com', '10/04/2017', '1_asd_asd.png', '2017-04-12 11:05:27', 0),
-(2, 'Granit', 'Graniti', 'Male', 'afdsfasdf', 'adsfasdfasf', 'adfasdf', 'adfadsff', 'asdf@sadfdas.de', '27/03/2017', '2_Granit_Graniti.png', '2017-04-16 11:31:14', 0),
+(0, 'asd', 'asd', 'Male', '22', '22', '22', '22', '123@123', '04/04/2017', '6_asd_asd.png', '2017-04-20 11:32:48', 0),
+(1, 'asd', 'asd', 'Male', 'mati i', 'Prishtine', '+23', '+23', 'labiangashi@gmail.com', '10/04/2017', '1_asd_asd.png', '2017-04-12 11:05:27', 0),
+(2, 'Granit', 'Graniti', 'Male', 'afdsfasdf', 'adsfasdfasf', '+123', '+123', 'asdf@sadfdas.de', '02/03/2017', '2_Granit_Graniti.png', '2017-04-16 11:31:14', 0),
 (3, 'Blend', 'Blendi', 'Other', 'blend', 'blend', 'blend', 'blend', 'blend@blend.blend', '09/04/2017', '3_Blend_Blendi.png', '2017-04-16 11:32:57', 0),
 (4, 'Fatmir', 'Fatmir', 'Female', 'fatmir', 'fatmir', 'fatmir', 'fatmir', 'fatmir@fatmir.fatmir', '09/04/2017', '4_Fatmir_Fatmir.png', '2017-04-16 12:10:11', 0),
 (5, 'Admir', 'Admir', 'Male', 'Admir', 'Admir', 'Admir', 'Admir', 'Admir@admir.admir', '01/03/2016', '5_Admir_Admir.png', '2017-04-16 15:02:46', 0);
@@ -351,11 +354,10 @@ CREATE TABLE `membership_payment` (
 --
 
 INSERT INTO `membership_payment` (`id`, `start_date`, `end_date`, `amount`, `id_member`, `id_membership`) VALUES
-(1, '16/04/2017', '17/04/2017', 2, 1, 1),
-(2, '18/04/2017', '25/04/2017', 15, 1, 2),
-(3, '26/04/2017', '26/05/2017', 30, 1, 3),
-(4, '27/04/2017', '05/05/2017', 150, 1, 4),
-(5, '18/04/2017', '29/04/2017', 300, 1, 5);
+(1, '20/04/2017', '21/04/2017', 15, 2, 2),
+(2, '20/04/2017', '21/04/2017', 15, 2, 2),
+(3, '20/04/2017', '21/04/2017', 30, 2, 3),
+(4, '20/04/2017', '21/04/2017', 15, 6, 2);
 
 -- --------------------------------------------------------
 
@@ -376,7 +378,11 @@ CREATE TABLE `tasks` (
 --
 
 INSERT INTO `tasks` (`id`, `name`, `status`, `timestamp`, `account_id`) VALUES
-(72, 'Unfuck Labi', 1, '2017-04-19 14:46:18', 1);
+(72, 'Unfuck Labi', 1, '2017-04-19 14:46:18', 1),
+(73, 'labian', 1, '2017-04-20 11:01:32', 1),
+(74, 'me ndreq diqka', 1, '2017-04-20 11:01:44', 1),
+(75, 'asd', 1, '2017-04-20 11:42:29', 1),
+(76, 'me dal', 1, '2017-04-20 11:42:37', 1);
 
 --
 -- Indexes for dumped tables
@@ -474,7 +480,7 @@ ALTER TABLE `tasks`
 -- AUTO_INCREMENT for table `account`
 --
 ALTER TABLE `account`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT for table `branches`
 --
@@ -506,10 +512,15 @@ ALTER TABLE `item`
 ALTER TABLE `item_category`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
+-- AUTO_INCREMENT for table `membership_payment`
+--
+ALTER TABLE `membership_payment`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+--
 -- AUTO_INCREMENT for table `tasks`
 --
 ALTER TABLE `tasks`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
