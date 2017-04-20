@@ -22,7 +22,6 @@ $threeWeeksAgoValue = mysqli_fetch_assoc($threeWeeksAgoSql);
 $fourWeeksAgoQuery = "SELECT count(*) as fourWeeksAgoCount FROM member WHERE status='0' AND date_added BETWEEN NOW()-INTERVAL 5 WEEK AND NOW()-INTERVAL 4 WEEK";
 $fourWeeksAgoSql = mysqli_query($conn, $fourWeeksAgoQuery);
 $fourWeeksAgoValue = mysqli_fetch_assoc($fourWeeksAgoSql);
-
 ?>
 <script type="text/javascript">
     jQuery(document).ready(function ($)
@@ -75,11 +74,13 @@ $fourWeeksAgoValue = mysqli_fetch_assoc($fourWeeksAgoSql);
                 {y: '3 weeks ago', a: week4},
                 {y: '2 weeks ago', a: week3},
                 {y: 'Last week', a: week2},
-                {y: 'This wee', a: week1}
+                {y: 'This week', a: week1}
             ],
             xkey: 'y',
             ykeys: ['a'],
             labels: ['Weekly members'],
+            xLabelMargin: 10,
+            xLabelAngle: 60,
             redraw: true
         });
 
@@ -129,61 +130,6 @@ $fourWeeksAgoValue = mysqli_fetch_assoc($fourWeeksAgoSql);
         area_chart_demo.parent().attr('style', '');
 
 
-
-
-        // Rickshaw
-        var seriesData = [[], []];
-
-        var random = new Rickshaw.Fixtures.RandomData(50);
-
-        for (var i = 0; i < 50; i++)
-        {
-            random.addData(seriesData);
-        }
-
-        var graph = new Rickshaw.Graph({
-            element: document.getElementById("rickshaw-chart-demo"),
-            height: 193,
-            renderer: 'area',
-            stroke: false,
-            preserve: true,
-            series: [{
-                    color: '#73c8ff',
-                    data: seriesData[0],
-                    name: 'Upload'
-                }, {
-                    color: '#e0f2ff',
-                    data: seriesData[1],
-                    name: 'Download'
-                }
-            ]
-        });
-
-        graph.render();
-
-        var hoverDetail = new Rickshaw.Graph.HoverDetail({
-            graph: graph,
-            xFormatter: function (x) {
-                return new Date(x * 1000).toString();
-            }
-        });
-
-        var legend = new Rickshaw.Graph.Legend({
-            graph: graph,
-            element: document.getElementById('rickshaw-legend')
-        });
-
-        var highlighter = new Rickshaw.Graph.Behavior.Series.Highlight({
-            graph: graph,
-            legend: legend
-        });
-
-        setInterval(function () {
-            random.removeData(seriesData);
-            random.addData(seriesData);
-            graph.update();
-
-        }, 500);
     });
 
 
@@ -213,6 +159,7 @@ $numrows = mysqli_num_rows($result);
         <?php
         $querymembership = "SELECT id_membership, COUNT(*) AS membership FROM membership_payment GROUP BY id_membership ORDER BY membership DESC LIMIT 1";
         $resultmembership = mysqli_query($conn, $querymembership);
+        $resultmembershiptype = 'None';
         if (($resultmembership->num_rows > 0)) {
             $resultfetch = mysqli_fetch_assoc($resultmembership);
             $resultidmembership = $resultfetch['id_membership'];
@@ -282,7 +229,7 @@ $numrows = mysqli_num_rows($result);
         <div class="panel panel-primary" id="charts_env">
 
             <div class="panel-heading">
-                <div class="panel-title">Site Stats</div>
+                <div class="panel-title">Member Stats</div>
 
                 <div class="panel-options">
                     <ul class="nav nav-tabs">
@@ -332,137 +279,30 @@ $numrows = mysqli_num_rows($result);
             </table>
 
         </div>
-
-    </div>
-
-    <div class="col-sm-4">
-
-        <div class="panel panel-primary">
-            <div class="panel-heading">
-                <div class="panel-title">
-                    <h4>
-                        Real Time Stats
-                        <br />
-                        <small>current server uptime</small>
-                    </h4>
-                </div>
-
-                <div class="panel-options">
-                    <a href="#" data-rel="collapse"><i class="entypo-down-open"></i></a>
-                    <a href="#" data-rel="reload"><i class="entypo-arrows-ccw"></i></a>
-                    <a href="#" data-rel="close"><i class="entypo-cancel"></i></a>
-                </div>
-            </div>
-
-            <div class="panel-body no-padding">
-                <div id="rickshaw-chart-demo">
-                    <div id="rickshaw-legend"></div>
-                </div>
-            </div>
-        </div> 
-
-    </div>
-</div>
-
-
-<br />
-
-<div class="row">
-
-    <div class="col-sm-4">
-
-        <div class="panel panel-primary">
-            <table class="table table-bordered table-responsive">
-                <thead>
-                    <tr>
-                        <th class="padding-bottom-none text-center">
-                            <br />
-                            <br />
-                            <span class="monthly-sales"></span>
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td class="panel-heading">
-                            <h4>Members per day</h4>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-    </div>
-
-    <div class="col-sm-8">
-
-        <div class="panel panel-primary">
-            <div class="panel-heading">
-                <div class="panel-title">Latest members</div>
-
-                <div class="panel-options">
-                    <a href="#" data-rel="collapse"><i class="entypo-down-open"></i></a>
-                    <a href="#" data-rel="reload"><i class="entypo-arrows-ccw"></i></a>
-                </div>
-            </div>
-            <?php
-            include('database/db_connect.php');
-            $sqlgetaccounts = "SELECT * FROM member ORDER BY id DESC LIMIT 3";
-            $executegetaccounts = mysqli_query($conn, $sqlgetaccounts) or die(mysqli_error());
-            ?>
-            <table class="table table-bordered table-responsive">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th>City</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php while ($row = $executegetaccounts->fetch_assoc()): ?>
-                        <tr>
-                            <td><?php echo $row['id']; ?></td>
-                            <td><?php echo $row['first_name'] . " " . $row['last_name']; ?></td>
-                            <td><?php echo $row['city']; ?></td>
-                        </tr>
-                    <?php endwhile; ?>
-                </tbody>
-            </table>
-        </div>
-
-    </div>
-
-</div>
-
-<br />
-
-
-<script type="text/javascript">
-    // Code used to add Todo Tasks
-    jQuery(document).ready(function ($)
-    {
-        var $todo_tasks = $("#todo_tasks");
-
-        $todo_tasks.find('input[type="text"]').on('keydown', function (ev)
-        {
-            if (ev.keyCode == 13)
+        <script type="text/javascript">
+            // Code used to add Todo Tasks
+            jQuery(document).ready(function ($)
             {
-                if ($.trim($(this).val()).length)
+                var $todo_tasks = $("#todo_tasks");
+
+                $todo_tasks.find('input[type="text"]').on('keydown', function (ev)
                 {
-                    var $todo_entry = $('<li><div class="checkbox checkbox-replace color-white"><input type="checkbox" /><label>' + $(this).val() + '</label></div></li>');
+                    if (ev.keyCode == 13)
+                    {
+                        if ($.trim($(this).val()).length)
+                        {
+                            var $todo_entry = $('<li><div class="checkbox checkbox-replace color-white"><input type="checkbox" /><label>' + $(this).val() + '</label></div></li>');
 
-                    $todo_entry.appendTo($todo_tasks.find('.todo-list'));
-                    $todo_entry.hide().slideDown('fast');
-                    replaceCheckboxes();
-                }
-            }
-        });
-    });
-</script> 
-
-<div class="row">
-
-    <div class="col-sm-3">
+                            $todo_entry.appendTo($todo_tasks.find('.todo-list'));
+                            $todo_entry.hide().slideDown('fast');
+                            replaceCheckboxes();
+                        }
+                    }
+                });
+            });
+        </script> 
+    </div>
+    <div class="col-sm-4">
         <div class="tile-block" id="todo_tasks">
 
             <div class="tile-header">
@@ -504,97 +344,52 @@ $numrows = mysqli_num_rows($result);
         </div>
     </div>
 
-    <div class="col-sm-9">
-        <script type="text/javascript">
-            jQuery(document).ready(function ($)
-            {
-                var map = $("#map-2");
 
-                map.vectorMap({
-                    map: 'europe_merc_en',
-                    zoomMin: '3',
-                    backgroundColor: '#383f47',
-                    focusOn: {x: 0.5, y: 0.8, scale: 3}
-                });
-                $("#add-task-form").submit(function (e) {
-                    e.preventDefault();
-                    if (!($("#add-task").val() === "")) {
-                        var id = $("#hidden-id").val();
-                        var taskname = $("#add-task").val();
-                        var form_data = new FormData();
-                        form_data.append('id', id);
-                        form_data.append('taskname', taskname);
-                        $.ajax({
-                            type: "POST",
-                            dataType: 'text',
-                            cache: false,
-                            contentType: false,
-                            processData: false,
-                            url: "database/add_task.php",
-                            data: form_data
-                        });
-                        $("#add-task").val('');
-                    }
-                });
-                $(".checkbox").change(function () {
-                    if ($(this).find("#task-checkbox").is(":checked")) {
-                        var id = $(this).find(".task-text").attr('data-attr');
-                        var form_data = new FormData();
-                        form_data.append('id', id);
-                        $.ajax({
-                            type: "POST",
-                            dataType: 'text',
-                            cache: false,
-                            contentType: false,
-                            processData: false,
-                            url: "database/remove_task.php",
-                            data: form_data
-                        });
-                    }
-                });
-            });
-        </script>
+    <br />
 
-        <div class="tile-group">
+    <div class="row">
 
-            <div class="tile-left">
-                <div class="tile-entry">
-                    <h3>Map</h3>
-                    <span>top visitors location</span>
+        <div class="col-sm-8">
+
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <div class="panel-title">Latest members</div>
+
+                    <div class="panel-options">
+                        <a href="#" data-rel="collapse"><i class="entypo-down-open"></i></a>
+                        <a href="#" data-rel="reload"><i class="entypo-arrows-ccw"></i></a>
+                    </div>
                 </div>
-
-                <div class="tile-entry">
-                    <img src="assets/images/sample-al.png" alt="" class="pull-right op" />
-
-                    <h4>Albania</h4>
-                    <span>25%</span>
-                </div>
-
-                <div class="tile-entry">
-                    <img src="assets/images/sample-it.png" alt="" class="pull-right op" />
-
-                    <h4>Italy</h4>
-                    <span>18%</span>
-                </div>
-
-                <div class="tile-entry">
-                    <img src="assets/images/sample-au.png" alt="" class="pull-right op" />
-
-                    <h4>Austria</h4>
-                    <span>15%</span>
-                </div>
-            </div>
-
-            <div class="tile-right">
-
-                <div id="map-2" class="map"></div>
-
+                <?php
+                include('database/db_connect.php');
+                $sqlgetaccounts = "SELECT * FROM member ORDER BY id DESC LIMIT 3";
+                $executegetaccounts = mysqli_query($conn, $sqlgetaccounts) or die(mysqli_error());
+                ?>
+                <table class="table table-bordered table-responsive">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>City</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php while ($row = $executegetaccounts->fetch_assoc()): ?>
+                            <tr>
+                                <td><?php echo $row['id']; ?></td>
+                                <td><?php echo $row['first_name'] . " " . $row['last_name']; ?></td>
+                                <td><?php echo $row['city']; ?></td>
+                            </tr>
+                        <?php endwhile; ?>
+                    </tbody>
+                </table>
             </div>
 
         </div>
 
     </div>
 
+    <br />
 </div>
 
 <?php if ($_SESSION['popup'] === 1) {
@@ -630,7 +425,6 @@ $_SESSION['popup'] = NULL;
 <footer class="main">
     <strong>E-Fitness 2017 </strong>&copy; All Rights Reserved
 </footer>
-
 <!-- Imported styles on this page -->
 <link rel="stylesheet" href="assets/js/jvectormap/jquery-jvectormap-1.2.2.css">
 <link rel="stylesheet" href="assets/js/rickshaw/rickshaw.min.css">
