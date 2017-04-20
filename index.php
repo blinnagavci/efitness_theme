@@ -5,9 +5,6 @@ require_once ('header.php');
 <script type="text/javascript">
     jQuery(document).ready(function ($)
     {
-
-
-
         // Sparkline Charts
         $('.inlinebar').sparkline('html', {type: 'bar', barColor: '#ff6264'});
         $('.inlinebar-2').sparkline('html', {type: 'bar', barColor: '#445982'});
@@ -189,11 +186,24 @@ require_once ('header.php');
     </div>
 
     <div class="col-sm-3 col-xs-6">
-
+        <?php
+        $querymembership = "SELECT id_membership, COUNT(*) AS membership FROM membership_payment GROUP BY id_membership ORDER BY membership DESC LIMIT 1";
+        $resultmembership = mysqli_query($conn, $querymembership);
+        if (($resultmembership->num_rows > 0)) {
+            $resultfetch = mysqli_fetch_assoc($resultmembership);
+            $resultidmembership = $resultfetch['id_membership'];
+            $querymembershiptype = "SELECT membership_type from membership WHERE id = $resultidmembership";
+            $mainresult = mysqli_query($conn, $querymembershiptype);
+            while ($row = $mainresult->fetch_assoc()) {
+                $resultmembershiptype = $row['membership_type'];
+            }
+        } else {
+            $resultmembershiptype = 'None';
+        }
+        ?>
         <div class="tile-stats tile-green">
             <div class="icon"><i class="entypo-chart-bar"></i></div>
-            <div class="num" data-start="0" data-end="135" data-postfix="" data-duration="1500" data-delay="600">0</div>
-
+            <div class="num" data-postfix="" data-duration="1500" data-delay="600"><?php echo $resultmembershiptype; ?></div>
             <h3>Membership</h3>
             <p>most popular membership so far</p>
         </div>
@@ -469,7 +479,7 @@ require_once ('header.php');
                                 <label class='task-text' data-attr='<?php echo $row['id'] ?>'><?php echo $row['name']; ?></label>
                             </div>
                         </li>
-<?php endwhile; ?>
+                    <?php endwhile; ?>
                 </ul>
             </div>
         </div>

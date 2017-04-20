@@ -115,10 +115,11 @@
 </div>
 
 <link rel="stylesheet" href="assets/js/datatables/datatables.css">
+
+<script src="assets/js/datatables/datatables.js" type="text/javascript"></script>
 <script src="assets/js/bootstrap-datepicker.js"></script>
 <script src="assets/js/jquery.validate.min.js"></script>
 <script src="assets/js/main.js" type="text/javascript"></script>
-<script src="assets/js/datatables/datatables.js" type="text/javascript"></script>
 <script type="text/javascript">
     $(document).ready(function () {
         var $tablecontract = $("#contract_table");
@@ -138,9 +139,9 @@
             ],
             "bStateSave": true
         });
-    });
-    $('input.datepicker').on('changeDate', function (e) {
-        $(this).datepicker('hide');
+        $('input.datepicker').on('changeDate', function (e) {
+            $(this).datepicker('hide');
+        });
     });
     $("#modal_form_contract_employee").submit(function (e) {
         e.preventDefault();

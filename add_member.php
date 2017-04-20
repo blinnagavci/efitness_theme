@@ -191,7 +191,7 @@ require_once ('header.php');
 
                         <div class="col-sm-3">
                             <div class="input-group">
-                                <input type="text" class="form-control datepicker" data-validate="required" id="membership-start" name="membership_start" data-format="dd/mm/yyyy" readonly style="background-color: transparent; cursor: pointer;">
+                                <input type="text" class="form-control datepicker" data-validate="required" id="membership-start" name="membership_start" data-start-date="+0d" data-format="dd/mm/yyyy" readonly style="background-color: transparent; cursor: pointer;">
 
                                 <div class="input-group-addon">
                                     <a href="#"><i class="entypo-calendar"></i></a>
@@ -204,7 +204,7 @@ require_once ('header.php');
 
                         <div class="col-sm-3">
                             <div class="input-group">
-                                <input type="text" class="form-control datepicker" data-validate="required" id="membership-end" name="membership_end" data-format="dd/mm/yyyy" readonly style="background-color: transparent; cursor: pointer;">
+                                <input type="text" class="form-control datepicker" data-validate="required" id="membership-end" name="membership_end" data-start-date="+0d" data-format="dd/mm/yyyy" readonly style="background-color: transparent; cursor: pointer;">
 
                                 <div class="input-group-addon">
                                     <a href="#"><i class="entypo-calendar"></i></a>
