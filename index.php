@@ -42,8 +42,9 @@ require_once ('header.php');
 
         var line_chart = Morris.Line({
             element: 'line-chart-demo',
+            parseTime: false,
             data: [
-                {y: '2006', a: 100, b: 90},
+                {y: 'asd', a: 100, b: 90},
                 {y: '2007', a: 75, b: 65},
                 {y: '2008', a: 50, b: 40},
                 {y: '2009', a: 75, b: 65},
@@ -471,7 +472,7 @@ require_once ('header.php');
                             <div class="checkbox checkbox-replace color-white">
                                 <?php
                                 if ($row['status'] == '1') {
-                                    echo "<input type='checkbox' id='task-checkbox' name='task-checkbox' checked/>";
+                                    echo "<input type='checkbox' id='task-checkbox' name='task-checkbox' checked disabled/>";
                                 } else {
                                     echo "<input type='checkbox' id='task-checkbox' name='task-checkbox'/>";
                                 }
@@ -519,7 +520,6 @@ require_once ('header.php');
                 });
                 $(".checkbox").change(function () {
                     if ($(this).find("#task-checkbox").is(":checked")) {
-                        console.log("asd");
                         var id = $(this).find(".task-text").attr('data-attr');
                         var form_data = new FormData();
                         form_data.append('id', id);
