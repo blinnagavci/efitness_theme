@@ -1,6 +1,7 @@
-<?php 
+<?php
 $title = 'Add Member';
-require_once ('header.php'); ?>
+require_once ('header.php');
+?>
 
 <ol class="breadcrumb bc-3" >
     <li>
@@ -151,34 +152,32 @@ require_once ('header.php'); ?>
                             <select name="member_subscription" class="form-control"  data-validate="required" id="member_subscription">
                                 <option value="disabled" disabled selected>Select</option>
                                 <?php
-                                include('inc/database/db_connect.php');
+                                include('database/db_connect.php');
+                                
                                 $tempId = $_SESSION['id'];
-
                                 $ret = mysqli_query($conn, "SELECT branches from account WHERE id = '$tempId'");
                                 $query = mysqli_fetch_row($ret);
-                                $branches = $query[0];
-                                echo "<script>console.log( 'Branches: " . $branches . "' );</script>";
-                                $branchesArray = explode(",", $branches);
-                                foreach ($branchesArray as $branch) {
-                                    echo "<script>console.log( 'Branch: " . $branch . "' );</script>";
-                                    if (strpos($a, 'are') !== false) {
-                                        echo 'true';
-                                    }
-                                }
-                                $sql = 'SELECT id, membership_type, offer, amount FROM membership WHERE status= "0"';
+                                $sBranches = explode(",", $query['0']);
+                                
+                                $sql = 'SELECT * FROM membership WHERE status= "0"';
                                 $retval = mysqli_query($conn, $sql);
                                 if (!$retval) {
                                     echo ("Could not retrieve data" . mysql_error());
                                 }
                                 while ($row = $retval->fetch_assoc()) {
-                                    $membershipId = $row['id'];
-                                    $membership = $row['membership_type'];
-                                    $membershipOffer = $row['offer'];
-                                    $membershipAmount = $row['amount'];
-                                    if ($membershipOffer === "") {
-                                        echo "<option value='$membershipId'>$membership, $membershipAmount €</option>";
-                                    } else {
-                                        echo "<option value='$membershipId'>$membership, $membershipOffer, $membershipAmount €</option>";
+                                    $membershipBranches = $row['branches'];
+                                    $branches = explode(",", $membershipBranches);
+                                    $c = array_intersect($branches, $sBranches);
+                                    if (count($c) > 0) {
+                                        $membershipId = $row['id'];
+                                        $membership = $row['membership_type'];
+                                        $membershipOffer = $row['offer'];
+                                        $membershipAmount = $row['amount'];
+                                        if ($membershipOffer === "") {
+                                            echo "<option value='$membershipId'>$membership, $membershipAmount €</option>";
+                                        } else {
+                                            echo "<option value='$membershipId'>$membership, $membershipOffer, $membershipAmount €</option>";
+                                        }
                                     }
                                 }
                                 mysqli_close($conn);
