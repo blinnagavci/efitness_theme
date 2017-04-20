@@ -1,6 +1,12 @@
 <?php
 $title = 'Dashboard';
 require_once ('header.php');
+
+//include('database/db_connect.php');
+$thisWeekSql = "SELECT count(*) as numRecords FROM member WHERE date_added >= NOW() - INTERVAL 1 WEEK";
+$thisWeekValue = mysqli_query($conn, $thisWeekSql);
+$data = mysqli_fetch_assoc($thisWeekValue);
+echo $data['numRecords'];
 ?>
 <script type="text/javascript">
     jQuery(document).ready(function ($)
@@ -240,10 +246,8 @@ require_once ('header.php');
             include('database/db_connect.php');
             $result2 = mysqli_query($conn, "SELECT count(*) as numRecords FROM member WHERE date_added >= NOW() - INTERVAL 1 WEEK");
             if (($result2->num_rows > 0)) {
-                while ($row = $result2->fetch_assoc()) {
-                    $records = $row['numRecords'];
-                    echo "$records";
-                }
+                $data = mysql_fetch_assoc($result);
+                echo $data['numRecords'];
             } else {
                 echo '0';
             }
