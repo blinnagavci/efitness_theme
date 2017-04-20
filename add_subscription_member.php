@@ -24,7 +24,6 @@
                         <select name = "member_subscription" class="form-control"  id="member-subscription" required>
                             <option value = "select" disabled selected>Select</option>
                             <?php
-                            //include('inc/database/db_connect.php');
 
                             $sql = 'SELECT id, membership_type, offer, amount FROM membership WHERE status= "0"';
                             $retval = mysqli_query($conn, $sql);

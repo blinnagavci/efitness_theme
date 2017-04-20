@@ -42,14 +42,13 @@ require_once ('header.php');
 
         var line_chart = Morris.Line({
             element: 'line-chart-demo',
+            parseTime: false,
+            resize: true,
             data: [
-                {y: '2006', a: 100, b: 90},
-                {y: '2007', a: 75, b: 65},
-                {y: '2008', a: 50, b: 40},
-                {y: '2009', a: 75, b: 65},
-                {y: '2010', a: 50, b: 40},
-                {y: '2011', a: 75, b: 65},
-                {y: '2012', a: 100, b: 90}
+                {y: '3 Weeks Ago', a: 100, b: 90},
+                {y: '2 Weeks Ago', a: 75, b: 65},
+                {y: 'Last Week', a: 50, b: 40},
+                {y: 'This week', a: 50, b: 20}
             ],
             xkey: 'y',
             ykeys: ['a', 'b'],

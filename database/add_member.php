@@ -2,7 +2,6 @@
 
 require('db_connect.php');
 
-
 $firstname = $_POST['firstname'];
 $surname = ($_POST['surname']);
 $gender = $_POST['gender'];
