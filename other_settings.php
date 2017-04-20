@@ -51,6 +51,14 @@ require_once ('header.php');
                                     </div>
                                 </div>
 
+
+
+                                <div class="form-group">
+                                    <label for="membership_payment_amount" class="col-sm-3 control-label" >Amount</label>
+                                    <div class="col-sm-5">
+                                        <input type="number"  name="membership_payment_amount" id="membership_payment_amount" class="form-control" data-validate="required">
+                                    </div>
+                                </div>
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">Branches</label>
 
@@ -74,23 +82,14 @@ require_once ('header.php');
                                         </select>
                                     </div>
                                 </div>
-
                                 <div class="form-group">
-                                    <label for="membership_payment_amount" class="col-sm-3 control-label" >Amount</label>
-                                    <div class="col-sm-5">
-                                        <div class="input-group">
-                                            <input type="text"  name="membership_payment_amount" id="membership_payment_amount" class="form-control" data-validate="required">
-                                            <span class="input-group-btn">
-                                                <button type="submit" name="add_membership_submit" id="add_membership_submit" class="width-72 btn btn-primary">Add</button>
-                                            </span>
-                                        </div>
+                                    <div class="col-sm-offset-3 col-sm-5">
+                                        <button type="submit" name="add_membership_submit" id="add_membership_submit" class=" btn btn-block btn-primary"/>Add
                                     </div>
                                 </div>
                                 <div class="form-group">
                                 </div>
-
                             </form>
-
                             <form action='database/remove_membership.php' method="POST" role="form" class="form-horizontal form-groups-bordered validate">
 
                                 <div class="form-group">
@@ -410,6 +409,161 @@ require_once ('header.php');
 
 <!-- Demo Settings -->
 <script src="assets/js/neon-demo.js"></script>
+<script src="assets/js/toastr.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var url = window.location.href;
+        var array = url.split('/');
+        var lastsegment = array[array.length - 1];
+        switch (lastsegment) {
+            case "other_settings.php#addmembershipsuccess":
+                addMembershipSuccess();
+                removeHash();
+                break;
+            case "other_settings.php#deletemembershipsuccess":
+                deleteMembershipSuccess();
+                removeHash();
+                break;
+            case "other_settings.php#addpositionsuccess":
+                addPositionSuccess();
+                removeHash();
+                break;
+            case "other_settings.php#deletepositionsuccess":
+                deletePositionSuccess();
+                removeHash();
+                break;
+            case "other_settings.php#addcategorysuccess":
+                addCategorySuccess();
+                removeHash();
+                break;
+            case "other_settings.php#deletecategorysuccess":
+                deleteCategorySuccess();
+                removeHash();
+                break;
+            case "other_settings.php#addunitsuccess":
+                addUnitSuccess();
+                removeHash();
+                break;
+            case "other_settings.php#deleteunitsuccess":
+                deleteUnitSuccess();
+                removeHash();
+                break;
+            case "other_settings.php#addbranchsuccess":
+                addBranchSuccess();
+                removeHash();
+                break;
+            case "other_settings.php#deletebranchsuccess":
+                deleteBranchSuccess();
+                removeHash();
+                break;
+            default:
+                break;
+        }
+    });
+
+    function removeHash() {
+        history.pushState("", document.title, window.location.pathname
+                + window.location.search);
+    }
+
+    var opts;
+    function toastrAlert() {
+        opts = {
+            "closeButton": true,
+            "debug": false,
+            "positionClass": "toast-top-full-width",
+            "onclick": null,
+            "showDuration": "300",
+            "hideDuration": "1000",
+            "timeOut": "5000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+        };
+    }
+    function addMembershipSuccess() {
+        toastrAlert();
+        toastr.success("Membership successfully added", opts);
+    }
+    function addMembershipFail() {
+        toastrAlert();
+        toastr.error("Unfortunately, we ran into some problems trying to add the membership type", opts);
+    }
+    function deleteMembershipSuccess() {
+        toastrAlert();
+        toastr.success("Membership successfully added", opts);
+    }
+    function deleteMembershipFail() {
+        toastrAlert();
+        toastr.error("Unfortunately, we ran into some problems trying to delete the membership type", opts);
+    }
+    function addPositonSuccess() {
+        toastrAlert();
+        toastr.success("Employee type successfully added", opts);
+    }
+    function addPositionFail() {
+        toastrAlert();
+        toastr.error("Unfortunately, we ran into some problems trying to add the employee type", opts);
+    }
+    function deletePositonSuccess() {
+        toastrAlert();
+        toastr.success("Employee type successfully deleted", opts);
+    }
+    function deletePositonFail() {
+        toastrAlert();
+        toastr.error("Unfortunately, we ran into some problems trying to delete the employee type", opts);
+    }
+    function addCategorySuccess() {
+        toastrAlert();
+        toastr.success("Item category successfully added", opts);
+    }
+    function addCategoryFail() {
+        toastrAlert();
+        toastr.success("Unfortunately, we ran into some problems trying to add the item category", opts);
+    }
+    function deleteCategorySuccess() {
+        toastrAlert();
+        toastr.success("Item category successfully deleted", opts);
+    }
+    function deleteCategoryFail() {
+        toastrAlert();
+        toastr.error("Unfortunately, we ran into some problems trying to delete the item category", opts);
+    }
+    function addUnitSuccess() {
+        toastrAlert();
+        toastr.success("Item unit successfully added", opts);
+    }
+    function addUnitFail() {
+        toastrAlert();
+        toastr.error("Unfortunately, we ran into some problems trying to add the item unit", opts);
+    }
+    function deleteUnitSuccess() {
+        toastrAlert();
+        toastr.success("Item unit successfully deleted", opts);
+    }
+    function deleteUnitFail() {
+        toastrAlert();
+        toastr.error("Unfortunately, we ran into some problems trying to delete the item unit", opts);
+    }
+    function addBranchSuccess() {
+        toastrAlert();
+        toastr.success("Branch successfully added", opts);
+    }
+    function addBranchFail() {
+        toastrAlert();
+        toastr.error("Unfortunately, we ran into some problems trying to add the branch", opts);
+    }
+    function deleteBranchSuccess() {
+        toastrAlert();
+        toastr.success("Branch successfully deleted", opts);
+    }
+    function deleteBranchFail() {
+        toastrAlert();
+        toastr.error("Unfortunately, we ran into some problems trying to delete the branch", opts);
+    }
+</script>
 
 </body>
 </html>

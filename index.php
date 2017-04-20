@@ -167,18 +167,16 @@ require_once ('header.php');
         return Math.floor(Math.random() * (max - min + 1)) + min;
     }
 </script>
+<?php
+include('database/db_connect.php');
+$result = mysqli_query($conn, "SELECT * FROM member where status = '0'");
+$numrows = mysqli_num_rows($result);
+?>
 <div class="row">
     <div class="col-sm-3 col-xs-6">
         <div class="tile-stats tile-red">
             <div class="icon"><i class="entypo-users"></i></div>
-            <div class="num" data-start="0" data-end="
-            <?php
-            include('database/db_connect.php');
-            $result = mysqli_query($conn, "SELECT * FROM member where status = '0'");
-            $numrows = mysqli_num_rows($result);
-            echo "$numrows";
-            ?>
-                 " data-postfix="" data-duration="1500" data-delay="0">0</div>
+            <div class="num" data-start="0" data-end="<?php echo $numrows ?>" data-postfix="" data-duration="1500" data-delay="0">0</div>
 
             <h3>Registered Members</h3>
             <p>total number of members registered</p>
