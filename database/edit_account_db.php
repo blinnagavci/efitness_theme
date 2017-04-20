@@ -9,6 +9,7 @@ $email = ($_POST['email']);
 $accounttypeselect = $_POST['account_type'];
 $branches = $_POST['branches_array'];
 $test = ($_POST['test']);
+
 if ($test === 'pic') {
     //we can use temp but we are converting every pic to PNG for less space
     $newfilename = $id . "_" . $username . "." . "png";
@@ -43,8 +44,6 @@ if ($idRow[0] !== $email) {
         }
     }
 }
-
-
 
 $getAccountPassword = mysqli_query($conn, "SELECT password FROM account WHERE id = '$id'");
 $accountPassword = mysqli_fetch_row($getAccountPassword);
