@@ -8,11 +8,12 @@
             <form id="modal_form_subscription_member" name="modal_form_subscription_member" role="form" enctype="multipart/form-data" class="form-horizontal form-groups-bordered">
                 <?php
                 require('database/db_connect.php');
-                if (isset($_GET['id'])) {
+                if (isset($_GET['id']) AND isset($_GET['accountId'])) {
                     $id = $_GET['id'];
+                    $accountId = $_GET['accountId'];
                 }
-                $sql = "SELECT * FROM member WHERE id = '$id'";
-                $result = $conn->query($sql);
+                $sqlQuery = "SELECT * FROM member WHERE id = '$id'";
+                $result = $conn->query($sqlQuery);
                 $row = $result->fetch_assoc();
                 ?>
                 <input type="hidden" name="test-id" id="test-id" value="<?php echo $row['id']; ?>"/>
@@ -24,21 +25,30 @@
                         <select name = "member_subscription" class="form-control"  id="member-subscription" required>
                             <option value = "select" disabled selected>Select</option>
                             <?php
+                            
+                            $ret = mysqli_query($conn, "SELECT branches from account WHERE id = '$accountId'");
+                            $query = mysqli_fetch_row($ret);
+                            $sBranches = explode(",", $query['0']);
 
-                            $sql = 'SELECT id, membership_type, offer, amount FROM membership WHERE status= "0"';
+                            $sql = 'SELECT * FROM membership WHERE status= "0"';
                             $retval = mysqli_query($conn, $sql);
                             if (!$retval) {
                                 echo ("Could not retrieve data" . mysql_error());
                             }
                             while ($row = $retval->fetch_assoc()) {
-                                $membershipId = $row['id'];
-                                $membership = $row['membership_type'];
-                                $membershipOffer = $row['offer'];
-                                $membershipAmount = $row['amount'];
-                                if ($membershipOffer === "") {
-                                    echo "<option value='$membershipId'>$membership, $membershipAmount €</option>";
-                                } else {
-                                    echo "<option value='$membershipId'>$membership, $membershipOffer, $membershipAmount €</option>";
+                                $membershipBranches = $row['branches'];
+                                $branches = explode(",", $membershipBranches);
+                                $c = array_intersect($branches, $sBranches);
+                                if (count($c) > 0) {
+                                    $membershipId = $row['id'];
+                                    $membership = $row['membership_type'];
+                                    $membershipOffer = $row['offer'];
+                                    $membershipAmount = $row['amount'];
+                                    if ($membershipOffer === "") {
+                                        echo "<option value='$membershipId'>$membership, $membershipAmount €</option>";
+                                    } else {
+                                        echo "<option value='$membershipId'>$membership, $membershipOffer, $membershipAmount €</option>";
+                                    }
                                 }
                             }
                             //mysqli_close($conn);

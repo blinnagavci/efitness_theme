@@ -3,10 +3,26 @@ $title = 'Dashboard';
 require_once ('header.php');
 
 //include('database/db_connect.php');
-$thisWeekSql = "SELECT count(*) as numRecords FROM member WHERE date_added >= NOW() - INTERVAL 1 WEEK";
-$thisWeekValue = mysqli_query($conn, $thisWeekSql);
-$data = mysqli_fetch_assoc($thisWeekValue);
-echo $data['numRecords'];
+$thisWeekQuery = "SELECT count(*) as thisWeekCount FROM member WHERE status='0' AND date_added >= NOW() - INTERVAL 1 WEEK";
+$thisWeekSql = mysqli_query($conn, $thisWeekQuery);
+$thisWeekValue = mysqli_fetch_assoc($thisWeekSql);
+
+$lastWeekQuery = "SELECT count(*) as lastWeekCount FROM member WHERE status='0' AND date_added BETWEEN NOW()-INTERVAL 2 WEEK AND NOW()-INTERVAL 1 WEEK";
+$lastWeekSql = mysqli_query($conn, $lastWeekQuery);
+$lastWeekValue = mysqli_fetch_assoc($lastWeekSql);
+
+$twoWeeksAgoQuery = "SELECT count(*) as twoWeeksAgoCount FROM member WHERE status='0' AND date_added BETWEEN NOW()-INTERVAL 3 WEEK AND NOW()-INTERVAL 2 WEEK";
+$twoWeeksAgoSql = mysqli_query($conn, $twoWeeksAgoQuery);
+$twoWeeksAgoValue = mysqli_fetch_assoc($twoWeeksAgoSql);
+
+$threeWeeksAgoQuery = "SELECT count(*) as threeWeeksAgoCount FROM member WHERE status='0' AND date_added BETWEEN NOW()-INTERVAL 4 WEEK AND NOW()-INTERVAL 3 WEEK";
+$threeWeeksAgoSql = mysqli_query($conn, $threeWeeksAgoQuery);
+$threeWeeksAgoValue = mysqli_fetch_assoc($threeWeeksAgoSql);
+
+$fourWeeksAgoQuery = "SELECT count(*) as fourWeeksAgoCount FROM member WHERE status='0' AND date_added BETWEEN NOW()-INTERVAL 5 WEEK AND NOW()-INTERVAL 4 WEEK";
+$fourWeeksAgoSql = mysqli_query($conn, $fourWeeksAgoQuery);
+$fourWeeksAgoValue = mysqli_fetch_assoc($fourWeeksAgoSql);
+
 ?>
 <script type="text/javascript">
     jQuery(document).ready(function ($)
@@ -44,23 +60,26 @@ echo $data['numRecords'];
 
 
         // Line Charts
+        var week1 = "<?php echo $thisWeekValue['thisWeekCount']; ?>";
+        var week2 = "<?php echo $lastWeekValue['lastWeekCount']; ?>";
+        var week3 = "<?php echo $twoWeeksAgoValue['twoWeeksAgoCount']; ?>";
+        var week4 = "<?php echo $threeWeeksAgoValue['threeWeeksAgoCount']; ?>";
+        var week5 = "<?php echo $fourWeeksAgoValue['fourWeeksAgoCount']; ?>";
         var line_chart_demo = $("#line-chart-demo");
 
         var line_chart = Morris.Line({
             element: 'line-chart-demo',
             parseTime: false,
             data: [
-                {y: 'asd', a: 100, b: 90},
-                {y: '2007', a: 75, b: 65},
-                {y: '2008', a: 50, b: 40},
-                {y: '2009', a: 75, b: 65},
-                {y: '2010', a: 50, b: 40},
-                {y: '2011', a: 75, b: 65},
-                {y: '2012', a: 100, b: 90}
+                {y: '4 weeks ago', a: week5},
+                {y: '3 weeks ago', a: week4},
+                {y: '2 weeks ago', a: week3},
+                {y: 'Last week', a: week2},
+                {y: 'This wee', a: week1}
             ],
             xkey: 'y',
-            ykeys: ['a', 'b'],
-            labels: ['October 2013', 'November 2013'],
+            ykeys: ['a'],
+            labels: ['Weekly members'],
             redraw: true
         });
 
@@ -242,13 +261,10 @@ $numrows = mysqli_num_rows($result);
             <div class="icon"><i class="entypo-user-add"></i></div>
             <div class="num" data-start="0" data-end="<?php
             include('database/db_connect.php');
-            $result2 = mysqli_query($conn, "SELECT count(*) as numRecords FROM member WHERE date_added >= NOW() - INTERVAL 1 WEEK");
-            if (($result2->num_rows > 0)) {
-                $data = mysql_fetch_assoc($result);
-                echo $data['numRecords'];
-            } else {
-                echo '0';
-            }
+            $thisWeekSql1 = "SELECT count(*) as countMembers FROM member WHERE date_added >= NOW() - INTERVAL 1 WEEK";
+            $thisWeekValue1 = mysqli_query($conn, $thisWeekSql1);
+            $data1 = mysqli_fetch_assoc($thisWeekValue1);
+            echo $data1['countMembers'];
             ?>" data-postfix="" data-duration="1500" data-delay="1800">0</div>
 
             <h3>This Week</h3>

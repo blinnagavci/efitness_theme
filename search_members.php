@@ -194,8 +194,9 @@ $result = $conn->query($sql);
 
                 $('.subscriptionButton').click(function () {
                     var id = $(this).attr('data-id');
+                    var accountId = "<?php echo $_SESSION['id']; ?>";
                     $.ajax({
-                        url: "add_subscription_member.php?id=" + id, cache: false, success: function (result) {
+                        url: "add_subscription_member.php?id=" + id + "&accountId=" + accountId, cache: false, success: function (result) {
                             $('#modal_add_subscription_content').html(result);
                         }
                     });
