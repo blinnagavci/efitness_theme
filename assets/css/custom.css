@@ -20,3 +20,7 @@ body {
 .add_subscription_submit{
     margin-bottom: 10px;
 }
+
+.sidebar-menu-inner{
+    background: #303641 !important;
+}

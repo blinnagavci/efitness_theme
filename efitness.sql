@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 20, 2017 at 02:15 PM
+-- Generation Time: Apr 20, 2017 at 03:25 PM
 -- Server version: 10.1.21-MariaDB
--- PHP Version: 5.6.30
+-- PHP Version: 7.1.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -106,7 +106,8 @@ CREATE TABLE `employee` (
 --
 
 INSERT INTO `employee` (`id`, `first_name`, `last_name`, `gender`, `residential_address`, `city`, `telephone_no`, `alternative_no`, `email`, `birth_date`, `photo`, `status`) VALUES
-(1, 'Granit', 'Abdu', 'Male', 'afdsfjn', 'asjkfsdf', 'asdfjksnjk', 'dajksfnaskdjf', 'sadfsadf@acs.de', '06/04/2017', NULL, 0);
+(1, 'Granit', 'Abdu', 'Male', 'afdsfjn', 'asjkfsdf', 'asdfjksnjk', 'dajksfnaskdjf', 'sadfsadf@acs.de', '06/04/2017', NULL, 0),
+(2, 'sdgsa', 'gaga', 'Male', '1241', 'asfasf', '1231', '12312', 'ag@gmail.com', '20/04/2017', NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -128,7 +129,8 @@ CREATE TABLE `employee_contract` (
 --
 
 INSERT INTO `employee_contract` (`id`, `amount_of_salary`, `start_date`, `end_date`, `employee_id`, `employee_type_id`) VALUES
-(1, 52, '19/04/2017', '03/05/2017', 1, 3);
+(1, 52, '19/04/2017', '03/05/2017', 1, 3),
+(2, 1241, '20/04/2017', '21/04/2017', 2, 2);
 
 -- --------------------------------------------------------
 
@@ -220,20 +222,6 @@ CREATE TABLE `item_payment_in` (
   `product_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `item_payment_in`
---
-
-INSERT INTO `item_payment_in` (`id`, `cost_price`, `quantity`, `payment_date`, `payment_amount`, `product_id`) VALUES
-(1, 1, 20, '2017-04-12 07:52:33', 20, 1),
-(2, 0.2, 100, '2017-04-12 08:07:15', 20, 2),
-(3, 20, 15, '2017-04-12 08:11:15', 300, 3),
-(4, 0.4, 50, '2017-04-12 08:15:38', 20, 4),
-(5, 400, 1, '2017-04-12 08:19:55', 400, 5),
-(6, 1.5, 10, '2017-04-13 22:12:38', 17.7, 1),
-(7, 30, 2, '2017-04-18 13:10:23', 60, 1),
-(8, 2, 6, '2017-04-18 13:10:35', 12, 1);
-
 -- --------------------------------------------------------
 
 --
@@ -261,16 +249,6 @@ CREATE TABLE `item_unit` (
   `status` int(11) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
---
--- Dumping data for table `item_unit`
---
-
-INSERT INTO `item_unit` (`id`, `unit`, `status`) VALUES
-(1, 'KG', 0),
-(2, 'Litre', 0),
-(3, 'Pound', 0),
-(4, 'Piece', 0);
-
 -- --------------------------------------------------------
 
 --
@@ -293,18 +271,6 @@ CREATE TABLE `member` (
   `status` int(2) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `member`
---
-
-INSERT INTO `member` (`id`, `first_name`, `last_name`, `gender`, `residential_address`, `city`, `telephone_no`, `alternative_no`, `email`, `birth_date`, `photo`, `date_added`, `status`) VALUES
-(0, 'asd', 'asd', 'Male', '22', '22', '22', '22', '123@123', '04/04/2017', '6_asd_asd.png', '2017-04-20 11:32:48', 0),
-(1, 'asd', 'asd', 'Male', 'mati i', 'Prishtine', '+23', '+23', 'labiangashi@gmail.com', '10/04/2017', '1_asd_asd.png', '2017-04-12 11:05:27', 0),
-(2, 'Granit', 'Graniti', 'Male', 'afdsfasdf', 'adsfasdfasf', '+123', '+123', 'asdf@sadfdas.de', '02/03/2017', '2_Granit_Graniti.png', '2017-04-16 11:31:14', 0),
-(3, 'Blend', 'Blendi', 'Other', 'blend', 'blend', 'blend', 'blend', 'blend@blend.blend', '09/04/2017', '3_Blend_Blendi.png', '2017-04-16 11:32:57', 0),
-(4, 'Fatmir', 'Fatmir', 'Female', 'fatmir', 'fatmir', 'fatmir', 'fatmir', 'fatmir@fatmir.fatmir', '09/04/2017', '4_Fatmir_Fatmir.png', '2017-04-16 12:10:11', 0),
-(5, 'Admir', 'Admir', 'Male', 'Admir', 'Admir', 'Admir', 'Admir', 'Admir@admir.admir', '01/03/2016', '5_Admir_Admir.png', '2017-04-16 15:02:46', 0);
-
 -- --------------------------------------------------------
 
 --
@@ -319,20 +285,6 @@ CREATE TABLE `membership` (
   `branches` varchar(255) NOT NULL,
   `status` int(11) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `membership`
---
-
-INSERT INTO `membership` (`id`, `membership_type`, `offer`, `amount`, `branches`, `status`) VALUES
-(1, 'Daily', '', 2, '1,2,3,4,5,6,7,8', 0),
-(2, 'Weekly', '', 15, '1,2,3,4,5,6,7,8', 0),
-(3, 'Monthly', '', 30, '1,2,3,4,5,6,7,8', 0),
-(4, '6 Months', '', 150, '1,2,3,4,5,6,7,8', 0),
-(5, 'Yearly', '', 300, '1,2,3,4,5,6,7,8', 0),
-(6, 'Yearly', 'Dragodan', 270, '1', 0),
-(7, 'Monthly', 'Ferizaj', 25, '4,5,6', 0),
-(8, 'Yearly', 'Gjilan', 285, '7,8', 0);
 
 -- --------------------------------------------------------
 
@@ -357,7 +309,9 @@ INSERT INTO `membership_payment` (`id`, `start_date`, `end_date`, `amount`, `id_
 (1, '20/04/2017', '21/04/2017', 15, 2, 2),
 (2, '20/04/2017', '21/04/2017', 15, 2, 2),
 (3, '20/04/2017', '21/04/2017', 30, 2, 3),
-(4, '20/04/2017', '21/04/2017', 15, 6, 2);
+(4, '20/04/2017', '21/04/2017', 15, 6, 2),
+(5, '20/04/2017', '21/04/2017', 2, 0, 1),
+(6, '20/04/2017', '21/04/2017', 2, 6, 1);
 
 -- --------------------------------------------------------
 
@@ -382,7 +336,15 @@ INSERT INTO `tasks` (`id`, `name`, `status`, `timestamp`, `account_id`) VALUES
 (73, 'labian', 1, '2017-04-20 11:01:32', 1),
 (74, 'me ndreq diqka', 1, '2017-04-20 11:01:44', 1),
 (75, 'asd', 1, '2017-04-20 11:42:29', 1),
-(76, 'me dal', 1, '2017-04-20 11:42:37', 1);
+(76, 'me dal', 1, '2017-04-20 11:42:37', 1),
+(77, 'gadga', 1, '2017-04-20 12:18:47', 1),
+(78, 'isisi', 1, '2017-04-20 12:50:18', 1),
+(79, 'dddd', 1, '2017-04-20 12:51:26', 1),
+(80, 'iwiw', 1, '2017-04-20 12:51:44', 1),
+(81, 'ssss', 1, '2017-04-20 12:51:57', 1),
+(82, 'asdsd', 1, '2017-04-20 12:52:02', 1),
+(83, 'ksksk', 0, '2017-04-20 12:52:13', 1),
+(84, 'akskdakdks', 1, '2017-04-20 12:52:17', 1);
 
 --
 -- Indexes for dumped tables
@@ -490,12 +452,12 @@ ALTER TABLE `branches`
 -- AUTO_INCREMENT for table `employee`
 --
 ALTER TABLE `employee`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `employee_contract`
 --
 ALTER TABLE `employee_contract`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `employee_type`
 --
@@ -512,15 +474,40 @@ ALTER TABLE `item`
 ALTER TABLE `item_category`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
+-- AUTO_INCREMENT for table `item_payment_in`
+--
+ALTER TABLE `item_payment_in`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `item_payment_out`
+--
+ALTER TABLE `item_payment_out`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `item_unit`
+--
+ALTER TABLE `item_unit`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `member`
+--
+ALTER TABLE `member`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `membership`
+--
+ALTER TABLE `membership`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
 -- AUTO_INCREMENT for table `membership_payment`
 --
 ALTER TABLE `membership_payment`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `tasks`
 --
 ALTER TABLE `tasks`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=85;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
