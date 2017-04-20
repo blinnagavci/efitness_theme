@@ -37,15 +37,7 @@ $result = $conn->query($sql);
             "bStateSave": true
         });
     });
-
-    var giCount = 1;
-
-    function fnClickAddRow() {
-        jQuery('#table-2').dataTable().fnAddData(['<div class="checkbox checkbox-replace"><input type="checkbox" /></div>', giCount + ".1", giCount + ".2", giCount + ".3", giCount + ".4"]);
-        replaceCheckboxes(); // because there is checkbox, replace it
-        giCount++;
-    }
-    ;
+    
 
 </script>
 

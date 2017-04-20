@@ -42,7 +42,11 @@ if (!isset($_SESSION['logged_in'])) {
 
 
     </head>
-    <body class="page-body page-fade">
+    <body class="page-body <?php
+    if ($_SESSION['popup'] == 1) {
+        echo 'page-fade';
+    }
+    ?>">
         <div class="page-container"><!-- add class "sidebar-collapsed" to close sidebar by default, "chat-visible" to make chat appear always -->
             <div class="sidebar-menu">
                 <div class="sidebar-menu-inner">
@@ -76,7 +80,7 @@ if (!isset($_SESSION['logged_in'])) {
                             </a>
                         </li>
                         <li class="<?php
-                        active('add_member.php') || active('search_members.php') ? 'active' : NULL
+                            active('add_member.php') || active('search_members.php') ? 'active' : NULL
                         ?>">
                             <a href="#">
                                 <i class="entypo-users"></i>
@@ -136,7 +140,7 @@ if (!isset($_SESSION['logged_in'])) {
                                 </li>
                             </ul>
                         </li>
-                        <?php if ($_SESSION['admin_status'] == 0) { ?>
+<?php if ($_SESSION['admin_status'] == 0) { ?>
                             <li class="<?php active('accounts.php') ? 'active' : NULL ?>">
                                 <a href="accounts.php">
                                     <i class="entypo-user"></i>
@@ -150,7 +154,7 @@ if (!isset($_SESSION['logged_in'])) {
                                     <span class="title">Settings</span>
                                 </a>
                             </li>
-                        <?php } ?>
+<?php } ?>
                     </ul>
                 </div>
             </div>
@@ -172,7 +176,7 @@ if (!isset($_SESSION['logged_in'])) {
                                     ?>" alt="Profile" class="img-circle" width="44" />
                                     <script> var username = "<?php echo $_SESSION['username']; ?>";
                                     </script>
-                                    <?php echo "<span>" . $_SESSION['username'] . "</span>"; ?>
+<?php echo "<span>" . $_SESSION['username'] . "</span>"; ?>
                                 </a>
                                 <ul class="dropdown-menu">
 
