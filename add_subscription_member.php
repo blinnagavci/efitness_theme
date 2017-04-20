@@ -123,11 +123,34 @@
     <button type = "button" class = "btn btn-default" data-dismiss = "modal">Close</button>
 </div>
 
-
+<link rel="stylesheet" href="assets/js/datatables/datatables.css">
 <script src="assets/js/bootstrap-datepicker.js"></script>
 <script src="assets/js/jquery.validate.min.js"></script>
 <script src="assets/js/main.js" type="text/javascript"></script>
+<script src="assets/js/datatables/datatables.js"></script>
 <script type="text/javascript">
+    $(document).ready(function () {
+        console.log("asd");
+        var $tablemembership = $("#membership_table");
+        $tablemembership.DataTable({
+            "autoWidth": false,
+            "sDom": "Bfrtip",
+            "iDisplayLength": 10,
+            "aoColumns": [
+                null,
+                null,
+                null,
+                null,
+                null
+            ],
+            buttons: [
+                'excelHtml5',
+                'pdfHtml5'
+            ],
+            "bStateSave": true
+        });
+    });
+
     $('input.datepicker').on('changeDate', function (e) {
         $(this).datepicker('hide');
     });
