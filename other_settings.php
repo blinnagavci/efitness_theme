@@ -410,7 +410,7 @@ require_once ('header.php');
 <!-- Demo Settings -->
 <script src="assets/js/neon-demo.js"></script>
 <script src="assets/js/toastr.js"></script>
-<script type="text/javascript">
+<!--<script type="text/javascript">
     $(document).ready(function () {
         var url = window.location.href;
         var array = url.split('/');
@@ -563,7 +563,7 @@ require_once ('header.php');
         toastrAlert();
         toastr.error("Unfortunately, we ran into some problems trying to delete the branch", opts);
     }
-</script>
+</script>-->
 
 </body>
 </html>
