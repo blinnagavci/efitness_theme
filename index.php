@@ -22,6 +22,18 @@ $threeWeeksAgoValue = mysqli_fetch_assoc($threeWeeksAgoSql);
 $fourWeeksAgoQuery = "SELECT count(*) as fourWeeksAgoCount FROM member WHERE status='0' AND date_added BETWEEN NOW()-INTERVAL 5 WEEK AND NOW()-INTERVAL 4 WEEK";
 $fourWeeksAgoSql = mysqli_query($conn, $fourWeeksAgoQuery);
 $fourWeeksAgoValue = mysqli_fetch_assoc($fourWeeksAgoSql);
+
+$productsquery = "SELECT count(*) as totalProducts FROM item WHERE status='0'";
+$productsretval = mysqli_query($conn, $productsquery);
+$productsresult = mysqli_fetch_assoc($productsretval);
+
+$buysquery = "SELECT count(*) as totalBuys FROM item_payment_in";
+$buysretval = mysqli_query($conn, $buysquery);
+$buysresult = mysqli_fetch_assoc($buysretval);
+
+$salesquery = "SELECT count(*) as totalSales FROM item_payment_out";
+$salesretval = mysqli_query($conn, $salesquery);
+$salesresult = mysqli_fetch_assoc($salesretval);
 ?>
 <script type="text/javascript">
     jQuery(document).ready(function ($)
@@ -34,7 +46,6 @@ $fourWeeksAgoValue = mysqli_fetch_assoc($fourWeeksAgoSql);
         $('.pie').sparkline('html', {type: 'pie', borderWidth: 0, sliceColors: ['#3d4554', '#ee4749', '#00b19d']});
         $('.linechart').sparkline();
         $('.pageviews').sparkline('html', {type: 'bar', height: '30px', barColor: '#ff6264'});
-        $('.uniquevisitors').sparkline('html', {type: 'bar', height: '30px', barColor: '#00b19d'});
 
 
         $(".monthly-sales").sparkline([1, 2, 3, 5, 6, 7, 2, 3, 3, 4, 3, 5, 7, 2, 4, 3, 5, 4, 5, 6, 3, 2], {
@@ -44,19 +55,6 @@ $fourWeeksAgoValue = mysqli_fetch_assoc($fourWeeksAgoSql);
             barWidth: 10,
             barSpacing: 2
         });
-
-
-        // JVector Maps
-        var map = $("#map");
-
-        map.vectorMap({
-            map: 'europe_merc_en',
-            zoomMin: '3',
-            backgroundColor: '#383f47',
-            focusOn: {x: 0.5, y: 0.8, scale: 3}
-        });
-
-
 
         // Line Charts
         var week1 = "<?php echo $thisWeekValue['thisWeekCount']; ?>";
@@ -86,6 +84,9 @@ $fourWeeksAgoValue = mysqli_fetch_assoc($fourWeeksAgoSql);
 
         line_chart_demo.parent().attr('style', '');
 
+        var buys = "<?php echo $buysresult['totalBuys']; ?>";
+        var sales = "<?php echo $salesresult['totalSales']; ?>";
+        var items = "<?php echo $productsresult['totalProducts']; ?>";
 
         // Donut Chart
         var donut_chart_demo = $("#donut-chart-demo");
@@ -95,9 +96,9 @@ $fourWeeksAgoValue = mysqli_fetch_assoc($fourWeeksAgoSql);
         var donut_chart = Morris.Donut({
             element: 'donut-chart-demo',
             data: [
-                {label: "Download Sales", value: getRandomInt(10, 50)},
-                {label: "In-Store Sales", value: getRandomInt(10, 50)},
-                {label: "Mail-Order Sales", value: getRandomInt(10, 50)}
+                {label: "Buys", value: buys},
+                {label: "Sales", value: sales},
+                {label: "Items", value: items}
             ],
             colors: ['#707f9b', '#455064', '#242d3c']
         });
@@ -106,29 +107,6 @@ $fourWeeksAgoValue = mysqli_fetch_assoc($fourWeeksAgoSql);
 
 
         // Area Chart
-        var area_chart_demo = $("#area-chart-demo");
-
-        area_chart_demo.parent().show();
-
-        var area_chart = Morris.Area({
-            element: 'area-chart-demo',
-            data: [
-                {y: '2006', a: 100, b: 90},
-                {y: '2007', a: 75, b: 65},
-                {y: '2008', a: 50, b: 40},
-                {y: '2009', a: 75, b: 65},
-                {y: '2010', a: 50, b: 40},
-                {y: '2011', a: 75, b: 65},
-                {y: '2012', a: 100, b: 90}
-            ],
-            xkey: 'y',
-            ykeys: ['a', 'b'],
-            labels: ['Series A', 'Series B'],
-            lineColors: ['#303641', '#576277']
-        });
-
-        area_chart_demo.parent().attr('style', '');
-
 
     });
 
@@ -233,50 +211,19 @@ $numrows = mysqli_num_rows($result);
 
                 <div class="panel-options">
                     <ul class="nav nav-tabs">
-                        <li class=""><a href="#area-chart" data-toggle="tab">Area Chart</a></li>
-                        <li class="active"><a href="#line-chart" data-toggle="tab">Line Charts</a></li>
-                        <li class=""><a href="#pie-chart" data-toggle="tab">Pie Chart</a></li>
+                        <li class="active"><a href="#line-chart" data-toggle="tab">Line Chart</a></li>
                     </ul>
                 </div>
             </div>
 
             <div class="panel-body">
                 <div class="tab-content">
-                    <div class="tab-pane" id="area-chart">
-                        <div id="area-chart-demo" class="morrischart" style="height: 300px"></div>
-                    </div>
                     <div class="tab-pane active" id="line-chart">
                         <div id="line-chart-demo" class="morrischart" style="height: 300px"></div>
-                    </div>
-                    <div class="tab-pane" id="pie-chart">
-                        <div id="donut-chart-demo" class="morrischart" style="height: 300px;"></div>
                     </div>
                 </div>
             </div>
 
-            <table class="table table-bordered table-responsive">
-
-                <thead>
-                    <tr>
-                        <th width="50%" class="col-padding-1">
-                            <div class="pull-left">
-                                <div class="h4 no-margin">Pageviews</div>
-                                <small>54,127</small>
-                            </div>
-                            <span class="pull-right pageviews">4,3,5,4,5,6,5</span>
-
-                        </th>
-                        <th width="50%" class="col-padding-1">
-                            <div class="pull-left">
-                                <div class="h4 no-margin">Unique Visitors</div>
-                                <small>25,127</small>
-                            </div>
-                            <span class="pull-right uniquevisitors">2,3,5,4,3,4,5</span>
-                        </th>
-                    </tr>
-                </thead>
-
-            </table>
 
         </div>
         <script type="text/javascript">
@@ -318,13 +265,13 @@ $numrows = mysqli_num_rows($result);
             $id = $_SESSION['id'];
             $executequery = mysqli_query($conn, "SELECT * FROM tasks where account_id='$id' AND status='0' UNION SELECT * FROM tasks where account_id='$id' AND status='1' AND timestamp >= NOW() - INTERVAL 2 DAY");
             ?>
-            <div class="tile-content">
-                <form id="add-task-form" name="add-task-form">
+            <div class="tile-content" style="height: 287px;">
+                <form style="padding-bottom: 20px;" id="add-task-form" name="add-task-form">
                     <input type='hidden' id='hidden-id' value='<?php echo $id; ?>'>
                     <input type="text" class="form-control" placeholder="Add Task" id="add-task" name="add-task"/>
                 </form>
 
-                <ul class="todo-list" style="margin-top: 20px;">
+                <ul class="todo-list scrollable" style="height: 200px;">
                     <?php while ($row = $executequery->fetch_assoc()): ?>
                         <li>
                             <div class="checkbox checkbox-replace color-white">
@@ -347,48 +294,59 @@ $numrows = mysqli_num_rows($result);
 
     <br />
 
-    <div class="row">
 
-        <div class="col-sm-8">
+    <div class="col-sm-8">
 
-            <div class="panel panel-primary">
-                <div class="panel-heading">
-                    <div class="panel-title">Latest members</div>
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <div class="panel-title">Latest members</div>
 
-                    <div class="panel-options">
-                        <a href="#" data-rel="collapse"><i class="entypo-down-open"></i></a>
-                        <a href="#" data-rel="reload"><i class="entypo-arrows-ccw"></i></a>
-                    </div>
+                <div class="panel-options">
+                    <a href="#" data-rel="collapse"><i class="entypo-down-open"></i></a>
+                    <a href="#" data-rel="reload"><i class="entypo-arrows-ccw"></i></a>
                 </div>
-                <?php
-                include('database/db_connect.php');
-                $sqlgetaccounts = "SELECT * FROM member ORDER BY id DESC LIMIT 3";
-                $executegetaccounts = mysqli_query($conn, $sqlgetaccounts) or die(mysqli_error());
-                ?>
-                <table class="table table-bordered table-responsive">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Name</th>
-                            <th>City</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php while ($row = $executegetaccounts->fetch_assoc()): ?>
-                            <tr>
-                                <td><?php echo $row['id']; ?></td>
-                                <td><?php echo $row['first_name'] . " " . $row['last_name']; ?></td>
-                                <td><?php echo $row['city']; ?></td>
-                            </tr>
-                        <?php endwhile; ?>
-                    </tbody>
-                </table>
             </div>
-
+            <?php
+            include('database/db_connect.php');
+            $sqlgetaccounts = "SELECT * FROM member ORDER BY id DESC LIMIT 9";
+            $executegetaccounts = mysqli_query($conn, $sqlgetaccounts) or die(mysqli_error());
+            ?>
+            <table class="table table-bordered table-responsive">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>City</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php while ($row = $executegetaccounts->fetch_assoc()): ?>
+                        <tr>
+                            <td><?php echo $row['id']; ?></td>
+                            <td><?php echo $row['first_name'] . " " . $row['last_name']; ?></td>
+                            <td><?php echo $row['city']; ?></td>
+                        </tr>
+                    <?php endwhile; ?>
+                </tbody>
+            </table>
         </div>
 
     </div>
+    <div class="col-sm-4">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <div class="panel-title">Pie Chart</div>
 
+                <div class="panel-options">
+                    <a href="#" data-rel="collapse"><i class="entypo-down-open"></i></a>
+                    <a href="#" data-rel="reload"><i class="entypo-arrows-ccw"></i></a>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div id="donut-chart-demo" class="morrischart" style="height: 310px;"></div>
+            </div>
+        </div>
+    </div>
     <br />
 </div>
 
@@ -428,7 +386,44 @@ $_SESSION['popup'] = NULL;
 <!-- Imported styles on this page -->
 <link rel="stylesheet" href="assets/js/jvectormap/jquery-jvectormap-1.2.2.css">
 <link rel="stylesheet" href="assets/js/rickshaw/rickshaw.min.css">
-
+<script>
+    $("#add-task-form").submit(function (e) {
+        e.preventDefault();
+        if (!($("#add-task").val() === "")) {
+            var id = $("#hidden-id").val();
+            var taskname = $("#add-task").val();
+            var form_data = new FormData();
+            form_data.append('id', id);
+            form_data.append('taskname', taskname);
+            $.ajax({
+                type: "POST",
+                dataType: 'text',
+                cache: false,
+                contentType: false,
+                processData: false,
+                url: "database/add_task.php",
+                data: form_data
+            });
+            $("#add-task").val('');
+        }
+    });
+    $(".checkbox").change(function () {
+        if ($(this).find("#task-checkbox").is(":checked")) {
+            var id = $(this).find(".task-text").attr('data-attr');
+            var form_data = new FormData();
+            form_data.append('id', id);
+            $.ajax({
+                type: "POST",
+                dataType: 'text',
+                cache: false,
+                contentType: false,
+                processData: false,
+                url: "database/remove_task.php",
+                data: form_data
+            });
+        }
+    });
+</script>
 <!-- Bottom scripts (common) -->
 <script src="assets/js/gsap/TweenMax.min.js"></script>
 <script src="assets/js/jquery-ui/js/jquery-ui-1.10.3.minimal.min.js"></script>
