@@ -72,7 +72,7 @@
 
                         <div class="form-login-error">
                             <h3>Error</h3>
-                            <p>Something went wrong! Please make sure the email address is valid.</p>
+                            <p>Something went wrong! Please make sure the email is linked to any account registered.</p>
                         </div>
 
                         <div class="form-steps">
