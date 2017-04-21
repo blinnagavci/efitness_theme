@@ -13,10 +13,10 @@ if (!isset($_SESSION['logged_in'])) {
 
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="description" content="EFitness Admin Panel" />
+        <meta name="description" content="E-Fitness Admin Panel" />
         <meta name="Blin Nagavci, Labian Gashi, Besarber Tasholli" content="" />
 
-        <link rel="icon" href="assets/images/favicon.ico">
+        <link rel="shortcut icon" href="assets/images/favicon2.ico">
 
         <title>E-Fitness | <?php echo $title ?></title>
 
