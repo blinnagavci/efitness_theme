@@ -77,8 +77,7 @@ $salesresult = mysqli_fetch_assoc($salesretval);
             xkey: 'y',
             ykeys: ['a'],
             labels: ['Weekly members'],
-            xLabelMargin: 10,
-            xLabelAngle: 60,
+            xLabelAngle: 65,
             redraw: true
         });
 
