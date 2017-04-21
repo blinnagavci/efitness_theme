@@ -111,10 +111,11 @@ require_once ('header.php');
                                                     $tempId = $row['id'];
                                                     $membership = $row['membership_type'];
                                                     $offer = $row['offer'];
+                                                    $amount = $row['amount'];
                                                     if ($offer === "") {
-                                                        echo "<option value='$tempId'>$membership</option>";
+                                                        echo "<option value='$tempId'>$membership, $amount €</option>";
                                                     } else {
-                                                        echo "<option value='$tempId'>$membership, $offer</option>";
+                                                        echo "<option value='$tempId'>$membership, $offer, $amount €</option>";
                                                     }
                                                 }
                                                 mysqli_close($conn);
