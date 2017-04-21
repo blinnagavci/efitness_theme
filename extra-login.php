@@ -15,7 +15,7 @@ if (isset($_SESSION['logged_in'])) {
         <meta name="description" content="Neon Admin Panel" />
         <meta name="author" content="" />
 
-        <link rel="icon" href="assets/images/favicon.ico">
+        <link rel="icon" href="assets/images/favicon2.ico">
 
         <title>E-Fitness | Log In</title>
 
@@ -50,7 +50,6 @@ if (isset($_SESSION['logged_in'])) {
                         <img src="assets/images/logo@2x.png" width="120" alt="" />
                     </a>
 
-                    <p class="description">Dear user, log in to access the admin area!</p>
 
                     <!-- progress bar indicator -->
                     <div class="login-progressbar-indicator">
