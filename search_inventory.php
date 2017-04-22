@@ -55,7 +55,7 @@ $resultnonsellable = $conn->query($sqlnotsellable);
                                     //                            ],
                                     "aoColumns": [
                                         null,
-                                        null,
+                                        {"width": "100px"},
                                         null,
                                         null,
                                         null,
