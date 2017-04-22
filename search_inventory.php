@@ -81,7 +81,7 @@ $resultnonsellable = $conn->query($sqlnotsellable);
                                     <th>Name</th>
                                     <th>Category</th>
                                     <th>Unit</th>
-                                    <th>Company Name</th>
+                                    <th>Brand</th>
                                     <th>Barcode</th>
                                     <th>Selling Price</th>
                                     <th>Quantity</th>
